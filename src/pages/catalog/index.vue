@@ -3,7 +3,7 @@
     <view class="search">
         <navigator url="/pages/search/search" class="input">
             <img class="icon"/>
-            <text class="txt">商品搜索, 共{{goodsCount}}款好物</text>
+            <text class="txt">共 {{goodsCount}} 件生物&器材</text>
         </navigator>
     </view>
     <view class="catalog">
@@ -52,6 +52,7 @@ export default {
     await Promise.all([
       this.getCatalogList()
     ])
+    this.goodsCount = await api.getMaterialCount();
   },
   methods: {
     // 分类主页数据和数量
@@ -61,11 +62,6 @@ export default {
       if (res1.errno === 0) {
         this.navList = res1.data.categoryList;
         this.currentCategory = res1.data.currentCategory;
-      }
-      const res2 = await api.getGoodsCount();
-      // console.log('分类主页商品数量,请求结果', res2);
-      if (res2.errno === 0) {
-        this.goodsCount = res2.data.goodsCount;
       }
     },
     // 选择不同的分类

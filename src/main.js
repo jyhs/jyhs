@@ -22,11 +22,9 @@ export default {
       'pages/ucenter/index'
     ],
     window: {
-      backgroundTextStyle: 'dark',
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: '礁岩海水',
-      navigationBarTextStyle: 'black',
-      enablePullDownRefresh: true
+      navigationBarTextStyle: 'black'
     },
     tabBar: {
       'backgroundColor': '#fafafa',

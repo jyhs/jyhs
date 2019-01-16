@@ -7,94 +7,151 @@
       </navigator>
     </swiper-item>
   </swiper>
-  <view class="m-menu">
+    <!-- <view class="m-menu">
     <navigator  class="item" :url="item.url" v-for="item of channel" :key="item.id">
       <img :src="item.icon_url" background-size="cover" />
       <text>{{item.name}}</text>
     </navigator>
+  </view> -->
+  <view class="a-section a-brand">
+    <view class="h">
+      <navigator url="../brand/brand">
+        <text class="txt">品牌制造商直供</text>
+      </navigator>
+    </view>
+    <view class="b">
+      <view class="item item-1" v-for="item of brands" :key="item.id">
+        <navigator :url="'/pages/brand/brandDetail?id='+item.id">
+          <view class="wrap">
+            <img class="img" :src="item.new_pic_url" mode="aspectFill" />
+            <view class="mt">
+              <text class="brand">{{item.name}}</text>
+              <text class="price">{{item.floor_price}}</text>
+              <text class="unit">元起</text>
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </view>
   </view>
 
+  <view class="a-section a-new" v-if="newGoods.length">
+    <view class="h">
+      <view>
+        <navigator url="../newGoods/newGoods">
+          <text class="txt">周一周四 · 新品首发</text>
+        </navigator>
+      </view>
+    </view>
+    <view class="b">
+      <view class="item" v-for="item of newGoods" :key="item.id">
+        <navigator :url="'../goods/goods?id='+ item.id">
+          <img class="img" :src="item.list_pic_url" background-size="cover" />
+          <text class="name">{{item.name}}</text>
+          <text class="price">￥{{item.retail_price}}</text>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  <view class="a-section a-popular" v-if="hotGoods.length">
+    <view class="h">
+      <view>
+        <navigator url="../hotGoods/hotGoods">
+          <text class="txt">人气推荐</text>
+        </navigator>
+      </view>
+    </view>
+    <view class="b">
+      <view class="item" v-for="item of hotGoods" :key="item.id">
+        <navigator :url="'/pages/goods/goods?id=' + item.id">
+          <img class="img" :src="item.list_pic_url" background-size="cover" />
+          <view class="right">
+            <view class="text">
+              <text class="name">{{item.name}}</text>
+              <text class="desc">{{item.goods_brief}}</text>
+              <text class="price">￥{{item.retail_price}}</text>
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  <view class="a-section a-topic" v-if="topics.length">
+    <view class="h">
+      <view>
+      <navigator url="../topic/topic" open-type="switchTab">
+        <text class="txt">专题精选</text>
+        </navigator>
+      </view>
+    </view>
+    <view class="b">
+      <scroll-view scroll-x="true" class="list">
+        <view class="item" v-for="item of topics" :key="item.id">
+          <navigator :url="'../topic/topicDetail?id=' + item.id">
+            <img class="img" :src="item.scene_pic_url" background-size="cover" />
+            <view class="np">
+              <text class="name">{{item.title}}</text>
+              <text class="price">￥{{item.price_info}}元起</text>
+            </view>
+            <text class="desc">{{item.subtitle}}</text>
+          </navigator>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+  <view class="good-grid" v-for="(item,index) of floorGoods" :key="item.id">
+    <view class="h">
+      <view>
+        <text>{{item.name}}</text>
+      </view>
+    </view>
+    <view class="b">
+      <block v-for="(iitem,iindex) of item.goodsList" :key="iitem.id" :data-id="index">
+        <view :class="  iindex % 2 == 0 ? 'item' : 'item item-b'">
+          <navigator :url="'../goods/goods?id=' + iitem.id" class="a">
+            <img class="img" :src="iitem.list_pic_url" background-size="cover" />
+            <text class="name">{{iitem.name}}</text>
+            <text class="price">￥{{iitem.retail_price}}</text>
+          </navigator>
+        </view>
+      </block>
+      <view class="item item-b item-more">
+          <navigator :url="'/pages/category/category?id=' + item.id" class="more-a">
+            <view class="txt">{{'更多'+item.name+'好物'}}</view>
+            <image class="icon" src="../../static/images/icon_go_more.png" background-size="cover"/>
+          </navigator>
+      </view>
+    </view>
+  </view>
 </view>
 </template>
 
 <script>
 // import api from '@/utils/api'
+import { mapState, mapActions } from 'vuex'
+
 export default {
   computed: {
-
-  },
-  data () {
-    return {
-      'banner': [{
-        'id': 1,
-        'ad_position_id': 1,
-        'media_type': 1,
-        'name': '合作 谁是你的菜',
-        'link': '/pages/category/category?id=1005002',
-        'image_url': 'http://yanxuan.nosdn.127.net/65091eebc48899298171c2eb6696fe27.jpg',
-        'content': '合作 谁是你的菜',
-        'end_time': 0,
-        'enabled': 1
-      }, {
-        'id': 2,
-        'ad_position_id': 1,
-        'media_type': 1,
-        'name': '活动 美食节',
-        'link': '/pages/category/category?id=1005001',
-        'image_url': 'http://yanxuan.nosdn.127.net/bff2e49136fcef1fd829f5036e07f116.jpg',
-        'content': '活动 美食节',
-        'end_time': 0,
-        'enabled': 1
-      }, {
-        'id': 3,
-        'ad_position_id': 1,
-        'media_type': 1,
-        'name': '活动 母亲节',
-        'link': '/pages/category/category?id=1005000',
-        'image_url': 'http://yanxuan.nosdn.127.net/8e50c65fda145e6dd1bf4fb7ee0fcecc.jpg',
-        'content': '活动 母亲节',
-        'end_time': 0,
-        'enabled': 1
-      }],
-      'channel': [{
-        'id': 1,
-        'name': '商城',
-        'url': '/pages/mall/index',
-        'icon_url': 'https://yanxuan.nosdn.127.net/243e5bf327a87217ad1f54592f0176ec.png',
-        'sort_order': 1
-      }, {
-        'id': 2,
-        'name': '团购',
-        'url': '/pages/group/index',
-        'icon_url': 'https://yanxuan.nosdn.127.net/f109afbb7e7a00c243c1da29991a5aa3.png',
-        'sort_order': 2
-      }, {
-        'id': 3,
-        'name': '二手',
-        'url': '/pages/second/index',
-        'icon_url': 'https://yanxuan.nosdn.127.net/288b0e864a24763bade8e22c0c39ff02.png',
-        'sort_order': 3
-      }, {
-        'id': 4,
-        'name': '游戏',
-        'url': '/pages/game/index',
-        'icon_url': 'https://yanxuan.nosdn.127.net/863b1e4a6c84fb33f5d09d91d2a36881.png',
-        'sort_order': 4
-      }, {
-        'id': 5,
-        'name': '资讯',
-        'url': '/pages/information/index',
-        'icon_url': 'https://yanxuan.nosdn.127.net/a13a24413e66474cc7b0551984cfe9d4.png',
-        'sort_order': 5
-      }]
-    }
+    ...mapState([
+      'newGoods',
+      'hotGoods',
+      'topics',
+      'brands',
+      'floorGoods',
+      'banner',
+      'channel'
+    ])
   },
   async mounted () {
-
+    await Promise.all([
+      this.getIndexData()
+    ])
   },
 
   methods: {
-
+    ...mapActions([
+      'getIndexData'
+    ])
   },
 
   // 原生的分享功能

@@ -5,6 +5,12 @@ const ApiCommonUrl = 'https://api2.huanjiaohu.com/api/'
 
 const api = {
   // 获得服务列表
+  getMaterialCount: (paramObj) => request.post('material/count', paramObj, {
+    baseURL: ApiCommonUrl
+  }),
+  getCategoryAll: (paramObj) => request.post('material/categoryAll', paramObj, {
+    baseURL: ApiCommonUrl
+  }),
   login: (paramObj) => request.post('user/loginByMiniProgram', paramObj, {
     baseURL: ApiCommonUrl
   }),

@@ -138,10 +138,14 @@
               </view>
             </navigator>
           </view>
+          <view class="logout">
+            <wux-button block type="assertive" @click="logout">退出</wux-button>
+          </view>
         </view>
         <view class="character-menu"  v-else>
             <img class="avatar">
         </view>
+       
       </view>
     </view>
   </view>
@@ -161,6 +165,14 @@ export default {
   },
   onShow () {
     this.userInfo = wx.getStorageSync('userInfo');
+  },
+  methods: {
+    logout () {
+      wx.clearStorageSync();
+      wx.reLaunch({
+        url: '/pages/ucenter/login'
+      });
+    }
   }
 };
 </script>
