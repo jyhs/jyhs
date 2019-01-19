@@ -1,117 +1,110 @@
 <template >
-<view class="container">
-  <swiper class="banner"   autoplay="true" interval="3000" duration="1000">
-    <swiper-item v-for="item of banner" :key="item.id">
-      <navigator :url="item.link">
-        <img :src="item.image_url" background-size="cover" />
+  <view class="container">
+    <swiper class="banner" autoplay="true" interval="3000" duration="1000">
+      <swiper-item v-for="item of banner" :key="item.id">
+        <navigator :url="item.link">
+          <img :src="item.image_url" background-size="cover">
+        </navigator>
+      </swiper-item>
+    </swiper>
+    <view class="row">
+      <wux-row>
+        <wux-col span="9">
+          <wux-notice-bar content="喜大普奔！礁岩海水小程序上线了！礁岩海水小程序上线了" loop speed="50"/>
+        </wux-col>
+        <wux-col span="3">
+          <view class="location-select-btn" @click="selectProvince">上海</view>
+          <wux-select id="province"/>
+        </wux-col>
+      </wux-row>
+    </view>
+    <view class="m-menu">
+      <navigator class="item" :url="item.url" v-for="item of channel" :key="item.id">
+        <img :src="item.icon_url" background-size="cover">
+        <text>{{item.name}}</text>
       </navigator>
-    </swiper-item>
-  </swiper>
-<view class="row">
-   <wux-row>
-                <wux-col span="9">
-                    <wux-notice-bar content="喜大普奔！礁岩海水小程序上线了！礁岩海水小程序上线了" loop speed="50"/>
-                </wux-col>
-                <wux-col span="3">
-                    <view   class='location-select-btn'  @click='selectProvince'>上海</view>
-                    <wux-select id="province" />
-                </wux-col>
-    </wux-row>
-  </view>
-  
-  <view class="m-menu">
-    <navigator  class="item" :url="item.url" v-for="item of channel" :key="item.id">
-      <img :src="item.icon_url" background-size="cover" />
-      <text>{{item.name}}</text>
-    </navigator>
-  </view>
-
-<view class="row jytt_module">
-    <wux-wing-blank>
-    <wux-row>
-                <wux-col span="2">
-                </wux-col>
-                <wux-col span="8">
-                     <wux-row prefixCls="jytt_text">
-                                <wux-col span="2">
-                                  <wux-tag color="red">最热</wux-tag>
-                                </wux-col>
-                                <wux-col span="10">
-                                    喜大普奔！礁岩海水小程序上线了！礁岩海水小程序上线了
-                                </wux-col>
-                     </wux-row>
-                     <wux-row>
-                                <wux-col span="2">
-                                  <wux-tag color="blue">最新</wux-tag>
-                                </wux-col>
-                                <wux-col span="10">
-                                    喜大普奔！礁岩海水小程序上线了！礁岩海水小程序上线了
-                                </wux-col>
-                     </wux-row>
-                </wux-col>
-                <wux-col span="2">
-                </wux-col>
-    </wux-row>
-    </wux-wing-blank>
-  </view>
-                  <wux-divider dashed  position="left" text="最新团购" />
-
-          <view class="row">
-                       <wux-wing-blank>
-                            <groupItem/>
-                       </wux-wing-blank>
-                               <wux-white-space/>
-                     <wux-wing-blank>
-                            <groupItem/>
-                       </wux-wing-blank>
+    </view>
+    <view class="row jytt_module">
+      <wux-wing-blank>
+        <wux-row>
+          <wux-col span="2"></wux-col>
+          <wux-col span="8">
+            <wux-row prefixCls="jytt_text">
+              <wux-col span="2">
+                <wux-tag color="red">最热</wux-tag>
+              </wux-col>
+              <wux-col span="10">喜大普奔！礁岩海水小程序上线了！礁岩海水小程序上线了</wux-col>
+            </wux-row>
+            <wux-row>
+              <wux-col span="2">
+                <wux-tag color="blue">最新</wux-tag>
+              </wux-col>
+              <wux-col span="10">喜大普奔！礁岩海水小程序上线了！礁岩海水小程序上线了</wux-col>
+            </wux-row>
+          </wux-col>
+          <wux-col span="2"></wux-col>
+        </wux-row>
+      </wux-wing-blank>
+    </view>
+    <wux-divider dashed position="left" text="最新团购"/>
+    <view class="row">
+      <wux-wing-blank>
+        <groupItem/>
+      </wux-wing-blank>
+      <wux-white-space/>
+      <wux-wing-blank>
+        <groupItem/>
+      </wux-wing-blank>
+    </view>
+    <wux-white-space/>
+    <swiper class="banner2" autoplay="true" interval="3000" duration="1000">
+      <swiper-item v-for="item of banner2" :key="item.id">
+        <navigator :url="item.link">
+          <img :src="item.image_url" background-size="cover">
+        </navigator>
+      </swiper-item>
+    </swiper>
+    <wux-divider dashed position="left" text="最新商品"/>
+    <view class="row">
+      <view class="index-section index-new">
+        <view class="b">
+          <view class="item" v-for="item of newGoods" :key="item.id">
+            <navigator :url="'../goods/goods?id='+ item.id">
+              <img class="img" :src="item.list_pic_url" background-size="cover">
+              <text class="name">{{item.name}}</text>
+              <text class="price">￥{{item.retail_price}}</text>
+            </navigator>
           </view>
-           <wux-white-space/>
-          <swiper class="banner2"   autoplay="true" interval="3000" duration="1000">
-            <swiper-item v-for="item of banner2" :key="item.id">
-              <navigator :url="item.link">
-                <img :src="item.image_url" background-size="cover" />
-              </navigator>
-            </swiper-item>
-          </swiper>
-                  <wux-divider dashed  position="left" text="最新商品" />
-          <view class="row">
-               <view class="index-section index-new">
-                          <view class="b">
-                            <view class="item" v-for="item of newGoods" :key="item.id">
-                              <navigator :url="'../goods/goods?id='+ item.id">
-                                <img class="img" :src="item.list_pic_url" background-size="cover" />
-                                <text class="name">{{item.name}}</text>
-                                <text class="price">￥{{item.retail_price}}</text>
-                              </navigator>
-                            </view>
-                          </view>
-              </view>
-          </view>
-          <wux-white-space/>
-           <swiper class="banner2"   autoplay="true" interval="3000" duration="1000">
-            <swiper-item v-for="item of banner2" :key="item.id">
-              <navigator :url="item.link">
-                <img :src="item.image_url" background-size="cover" />
-              </navigator>
-            </swiper-item>
-          </swiper>
-                  <wux-divider dashed  position="left" text="最新零售" />
-          <view class="row">
-                                  <retailItem/>
-                                  <wux-white-space/>
-                                  <retailItem/>
-
-
-          </view>
-          <wux-white-space/>
-</view>
+        </view>
+      </view>
+    </view>
+    <wux-white-space/>
+    <swiper class="banner2" autoplay="true" interval="3000" duration="1000">
+      <swiper-item v-for="item of banner2" :key="item.id">
+        <navigator :url="item.link">
+          <img :src="item.image_url" background-size="cover">
+        </navigator>
+      </swiper-item>
+    </swiper>
+    <wux-divider dashed position="left" text="最新零售"/>
+    <view class="row">
+      <wux-wing-blank>
+        <retailItem/>
+      </wux-wing-blank>
+      <wux-white-space/>
+      <wux-wing-blank>
+        <retailItem/>
+      </wux-wing-blank>
+    </view>
+    <wux-white-space/>
+  </view>
 </template>
 
 <script>
 // import api from '@/utils/api'
-import { $wuxSelect } from '../../../static/wux/index'
-import groupItem from '@/components/groupItem'
-import retailItem from '@/components/retailItem'
+import { $wuxSelect } from '../../../static/wux/index';
+import groupItem from '@/components/groupItem';
+import retailItem from '@/components/retailItem';
 
 export default {
   components: {
@@ -124,222 +117,239 @@ export default {
       value3: '',
       newGoods: [
         {
-          'id': 1134030,
-          'name': '简约知性记忆棉坐垫',
-          'list_pic_url': 'http://yanxuan.nosdn.127.net/aa49dfe878becf768eddc4c1636643a6.png',
-          'retail_price': 46
+          id: 1134030,
+          name: '简约知性记忆棉坐垫',
+          list_pic_url:
+            'http://yanxuan.nosdn.127.net/aa49dfe878becf768eddc4c1636643a6.png',
+          retail_price: 46
         },
         {
-          'id': 1134032,
-          'name': '趣味粉彩系列记忆棉坐垫',
-          'list_pic_url': 'http://yanxuan.nosdn.127.net/8b30eeb17c831eba08b97bdcb4c46a8e.png',
-          'retail_price': 49
+          id: 1134032,
+          name: '趣味粉彩系列记忆棉坐垫',
+          list_pic_url:
+            'http://yanxuan.nosdn.127.net/8b30eeb17c831eba08b97bdcb4c46a8e.png',
+          retail_price: 49
         },
         {
-          'id': 1135002,
-          'name': '宫廷奢华真丝四件套',
-          'list_pic_url': 'http://yanxuan.nosdn.127.net/45548f26cfd0c7c41e0afc3709d48286.png',
-          'retail_price': 2599
+          id: 1135002,
+          name: '宫廷奢华真丝四件套',
+          list_pic_url:
+            'http://yanxuan.nosdn.127.net/45548f26cfd0c7c41e0afc3709d48286.png',
+          retail_price: 2599
         },
         {
-          'id': 1152161,
-          'name': '竹语丝麻印花四件套',
-          'list_pic_url': 'http://yanxuan.nosdn.127.net/977401e75113f7c8334c4fb5b4bf6215.png',
-          'retail_price': 459
+          id: 1152161,
+          name: '竹语丝麻印花四件套',
+          list_pic_url:
+            'http://yanxuan.nosdn.127.net/977401e75113f7c8334c4fb5b4bf6215.png',
+          retail_price: 459
         }
       ],
-      'banner': [{
-        'id': 1,
-        'ad_position_id': 1,
-        'media_type': 1,
-        'name': '合作 谁是你的菜',
-        'link': '/pages/category/category?id=1005002',
-        'image_url': 'https://static.huanjiaohu.com/mini/index/banner1.jpg',
-        'content': '合作 谁是你的菜',
-        'end_time': 0,
-        'enabled': 1
-      }, {
-        'id': 2,
-        'ad_position_id': 1,
-        'media_type': 1,
-        'name': '活动 美食节',
-        'link': '/pages/category/category?id=1005001',
-        'image_url': 'https://static.huanjiaohu.com/mini/index/banner2.jpg',
-        'content': '活动 美食节',
-        'end_time': 0,
-        'enabled': 1
-      }, {
-        'id': 3,
-        'ad_position_id': 1,
-        'media_type': 1,
-        'name': '活动 母亲节',
-        'link': '/pages/category/category?id=1005000',
-        'image_url': 'https://static.huanjiaohu.com/mini/index/banner3.jpg',
-        'content': '活动 母亲节',
-        'end_time': 0,
-        'enabled': 1
-      }],
-      'banner2': [{
-        'id': 1,
-        'ad_position_id': 1,
-        'media_type': 1,
-        'name': '合作 谁是你的菜',
-        'link': '/pages/category/category?id=1005002',
-        'image_url': 'https://static.huanjiaohu.com/image/ad/sh/1.jpg',
-        'content': '合作 谁是你的菜',
-        'end_time': 0,
-        'enabled': 1
-      }, {
-        'id': 2,
-        'ad_position_id': 1,
-        'media_type': 1,
-        'name': '活动 美食节',
-        'link': '/pages/category/category?id=1005001',
-        'image_url': 'https://static.huanjiaohu.com/image/ad/sh/2.jpg',
-        'content': '活动 美食节',
-        'end_time': 0,
-        'enabled': 1
-      }, {
-        'id': 3,
-        'ad_position_id': 1,
-        'media_type': 1,
-        'name': '活动 母亲节',
-        'link': '/pages/category/category?id=1005000',
-        'image_url': 'https://static.huanjiaohu.com/image/ad/sh/3.jpg',
-        'content': '活动 母亲节',
-        'end_time': 0,
-        'enabled': 1
-      }],
-      'channel': [{
-        'id': 1,
-        'name': '商城',
-        'url': '/pages/mall/index',
-        'icon_url': 'https://static.huanjiaohu.com/mini/index/mall.png',
-        'sort_order': 1
-      }, {
-        'id': 2,
-        'name': '团购',
-        'url': '/pages/group/index',
-        'icon_url': 'https://static.huanjiaohu.com/mini/index/group.png',
-        'sort_order': 2
-      }, {
-        'id': 3,
-        'name': '活动',
-        'url': '/pages/second/index',
-        'icon_url': 'https://static.huanjiaohu.com/mini/index/second.png',
-        'sort_order': 3
-      }, {
-        'id': 4,
-        'name': '游戏',
-        'url': '/pages/game/index',
-        'icon_url': 'https://static.huanjiaohu.com/mini/index/game.png',
-        'sort_order': 4
-      }, {
-        'id': 5,
-        'name': '资讯',
-        'url': '/pages/information/index',
-        'icon_url': 'https://static.huanjiaohu.com/mini/index/information.png',
-        'sort_order': 5
-      }]
-    }
+      banner: [
+        {
+          id: 1,
+          ad_position_id: 1,
+          media_type: 1,
+          name: '合作 谁是你的菜',
+          link: '/pages/category/category?id=1005002',
+          image_url: 'https://static.huanjiaohu.com/mini/index/banner1.jpg',
+          content: '合作 谁是你的菜',
+          end_time: 0,
+          enabled: 1
+        },
+        {
+          id: 2,
+          ad_position_id: 1,
+          media_type: 1,
+          name: '活动 美食节',
+          link: '/pages/category/category?id=1005001',
+          image_url: 'https://static.huanjiaohu.com/mini/index/banner2.jpg',
+          content: '活动 美食节',
+          end_time: 0,
+          enabled: 1
+        },
+        {
+          id: 3,
+          ad_position_id: 1,
+          media_type: 1,
+          name: '活动 母亲节',
+          link: '/pages/category/category?id=1005000',
+          image_url: 'https://static.huanjiaohu.com/mini/index/banner3.jpg',
+          content: '活动 母亲节',
+          end_time: 0,
+          enabled: 1
+        }
+      ],
+      banner2: [
+        {
+          id: 1,
+          ad_position_id: 1,
+          media_type: 1,
+          name: '合作 谁是你的菜',
+          link: '/pages/category/category?id=1005002',
+          image_url: 'https://static.huanjiaohu.com/image/ad/sh/1.jpg',
+          content: '合作 谁是你的菜',
+          end_time: 0,
+          enabled: 1
+        },
+        {
+          id: 2,
+          ad_position_id: 1,
+          media_type: 1,
+          name: '活动 美食节',
+          link: '/pages/category/category?id=1005001',
+          image_url: 'https://static.huanjiaohu.com/image/ad/sh/2.jpg',
+          content: '活动 美食节',
+          end_time: 0,
+          enabled: 1
+        },
+        {
+          id: 3,
+          ad_position_id: 1,
+          media_type: 1,
+          name: '活动 母亲节',
+          link: '/pages/category/category?id=1005000',
+          image_url: 'https://static.huanjiaohu.com/image/ad/sh/3.jpg',
+          content: '活动 母亲节',
+          end_time: 0,
+          enabled: 1
+        }
+      ],
+      channel: [
+        {
+          id: 1,
+          name: '商城',
+          url: '/pages/mall/index',
+          icon_url: 'https://static.huanjiaohu.com/mini/index/mall.png',
+          sort_order: 1
+        },
+        {
+          id: 2,
+          name: '团购',
+          url: '/pages/group/index',
+          icon_url: 'https://static.huanjiaohu.com/mini/index/group.png',
+          sort_order: 2
+        },
+        {
+          id: 3,
+          name: '活动',
+          url: '/pages/second/index',
+          icon_url: 'https://static.huanjiaohu.com/mini/index/second.png',
+          sort_order: 3
+        },
+        {
+          id: 4,
+          name: '游戏',
+          url: '/pages/game/index',
+          icon_url: 'https://static.huanjiaohu.com/mini/index/game.png',
+          sort_order: 4
+        },
+        {
+          id: 5,
+          name: '资讯',
+          url: '/pages/information/index',
+          icon_url: 'https://static.huanjiaohu.com/mini/index/information.png',
+          sort_order: 5
+        }
+      ]
+    };
   },
-  async mounted () {
-
-  },
+  async mounted () {},
 
   methods: {
     selectProvince () {
       $wuxSelect('#province').open({
         value: this.value3,
-        options: [{
-          title: '画画',
-          value: '1'
-        },
-        {
-          title: '打球',
-          value: '2'
-        },
-        {
-          title: '唱歌',
-          value: '3'
-        },
-        {
-          title: '游泳',
-          value: '4'
-        },
-        {
-          title: '健身',
-          value: '5'
-        },
-        {
-          title: '睡觉',
-          value: '6'
-        },
-        {
-          title: '健身',
-          value: '5'
-        },
-        {
-          title: '健身',
-          value: '5'
-        },
-        {
-          title: '健身',
-          value: '5'
-        },
-        {
-          title: '健身',
-          value: '5'
-        },
-        {
-          title: '健身',
-          value: '5'
-        },
-        {
-          title: '健身',
-          value: '5'
-        },
-        {
-          title: '健身',
-          value: '5'
-        },
-        {
-          title: '健身',
-          value: '5'
-        },
-        {
-          title: '健身',
-          value: '5'
-        },
-        {
-          title: '健身',
-          value: '5'
-        },
-        {
-          title: '健身',
-          value: '5'
-        },
-        {
-          title: '健身',
-          value: '5'
-        },
-        {
-          title: '健身',
-          value: '5'
-        },
-        {
-          title: '健身',
-          value: '5'
-        },
-        {
-          title: '健身',
-          value: '5'
-        }
+        options: [
+          {
+            title: '画画',
+            value: '1'
+          },
+          {
+            title: '打球',
+            value: '2'
+          },
+          {
+            title: '唱歌',
+            value: '3'
+          },
+          {
+            title: '游泳',
+            value: '4'
+          },
+          {
+            title: '健身',
+            value: '5'
+          },
+          {
+            title: '睡觉',
+            value: '6'
+          },
+          {
+            title: '健身',
+            value: '5'
+          },
+          {
+            title: '健身',
+            value: '5'
+          },
+          {
+            title: '健身',
+            value: '5'
+          },
+          {
+            title: '健身',
+            value: '5'
+          },
+          {
+            title: '健身',
+            value: '5'
+          },
+          {
+            title: '健身',
+            value: '5'
+          },
+          {
+            title: '健身',
+            value: '5'
+          },
+          {
+            title: '健身',
+            value: '5'
+          },
+          {
+            title: '健身',
+            value: '5'
+          },
+          {
+            title: '健身',
+            value: '5'
+          },
+          {
+            title: '健身',
+            value: '5'
+          },
+          {
+            title: '健身',
+            value: '5'
+          },
+          {
+            title: '健身',
+            value: '5'
+          },
+          {
+            title: '健身',
+            value: '5'
+          },
+          {
+            title: '健身',
+            value: '5'
+          }
         ],
         onConfirm: (value, index, options) => {
-          console.log('onConfirm', value, index, options)
+          console.log('onConfirm', value, index, options);
         }
-      })
+      });
     }
   },
 
@@ -349,9 +359,9 @@ export default {
       title: '礁岩海水',
       desc: '礁岩海水',
       path: '/pages/index/index'
-    }
+    };
   }
-}
+};
 </script>
 
 <style scoped>
@@ -361,7 +371,7 @@ export default {
   overflow: hidden;
   background: #fff;
   color: #333;
-  padding-bottom:70rpx;
+  padding-bottom: 70rpx;
 }
 
 .index-new .b {
@@ -405,7 +415,6 @@ export default {
   font-size: 30rpx;
   color: #b4282d;
 }
-
 
 .banner {
   width: 750rpx;
@@ -479,7 +488,8 @@ export default {
 
 .a-section .h .txt {
   padding-right: 30rpx;
-  background: url("http://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/index-titleArrow-219f348910.png") right 4rpx no-repeat;
+  background: url("http://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/index-titleArrow-219f348910.png")
+    right 4rpx no-repeat;
   background-size: 16.656rpx 27rpx;
   display: inline-block;
   height: 36rpx;
@@ -487,39 +497,40 @@ export default {
   line-height: 36rpx;
 }
 
-.location-select-btn{
-background-color:transparent;
-background-image: url("https://static.huanjiaohu.com/mini/index/triangle.png");
-background-position-x: right;
-background-position-y: center;
-background-repeat: no-repeat;
-line-height: 36px;
-border: none;
-border-radius: 0;
-padding-right:15px;
-margin-right:10px;
-font-size: 12px;
-text-align: right;
+.location-select-btn {
+  background-color: transparent;
+  background-image: url("https://static.huanjiaohu.com/mini/index/triangle.png");
+  background-position-x: right;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  line-height: 36px;
+  border: none;
+  border-radius: 0;
+  padding-right: 15px;
+  margin-right: 10px;
+  font-size: 12px;
+  text-align: right;
 }
 ._wux-notice-bar > .wux-notice-bar {
   background: white;
 }
 
-.jytt_module{
-  font-size:12px;
+.jytt_module {
+  font-size: 12px;
   background-image: url("https://static.huanjiaohu.com/mini/index/jytt_bg.png");
   background-size: cover;
   background-repeat: no-repeat;
   white-space: nowrap;
-  height:60px;
+  height: 60px;
   line-height: 22px;
 }
-.jytt_text{
-  padding-top:8px;
+.jytt_text {
+  padding-top: 8px;
 }
-.jytt_module .wux-tag--red,.jytt_module .wux-tag--blue{
+.jytt_module .wux-tag--red,
+.jytt_module .wux-tag--blue {
   font-size: 10px;
-  padding:0 6px;
-  height:14px;
+  padding: 0 6px;
+  height: 14px;
 }
 </style>
