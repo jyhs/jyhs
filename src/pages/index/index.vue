@@ -30,9 +30,8 @@
     <wux-wing-blank>
     <wux-row>
                 <wux-col span="2">
-                  礁岩<br>头条
                 </wux-col>
-                <wux-col span="10">
+                <wux-col span="8">
                      <wux-row>
                                 <wux-col span="2">
                                   <wux-tag color="red">最热</wux-tag>
@@ -50,6 +49,8 @@
                                 </wux-col>
                      </wux-row>
                 </wux-col>
+                <wux-col span="2">
+                </wux-col>
     </wux-row>
     </wux-wing-blank>
   </view>
@@ -65,6 +66,14 @@
                 </wux-card>
              </wux-wing-blank>
           </view>
+           <wux-white-space/>
+             <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
+    <swiper-item v-for="item of banner" :key="item.id">
+      <navigator :url="item.link">
+        <img :src="item.image_url" background-size="cover" />
+      </navigator>
+    </swiper-item>
+  </swiper>
            <wux-white-space/>
           <view class="row">
               <wux-wing-blank >
