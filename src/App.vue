@@ -15,6 +15,6 @@ export default {
   box-sizing: border-box;
 }
 .row{
-  width: 100%
+  width: 100%;
 }
 </style>

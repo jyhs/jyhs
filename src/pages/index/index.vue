@@ -8,12 +8,12 @@
     </swiper-item>
   </swiper>
   <view class="row">
-    <wux-row>
-                <wux-col span="10">
+   <wux-row>
+                <wux-col span="9">
                     <wux-notice-bar content="喜大普奔！礁岩海水小程序上线了！礁岩海水小程序上线了" loop speed="50"/>
                 </wux-col>
-                <wux-col span="2">
-                    <wux-button  block clear prefixCls='location-select-btn' type="balanced" size=“small” @click='selectProvince'>上海</wux-button>
+                <wux-col span="3">
+                    <view   class='location-select-btn'  @click='selectProvince'>上海</view>
                     <wux-select id="province" />
                 </wux-col>
     </wux-row>
@@ -26,7 +26,7 @@
     </navigator>
   </view>
 
-  <view class="row toutiao">
+  <view class="row">
     <wux-wing-blank>
     <wux-row>
                 <wux-col span="2">
@@ -53,16 +53,50 @@
     </wux-row>
     </wux-wing-blank>
   </view>
+          <wux-white-space/>
+          <view class="row">
+              <wux-wing-blank >
+                <wux-card title="最新团购"   thumb="/static/images/footprint.png">
+                    <view slot="body">
+                     <groupItem/>
+                                          <groupItem/>
+
+                    </view>
+                </wux-card>
+             </wux-wing-blank>
+          </view>
+           <wux-white-space/>
+          <view class="row">
+              <wux-wing-blank >
+                <wux-card title="最新商品"   thumb="/static/images/footprint.png">
+                    <view slot="body">
+                     最新商品
+                    </view>
+                </wux-card>
+             </wux-wing-blank>
+          </view>
+          <wux-white-space/>
+          <view class="row">
+              <wux-wing-blank >
+                <wux-card title="最新零售"   thumb="/static/images/footprint.png">
+                    <view slot="body">
+                     最新零售
+                    </view>
+                </wux-card>
+             </wux-wing-blank>
+          </view>
+         
 </view>
 </template>
 
 <script>
 // import api from '@/utils/api'
 import { $wuxSelect } from '../../../static/wux/index'
+import groupItem from '@/components/groupItem'
 
 export default {
-  computed: {
-
+  components: {
+    groupItem
   },
   data () {
     return {
@@ -314,5 +348,22 @@ export default {
   line-height: 36rpx;
 }
 
+.location-select-btn{
+background-color:transparent;
+background-image: url("https://static.huanjiaohu.com/mini/index/triangle.png");
+background-position-x: right;
+background-position-y: center;
+background-repeat: no-repeat;
+margin-right:5px;
+line-height: 36px;
+border: none;
+border-radius: 0;
+padding: 0;
+font-size: 12px;
+text-align: center;
+}
+._wux-notice-bar > .wux-notice-bar {
+  background: white;
+}
 
 </style>
