@@ -10,10 +10,11 @@
   <view class="row">
     <wux-row>
                 <wux-col span="10">
-        <wux-notice-bar content="喜大普奔！礁岩海水小程序上线了！礁岩海水小程序上线了" loop speed="50"/>
+                    <wux-notice-bar content="喜大普奔！礁岩海水小程序上线了！礁岩海水小程序上线了" loop speed="50"/>
                 </wux-col>
                 <wux-col span="2">
-                    <view class="placeholder">wux</view>
+                    <wux-button block clear type="balanced" size=“small” @click='selectProvince'>上海</wux-button>
+                    <wux-select id="province" />
                 </wux-col>
     </wux-row>
   </view>
@@ -29,12 +30,16 @@
 
 <script>
 // import api from '@/utils/api'
+import { $wuxSelect } from '../../../static/wux/index'
+
 export default {
   computed: {
 
   },
   data () {
     return {
+      title3: '',
+      value3: '',
       'banner': [{
         'id': 1,
         'ad_position_id': 1,
@@ -80,7 +85,7 @@ export default {
         'sort_order': 2
       }, {
         'id': 3,
-        'name': '二手',
+        'name': '活动',
         'url': '/pages/second/index',
         'icon_url': 'https://static.huanjiaohu.com/mini/index/second.png',
         'sort_order': 3
@@ -104,14 +109,106 @@ export default {
   },
 
   methods: {
-
+    selectProvince () {
+      $wuxSelect('#province').open({
+        value: this.value3,
+        options: [{
+          title: '画画',
+          value: '1'
+        },
+        {
+          title: '打球',
+          value: '2'
+        },
+        {
+          title: '唱歌',
+          value: '3'
+        },
+        {
+          title: '游泳',
+          value: '4'
+        },
+        {
+          title: '健身',
+          value: '5'
+        },
+        {
+          title: '睡觉',
+          value: '6'
+        },
+        {
+          title: '健身',
+          value: '5'
+        },
+        {
+          title: '健身',
+          value: '5'
+        },
+        {
+          title: '健身',
+          value: '5'
+        },
+        {
+          title: '健身',
+          value: '5'
+        },
+        {
+          title: '健身',
+          value: '5'
+        },
+        {
+          title: '健身',
+          value: '5'
+        },
+        {
+          title: '健身',
+          value: '5'
+        },
+        {
+          title: '健身',
+          value: '5'
+        },
+        {
+          title: '健身',
+          value: '5'
+        },
+        {
+          title: '健身',
+          value: '5'
+        },
+        {
+          title: '健身',
+          value: '5'
+        },
+        {
+          title: '健身',
+          value: '5'
+        },
+        {
+          title: '健身',
+          value: '5'
+        },
+        {
+          title: '健身',
+          value: '5'
+        },
+        {
+          title: '健身',
+          value: '5'
+        }
+        ],
+        onConfirm: (value, index, options) => {
+          console.log('onConfirm', value, index, options)
+        }
+      })
+    }
   },
 
   // 原生的分享功能
   onShareAppMessage: function () {
     return {
-      title: 'xbyjShop',
-      desc: '仿网易严选小程序商城',
+      title: '礁岩海水',
+      desc: '礁岩海水',
       path: '/pages/index/index'
     }
   }
@@ -147,8 +244,8 @@ export default {
 
 .m-menu image {
   display: block;
-  width: 58rpx;
-  height: 58rpx;
+  width: 80rpx;
+  height: 80rpx;
   margin: 0 auto;
   margin-bottom: 12rpx;
 }

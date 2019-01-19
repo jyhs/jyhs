@@ -7,7 +7,9 @@ module.exports = [
       usingComponents: {
         'wux-notice-bar': '../../static/wux/notice-bar/index',
         'wux-row': '../../static/wux/row/index',
-        'wux-col': '../../static/wux/col/index'
+        'wux-button': '../../static/wux/button/index',
+        'wux-col': '../../static/wux/col/index',
+        'wux-select': '../../static/wux/select/index'
       }
     }
   },
