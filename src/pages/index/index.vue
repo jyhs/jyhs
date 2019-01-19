@@ -60,31 +60,31 @@ export default {
         'id': 1,
         'name': '商城',
         'url': '/pages/mall/index',
-        'icon_url': 'https://static.huanjiaohu.com/mini/index/footprint.png',
+        'icon_url': 'https://static.huanjiaohu.com/mini/index/mall.png',
         'sort_order': 1
       }, {
         'id': 2,
         'name': '团购',
         'url': '/pages/group/index',
-        'icon_url': 'https://static.huanjiaohu.com/mini/index/footprint.png',
+        'icon_url': 'https://static.huanjiaohu.com/mini/index/group.png',
         'sort_order': 2
       }, {
         'id': 3,
         'name': '二手',
         'url': '/pages/second/index',
-        'icon_url': 'https://static.huanjiaohu.com/mini/index/footprint.png',
+        'icon_url': 'https://static.huanjiaohu.com/mini/index/second.png',
         'sort_order': 3
       }, {
         'id': 4,
         'name': '游戏',
         'url': '/pages/game/index',
-        'icon_url': 'https://static.huanjiaohu.com/mini/index/footprint.png',
+        'icon_url': 'https://static.huanjiaohu.com/mini/index/game.png',
         'sort_order': 4
       }, {
         'id': 5,
         'name': '资讯',
         'url': '/pages/information/index',
-        'icon_url': 'https://static.huanjiaohu.com/mini/index/footprint.png',
+        'icon_url': 'https://static.huanjiaohu.com/mini/index/information.png',
         'sort_order': 5
       }]
     }
