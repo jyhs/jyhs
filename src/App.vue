@@ -14,4 +14,5 @@ export default {
   justify-content: flex-start;
   box-sizing: border-box;
 }
+
 </style>

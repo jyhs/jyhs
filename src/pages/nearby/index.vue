@@ -153,7 +153,7 @@ export default {
   onShareAppMessage (options) {
     return {
       title: '礁岩海水到位服务',
-      imageUrl: '/static/images/daowei.jpg'
+      imageUrl: 'https://static.huanjiaohu.com/image/share/daowei.jpg'
     }
   }
 

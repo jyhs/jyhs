@@ -6,13 +6,14 @@
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
-		"autoAudits": false
+		"nodeModules": false,
+		"autoAudits": true
 	},
 	"miniprogramRoot": "dist/",
 	"compileType": "miniprogram",
 	"appid": "wx9f635f06da7360d7",
 	"projectname": "main",
-	"libVersion": "2.4.4",
+	"libVersion": "2.5.0",
 	"condition": {
 		"search": {
 			"current": -1,

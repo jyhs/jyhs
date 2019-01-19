@@ -1,25 +1,23 @@
 <template >
   <view>
     <view class="container">
-      <view class="profile-info"/>
-      <view class="user-menu">
-        <view class="character-info">
-          <view v-if="userInfo.avatarUrl">
-              <img class="avatar" :src="userInfo.avatarUrl">
-          </view>
-           <view v-else>
-            <navigator url="/pages/ucenter/login" class="a">
-              <img class="avatar" :src="avatarUrl">
-            </navigator>
-          </view>
-          <view class="character-text">
-            <view class="name">
-              <text class="name">{{userInfo.nickName}}</text>
-            </view>
+      <view class="profile-info">
+         <view v-if="userInfo.avatarUrl">
+            <wux-avatar size="large" :src="userInfo.avatarUrl" body-style="background-color: #ffffff;width:100rpx;height:100rpx;border-radius:50rpx;line-height:100rpx;"/>
+        </view>
+        <view v-else>
+              <navigator url="/pages/ucenter/login">
+              <wux-avatar size="large" :src="avatarUrl" body-style="background-color: #ffffff;width:100rpx;height:100rpx;border-radius:50rpx;line-height:100rpx;"/>
+              </navigator>
+        </view>
+        <view class="sub-title">{{userInfo.nickName}}</view>
+      </view>
+      <view class="user-menu" v-if="userInfo.avatarUrl">
+        <view class="character-text">
             <view class="character-itemlist">
               <navigator url="/pages/ucenter/collect">
                 <view class="character-item">
-                  <text class="txt">0</text>
+                  <img class="icon" src="/static/images/footprint.png">
                   <view>
                     <text class="description">关注商家</text>
                   </view>
@@ -28,7 +26,7 @@
               <navigator url="/pages/ucenter/collect">
                 <view class="character-item">
                   <view class="character-item2">
-                    <text class="txt">0</text>
+                  <img class="icon" src="/static/images/footprint.png">
                     <view>
                       <text class="description">生物收藏</text>
                     </view>
@@ -37,7 +35,7 @@
               </navigator>
               <navigator url="/pages/ucenter/collect">
                 <view class="character-item">
-                  <text class="txt">0</text>
+                  <img class="icon" src="/static/images/footprint.png">
                   <view>
                     <text class="description">我的积分</text>
                   </view>
@@ -45,108 +43,66 @@
               </navigator>
             </view>
           </view>
-        </view>
-        <view class="character-menu" v-if="userInfo.avatarUrl">
-          <view class="item">
-            <navigator url="/pages/ucenter/order" class="a">
-              <view class="item-container">
-                <view class="item-container-icon">
-                  <text class="icon order"></text>
-                  <text class="txt">我的订单</text>
-                </view>
-                <view class="item-container-end">
-                  <text class="icon">></text>
-                </view>
-              </view>
-            </navigator>
-          </view>
-          <view class="item">
-            <navigator url="/pages/ucenter/coupon" class="a">
-              <view class="item-container">
-                <view class="item-container-icon">
-                  <text class="icon coupon"></text>
-                  <text class="txt">优惠券</text>
-                </view>
-                <view class="item-container-end">
-                  <text class="icon">></text>
-                </view>
-              </view>
-            </navigator>
-          </view>
-          <view class="item">
-            <navigator url="/pages/ucenter/collect" class="a">
-              <view class="item-container">
-                <view class="item-container-icon">
-                  <img class="icon" src="/static/images/icon_collect.png">
-                  <text class="txt">我的收藏</text>
-                </view>
-                <view class="item-container-end">
-                  <text class="icon">></text>
-                </view>
-              </view>
-            </navigator>
-          </view>
-          <view class="item">
-            <navigator url="../ucenter/footprint" class="a">
-              <view class="item-container">
-                <view class="item-container-icon">
-                  <img class="icon" src="/static/images/footprint.png">
-                  <text class="txt">我的足迹</text>
-                </view>
-                <view class="item-container-end">
-                  <text class="icon">></text>
-                </view>
-              </view>
-            </navigator>
-          </view>
-          <view class="item">
-            <navigator url="../ucenter/address" class="a">
-              <view class="item-container">
-                <view class="item-container-icon">
-                  <text class="icon address"></text>
-                  <text class="txt">地址管理</text>
-                </view>
-                <view class="item-container-end">
-                  <text class="icon">></text>
-                </view>
-              </view>
-            </navigator>
-          </view>
-          <view class="item item-bottom">
-            <navigator url="../ucenter/feedback" class="a">
-              <view class="item-container">
-                <view class="item-container-icon">
-                  <text class="icon feedback"></text>
-                  <text class="txt">意见反馈</text>
-                </view>
-                <view class="item-container-end">
-                  <text class="icon">></text>
-                </view>
-              </view>
-            </navigator>
-          </view>
-          <view class="item">
-            <navigator url="../ucenter/express" class="a">
-              <view class="item-container">
-                <view class="item-container-icon">
-                  <img class="icon" src="/static/images/car.png">
-                  <text class="txt">物流查询</text>
-                </view>
-                <view class="item-container-end">
-                  <text class="icon">></text>
-                </view>
-              </view>
-            </navigator>
-          </view>
-          <view class="logout">
-            <wux-button block type="assertive" @click="logout">退出</wux-button>
-          </view>
-        </view>
-        <view class="character-menu"  v-else>
-            <img class="avatar">
-        </view>
-       
       </view>
+      <wux-white-space/>
+        <view class="character-info" >
+          <view class="character-menu" v-if="userInfo.avatarUrl">
+             <wux-wing-blank >
+                <wux-card title="我的订单"   thumb="/static/images/footprint.png">
+                    <view slot="body">
+                       <wux-grids col="4" :bordered="false">
+                          <wux-grid thumb="/static/images/footprint.png" label="待付款" />
+                          <wux-grid thumb="/static/images/footprint.png" label="待发货" />
+                          <wux-grid thumb="/static/images/footprint.png" label="待收获" />
+                          <wux-grid thumb="/static/images/footprint.png" label="待评价" />
+                          <wux-grid thumb="/static/images/footprint.png" label="退款退货" />
+                          <wux-grid thumb="/static/images/footprint.png" label="待确认" />
+                      </wux-grids>
+                    </view>
+                </wux-card>
+             </wux-wing-blank>
+             <wux-white-space/>
+
+              <wux-wing-blank >
+                <wux-card title="我的团购"   thumb="/static/images/footprint.png">
+                    <view slot="body">卡片内容</view>
+                </wux-card>
+             </wux-wing-blank>
+             <wux-white-space/>
+
+              <wux-wing-blank >
+                <wux-card title="我的服务"  thumb="/static/images/footprint.png">
+                    <view slot="body">卡片内容</view>
+                </wux-card>
+             </wux-wing-blank>
+             <wux-white-space/>
+
+             <wux-wing-blank >
+                <wux-card title="我的二手"  thumb="/static/images/footprint.png">
+                    <view slot="body">卡片内容</view>
+                </wux-card>
+             </wux-wing-blank>
+             <wux-white-space/>
+
+              <wux-wing-blank >
+                <wux-card title="我的设置"  thumb="/static/images/footprint.png">
+                    <view slot="body">卡片内容</view>
+                </wux-card>
+             </wux-wing-blank>
+             <wux-white-space/>
+             <wux-wing-blank >
+                  <wux-cell thumb="/static/images/footprint.png" is-link title="退出" @click="logout" ></wux-cell>
+             </wux-wing-blank>
+             <wux-white-space/>
+        </view>
+         <view v-else >
+            <wux-white-space body-style="height: 120rpx" />
+            <wux-prompt   :visible="true" icon="/static/images/footprint.png" title="您还没有登录" />
+                    <wux-button block type="light" size='small' @click="logout">登录</wux-button>
+
+        </view>
+               
+        </view>
     </view>
   </view>
 </template>
@@ -172,17 +128,15 @@ export default {
       wx.reLaunch({
         url: '/pages/ucenter/login'
       });
+    },
+    login () {
+
     }
   }
 };
 </script>
 
 <style scoped>
-page {
-  height: 100%;
-  width: 100%;
-  background: #f4f4f4;
-}
 .container {
   background: #f4f4f4;
   height: auto;
@@ -192,111 +146,28 @@ page {
 }
 .profile-info {
   width: 100%;
-  height: 470rpx;
+  height: 370rpx;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 0 30.25rpx;
   background: url(https://static.huanjiaohu.com/image/login_banner.jpg);
   background-size: cover;
   -webkit-background-size: cover;
   -o-background-size: cover;
+  justify-content: center;
+  flex-direction:column;
+  text-align:center;
 
-  /* background: #fff; */
-}
-
-/* .user-floatmenu{
-  width: 90%;
-  margin-top: -20px;
-} */
-
-.user-menu .avatar {
-  height: 148rpx;
-  width: 148rpx;
-  border-radius: 10%;
-  margin-top: 20rpx;
-  margin-left: 20rpx;
-}
-
-.user-menu .info {
-  flex: 1;
-  height: 50rpx;
-  margin-top: 100rpx;
-  margin-left: 70rpx;
-}
-
-.user-menu .character-info .name {
-  /* display: block; */
-  /* height: 45rpx; */
-  /* line-height: 45rpx; */
-  /* font-size: 37.5rpx; */
-  margin-top: 10rpx;
-}
-
-.profile-info .level {
-  display: block;
-  height: 30rpx;
-  line-height: 30rpx;
-  margin-bottom: 10rpx;
-  color: #7f7f7f;
-  font-size: 30rpx;
 }
 
 .user-menu {
   margin-top: -30px;
   width: 95%;
-  height: auto;
+  height:170rpx;
   overflow: hidden;
-  /* background: #fff; */
+  background:#ffffff;
+  display:flex;
+  justify-content:center;
+  border-radius: 20rpx;
 }
-
-.user-menu .name{
-  height: 20px;
-  overflow: hidden;
-}
-
-.user-menu .item {
-  /* float: left; */
-  /* width: 33%; */
-  display: flex;
-  height: 78rpx;
-  /* border-right: 1px solid rgba(0, 0, 0, 0.15); */
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-  text-align: center;
-}
-
-.user-menu .item .item-container {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.user-menu .item .item-container .item-container-icon {
-  display: flex;
-}
-
-.user-menu .item .item-container .item-container-end {
-  margin-left: 200px;
-}
-
-.user-menu .item .a {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.user-menu .item.no-border {
-  border-right: 0;
-}
-
-.user-menu .item.item-bottom {
-  /* border-bottom: none; */
-}
-
 .user-menu .icon {
   margin: 0 auto;
   display: block;
@@ -305,57 +176,6 @@ page {
   margin-bottom: 16rpx;
 }
 
-.user-menu image {
-  opacity: 0.6;
-}
-
-.user-menu .icon.order {
-  background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png)
-    0 -437.5rpx no-repeat;
-  background-size: 52.803rpx;
-}
-
-.user-menu .icon.coupon {
-  background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png)
-    0 -62.4997rpx no-repeat;
-  background-size: 52.803rpx;
-}
-
-.user-menu .icon.gift {
-  background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png)
-    0 -187.5rpx no-repeat;
-  background-size: 52.803rpx;
-}
-
-.user-menu .icon.address {
-  background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png)
-    0 0 no-repeat;
-  background-size: 52.803rpx;
-}
-
-.user-menu .icon.security {
-  background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png)
-    0 -500rpx no-repeat;
-  background-size: 52.803rpx;
-}
-
-.user-menu .icon.kefu {
-  background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png)
-    0 -312.5rpx no-repeat;
-  background-size: 52.803rpx;
-}
-
-.user-menu .icon.help {
-  background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png)
-    0 -250rpx no-repeat;
-  background-size: 52.803rpx;
-}
-
-.user-menu .icon.feedback {
-  background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png)
-    0 -125rpx no-repeat;
-  background-size: 52.803rpx;
-}
 
 .user-menu .txt {
   display: block;
@@ -375,126 +195,55 @@ page {
   color: #ea3732;
   font-size: 30rpx;
 }
-.login-list {
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  background: #fff;
-  border-top: 1px solid #e1e1e1;
-}
 
-.userinfo-tel,
-.userinfo-code {
-  display: flex;
-  justify-content: space-between;
-  margin: 20px;
-  border: solid 1px #d6d6d6;
-  border-radius: 4px;
-}
-.userinfo-tel > input,
-.userinfo-code > input {
-  line-height: 48px;
-  height: 48px;
-  font-size: 14px;
-  justify-content: space-between;
-  width: 70%;
-  padding-left: 36px;
-}
-.userinfo-tel > input {
-  background: url(https://static.huanjiaohu.com/icon/phone.png);
-  background-repeat: no-repeat;
-  background-size: 8%;
-  background-position: 10px;
-}
-.userinfo-code > input {
-  background: url(https://static.huanjiaohu.com/icon/validate.png);
-  background-repeat: no-repeat;
-  background-size: 8%;
-  background-position: 10px;
-}
-.userinfo-tel button,
-.userinfo-code button {
-  border: none;
-  color: #278cec;
-  height: 24px;
-  margin: 12px 0 0 0;
-  align-items: center;
-  padding: 4px 0;
-  border-left: solid 1px #d6d6d6;
-  line-height: 24px;
-  padding: 0;
-  width: 30%;
-  font-size: 14px;
-  text-align: right;
-  padding: 0 12px;
-  border-radius: 0;
-  flex-shrink: 0;
-}
-.captcha-button {
-  font-size: 14px;
-  line-height: 48px;
-  padding-right: 10px;
-  width: 50%;
-  text-align: right;
-}
-.userinfo-tel button {
-  border: none;
-}
-
-.login-list > image {
-  width: 100%;
-}
-
-.userinfo-confirm {
-  width: 100%;
-}
-
-.userinfo-confirm button {
-  border: none;
-  margin: 40px 20px 20px 20px;
-  color: white;
-  height: 48px;
-  line-height: 48px;
-  background: #26ab28;
-}
 .character-info {
-  background: #fff;
   display: flex;
+  justify-content:center;
+  border-radius: 15rpx;
+  align-items: center;
+  height: auto;
+  width:100%;
 }
 
 .character-menu {
-  background: #fff;
+  width:100%;
+
 }
 
-.character-text {
+.character-menu button{
+  padding: 30rpx 30rpx;
+
+}
+
+.user-menu .character-text {
   margin-left: 20rpx;
 }
 
-.character-itemlist {
+.user-menu .character-itemlist {
   margin-top: 30rpx;
   justify-content: flex-end;
   display: flex;
 }
 
-.character-info .info {
+.user-menu .character-info .info {
   text-align: center;
   display: inherit;
   /* margin-left:320rpx; */
   margin-bottom: 20rpx;
 }
 
-.character-info .info navigator {
+.user-menu .character-info .info navigator {
   margin: 0px 5px;
 }
 
-.character-item {
+.user-menu .character-item {
   font-size: 14px;
 }
-.character-item2 {
+.user-menu .character-item2 {
   margin: 0px 40px;
 }
 
-.character-item .txt {
+.user-menu .character-item .txt {
   text-align: center;
   margin-bottom: 5px;
   font-size: 16px;

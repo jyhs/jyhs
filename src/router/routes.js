@@ -52,7 +52,16 @@ module.exports = [
       enablePullDownRefresh: true,
       navigationBarTitleText: '礁岩个人',
       usingComponents: {
-        'wux-button': '../../static/wux/button/index'
+        'wux-button': '../../static/wux/button/index',
+        'wux-avatar': '../../static/wux/avatar/index',
+        'wux-prompt': '../../static/wux/prompt/index',
+        'wux-cell-group': '../../static/wux/cell-group/index',
+        'wux-cell': '../../static/wux/cell/index',
+        'wux-white-space': '../../static/wux/white-space/index',
+        'wux-card': '../../static/wux/card/index',
+        'wux-wing-blank': '../../static/wux/wing-blank/index',
+        'wux-grids': '../../static/wux/grids/index',
+        'wux-grid': '../../static/wux/grid/index'
       }
     }
   },

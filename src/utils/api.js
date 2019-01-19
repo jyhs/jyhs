@@ -3,6 +3,9 @@ import request from './request'
 const ApiRootUrl = 'https://api2.huanjiaohu.com/mall/'
 const ApiCommonUrl = 'https://api2.huanjiaohu.com/api/'
 
+// const ApiRootUrl = 'http://127.0.0.1:8360/mall/'
+// const ApiCommonUrl = 'http://127.0.0.1:8360/api/'
+
 const api = {
   // 获得服务列表
   getMaterialCount: (paramObj) => request.post('material/count', paramObj, {
@@ -32,11 +35,11 @@ const api = {
   }),
   // 分类目录全部分类数据接口
   getCatalogList: (r) => request.get('catalog/index', null, {
-    baseURL: ApiRootUrl
+    baseURL: ApiCommonUrl
   }),
   // 分类目录当前分类数据接口
   getCatalogCurrent: (paramObj) => request.get('catalog/current', paramObj, {
-    baseURL: ApiRootUrl
+    baseURL: ApiCommonUrl
   }),
   // 使用util的request方法，字符串变量即可
   // 微信登录
