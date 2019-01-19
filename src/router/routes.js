@@ -3,7 +3,12 @@ module.exports = [
     path: '/pages/index/index',
     name: 'index',
     config: {
-      enablePullDownRefresh: true
+      enablePullDownRefresh: true,
+      usingComponents: {
+        'wux-notice-bar': '../../static/wux/notice-bar/index',
+        'wux-row': '../../static/wux/row/index',
+        'wux-col': '../../static/wux/col/index'
+      }
     }
   },
   {

@@ -29,7 +29,7 @@ export default {
     tabBar: {
       'backgroundColor': '#fafafa',
       'borderStyle': 'white',
-      'selectedColor': '#b4282d',
+      'selectedColor': '#2382f0',
       'color': '#666',
       'list': [{
         'pagePath': 'pages/index/index',
