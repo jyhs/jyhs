@@ -7,7 +7,7 @@
       </navigator>
     </swiper-item>
   </swiper>
-  <view class="row">
+  <view class="row notice">
     <wux-row>
                 <wux-col span="10">
                     <wux-notice-bar content="喜大普奔！礁岩海水小程序上线了！礁岩海水小程序上线了" loop speed="50"/>
@@ -18,6 +18,7 @@
                 </wux-col>
     </wux-row>
   </view>
+  
   <view class="m-menu">
     <navigator  class="item" :url="item.url" v-for="item of channel" :key="item.id">
       <img :src="item.icon_url" background-size="cover" />
@@ -25,6 +26,33 @@
     </navigator>
   </view>
 
+  <view class="row toutiao">
+    <wux-wing-blank>
+    <wux-row>
+                <wux-col span="2" prefixCls="title">
+                  礁岩<br>头条
+                </wux-col>
+                <wux-col span="10" prefixCls="list">
+                     <wux-row>
+                                <wux-col span="2">
+                                  <wux-tag color="red">最热</wux-tag>
+                                </wux-col>
+                                <wux-col span="10">
+                                    喜大普奔！礁岩海水小程序上线了！礁岩海水小程序上线了
+                                </wux-col>
+                     </wux-row>
+                     <wux-row>
+                                <wux-col span="2">
+                                  <wux-tag color="blue">最新</wux-tag>
+                                </wux-col>
+                                <wux-col span="10">
+                                    喜大普奔！礁岩海水小程序上线了！礁岩海水小程序上线了
+                                </wux-col>
+                     </wux-row>
+                </wux-col>
+    </wux-row>
+    </wux-wing-blank>
+  </view>
 </view>
 </template>
 

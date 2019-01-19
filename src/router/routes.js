@@ -9,7 +9,9 @@ module.exports = [
         'wux-row': '../../static/wux/row/index',
         'wux-button': '../../static/wux/button/index',
         'wux-col': '../../static/wux/col/index',
-        'wux-select': '../../static/wux/select/index'
+        'wux-wing-blank': '../../static/wux/wing-blank/index',
+        'wux-select': '../../static/wux/select/index',
+        'wux-tag': '../../static/wux/tag/index'
       }
     }
   },
