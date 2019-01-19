@@ -60,31 +60,31 @@ export default {
         'id': 1,
         'name': '商城',
         'url': '/pages/mall/index',
-        'icon_url': 'https://yanxuan.nosdn.127.net/243e5bf327a87217ad1f54592f0176ec.png',
+        'icon_url': 'https://static.huanjiaohu.com/mini/index/footprint.png',
         'sort_order': 1
       }, {
         'id': 2,
         'name': '团购',
         'url': '/pages/group/index',
-        'icon_url': 'https://yanxuan.nosdn.127.net/f109afbb7e7a00c243c1da29991a5aa3.png',
+        'icon_url': 'https://static.huanjiaohu.com/mini/index/footprint.png',
         'sort_order': 2
       }, {
         'id': 3,
         'name': '二手',
         'url': '/pages/second/index',
-        'icon_url': 'https://yanxuan.nosdn.127.net/288b0e864a24763bade8e22c0c39ff02.png',
+        'icon_url': 'https://static.huanjiaohu.com/mini/index/footprint.png',
         'sort_order': 3
       }, {
         'id': 4,
         'name': '游戏',
         'url': '/pages/game/index',
-        'icon_url': 'https://yanxuan.nosdn.127.net/863b1e4a6c84fb33f5d09d91d2a36881.png',
+        'icon_url': 'https://static.huanjiaohu.com/mini/index/footprint.png',
         'sort_order': 4
       }, {
         'id': 5,
         'name': '资讯',
         'url': '/pages/information/index',
-        'icon_url': 'https://yanxuan.nosdn.127.net/a13a24413e66474cc7b0551984cfe9d4.png',
+        'icon_url': 'https://static.huanjiaohu.com/mini/index/footprint.png',
         'sort_order': 5
       }]
     }
