@@ -11,7 +11,7 @@
                                 <wux-col span="5">
                                     天鸿水族
                                 </wux-col>
-                                <wux-col offset="11">
+                                <wux-col span="11">
                                   13
                                 </wux-col>
                      </wux-row>

@@ -1,6 +1,10 @@
 <template>
 <view class='row group-item'>
+                               <wux-wing-blank>
+                               <wux-white-space/>
+
     <wux-row>
+
                 <wux-col span="2">
                   <wux-avatar src="https://api.huanjiaohu.com/user/getAvatar?userId=3152" body-style="background-color: #ffffff;width:100rpx;height:100rpx;line-height:100rpx;"/>
                 </wux-col>
@@ -28,6 +32,9 @@
                      </wux-row>
                 </wux-col>
     </wux-row>
+                                   <wux-white-space/>
+
+                               </wux-wing-blank>
 </view>
 </template>
 
