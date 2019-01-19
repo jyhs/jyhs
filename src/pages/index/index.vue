@@ -54,16 +54,12 @@
     </wux-row>
     </wux-wing-blank>
   </view>
-          <wux-white-space/>
+                  <wux-divider dashed  position="left" text="最新团购" />
+
           <view class="row">
-                <wux-card title="最新团购" :bordered="false"  thumb="/static/images/footprint.png">
-                    <view slot="body">
-                     <groupItem/>
+               <groupItem/>
                                <wux-white-space/>
                      <groupItem/>
-
-                    </view>
-                </wux-card>
           </view>
            <wux-white-space/>
           <swiper class="banner2"   autoplay="true" interval="3000" duration="1000">
@@ -73,15 +69,19 @@
               </navigator>
             </swiper-item>
           </swiper>
-           <wux-white-space/>
+                  <wux-divider dashed  position="left" text="最新商品" />
           <view class="row">
-              <wux-wing-blank >
-                <wux-card title="最新商品" :bordered="false"  thumb="/static/images/footprint.png">
-                    <view slot="body">
-                     最新商品
-                    </view>
-                </wux-card>
-             </wux-wing-blank>
+               <view class="a-section a-new">
+                          <view class="b">
+                            <view class="item" v-for="item of newGoods" :key="item.id">
+                              <navigator :url="'../goods/goods?id='+ item.id">
+                                <img class="img" :src="item.list_pic_url" background-size="cover" />
+                                <text class="name">{{item.name}}</text>
+                                <text class="price">￥{{item.retail_price}}</text>
+                              </navigator>
+                            </view>
+                          </view>
+                        </view>
           </view>
           <wux-white-space/>
            <swiper class="banner2"   autoplay="true" interval="3000" duration="1000">
@@ -91,15 +91,10 @@
               </navigator>
             </swiper-item>
           </swiper>
-          <wux-white-space/>
+                  <wux-divider dashed  position="left" text="最新商品" />
           <view class="row">
-              <wux-wing-blank >
-                <wux-card title="最新零售" :bordered="false"  thumb="/static/images/footprint.png">
-                    <view slot="body">
-                     最新零售
-                    </view>
-                </wux-card>
-             </wux-wing-blank>
+                                  最新零售
+
           </view>
           <wux-white-space/>
 </view>
@@ -118,6 +113,32 @@ export default {
     return {
       title3: '',
       value3: '',
+      newGoods: [
+        {
+          'id': 1134030,
+          'name': '简约知性记忆棉坐垫',
+          'list_pic_url': 'http://yanxuan.nosdn.127.net/aa49dfe878becf768eddc4c1636643a6.png',
+          'retail_price': 46
+        },
+        {
+          'id': 1134032,
+          'name': '趣味粉彩系列记忆棉坐垫',
+          'list_pic_url': 'http://yanxuan.nosdn.127.net/8b30eeb17c831eba08b97bdcb4c46a8e.png',
+          'retail_price': 49
+        },
+        {
+          'id': 1135002,
+          'name': '宫廷奢华真丝四件套',
+          'list_pic_url': 'http://yanxuan.nosdn.127.net/45548f26cfd0c7c41e0afc3709d48286.png',
+          'retail_price': 2599
+        },
+        {
+          'id': 1152161,
+          'name': '竹语丝麻印花四件套',
+          'list_pic_url': 'http://yanxuan.nosdn.127.net/977401e75113f7c8334c4fb5b4bf6215.png',
+          'retail_price': 459
+        }
+      ],
       'banner': [{
         'id': 1,
         'ad_position_id': 1,
@@ -324,7 +345,58 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.a-section {
+  width: 750rpx;
+  height: auto;
+  overflow: hidden;
+  background: #fff;
+  color: #333;
+}
+
+.a-new .b {
+  width: 750rpx;
+  height: auto;
+  overflow: hidden;
+}
+
+.a-new .b .item {
+  float: left;
+  width: 302rpx;
+  margin-top: 10rpx;
+  margin-left: 21rpx;
+  margin-right: 21rpx;
+}
+
+.a-new .b .item-b {
+  margin-left: 42rpx;
+}
+
+.a-new .b .img {
+  width: 302rpx;
+  height: 302rpx;
+}
+
+.a-new .b .name {
+  text-align: center;
+  display: block;
+  width: 302rpx;
+  height: 35rpx;
+  margin-bottom: 14rpx;
+  overflow: hidden;
+  font-size: 30rpx;
+  color: #333;
+}
+
+.a-new .b .price {
+  display: block;
+  text-align: center;
+  line-height: 30rpx;
+  font-size: 30rpx;
+  color: #b4282d;
+}
+
+
 .banner {
   width: 750rpx;
   height: 417rpx;
@@ -434,5 +506,10 @@ text-align: right;
 }
 .jytt_text{
   padding-top:8px;
+}
+.jytt_module .wux-tag--red,.jytt_module .wux-tag--blue{
+  font-size: 10px;
+  padding:0 6px;
+  height:14px;
 }
 </style>

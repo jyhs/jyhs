@@ -14,6 +14,7 @@ module.exports = [
         'wux-select': '../../static/wux/select/index',
         'wux-card': '../../static/wux/card/index',
         'wux-tag': '../../static/wux/tag/index',
+        'wux-divider': '../../static/wux/divider/index',
         'wux-avatar': '../../static/wux/avatar/index'
       }
     }
