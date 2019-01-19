@@ -46,7 +46,7 @@ export default {
         'media_type': 1,
         'name': '合作 谁是你的菜',
         'link': '/pages/category/category?id=1005002',
-        'image_url': 'http://yanxuan.nosdn.127.net/65091eebc48899298171c2eb6696fe27.jpg',
+        'image_url': 'https://static.huanjiaohu.com/mini/index/banner1.jpg',
         'content': '合作 谁是你的菜',
         'end_time': 0,
         'enabled': 1
@@ -56,7 +56,7 @@ export default {
         'media_type': 1,
         'name': '活动 美食节',
         'link': '/pages/category/category?id=1005001',
-        'image_url': 'http://yanxuan.nosdn.127.net/bff2e49136fcef1fd829f5036e07f116.jpg',
+        'image_url': 'https://static.huanjiaohu.com/mini/index/banner2.jpg',
         'content': '活动 美食节',
         'end_time': 0,
         'enabled': 1
@@ -66,7 +66,7 @@ export default {
         'media_type': 1,
         'name': '活动 母亲节',
         'link': '/pages/category/category?id=1005000',
-        'image_url': 'http://yanxuan.nosdn.127.net/8e50c65fda145e6dd1bf4fb7ee0fcecc.jpg',
+        'image_url': 'https://static.huanjiaohu.com/mini/index/banner3.jpg',
         'content': '活动 母亲节',
         'end_time': 0,
         'enabled': 1
