@@ -7,13 +7,13 @@
       </navigator>
     </swiper-item>
   </swiper>
-  <view class="row notice">
+  <view class="row">
     <wux-row>
                 <wux-col span="10">
                     <wux-notice-bar content="喜大普奔！礁岩海水小程序上线了！礁岩海水小程序上线了" loop speed="50"/>
                 </wux-col>
                 <wux-col span="2">
-                    <wux-button block clear type="balanced" size=“small” @click='selectProvince'>上海</wux-button>
+                    <wux-button  block clear prefixCls='location-select-btn' type="balanced" size=“small” @click='selectProvince'>上海</wux-button>
                     <wux-select id="province" />
                 </wux-col>
     </wux-row>
