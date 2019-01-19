@@ -29,10 +29,10 @@
   <view class="row toutiao">
     <wux-wing-blank>
     <wux-row>
-                <wux-col span="2" prefixCls="title">
+                <wux-col span="2">
                   礁岩<br>头条
                 </wux-col>
-                <wux-col span="10" prefixCls="list">
+                <wux-col span="10">
                      <wux-row>
                                 <wux-col span="2">
                                   <wux-tag color="red">最热</wux-tag>
