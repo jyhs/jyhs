@@ -1,4 +1,6 @@
 <script>
+import '../static/wux/styles/index.wxss';
+
 export default {
   mpType: 'app'
 }

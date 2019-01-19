@@ -57,9 +57,13 @@
                   <wux-divider dashed  position="left" text="最新团购" />
 
           <view class="row">
-               <groupItem/>
+                       <wux-wing-blank>
+                            <groupItem/>
+                       </wux-wing-blank>
                                <wux-white-space/>
-                     <groupItem/>
+                     <wux-wing-blank>
+                            <groupItem/>
+                       </wux-wing-blank>
           </view>
            <wux-white-space/>
           <swiper class="banner2"   autoplay="true" interval="3000" duration="1000">
@@ -71,7 +75,7 @@
           </swiper>
                   <wux-divider dashed  position="left" text="最新商品" />
           <view class="row">
-               <view class="a-section a-new">
+               <view class="index-section index-new">
                           <view class="b">
                             <view class="item" v-for="item of newGoods" :key="item.id">
                               <navigator :url="'../goods/goods?id='+ item.id">
@@ -81,7 +85,7 @@
                               </navigator>
                             </view>
                           </view>
-                        </view>
+              </view>
           </view>
           <wux-white-space/>
            <swiper class="banner2"   autoplay="true" interval="3000" duration="1000">
@@ -91,9 +95,12 @@
               </navigator>
             </swiper-item>
           </swiper>
-                  <wux-divider dashed  position="left" text="最新商品" />
+                  <wux-divider dashed  position="left" text="最新零售" />
           <view class="row">
-                                  最新零售
+                                  <retailItem/>
+                                  <wux-white-space/>
+                                  <retailItem/>
+
 
           </view>
           <wux-white-space/>
@@ -104,10 +111,12 @@
 // import api from '@/utils/api'
 import { $wuxSelect } from '../../../static/wux/index'
 import groupItem from '@/components/groupItem'
+import retailItem from '@/components/retailItem'
 
 export default {
   components: {
-    groupItem
+    groupItem,
+    retailItem
   },
   data () {
     return {
@@ -346,21 +355,22 @@ export default {
 </script>
 
 <style scoped>
-.a-section {
+.index-section {
   width: 750rpx;
   height: auto;
   overflow: hidden;
   background: #fff;
   color: #333;
+  padding-bottom:70rpx;
 }
 
-.a-new .b {
+.index-new .b {
   width: 750rpx;
   height: auto;
   overflow: hidden;
 }
 
-.a-new .b .item {
+.index-new .b .item {
   float: left;
   width: 302rpx;
   margin-top: 10rpx;
@@ -368,16 +378,16 @@ export default {
   margin-right: 21rpx;
 }
 
-.a-new .b .item-b {
+.index-new .b .item-b {
   margin-left: 42rpx;
 }
 
-.a-new .b .img {
+.index-new .b .img {
   width: 302rpx;
   height: 302rpx;
 }
 
-.a-new .b .name {
+.index-new .b .name {
   text-align: center;
   display: block;
   width: 302rpx;
@@ -388,7 +398,7 @@ export default {
   color: #333;
 }
 
-.a-new .b .price {
+.index-new .b .price {
   display: block;
   text-align: center;
   line-height: 30rpx;
