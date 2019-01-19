@@ -16,6 +16,7 @@ export default {
   justify-content: flex-start;
   box-sizing: border-box;
   background: #f4f4f4;
+  font-size: 28rpx;
 }
 .row{
   width: 100%;
