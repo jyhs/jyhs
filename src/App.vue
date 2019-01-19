@@ -13,6 +13,7 @@ export default {
   align-items: center;
   justify-content: flex-start;
   box-sizing: border-box;
+  background: #f4f4f4;
 }
 .row{
   width: 100%;

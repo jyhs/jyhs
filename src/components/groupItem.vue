@@ -46,6 +46,6 @@ export default {
 
 <style scoped>
   .group-item{
-    padding: 15rpx 15rpx;
+    background-color: #ffffff;
   }
 </style>

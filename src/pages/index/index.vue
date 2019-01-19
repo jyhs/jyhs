@@ -1,13 +1,13 @@
 <template >
 <view class="container">
-  <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
+  <swiper class="banner"   autoplay="true" interval="3000" duration="1000">
     <swiper-item v-for="item of banner" :key="item.id">
       <navigator :url="item.link">
         <img :src="item.image_url" background-size="cover" />
       </navigator>
     </swiper-item>
   </swiper>
-  <view class="row">
+<view class="row">
    <wux-row>
                 <wux-col span="9">
                     <wux-notice-bar content="喜大普奔！礁岩海水小程序上线了！礁岩海水小程序上线了" loop speed="50"/>
@@ -26,13 +26,13 @@
     </navigator>
   </view>
 
-  <view class="row">
+<view class="row jytt_module">
     <wux-wing-blank>
     <wux-row>
                 <wux-col span="2">
                 </wux-col>
                 <wux-col span="8">
-                     <wux-row>
+                     <wux-row prefixCls="jytt_text">
                                 <wux-col span="2">
                                   <wux-tag color="red">最热</wux-tag>
                                 </wux-col>
@@ -56,28 +56,27 @@
   </view>
           <wux-white-space/>
           <view class="row">
-              <wux-wing-blank >
-                <wux-card title="最新团购"   thumb="/static/images/footprint.png">
+                <wux-card title="最新团购" :bordered="false"  thumb="/static/images/footprint.png">
                     <view slot="body">
                      <groupItem/>
-                                          <groupItem/>
+                               <wux-white-space/>
+                     <groupItem/>
 
                     </view>
                 </wux-card>
-             </wux-wing-blank>
           </view>
            <wux-white-space/>
-             <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
-    <swiper-item v-for="item of banner" :key="item.id">
-      <navigator :url="item.link">
-        <img :src="item.image_url" background-size="cover" />
-      </navigator>
-    </swiper-item>
-  </swiper>
+          <swiper class="banner2"   autoplay="true" interval="3000" duration="1000">
+            <swiper-item v-for="item of banner2" :key="item.id">
+              <navigator :url="item.link">
+                <img :src="item.image_url" background-size="cover" />
+              </navigator>
+            </swiper-item>
+          </swiper>
            <wux-white-space/>
           <view class="row">
               <wux-wing-blank >
-                <wux-card title="最新商品"   thumb="/static/images/footprint.png">
+                <wux-card title="最新商品" :bordered="false"  thumb="/static/images/footprint.png">
                     <view slot="body">
                      最新商品
                     </view>
@@ -85,16 +84,24 @@
              </wux-wing-blank>
           </view>
           <wux-white-space/>
+           <swiper class="banner2"   autoplay="true" interval="3000" duration="1000">
+            <swiper-item v-for="item of banner2" :key="item.id">
+              <navigator :url="item.link">
+                <img :src="item.image_url" background-size="cover" />
+              </navigator>
+            </swiper-item>
+          </swiper>
+          <wux-white-space/>
           <view class="row">
               <wux-wing-blank >
-                <wux-card title="最新零售"   thumb="/static/images/footprint.png">
+                <wux-card title="最新零售" :bordered="false"  thumb="/static/images/footprint.png">
                     <view slot="body">
                      最新零售
                     </view>
                 </wux-card>
              </wux-wing-blank>
           </view>
-         
+          <wux-white-space/>
 </view>
 </template>
 
@@ -138,6 +145,37 @@ export default {
         'name': '活动 母亲节',
         'link': '/pages/category/category?id=1005000',
         'image_url': 'https://static.huanjiaohu.com/mini/index/banner3.jpg',
+        'content': '活动 母亲节',
+        'end_time': 0,
+        'enabled': 1
+      }],
+      'banner2': [{
+        'id': 1,
+        'ad_position_id': 1,
+        'media_type': 1,
+        'name': '合作 谁是你的菜',
+        'link': '/pages/category/category?id=1005002',
+        'image_url': 'https://static.huanjiaohu.com/image/ad/sh/1.jpg',
+        'content': '合作 谁是你的菜',
+        'end_time': 0,
+        'enabled': 1
+      }, {
+        'id': 2,
+        'ad_position_id': 1,
+        'media_type': 1,
+        'name': '活动 美食节',
+        'link': '/pages/category/category?id=1005001',
+        'image_url': 'https://static.huanjiaohu.com/image/ad/sh/2.jpg',
+        'content': '活动 美食节',
+        'end_time': 0,
+        'enabled': 1
+      }, {
+        'id': 3,
+        'ad_position_id': 1,
+        'media_type': 1,
+        'name': '活动 母亲节',
+        'link': '/pages/category/category?id=1005000',
+        'image_url': 'https://static.huanjiaohu.com/image/ad/sh/3.jpg',
         'content': '活动 母亲节',
         'end_time': 0,
         'enabled': 1
@@ -297,6 +335,16 @@ export default {
   height: 417rpx;
 }
 
+.banner2 {
+  width: 750rpx;
+  height: 140rpx;
+}
+
+.banner2 image {
+  width: 100%;
+  height: 140rpx;
+}
+
 .m-menu {
   display: flex;
   height: 181rpx;
@@ -363,16 +411,28 @@ background-image: url("https://static.huanjiaohu.com/mini/index/triangle.png");
 background-position-x: right;
 background-position-y: center;
 background-repeat: no-repeat;
-margin-right:5px;
 line-height: 36px;
 border: none;
 border-radius: 0;
-padding: 0;
+padding-right:15px;
+margin-right:10px;
 font-size: 12px;
-text-align: center;
+text-align: right;
 }
 ._wux-notice-bar > .wux-notice-bar {
   background: white;
 }
 
+.jytt_module{
+  font-size:12px;
+  background-image: url("https://static.huanjiaohu.com/mini/index/jytt_bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  white-space: nowrap;
+  height:60px;
+  line-height: 22px;
+}
+.jytt_text{
+  padding-top:8px;
+}
 </style>
