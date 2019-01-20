@@ -36,6 +36,7 @@ module.exports = [
         'wux-divider': '../../static/wux/divider/index',
         'wux-icon': '../../static/wux/icon/index',
         'wux-image': '../../static/wux/image/index',
+        'wux-avatar': '../../static/wux/avatar/index',
         'wux-search-bar': '../../static/wux/search-bar/index'
       }
     }
