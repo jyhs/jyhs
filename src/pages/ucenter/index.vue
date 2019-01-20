@@ -2,109 +2,206 @@
   <view>
     <view class="container">
       <view class="profile-info">
-         <view v-if="userInfo.avatarUrl">
-            <wux-avatar size="large" :src="userInfo.avatarUrl" body-style="background-color: #ffffff;width:100rpx;height:100rpx;border-radius:50rpx;line-height:100rpx;"/>
+        <view v-if="userInfo.avatarUrl">
+          <wux-avatar
+            size="large"
+            :src="userInfo.avatarUrl"
+            body-style="background-color: #ffffff;width:100rpx;height:100rpx;border-radius:50rpx;line-height:100rpx;"
+          />
         </view>
         <view v-else>
-              <navigator url="/pages/ucenter/login">
-              <wux-avatar size="large" :src="avatarUrl" body-style="background-color: #ffffff;width:100rpx;height:100rpx;border-radius:50rpx;line-height:100rpx;"/>
-              </navigator>
+          <navigator url="/pages/ucenter/login">
+            <wux-avatar
+              size="large"
+              :src="avatarUrl"
+              body-style="background-color: #ffffff;width:100rpx;height:100rpx;border-radius:50rpx;line-height:100rpx;"
+            />
+          </navigator>
         </view>
         <view class="sub-title">{{userInfo.nickName}}</view>
       </view>
       <view class="user-menu" v-if="userInfo.avatarUrl">
         <view class="character-text">
-            <view class="character-itemlist">
-               <navigator url="/pages/ucenter/collect">
-                <view class="character-item">
-                  <text>50</text>
-                  <view class="page__desc"></view>
-                  <text class="description">足迹</text>
-                </view>
-              </navigator>
-              <navigator url="/pages/ucenter/collect">
-                <view class="character-item">
-                  <text>218</text>
-                  <view class="page__desc"></view>
-                  <text class="description">收藏</text>
-                </view>
-              </navigator>
-              <navigator url="/pages/ucenter/collect">
-                <view class="character-item">
-                    <text>218</text>
-                    <view class="page__desc"></view>
-                    <text class="description">积分</text>
-                </view>
-              </navigator>
-              <navigator url="/pages/ucenter/collect">
-                <view class="character-item">
-                  <text>218</text>
-                  <view class="page__desc"></view>
-                  <text class="description">余额</text>
-                </view>
-              </navigator>
-            </view>
+          <view class="character-itemlist">
+            <navigator url="/pages/ucenter/collect">
+              <view class="character-item">
+                <text>50</text>
+                <view class="page__desc"></view>
+                <text class="description">优惠券</text>
+              </view>
+            </navigator>
+            <navigator url="/pages/ucenter/collect">
+              <view class="character-item">
+                <text>218</text>
+                <view class="page__desc"></view>
+                <text class="description">我的积分</text>
+              </view>
+            </navigator>
+            <navigator url="/pages/ucenter/collect">
+              <view class="character-item">
+                <text>218</text>
+                <view class="page__desc"></view>
+                <text class="description">我的余额</text>
+              </view>
+            </navigator>
           </view>
+        </view>
       </view>
       <wux-white-space/>
-        <view class="character-info" >
-          <view class="character-menu" v-if="userInfo.avatarUrl">
-             <wux-wing-blank >
-                <wux-card title="我的订单"   thumb="https://static.huanjiaohu.com/mini/index/ic_mybill.png">
-                    <view slot="body">
-                       <wux-grids col="4" :bordered="false">
-                          <wux-grid thumb="https://static.huanjiaohu.com/mini/index/ic_ppay.png" label="待付款" />
-                          <wux-grid thumb="https://static.huanjiaohu.com/mini/index/ic_psend.png" label="待发货" />
-                          <wux-grid thumb="https://static.huanjiaohu.com/mini/index/ic_receive.png" label="待收获" />
-                          <wux-grid thumb="https://static.huanjiaohu.com/mini/index/ic_pcomm.png" label="待评价" />
-                          <wux-grid thumb="https://static.huanjiaohu.com/mini/index/ic_back.png" label="退款退货" />
-                          <wux-grid thumb="https://static.huanjiaohu.com/mini/index/ic_confirm.png" label="待确认" />
-                      </wux-grids>
-                    </view>
-                </wux-card>
-             </wux-wing-blank>
-             <wux-white-space/>
-
-              <wux-wing-blank >
-                <wux-card title="我的团购"   thumb="https://static.huanjiaohu.com/mini/index/ic_mygroup.png">
-                    <view slot="body">卡片内容</view>
-                </wux-card>
-             </wux-wing-blank>
-             <wux-white-space/>
-
-              <wux-wing-blank >
-                <wux-card title="我的服务"  thumb="https://static.huanjiaohu.com/mini/index/ic_myserver.png">
-                    <view slot="body">卡片内容</view>
-                </wux-card>
-             </wux-wing-blank>
-             <wux-white-space/>
-
-             <wux-wing-blank >
-                <wux-card title="我的二手"  thumb="https://static.huanjiaohu.com/mini/index/ic_mysecond.png">
-                    <view slot="body">卡片内容</view>
-                </wux-card>
-             </wux-wing-blank>
-             <wux-white-space/>
-
-              <wux-wing-blank >
-                <wux-card title="我的设置"  thumb="https://static.huanjiaohu.com/mini/index/ic_myset.png">
-                    <view slot="body">卡片内容</view>
-                </wux-card>
-             </wux-wing-blank>
-             <wux-white-space/>
-             <wux-wing-blank >
-                  <wux-cell thumb="https://static.huanjiaohu.com/mini/index/ic_exit.png" is-link title="退出" @click="logout" ></wux-cell>
-             </wux-wing-blank>
-             <wux-white-space/>
+      <view class="character-info">
+        <view class="character-menu" v-if="userInfo.avatarUrl">
+          <wux-wing-blank>
+            <wux-card title="商城订单" extra="商城">
+              <view slot="body">
+                <wux-grids col="4" :bordered="false">
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_ppay.png"
+                    label="待付款"
+                  />
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_psend.png"
+                    label="待发货"
+                  />
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_receive.png"
+                    label="待收获"
+                  />
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_pcomm.png"
+                    label="待评价"
+                  />
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_back.png"
+                    label="退款退货"
+                  />
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_confirm.png"
+                    label="待确认"
+                  />
+                </wux-grids>
+              </view>
+            </wux-card>
+          </wux-wing-blank>
+          <wux-white-space/>
+          <wux-wing-blank>
+            <wux-card title="我是鱼友" extra="零售/团购">
+              <view slot="body">
+                <wux-grids col="4" :bordered="false">
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_ppay.png"
+                    label="待付款"
+                  />
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_psend.png"
+                    label="进行中"
+                  />
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_receive.png"
+                    label="已完成"
+                  />
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_pcomm.png"
+                    label="待评价"
+                  />
+                </wux-grids>
+              </view>
+            </wux-card>
+          </wux-wing-blank>
+          <wux-white-space/>
+          <wux-wing-blank>
+            <wux-card title="我是团长" extra="零售/团购">
+              <view slot="body">
+                <wux-grids col="4" :bordered="false">
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_ppay.png"
+                    label="未截单"
+                  />
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_psend.png"
+                    label="进行中"
+                  />
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_receive.png"
+                    label="已结束"
+                  />
+                </wux-grids>
+              </view>
+            </wux-card>
+          </wux-wing-blank>
+          <wux-white-space/>
+          <wux-wing-blank>
+            <wux-card title="我是渔场" extra="零售/团购">
+              <view slot="body">
+                <wux-grids col="4" :bordered="false">
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_ppay.png"
+                    label="未截单"
+                  />
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_psend.png"
+                    label="进行中"
+                  />
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_receive.png"
+                    label="已结束"
+                  />
+                </wux-grids>
+              </view>
+            </wux-card>
+          </wux-wing-blank>
+          <wux-white-space/>
+          <wux-wing-blank>
+            <wux-card title="我的设置">
+              <view slot="body">
+                <wux-grids col="4" :bordered="false">
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_ppay.png"
+                    label="个人设置"
+                  />
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_psend.png"
+                    label="我的足迹"
+                  />
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_receive.png"
+                    label="我的收藏"
+                  />
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_receive.png"
+                    label="我的云缸"
+                  />
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_receive.png"
+                    label="地址管理"
+                  />
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_receive.png"
+                    label="意见反馈"
+                  />
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_receive.png"
+                    label="清除缓存"
+                  />
+                  <wux-grid
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_receive.png"
+                    label="退出登录"
+                  />
+                </wux-grids>
+              </view>
+            </wux-card>
+          </wux-wing-blank>
+          <wux-white-space/>
         </view>
-         <view v-else >
-            <wux-white-space body-style="height: 120rpx" />
-            <wux-prompt   :visible="true" icon="https://static.huanjiaohu.com/mini/index/ic_exit.png" title="您还没有登录" />
-                    <wux-button block type="light" size='small' @click="logout">登录</wux-button>
-
+        <view v-else>
+          <wux-white-space body-style="height: 120rpx"/>
+          <wux-prompt
+            :visible="true"
+            icon="https://static.huanjiaohu.com/mini/index/ic_exit.png"
+            title="您还没有登录"
+          />
+          <wux-button block type="light" size="small" @click="logout">登录</wux-button>
         </view>
-               
-        </view>
+      </view>
     </view>
   </view>
 </template>
@@ -131,9 +228,7 @@ export default {
         url: '/pages/ucenter/login'
       });
     },
-    login () {
-
-    }
+    login () {}
   }
 };
 </script>
@@ -155,18 +250,17 @@ export default {
   -webkit-background-size: cover;
   -o-background-size: cover;
   justify-content: center;
-  flex-direction:column;
-  text-align:center;
-
+  flex-direction: column;
+  text-align: center;
 }
 
 .user-menu {
   margin-top: -30px;
   width: 95%;
   overflow: hidden;
-  background:#ffffff;
-  display:flex;
-  justify-content:center;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
   border-radius: 20rpx;
   padding-bottom: 15px;
 }
@@ -177,7 +271,6 @@ export default {
   width: 52.803rpx;
   margin-bottom: 16rpx;
 }
-
 
 .user-menu .txt {
   display: block;
@@ -200,21 +293,19 @@ export default {
 
 .character-info {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   border-radius: 15rpx;
   align-items: center;
   height: auto;
-  width:100%;
+  width: 100%;
 }
 
 .character-menu {
-  width:100%;
-
+  width: 100%;
 }
 
-.character-menu button{
+.character-menu button {
   padding: 30rpx 30rpx;
-
 }
 
 .user-menu .character-text {
@@ -240,7 +331,7 @@ export default {
 
 .user-menu .character-item {
   font-size: 14px;
-  padding:0 20px;
+  padding: 0 20px;
   text-align: center;
 }
 .user-menu .character-item .txt {
