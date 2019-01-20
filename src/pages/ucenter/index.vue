@@ -99,7 +99,7 @@
         </view>
          <view v-else >
             <wux-white-space body-style="height: 120rpx" />
-            <wux-prompt   :visible="true" icon="/static/images/footprint.png" title="您还没有登录" />
+            <wux-prompt   :visible="true" icon="https://static.huanjiaohu.com/mini/index/ic_exit.png" title="您还没有登录" />
                     <wux-button block type="light" size='small' @click="logout">登录</wux-button>
 
         </view>
