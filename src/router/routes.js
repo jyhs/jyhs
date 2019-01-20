@@ -53,8 +53,8 @@ module.exports = [
         'wux-row': '../../static/wux/row/index',
         'wux-button': '../../static/wux/button/index',
         'wux-col': '../../static/wux/col/index',
-        'wux-icon': '../../static/wux/icon/index'
-
+        'wux-icon': '../../static/wux/icon/index',
+        'wux-gallery': '../../static/wux/gallery/index'
       }
     }
   },
