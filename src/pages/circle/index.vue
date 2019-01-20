@@ -9,8 +9,8 @@
       </wux-tabs>
     </view>
        <view class="row">
-                  <wux-gallery id="wux-gallery"/>
-      <friendItem v-for="user in userList" :key="user.id" :user='user'/>
+        <wux-gallery id="wux-gallery"/>
+        <friendItem v-for="user in userList" :key="user.id" :user='user'/>
     </view>
   </view>
 </template>
