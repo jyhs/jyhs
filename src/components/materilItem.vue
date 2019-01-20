@@ -13,7 +13,7 @@
         <wux-col span="9">
           <wux-row>
             <wux-col span="8">
-              <wux-icon type="md-person" color="#A3A3A3" size="16"/>&nbsp;火焰木盒
+              火焰木盒
             </wux-col>
             <wux-col span="4">
               指导价&nbsp;¥&nbsp;13
@@ -21,7 +21,7 @@
           </wux-row>
           <wux-row>
             <wux-col span="12">
-                <wux-tag color="blue">火焰木盒</wux-tag>
+                <wux-tag color="blue" prefixCls="home_materil">火焰木盒</wux-tag>
             </wux-col>
           </wux-row>
           <wux-row>
@@ -56,4 +56,5 @@ export default {
 .retail-item {
   background-color: #ffffff;
 }
+
 </style>

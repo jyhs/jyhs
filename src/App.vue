@@ -61,4 +61,13 @@ export default {
   font-weight: bold;
   padding-top:6px;
 }
+.home_materil{
+  font-size: 10px;
+  border:solid 1px #ffaf6f;
+  color:#e2875a;
+  background-color: #fff3eb;
+  border-radius:4px;
+  padding:0px 4px;
+  display: inline;
+}
 </style>
