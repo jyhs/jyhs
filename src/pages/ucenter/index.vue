@@ -196,7 +196,7 @@
           <wux-white-space body-style="height: 120rpx"/>
           <wux-prompt
             :visible="true"
-            icon="https://static.huanjiaohu.com/mini/index/ic_exit.png"
+            icon="https://static.huanjiaohu.com/mini/index/ic_notlogin.png"
             title="您还没有登录"
           />
           <wux-button block type="light" size="small" @click="logout">登录</wux-button>
