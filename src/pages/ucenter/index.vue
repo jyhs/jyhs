@@ -113,15 +113,15 @@
               <view slot="body">
                 <wux-grids col="4" :bordered="false">
                   <wux-grid
-                    thumb="https://static.huanjiaohu.com/mini/index/ic_ppay.png"
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_notend.png"
                     label="未截单"
                   />
                   <wux-grid
-                    thumb="https://static.huanjiaohu.com/mini/index/ic_psend.png"
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_incomming.png"
                     label="进行中"
                   />
                   <wux-grid
-                    thumb="https://static.huanjiaohu.com/mini/index/ic_receive.png"
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_close.png"
                     label="已结束"
                   />
                 </wux-grids>
@@ -134,15 +134,15 @@
               <view slot="body">
                 <wux-grids col="4" :bordered="false">
                   <wux-grid
-                    thumb="https://static.huanjiaohu.com/mini/index/ic_ppay.png"
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_notend.png"
                     label="未截单"
                   />
                   <wux-grid
-                    thumb="https://static.huanjiaohu.com/mini/index/ic_psend.png"
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_incomming.png"
                     label="进行中"
                   />
                   <wux-grid
-                    thumb="https://static.huanjiaohu.com/mini/index/ic_receive.png"
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_close.png"
                     label="已结束"
                   />
                 </wux-grids>
@@ -155,35 +155,35 @@
               <view slot="body">
                 <wux-grids col="4" :bordered="false">
                   <wux-grid
-                    thumb="https://static.huanjiaohu.com/mini/index/ic_ppay.png"
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_mysetup.png"
                     label="个人设置"
                   />
                   <wux-grid
-                    thumb="https://static.huanjiaohu.com/mini/index/ic_psend.png"
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_myfoot.png"
                     label="我的足迹"
                   />
                   <wux-grid
-                    thumb="https://static.huanjiaohu.com/mini/index/ic_receive.png"
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_myfavior.png"
                     label="我的收藏"
                   />
                   <wux-grid
-                    thumb="https://static.huanjiaohu.com/mini/index/ic_receive.png"
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_myaqua.png"
                     label="我的云缸"
                   />
                   <wux-grid
-                    thumb="https://static.huanjiaohu.com/mini/index/ic_receive.png"
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_address.png"
                     label="地址管理"
                   />
                   <wux-grid
-                    thumb="https://static.huanjiaohu.com/mini/index/ic_receive.png"
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_feedback.png"
                     label="意见反馈"
                   />
                   <wux-grid
-                    thumb="https://static.huanjiaohu.com/mini/index/ic_receive.png"
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_clearcache.png"
                     label="清除缓存"
                   />
                   <wux-grid
-                    thumb="https://static.huanjiaohu.com/mini/index/ic_receive.png"
+                    thumb="https://static.huanjiaohu.com/mini/index/ic_exit.png"
                     label="退出登录"
                   />
                 </wux-grids>
