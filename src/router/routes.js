@@ -23,11 +23,21 @@ module.exports = [
     }
   },
   {
-    path: '/pages/second/index',
-    name: 'second',
+    path: '/pages/active/index',
+    name: 'active',
     config: {
       enablePullDownRefresh: true,
-      navigationBarTitleText: '礁岩二手'
+      navigationBarTitleText: '礁岩活动',
+      usingComponents: {
+        'wux-row': '../../static/wux/row/index',
+        'wux-col': '../../static/wux/col/index',
+        'wux-wing-blank': '../../static/wux/wing-blank/index',
+        'wux-white-space': '../../static/wux/white-space/index',
+        'wux-divider': '../../static/wux/divider/index',
+        'wux-icon': '../../static/wux/icon/index',
+        'wux-image': '../../static/wux/image/index',
+        'wux-search-bar': '../../static/wux/search-bar/index'
+      }
     }
   },
   {
@@ -42,7 +52,8 @@ module.exports = [
         'wux-wing-blank': '../../static/wux/wing-blank/index',
         'wux-white-space': '../../static/wux/white-space/index',
         'wux-divider': '../../static/wux/divider/index',
-        'wux-image': '../../static/wux/image/index'
+        'wux-image': '../../static/wux/image/index',
+        'wux-search-bar': '../../static/wux/search-bar/index'
       }
     }
   },
