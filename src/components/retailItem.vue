@@ -9,7 +9,7 @@
             body-style="background-color: #ffffff;width:100rpx;height:100rpx;line-height:100rpx;"
           />
           <br>
-          <wux-icon type="ios-pin" color="#A3A3A3" size="16"/>上海
+          <wux-icon type="ios-pin" color="#A3A3A3" size="16"/>&nbsp;上海
         </wux-col>
         <wux-col span="10">
           <wux-row>
@@ -21,9 +21,13 @@
               <wux-icon type="ios-chatboxes" color="#A3A3A3" size="16"/>&nbsp;13
             </wux-col>
           </wux-row>
+                <wux-white-space/>
+
           <wux-row>
             <wux-col span="12">月亮公主（周六）年前免运费团</wux-col>
           </wux-row>
+                <wux-white-space/>
+
           <wux-row>
             <wux-col span="3">
               <wux-avatar

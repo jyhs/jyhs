@@ -21,4 +21,28 @@ export default {
 .row{
   width: 100%;
 }
+
+.jytt_module {
+  font-size: 12px;
+  background-image: url("https://static.huanjiaohu.com/mini/index/jytt_bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  white-space: nowrap;
+  height: 60px;
+  line-height: 22px;
+}
+
+.jytt_text{
+  padding-top: 8px;
+}
+
+.jytt_module .wux-tag--red,
+.jytt_module .wux-tag--blue {
+  font-size: 10px;
+  padding: 0 6px;
+  height: 15px;
+}
+._wux-notice-bar .wux-notice-bar{
+  background-color: white;
+}
 </style>

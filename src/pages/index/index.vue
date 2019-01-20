@@ -7,13 +7,13 @@
         </navigator>
       </swiper-item>
     </swiper>
-    <view class="row">
+    <view class="row notice-bar-location">
       <wux-row>
         <wux-col span="9">
           <wux-notice-bar content="喜大普奔！礁岩海水小程序上线了！礁岩海水小程序上线了" loop speed="50"/>
         </wux-col>
         <wux-col span="3">
-          <view class="location-select-btn" @click="selectProvince">上海</view>
+          <view class="location-select-btn" @click="selectProvince"><wux-icon type="ios-pin" color="#A3A3A3" size="16"/>&nbsp;上海</view>
           <wux-select id="province"/>
         </wux-col>
       </wux-row>
@@ -28,18 +28,18 @@
       <wux-wing-blank>
         <wux-row>
           <wux-col span="2"></wux-col>
-          <wux-col span="8">
+          <wux-col span="8" >
             <wux-row prefixCls="jytt_text">
               <wux-col span="2">
                 <wux-tag color="red">最热</wux-tag>
               </wux-col>
-              <wux-col span="10">喜大普奔！礁岩海水小程序上线了！礁岩海水小程序上线了</wux-col>
+              <wux-col span="10" class="wux-ellipsis--l3">喜大普奔！礁岩海水小程序上线了！</wux-col>
             </wux-row>
             <wux-row>
               <wux-col span="2">
                 <wux-tag color="blue">最新</wux-tag>
               </wux-col>
-              <wux-col span="10">喜大普奔！礁岩海水小程序上线了！礁岩海水小程序上线了</wux-col>
+              <wux-col span="10" class="wux-ellipsis--l3">喜大普奔！礁岩海水小程序上线了！</wux-col>
             </wux-row>
           </wux-col>
           <wux-col span="2"></wux-col>
@@ -48,13 +48,9 @@
     </view>
     <wux-divider dashed position="left" text="最新团购"/>
     <view class="row">
-      <wux-wing-blank>
         <groupItem/>
-      </wux-wing-blank>
       <wux-white-space/>
-      <wux-wing-blank>
         <groupItem/>
-      </wux-wing-blank>
     </view>
     <wux-white-space/>
     <swiper class="banner2" autoplay="true" interval="3000" duration="1000">
@@ -88,13 +84,9 @@
     </swiper>
     <wux-divider dashed position="left" text="最新零售"/>
     <view class="row">
-      <wux-wing-blank>
         <retailItem/>
-      </wux-wing-blank>
       <wux-white-space/>
-      <wux-wing-blank>
         <retailItem/>
-      </wux-wing-blank>
     </view>
     <wux-white-space/>
   </view>
@@ -220,35 +212,35 @@ export default {
           id: 1,
           name: '商城',
           url: '/pages/mall/index',
-          icon_url: 'https://static.huanjiaohu.com/mini/index/mall.png',
+          icon_url: 'https://static.huanjiaohu.com/mini/index/mall.png?r=123',
           sort_order: 1
         },
         {
           id: 2,
           name: '团购',
           url: '/pages/group/index',
-          icon_url: 'https://static.huanjiaohu.com/mini/index/group.png',
+          icon_url: 'https://static.huanjiaohu.com/mini/index/group.png?r=123',
           sort_order: 2
         },
         {
           id: 3,
           name: '活动',
           url: '/pages/second/index',
-          icon_url: 'https://static.huanjiaohu.com/mini/index/second.png',
+          icon_url: 'https://static.huanjiaohu.com/mini/index/second.png?r=123',
           sort_order: 3
         },
         {
           id: 4,
           name: '游戏',
           url: '/pages/game/index',
-          icon_url: 'https://static.huanjiaohu.com/mini/index/game.png',
+          icon_url: 'https://static.huanjiaohu.com/mini/index/game.png?r=123',
           sort_order: 4
         },
         {
           id: 5,
           name: '资讯',
           url: '/pages/information/index',
-          icon_url: 'https://static.huanjiaohu.com/mini/index/information.png',
+          icon_url: 'https://static.huanjiaohu.com/mini/index/information.png?r=123',
           sort_order: 5
         }
       ]
@@ -418,12 +410,12 @@ export default {
 
 .banner {
   width: 750rpx;
-  height: 417rpx;
+  height: 306rpx;
 }
 
 .banner image {
   width: 100%;
-  height: 417rpx;
+  height: 306rpx;
 }
 
 .banner2 {
@@ -511,26 +503,10 @@ export default {
   font-size: 12px;
   text-align: right;
 }
-._wux-notice-bar > .wux-notice-bar {
-  background: white;
+
+.notice-bar-location{
+    background: white;
 }
 
-.jytt_module {
-  font-size: 12px;
-  background-image: url("https://static.huanjiaohu.com/mini/index/jytt_bg.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  white-space: nowrap;
-  height: 60px;
-  line-height: 22px;
-}
-.jytt_text {
-  padding-top: 8px;
-}
-.jytt_module .wux-tag--red,
-.jytt_module .wux-tag--blue {
-  font-size: 10px;
-  padding: 0 6px;
-  height: 14px;
-}
+
 </style>
