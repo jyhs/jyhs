@@ -35,7 +35,15 @@ module.exports = [
     name: 'information',
     config: {
       enablePullDownRefresh: true,
-      navigationBarTitleText: '礁岩资讯'
+      navigationBarTitleText: '礁岩资讯',
+      usingComponents: {
+        'wux-row': '../../static/wux/row/index',
+        'wux-col': '../../static/wux/col/index',
+        'wux-wing-blank': '../../static/wux/wing-blank/index',
+        'wux-white-space': '../../static/wux/white-space/index',
+        'wux-divider': '../../static/wux/divider/index',
+        'wux-image': '../../static/wux/image/index'
+      }
     }
   },
   {
