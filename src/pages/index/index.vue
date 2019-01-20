@@ -48,10 +48,10 @@
         </wux-row>
       </wux-wing-blank>
     </view>
-    <wux-divider dashed position="left" text="最新团购"/>
+    <title  text="最新团购"/>
     <view class="row">
       <groupItem/>
-      <wux-white-space/>
+      <wux-white-space size="small" />
       <groupItem/>
     </view>
     <wux-white-space/>
@@ -127,13 +127,15 @@ import groupItem from '@/components/groupItem';
 import retailItem from '@/components/retailItem';
 import friendItem from '@/components/friendItem';
 import materilItem from '@/components/materilItem';
+import title from '@/components/title';
 
 export default {
   components: {
     groupItem,
     retailItem,
     friendItem,
-    materilItem
+    materilItem,
+    title
   },
   data () {
     return {
@@ -558,4 +560,5 @@ export default {
 .notice-bar-location {
   background: white;
 }
+
 </style>

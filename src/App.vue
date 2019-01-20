@@ -70,4 +70,5 @@ export default {
   padding:0px 4px;
   display: inline;
 }
+.wux-whitespace--small{height:1px!important;}
 </style>
