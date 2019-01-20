@@ -1,85 +1,124 @@
 <template >
-    <view class="container">
-        <view class='row'>
-       <wux-search-bar
-      clear=""
-      show-cancel
-      :value="value"
-      controlled
-      placeholder="搜索活动"
-      @confirm="onConfirm"
-      @clear="onClear"
-    />
-  </view>
-        <scroll-view scroll-y="true" style="height: 100%">
-            <block v-for="item in data" :key="item.id">
-                <oneCard :data="item"/>
-            </block>
-            <loadMore :reflash="reflash"/>
-        </scroll-view>
+  <view class="container">
+    <view class="row">
+      <wux-search-bar
+        clear=""
+        show-cancel
+        :value="value"
+        controlled
+        placeholder="搜索活动"
+        @confirm="onConfirm"
+        @clear="onClear"
+      />
     </view>
+    <scroll-view scroll-y="true" style="height: 100%">
+      <block v-for="item in data" :key="item.id">
+        <oneCard :data="item" v-if="item.type!='small'"/>
+        <activeItem :data="item" v-if="item.type=='small'"/>
+      </block>
+      <loadMore :reflash="reflash"/>
+    </scroll-view>
+  </view>
 </template>
 
 <script>
 import loadMore from '@/components/loadMore';
 import oneCard from '@/components/oneCard';
+import activeItem from '@/components/activeItem';
 
 import { setTimeout } from 'timers';
 export default {
   components: {
     loadMore,
-    oneCard
+    oneCard,
+    activeItem
   },
   data () {
     return {
       reflash: false,
-      data: [{
-        id: 1,
-        width: '375px',
-        height: '180px',
-        src: 'https://static.huanjiaohu.com/image/ad/china/1.jpg?r=0.609779170857945',
-        title: '淘宝开张了',
-        comment: {
-          goodNumber: 10,
-          commentNumber: 20
+      data: [
+        {
+          id: 1,
+          width: '375px',
+          height: '180px',
+          src:
+            'https://static.huanjiaohu.com/image/ad/china/3.jpg?r=0.609779170857945',
+          title: '淘宝开张了',
+          comment: {
+            goodNumber: 10,
+            commentNumber: 20
+          },
+          share: true
         },
-        share: true
-      }, {
-        id: 1,
-        width: '375px',
-        height: '180px',
-        src: 'https://static.huanjiaohu.com/image/ad/china/2.jpg?r=0.609779170857945',
-        title: '淘宝开张了',
-        comment: {
-          goodNumber: 10,
-          commentNumber: 20
+        {
+          id: 1,
+          src:
+            'https://static.huanjiaohu.com/image/ad/china/2.jpg?r=0.609779170857945',
+          title: '淘宝开张了',
+          comment: {
+            goodNumber: 10,
+            commentNumber: 20
+          },
+          share: true,
+          time: '2019-01-20',
+          type: 'small',
+          price: '58元超低价格'
         },
-        share: true,
-        time: '2019年01月20日'
-      }, {
-        id: 1,
-        width: '375px',
-        height: '180px',
-        src: 'https://static.huanjiaohu.com/image/ad/china/3.jpg?r=0.609779170857945',
-        title: '淘宝开张了',
-        comment: {
-          goodNumber: 10,
-          commentNumber: 20
+        {
+          id: 1,
+          src:
+            'https://static.huanjiaohu.com/image/ad/china/2.jpg?r=0.609779170857945',
+          title: '淘宝开张了',
+          comment: {
+            goodNumber: 10,
+            commentNumber: 20
+          },
+          share: true,
+          time: '2019-01-20',
+          type: 'small',
+          price: '58元超低价格'
         },
-        share: true
-      }, {
-        id: 1,
-        width: '375px',
-        height: '180px',
-        src: 'https://static.huanjiaohu.com/image/ad/china/4.jpg?r=0.609779170857945',
-        title: '淘宝开张了',
-        comment: {
-          goodNumber: 10,
-          commentNumber: 20
+        {
+          id: 1,
+          width: '375px',
+          height: '180px',
+          src:
+            'https://static.huanjiaohu.com/image/ad/china/1.jpg?r=0.609779170857945',
+          title: '淘宝开张了',
+          comment: {
+            goodNumber: 10,
+            commentNumber: 20
+          },
+          share: true
         },
-        share: true,
-        time: '2019年01月19日'
-      }],
+        {
+          id: 1,
+          src:
+            'https://static.huanjiaohu.com/image/ad/china/2.jpg?r=0.609779170857945',
+          title: '淘宝开张了',
+          comment: {
+            goodNumber: 10,
+            commentNumber: 20
+          },
+          share: true,
+          time: '2019-01-20',
+          type: 'small',
+          price: '58元超低价格'
+        },
+        {
+          id: 1,
+          width: '375px',
+          height: '180px',
+          src:
+            'https://static.huanjiaohu.com/image/ad/china/3.jpg?r=0.609779170857945',
+          title: '淘宝开张了',
+          comment: {
+            goodNumber: 10,
+            commentNumber: 20
+          },
+          share: true
+        }
+      ],
       refreshing: false
     };
   },
@@ -88,31 +127,34 @@ export default {
     setTimeout(() => {
       this.data.push({
         id: 1,
-        width: '375px',
-        height: '180px',
-        src: 'https://static.huanjiaohu.com/image/ad/china/1.jpg?r=0.609779170857945',
-        title: '淘宝开张了',
-        comment: {
-          goodNumber: 10,
-          commentNumber: 20
-        },
-        share: true
-      });
-      this.data.push({
-        id: 1,
-        width: '375px',
-        height: '180px',
-        src: 'https://static.huanjiaohu.com/image/ad/china/1.jpg?r=0.609779170857945',
+        src:
+            'https://static.huanjiaohu.com/image/ad/china/2.jpg?r=0.609779170857945',
         title: '淘宝开张了',
         comment: {
           goodNumber: 10,
           commentNumber: 20
         },
         share: true,
-        time: '2019年01月14日'
+        time: '2019-01-20',
+        type: 'small',
+        price: '58元超低价格'
+      });
+      this.data.push({
+        id: 1,
+        src:
+            'https://static.huanjiaohu.com/image/ad/china/2.jpg?r=0.609779170857945',
+        title: '淘宝开张了',
+        comment: {
+          goodNumber: 10,
+          commentNumber: 20
+        },
+        share: true,
+        time: '2019-01-20',
+        type: 'small',
+        price: '58元超低价格'
       });
       this.reflash = false;
-    }, 3000)
+    }, 3000);
   },
   methods: {
     onConfirm () {
