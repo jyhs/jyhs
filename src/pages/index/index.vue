@@ -10,11 +10,11 @@
     <view class="row notice-bar-location">
       <wux-row>
         <wux-col span="9">
-          <wux-notice-bar content="喜大普奔！礁岩海水小程序上线了！礁岩海水小程序上线了" loop speed="50"/>
+          <wux-notice-bar size="12" content="喜大普奔！礁岩海水小程序上线了！礁岩海水小程序上线了" loop speed="50"/>
         </wux-col>
         <wux-col span="3">
           <view class="location-select-btn" @click="selectProvince">
-            <wux-icon type="ios-pin" color="#A3A3A3" size="16"/>&nbsp;上海
+            <wux-icon type="ios-pin" color="#A3A3A3" size="14"/>&nbsp;上海
           </view>
           <wux-select id="province"/>
         </wux-col>
@@ -54,7 +54,7 @@
       <wux-white-space size="small" />
       <groupItem/>
     </view>
-    <wux-white-space/>
+    <wux-white-space size="small" />
     <swiper class="banner2" autoplay="true" interval="3000" duration="1000">
       <swiper-item v-for="item of banner2" :key="item.id">
         <navigator :url="item.link">
@@ -62,7 +62,7 @@
         </navigator>
       </swiper-item>
     </swiper>
-    <wux-divider dashed position="left" text="最新商品"/>
+    <title text="最新商品"/>
     <view class="row">
       <view class="index-section index-new">
         <view class="b">
@@ -76,7 +76,7 @@
         </view>
       </view>
     </view>
-    <wux-white-space/>
+    <wux-white-space size="small" />
     <swiper class="banner2" autoplay="true" interval="3000" duration="1000">
       <swiper-item v-for="item of banner2" :key="item.id">
         <navigator :url="item.link">
@@ -84,13 +84,13 @@
         </navigator>
       </swiper-item>
     </swiper>
-    <wux-divider dashed position="left" text="最新零售"/>
+    <title text="最新零售"/>
     <view class="row">
       <retailItem/>
-      <wux-white-space/>
+      <wux-white-space size="small" />
       <retailItem/>
     </view>
-    <wux-white-space/>
+    <wux-white-space size="small" />
     <swiper class="banner2" autoplay="true" interval="3000" duration="1000">
       <swiper-item v-for="item of banner2" :key="item.id">
         <navigator :url="item.link">
@@ -98,7 +98,7 @@
         </navigator>
       </swiper-item>
     </swiper>
-    <wux-divider dashed position="left" text="最新鱼圈"/>
+    <title text="最新鱼圈"/>
     <view class="row">
                   <wux-gallery id="wux-gallery"/>
       <friendItem v-for="user in userList" :key="user.id" :user='user'/>
@@ -110,13 +110,13 @@
         </navigator>
       </swiper-item>
     </swiper>
-    <wux-divider dashed position="left" text="最新百科"/>
+    <title text="最新百科"/>
     <view class="row">
       <materilItem/>
-      <wux-white-space/>
+      <wux-white-space size="small" />
       <materilItem/>
     </view>
-    <wux-white-space/>
+    <wux-white-space size="small" />
   </view>
 </template>
 

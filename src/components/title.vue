@@ -20,6 +20,9 @@ export default {
 .title {
   display: block;
   width:100%;
-  padding:10px 15px;
+  margin:10px;
+  font-size:14px;
+  padding-left:10px;
+  border-left:solid 4px #2D9AE7;
 }
 </style>

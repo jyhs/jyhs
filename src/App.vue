@@ -16,7 +16,7 @@ export default {
   justify-content: flex-start;
   box-sizing: border-box;
   background: #f4f4f4;
-  font-size: 28rpx;
+  font-size:12px;
 }
 .row{
   width: 100%;
@@ -61,7 +61,7 @@ export default {
   font-weight: bold;
   padding-top:6px;
 }
-.home_materil{
+.tagvolcano_small{
   font-size: 10px;
   border:solid 1px #ffaf6f;
   color:#e2875a;
@@ -70,5 +70,16 @@ export default {
   padding:0px 4px;
   display: inline;
 }
-.wux-whitespace--small{height:1px!important;}
+.taggreen_small{
+  font-size: 10px;
+  border:solid 1px #b7eb8f;
+  color:#52c41a;
+  background-color: #f6ffed;
+  border-radius:4px;
+  padding:0px 4px;
+  display: inline;
+}
+.wux-whitespace--small{
+  height:1px!important;
+}
 </style>

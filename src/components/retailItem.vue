@@ -21,12 +21,11 @@
               <wux-icon type="ios-chatboxes" color="#A3A3A3" size="16"/>&nbsp;13
             </wux-col>
           </wux-row>
-                <wux-white-space/>
 
           <wux-row>
             <wux-col span="12">月亮公主（周六）年前免运费团</wux-col>
           </wux-row>
-                <wux-white-space/>
+               <wux-white-space size="small" />
 
           <wux-row>
             <wux-col span="3">
