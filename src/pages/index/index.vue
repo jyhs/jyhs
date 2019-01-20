@@ -275,8 +275,8 @@ export default {
         {
           id: 3,
           name: '活动',
-          url: '/pages/second/index',
-          icon_url: 'https://static.huanjiaohu.com/mini/index/second.png?r=123',
+          url: '/pages/active/index',
+          icon_url: 'https://static.huanjiaohu.com/mini/index/active.png?r=123',
           sort_order: 3
         },
         {
