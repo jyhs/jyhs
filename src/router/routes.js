@@ -17,7 +17,8 @@ module.exports = [
         'wux-divider': '../../static/wux/divider/index',
         'wux-avatar': '../../static/wux/avatar/index',
         'wux-rater': '../../static/wux/rater/index',
-        'wux-icon': '../../static/wux/icon/index'
+        'wux-icon': '../../static/wux/icon/index',
+        'wux-gallery': '../../static/wux/gallery/index'
       }
     }
   },

@@ -13,7 +13,9 @@
           <wux-notice-bar content="喜大普奔！礁岩海水小程序上线了！礁岩海水小程序上线了" loop speed="50"/>
         </wux-col>
         <wux-col span="3">
-          <view class="location-select-btn" @click="selectProvince"><wux-icon type="ios-pin" color="#A3A3A3" size="16"/>&nbsp;上海</view>
+          <view class="location-select-btn" @click="selectProvince">
+            <wux-icon type="ios-pin" color="#A3A3A3" size="16"/>&nbsp;上海
+          </view>
           <wux-select id="province"/>
         </wux-col>
       </wux-row>
@@ -28,7 +30,7 @@
       <wux-wing-blank>
         <wux-row>
           <wux-col span="2"></wux-col>
-          <wux-col span="8" >
+          <wux-col span="8">
             <wux-row prefixCls="jytt_text">
               <wux-col span="2">
                 <wux-tag color="red">最热</wux-tag>
@@ -48,9 +50,9 @@
     </view>
     <wux-divider dashed position="left" text="最新团购"/>
     <view class="row">
-        <groupItem/>
+      <groupItem/>
       <wux-white-space/>
-        <groupItem/>
+      <groupItem/>
     </view>
     <wux-white-space/>
     <swiper class="banner2" autoplay="true" interval="3000" duration="1000">
@@ -84,9 +86,35 @@
     </swiper>
     <wux-divider dashed position="left" text="最新零售"/>
     <view class="row">
-        <retailItem/>
+      <retailItem/>
       <wux-white-space/>
-        <retailItem/>
+      <retailItem/>
+    </view>
+    <wux-white-space/>
+    <swiper class="banner2" autoplay="true" interval="3000" duration="1000">
+      <swiper-item v-for="item of banner2" :key="item.id">
+        <navigator :url="item.link">
+          <img :src="item.image_url" background-size="cover">
+        </navigator>
+      </swiper-item>
+    </swiper>
+    <wux-divider dashed position="left" text="最新鱼圈"/>
+    <view class="row">
+                  <wux-gallery id="wux-gallery"/>
+      <friendItem v-for="user in userList" :key="user.id" :user='user'/>
+    </view>
+    <swiper class="banner2" autoplay="true" interval="3000" duration="1000">
+      <swiper-item v-for="item of banner2" :key="item.id">
+        <navigator :url="item.link">
+          <img :src="item.image_url" background-size="cover">
+        </navigator>
+      </swiper-item>
+    </swiper>
+    <wux-divider dashed position="left" text="最新百科"/>
+    <view class="row">
+      <materilItem/>
+      <wux-white-space/>
+      <materilItem/>
     </view>
     <wux-white-space/>
   </view>
@@ -97,16 +125,38 @@
 import { $wuxSelect } from '../../../static/wux/index';
 import groupItem from '@/components/groupItem';
 import retailItem from '@/components/retailItem';
+import friendItem from '@/components/friendItem';
+import materilItem from '@/components/materilItem';
 
 export default {
   components: {
     groupItem,
-    retailItem
+    retailItem,
+    friendItem,
+    materilItem
   },
   data () {
     return {
       title3: '',
       value3: '',
+      userList: [
+        {
+          id: 0,
+          urls: [
+            'https://api.huanjiaohu.com/material/getImageSmall?materialId=206',
+            'https://api.huanjiaohu.com/material/getImageSmall?materialId=207',
+            'https://api.huanjiaohu.com/material/getImageSmall?materialId=208'
+          ]
+        },
+        {
+          id: 1,
+          urls: [
+            'https://api.huanjiaohu.com/material/getImageSmall?materialId=209',
+            'https://api.huanjiaohu.com/material/getImageSmall?materialId=210',
+            'https://api.huanjiaohu.com/material/getImageSmall?materialId=211'
+          ]
+        }
+      ],
       newGoods: [
         {
           id: 1134030,
@@ -240,7 +290,8 @@ export default {
           id: 5,
           name: '资讯',
           url: '/pages/information/index',
-          icon_url: 'https://static.huanjiaohu.com/mini/index/information.png?r=123',
+          icon_url:
+            'https://static.huanjiaohu.com/mini/index/information.png?r=123',
           sort_order: 5
         }
       ]
@@ -504,9 +555,7 @@ export default {
   text-align: right;
 }
 
-.notice-bar-location{
-    background: white;
+.notice-bar-location {
+  background: white;
 }
-
-
 </style>
