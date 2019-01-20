@@ -15,30 +15,32 @@
       <view class="user-menu" v-if="userInfo.avatarUrl">
         <view class="character-text">
             <view class="character-itemlist">
-              <navigator url="/pages/ucenter/collect">
+               <navigator url="/pages/ucenter/collect">
                 <view class="character-item">
-                  <img class="icon" src="/static/images/footprint.png">
-                  <view>
-                    <text class="description">关注商家</text>
-                  </view>
+                  <text>50</text>
+                  <view class="page__desc"></view>
+                  <text class="description">足迹</text>
                 </view>
               </navigator>
               <navigator url="/pages/ucenter/collect">
                 <view class="character-item">
-                  <view class="character-item2">
-                  <img class="icon" src="/static/images/footprint.png">
-                    <view>
-                      <text class="description">生物收藏</text>
-                    </view>
-                  </view>
+                  <text>218</text>
+                  <view class="page__desc"></view>
+                  <text class="description">收藏</text>
                 </view>
               </navigator>
               <navigator url="/pages/ucenter/collect">
                 <view class="character-item">
-                  <img class="icon" src="/static/images/footprint.png">
-                  <view>
-                    <text class="description">我的积分</text>
-                  </view>
+                    <text>218</text>
+                    <view class="page__desc"></view>
+                    <text class="description">积分</text>
+                </view>
+              </navigator>
+              <navigator url="/pages/ucenter/collect">
+                <view class="character-item">
+                  <text>218</text>
+                  <view class="page__desc"></view>
+                  <text class="description">余额</text>
                 </view>
               </navigator>
             </view>
@@ -48,15 +50,15 @@
         <view class="character-info" >
           <view class="character-menu" v-if="userInfo.avatarUrl">
              <wux-wing-blank >
-                <wux-card title="我的订单"   thumb="/static/images/footprint.png">
+                <wux-card title="我的订单"   thumb="https://static.huanjiaohu.com/mini/index/ic_mybill.png">
                     <view slot="body">
                        <wux-grids col="4" :bordered="false">
-                          <wux-grid thumb="/static/images/footprint.png" label="待付款" />
-                          <wux-grid thumb="/static/images/footprint.png" label="待发货" />
-                          <wux-grid thumb="/static/images/footprint.png" label="待收获" />
-                          <wux-grid thumb="/static/images/footprint.png" label="待评价" />
-                          <wux-grid thumb="/static/images/footprint.png" label="退款退货" />
-                          <wux-grid thumb="/static/images/footprint.png" label="待确认" />
+                          <wux-grid thumb="https://static.huanjiaohu.com/mini/index/ic_ppay.png" label="待付款" />
+                          <wux-grid thumb="https://static.huanjiaohu.com/mini/index/ic_psend.png" label="待发货" />
+                          <wux-grid thumb="https://static.huanjiaohu.com/mini/index/ic_receive.png" label="待收获" />
+                          <wux-grid thumb="https://static.huanjiaohu.com/mini/index/ic_pcomm.png" label="待评价" />
+                          <wux-grid thumb="https://static.huanjiaohu.com/mini/index/ic_back.png" label="退款退货" />
+                          <wux-grid thumb="https://static.huanjiaohu.com/mini/index/ic_confirm.png" label="待确认" />
                       </wux-grids>
                     </view>
                 </wux-card>
@@ -64,34 +66,34 @@
              <wux-white-space/>
 
               <wux-wing-blank >
-                <wux-card title="我的团购"   thumb="/static/images/footprint.png">
+                <wux-card title="我的团购"   thumb="https://static.huanjiaohu.com/mini/index/ic_mygroup.png">
                     <view slot="body">卡片内容</view>
                 </wux-card>
              </wux-wing-blank>
              <wux-white-space/>
 
               <wux-wing-blank >
-                <wux-card title="我的服务"  thumb="/static/images/footprint.png">
+                <wux-card title="我的服务"  thumb="https://static.huanjiaohu.com/mini/index/ic_myserver.png">
                     <view slot="body">卡片内容</view>
                 </wux-card>
              </wux-wing-blank>
              <wux-white-space/>
 
              <wux-wing-blank >
-                <wux-card title="我的二手"  thumb="/static/images/footprint.png">
+                <wux-card title="我的二手"  thumb="https://static.huanjiaohu.com/mini/index/ic_mysecond.png">
                     <view slot="body">卡片内容</view>
                 </wux-card>
              </wux-wing-blank>
              <wux-white-space/>
 
               <wux-wing-blank >
-                <wux-card title="我的设置"  thumb="/static/images/footprint.png">
+                <wux-card title="我的设置"  thumb="https://static.huanjiaohu.com/mini/index/ic_myset.png">
                     <view slot="body">卡片内容</view>
                 </wux-card>
              </wux-wing-blank>
              <wux-white-space/>
              <wux-wing-blank >
-                  <wux-cell thumb="/static/images/footprint.png" is-link title="退出" @click="logout" ></wux-cell>
+                  <wux-cell thumb="https://static.huanjiaohu.com/mini/index/ic_exit.png" is-link title="退出" @click="logout" ></wux-cell>
              </wux-wing-blank>
              <wux-white-space/>
         </view>
@@ -161,12 +163,12 @@ export default {
 .user-menu {
   margin-top: -30px;
   width: 95%;
-  height:170rpx;
   overflow: hidden;
   background:#ffffff;
   display:flex;
   justify-content:center;
   border-radius: 20rpx;
+  padding-bottom: 15px;
 }
 .user-menu .icon {
   margin: 0 auto;
@@ -238,11 +240,9 @@ export default {
 
 .user-menu .character-item {
   font-size: 14px;
+  padding:0 20px;
+  text-align: center;
 }
-.user-menu .character-item2 {
-  margin: 0px 40px;
-}
-
 .user-menu .character-item .txt {
   text-align: center;
   margin-bottom: 5px;

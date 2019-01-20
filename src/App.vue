@@ -45,4 +45,20 @@ export default {
 ._wux-notice-bar .wux-notice-bar{
   background-color: white;
 }
+.wux-card__thumb{
+  margin-top:-4px;
+  height:24px!important;
+  width:24px!important;
+}
+.wux-grid__thumb{
+  opacity: .8;
+  height:24px!important;
+  width:24px!important;
+  }
+.wux-grid__label{font-size: 12px!important}
+.wux-card__content {
+  font-size: 16px;
+  font-weight: bold;
+  padding-top:6px;
+}
 </style>
