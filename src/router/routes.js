@@ -43,7 +43,19 @@ module.exports = [
     name: 'circle',
     config: {
       enablePullDownRefresh: true,
-      navigationBarTitleText: '礁岩鱼圈'
+      navigationBarTitleText: '礁岩鱼圈',
+      usingComponents: {
+        'wux-tabs': '../../static/wux/tabs/index',
+        'wux-tab': '../../static/wux/tab/index',
+        'wux-avatar': '../../static/wux/avatar/index',
+        'wux-white-space': '../../static/wux/white-space/index',
+        'wux-wing-blank': '../../static/wux/wing-blank/index',
+        'wux-row': '../../static/wux/row/index',
+        'wux-button': '../../static/wux/button/index',
+        'wux-col': '../../static/wux/col/index',
+        'wux-icon': '../../static/wux/icon/index'
+
+      }
     }
   },
   {
