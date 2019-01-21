@@ -17,6 +17,7 @@ export default {
   box-sizing: border-box;
   background: #f4f4f4;
   font-size:12px;
+  color:#666;
 }
 .row{
   width: 100%;
