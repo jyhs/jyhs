@@ -18,7 +18,8 @@ module.exports = [
         'wux-avatar': '../../static/wux/avatar/index',
         'wux-rater': '../../static/wux/rater/index',
         'wux-icon': '../../static/wux/icon/index',
-        'wux-gallery': '../../static/wux/gallery/index'
+        'wux-gallery': '../../static/wux/gallery/index',
+        'wux-prompt': '../../static/wux/prompt/index'
       }
     }
   },

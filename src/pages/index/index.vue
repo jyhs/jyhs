@@ -50,9 +50,15 @@
     </view>
     <title  text="最新团购"/>
     <view class="row">
-      <groupItem/>
+      <view v-if="group">
+         <groupItem/>
       <wux-white-space size="small" />
       <groupItem/>
+      </view>
+      <wux-prompt
+            :visible="!group"
+            title="暂时还没有开团"
+      />
     </view>
     <wux-white-space size="small" />
     <swiper class="banner2" autoplay="true" interval="3000" duration="1000">
@@ -86,9 +92,15 @@
     </swiper>
     <title text="最新零售"/>
     <view class="row">
-      <retailItem/>
+        <view v-if="retail">
+          <retailItem/>
       <wux-white-space size="small" />
       <retailItem/>
+      </view>
+      <wux-prompt
+            :visible="!retail"
+            title="暂时还没有零售"
+      />
     </view>
     <wux-white-space size="small" />
     <swiper class="banner2" autoplay="true" interval="3000" duration="1000">
@@ -139,6 +151,8 @@ export default {
   },
   data () {
     return {
+      group: [],
+      retail: [],
       title3: '',
       value3: '',
       userList: [
