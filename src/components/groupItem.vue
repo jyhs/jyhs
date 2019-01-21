@@ -15,7 +15,7 @@
               <wux-tag prefixCls="taggreen_small">热团中</wux-tag>
             </wux-col>
             <wux-col span="7" class="wux-text--right">
-              <wux-icon type="md-time" color="#A3A3A3" size="14"/>&nbsp;&nbsp;2019-01-18 00:00
+              <wux-icon type="md-time" color="#A3A3A3" size="12"/>&nbsp;&nbsp;2019-01-18 00:00
             </wux-col>
           </wux-row>
           <wux-row>

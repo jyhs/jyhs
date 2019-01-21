@@ -6,22 +6,22 @@
         <wux-col span="2">
           <wux-avatar
             src="https://api.huanjiaohu.com/user/getAvatar?userId=3152"
-            body-style="background-color: #ffffff;width:100rpx;height:100rpx;line-height:100rpx;"
+            body-style="background-color: #ffffff;width:120rpx;height:120rpx;line-height:120rpx;"
           />
         </wux-col>
         <wux-col span="10">
            <wux-row>
             <wux-col span="12">
-              <wux-icon type="md-person" color="#A3A3A3" size="16"/>&nbsp;天鸿水族
+              <wux-icon type="md-person" color="#A3A3A3" size="12"/>&nbsp;天鸿水族
             </wux-col>
           </wux-row>
           <wux-white-space/>
           <wux-row>
             <wux-col span="8">
-              <wux-icon type="ios-pin" color="#A3A3A3" size="16"/>&nbsp;上海
+              <wux-icon type="ios-pin" color="#A3A3A3" size="12"/>&nbsp;上海
             </wux-col>
             <wux-col span="4">
-              <wux-icon type="ios-time" color="#A3A3A3" size="16"/>&nbsp;2019-09-09
+              <wux-icon type="md-time" color="#A3A3A3" size="12"/>&nbsp;2019-09-09
             </wux-col>
           </wux-row>
           <wux-white-space/>
@@ -94,7 +94,7 @@ export default {
 <style scoped>
 .friend-item {
   background-color: #ffffff;
-  margin-bottom: 10px;
+  margin-bottom: 1px;
 }
 
 .list_head {

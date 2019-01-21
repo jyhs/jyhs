@@ -83,4 +83,8 @@ export default {
 .wux-whitespace--small{
   height:1px!important;
 }
+.retail-item ._wux-rater .wux-rater
+{
+  vertical-align:baseline!important;
+}
 </style>
