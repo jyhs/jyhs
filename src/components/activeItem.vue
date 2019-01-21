@@ -27,7 +27,7 @@
             <wux-col span="5">
               <view class="time">{{data.time}}</view>
             </wux-col>
-            <wux-col span="7">
+            <wux-col span="7" class="wux-text--right">
               <view class="text">
                 <wux-icon type="ios-chatboxes" color="#A3A3A3" size="16"/>&nbsp;13
                 &nbsp;
