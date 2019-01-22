@@ -18,8 +18,7 @@ module.exports = [
         'wux-avatar': '../../static/wux/avatar/index',
         'wux-rater': '../../static/wux/rater/index',
         'wux-icon': '../../static/wux/icon/index',
-        'wux-gallery': '../../static/wux/gallery/index',
-        'wux-prompt': '../../static/wux/prompt/index'
+        'wux-gallery': '../../static/wux/gallery/index'
       }
     }
   },
@@ -75,7 +74,8 @@ module.exports = [
         'wux-button': '../../static/wux/button/index',
         'wux-col': '../../static/wux/col/index',
         'wux-icon': '../../static/wux/icon/index',
-        'wux-gallery': '../../static/wux/gallery/index'
+        'wux-gallery': '../../static/wux/gallery/index',
+        'wux-divider': '../../static/wux/divider/index'
       }
     }
   },

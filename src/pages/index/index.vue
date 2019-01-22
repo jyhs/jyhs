@@ -50,18 +50,19 @@
     </view>
     <title  text="最新团购"/>
     <view class="row">
-      <view v-if="group">
-         <groupItem/>
-      <wux-white-space size="small" />
-      <groupItem/>
+      <view v-if="groups">
+           <view v-for="group of groups" :key="group.id">
+                <cardItem :item='group'/>
+                <wux-white-space size="small" />
+            </view>
       </view>
-      <wux-prompt
-            :visible="!group"
-            title="暂时还没有开团"
-      />
+      <view v-else class="wux-text--center">
+          亲，热团都结束了
+          <wux-white-space/>
+      </view>
     </view>
     <wux-white-space size="small" />
-    <swiper class="banner2" autoplay="true" interval="3000" duration="1000">
+    <swiper class="banner2" autoplay="true" interval="4000" duration="1500">
       <swiper-item v-for="item of banner2" :key="item.id">
         <navigator :url="item.link">
           <img :src="item.image_url" background-size="cover">
@@ -70,16 +71,9 @@
     </swiper>
     <title text="最新商品"/>
     <view class="row">
-      <view class="index-section index-new">
-        <view class="b">
-          <view class="item" v-for="item of newGoods" :key="item.id">
-            <navigator :url="'../goods/goods?id='+ item.id">
-              <img class="img" :src="item.list_pic_url" background-size="cover">
-              <text class="name">{{item.name}}</text>
-              <text class="price">￥{{item.retail_price}}</text>
-            </navigator>
-          </view>
-        </view>
+      <view v-for="good of goods" :key="good.id">
+          <cardItem :item='good'/>
+          <wux-white-space size="small" />
       </view>
     </view>
     <wux-white-space size="small" />
@@ -92,15 +86,16 @@
     </swiper>
     <title text="最新零售"/>
     <view class="row">
-        <view v-if="retail">
-          <retailItem/>
-      <wux-white-space size="small" />
-      <retailItem/>
+      <view v-if="retails">
+         <view v-for="retail of retails" :key="retail.id">
+          <cardItem :item='retail'/>
+          <wux-white-space size="small" />
+         </view>
       </view>
-      <wux-prompt
-            :visible="!retail"
-            title="暂时还没有零售"
-      />
+       <view v-else class="wux-text--center">
+          亲，当前省份暂时还没有零售商家
+          <wux-white-space/>
+      </view>
     </view>
     <wux-white-space size="small" />
     <swiper class="banner2" autoplay="true" interval="3000" duration="1000">
@@ -112,8 +107,10 @@
     </swiper>
     <title text="最新鱼圈"/>
     <view class="row">
-                  <wux-gallery id="wux-gallery"/>
-      <friendItem v-for="user in userList" :key="user.id" :user='user'/>
+       <view v-for="friend of friends" :key="friend.id">
+          <cardItem :item='friend'/>
+          <wux-white-space size="small" />
+      </view>
     </view>
     <swiper class="banner2" autoplay="true" interval="3000" duration="1000">
       <swiper-item v-for="item of banner2" :key="item.id">
@@ -129,80 +126,169 @@
       <materilItem/>
     </view>
     <wux-white-space size="small" />
+    <wux-gallery id="wux-gallery"/>
   </view>
 </template>
 
 <script>
 // import api from '@/utils/api'
 import { $wuxSelect } from '../../../static/wux/index';
-import groupItem from '@/components/groupItem';
-import retailItem from '@/components/retailItem';
-import friendItem from '@/components/friendItem';
+import cardItem from '@/components/cardItem';
 import materilItem from '@/components/materilItem';
 import title from '@/components/title';
 
 export default {
   components: {
-    groupItem,
-    retailItem,
-    friendItem,
+    cardItem,
     materilItem,
     title
   },
   data () {
     return {
-      group: [],
-      retail: [],
-      title3: '',
-      value3: '',
-      userList: [
+      groups: [
         {
           id: 0,
+          avatar: 'https://api.huanjiaohu.com/user/getAvatar?userId=3152',
+          link: '../goods/goods?id=1135002',
+          tags: ['热团中'],
+          time: '2019-01-20',
+          title: '月亮公主（周六）年前免运费团',
+          name: '月亮姐姐',
+          city: '上海',
+          price: '2130'
+        },
+        {
+          id: 0,
+          avatar: 'https://api.huanjiaohu.com/user/getAvatar?userId=3152',
+          link: '../goods/goods?id=1135002',
+          tags: ['热团中'],
+          time: '2019-01-20',
+          title: '月亮公主（周六）年前免运费团',
+          name: '月亮姐姐',
+          city: '上海',
+          price: '2130'
+        }
+      ],
+      goods: [
+        {
+          id: 0,
+          avatar: 'https://static.huanjiaohu.com/image/danfen.jpg',
+          link: '../goods/goods?id=1135002',
+          tags: ['热卖中'],
+          time: '2019-01-20',
+          title: '武强水族蛋分',
+          name: '武强',
+          city: '上海',
+          price: '2130',
+          bottom: {
+            comment: '12',
+            thumbs: '22'
+          }
+        },
+        {
+          id: 1,
+          avatar: 'https://static.huanjiaohu.com/image/danfen.jpg',
+          link: '../goods/goods?id=1135002',
+          tags: ['热卖中'],
+          time: '2019-01-20',
+          title: '武强水族蛋分',
+          name: '武强',
+          city: '上海',
+          price: '2130',
+          bottom: {
+            comment: '12',
+            thumbs: '22'
+          }
+        }
+      ],
+      retails: [
+        {
+          id: 0,
+          avatar: 'https://api.huanjiaohu.com/user/getAvatar?userId=4581',
+          link: '../goods/goods?id=1135002',
+          tags: ['促销'],
+          time: '2019-01-20',
+          title: '全国满200元起发顺丰空运到家陈小文海水渔场20181017',
+          name: '武强',
+          city: '上海',
+          price: '2130',
           urls: [
             'https://api.huanjiaohu.com/material/getImageSmall?materialId=206',
             'https://api.huanjiaohu.com/material/getImageSmall?materialId=207',
             'https://api.huanjiaohu.com/material/getImageSmall?materialId=208'
-          ]
+          ],
+          bottom: {
+            comment: '12',
+            thumbs: '22'
+          }
         },
         {
           id: 1,
+          avatar: 'https://api.huanjiaohu.com/user/getAvatar?userId=4581',
+          link: '../goods/goods?id=1135002',
+          tags: ['促销'],
+          time: '2019-01-20',
+          title: '全国满200元起发顺丰空运到家陈小文海水渔场20181017',
+          name: '武强',
+          city: '上海',
+          price: '2130',
           urls: [
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=209',
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=210',
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=211'
-          ]
+            'https://api.huanjiaohu.com/material/getImageSmall?materialId=206',
+            'https://api.huanjiaohu.com/material/getImageSmall?materialId=207',
+            'https://api.huanjiaohu.com/material/getImageSmall?materialId=208'
+          ],
+          bottom: {
+            comment: '12',
+            thumbs: '22'
+          }
         }
       ],
-      newGoods: [
+      friends: [
         {
-          id: 1134030,
-          name: '简约知性记忆棉坐垫',
-          list_pic_url:
-            'http://yanxuan.nosdn.127.net/aa49dfe878becf768eddc4c1636643a6.png',
-          retail_price: 46
+          id: 0,
+          avatar: 'https://api.huanjiaohu.com/user/getAvatar?userId=5482',
+          link: '../goods/goods?id=1135002',
+          tags: ['最新'],
+          time: '2019-01-20',
+          title: '我的鱼缸',
+          name: 'York',
+          city: '上海',
+          price: '2130',
+          descption: '我的鱼缸很牛逼啥都有，带鱼还有好几条',
+          urls: [
+            'https://api.huanjiaohu.com/material/getImageSmall?materialId=206',
+            'https://api.huanjiaohu.com/material/getImageSmall?materialId=207',
+            'https://api.huanjiaohu.com/material/getImageSmall?materialId=208'
+          ],
+          bottom: {
+            comment: '12',
+            thumbs: '22'
+          }
         },
         {
-          id: 1134032,
-          name: '趣味粉彩系列记忆棉坐垫',
-          list_pic_url:
-            'http://yanxuan.nosdn.127.net/8b30eeb17c831eba08b97bdcb4c46a8e.png',
-          retail_price: 49
-        },
-        {
-          id: 1135002,
-          name: '宫廷奢华真丝四件套',
-          list_pic_url:
-            'http://yanxuan.nosdn.127.net/45548f26cfd0c7c41e0afc3709d48286.png',
-          retail_price: 2599
-        },
-        {
-          id: 1152161,
-          name: '竹语丝麻印花四件套',
-          list_pic_url:
-            'http://yanxuan.nosdn.127.net/977401e75113f7c8334c4fb5b4bf6215.png',
-          retail_price: 459
+          id: 1,
+          avatar: 'https://api.huanjiaohu.com/user/getAvatar?userId=5481',
+          link: '../goods/goods?id=1135002',
+          tags: ['最热'],
+          time: '2019-01-20',
+          title: '我的鱼缸',
+          name: 'Tony',
+          city: '上海',
+          price: '2130',
+          descption: '我的鱼缸很牛逼啥都有，带鱼还有好几条',
+          urls: [
+            'https://api.huanjiaohu.com/material/getImageSmall?materialId=206',
+            'https://api.huanjiaohu.com/material/getImageSmall?materialId=207',
+            'https://api.huanjiaohu.com/material/getImageSmall?materialId=208'
+          ],
+          bottom: {
+            comment: '12',
+            thumbs: '22'
+          }
         }
       ],
+      title3: '',
+      value3: '',
       banner: [
         {
           id: 1,
