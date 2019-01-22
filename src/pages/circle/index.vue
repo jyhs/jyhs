@@ -15,6 +15,7 @@
         </view>
       <loadMore :reflash="reflash"/>
     </scroll-view>
+        <wux-gallery id="wux-gallery"/>
   </view>
 </template>
 
