@@ -7,8 +7,8 @@
           <wux-col span="2">
             <wux-avatar
               :src="item.avatar"
-              shape="square"
-              body-style="background-color: #ffffff;width:120rpx;height:120rpx;line-height:100rpx;"
+              shape="cycle"
+              body-style="background-color: #ffffff;margin:6px 12px;"
             />
           </wux-col>
           <wux-col span="10">
@@ -41,11 +41,9 @@
         </wux-row>
       </navigator>
       <wux-row v-if="item.descption">
-        <wux-white-space/>
-        <wux-col span="12">{{item.descption}}</wux-col>
+        <wux-col span="12"><view class="ydhg_des">{{item.descption}}</view></wux-col>
       </wux-row>
       <wux-row v-if="item.urls">
-        <wux-white-space/>
         <div class="img_all">
           <block v-for="it of item.urls" :key="it.id">
             <view class="list_img" @tap="showGallery(it.id,$event)" :data-current="index">
@@ -55,21 +53,20 @@
         </div>
       </wux-row>
       <wux-row v-if="item.bottom">
-        <wux-white-space/>
-        <wux-col span="4" class="wux-text--center">
+        <wux-col span="4" class="wux-text--right">
           <wux-icon type="ios-chatboxes" color="#A3A3A3" size="12"/>
           &nbsp;评论({{item.bottom.comment}})
         </wux-col>
-        <wux-col span="4" class="wux-text--center">
+        <wux-col span="4" class="wux-text--right">
           <wux-icon type="md-thumbs-up" color="#A3A3A3" size="12"/>
           &nbsp;点赞({{item.bottom.thumbs}})
         </wux-col>
-        <wux-col span="4" class="wux-text--center">
+        <wux-col span="4" class="wux-text--right">
           <wux-icon type="md-share" color="#A3A3A3" size="12"/>&nbsp;分享
         </wux-col>
-        <wux-white-space/>
       </wux-row>
     </wux-wing-blank>
+     <wux-white-space/>
   </view>
 </template>
 
@@ -118,7 +115,7 @@ export default {
 
 <style scoped>
 .ngrouppre {
-  line-height: 20px;
+  line-height: 22px;
   color: #999;
   font-size: 11px;
 }
@@ -134,16 +131,22 @@ export default {
   background-color: #ffffff;
 }
 .list_img {
-  width: 31%;
-  height: 100px;
+  width: 33%;
+  height: 90px;
   display: inline-block;
 }
 .list_img:nth-child(2),
 .list_img:nth-child(3) {
-  margin-left: 1%;
+  margin-left: 0.5%;
 }
 .list_img > img {
   width: 100%;
   height: 100%;
 }
+.fontbd{
+  font-size:13px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ydhg_des{font-size: 13px;color:#000;}
 </style>

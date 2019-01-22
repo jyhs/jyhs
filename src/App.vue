@@ -40,8 +40,8 @@ export default {
 .jytt_module .wux-tag--red,
 .jytt_module .wux-tag--blue {
   font-size: 10px;
-  padding: 0 6px;
-  height: 15px;
+  padding: 0 4px;
+  height: 14px;
 }
 ._wux-notice-bar .wux-notice-bar{
   background-color: white;
@@ -56,12 +56,6 @@ export default {
   height:24px!important;
   width:24px!important;
   }
-.wux-grid__label{font-size: 12px!important}
-.wux-card__content {
-  font-size: 16px;
-  font-weight: bold;
-  padding-top:6px;
-}
 .tagvolcano_small{
   font-size: 10px;
   border:solid 1px #ffaf6f;

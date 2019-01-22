@@ -19,7 +19,6 @@
               指导价&nbsp;¥&nbsp;13
             </wux-col>
           </wux-row>
-           <wux-white-space size="small" /> <wux-white-space size="small" /> <wux-white-space size="small" />
           <wux-row>
             <wux-col span="12">
                 <wux-tag color="blue" prefixCls="tagvolcano_small">火焰木盒</wux-tag>
