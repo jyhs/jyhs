@@ -236,10 +236,11 @@ page {
 .catalog .bd .item {
   display: block;
   float: left;
-  height: 216rpx;
+  height: 158rpx;
   width: 144rpx;
   margin-right: 34rpx;
 }
+.catalog .bd .navigator-hover{background-color:white}
 
 .catalog .bd .item.last {
   margin-right: 0;
@@ -255,8 +256,9 @@ page {
   text-align: center;
   font-size: 24rpx;
   color: #333;
-  height: 72rpx;
+  height: 32rpx;
   width: 144rpx;
+  margin-top:-18px;
 }
 
 </style>
