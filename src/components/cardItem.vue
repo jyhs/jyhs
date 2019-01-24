@@ -40,6 +40,7 @@
           </wux-col>
         </wux-row>
       </navigator>
+       <wux-white-space/>
       <wux-row v-if="item.descption">
         <wux-col span="12"><view class="ydhg_des">{{item.descption}}</view></wux-col>
       </wux-row>
@@ -52,17 +53,17 @@
           </block>
         </div>
       </wux-row>
-      <wux-row v-if="item.bottom">
-        <wux-col span="4" class="wux-text--right">
-          <wux-icon type="ios-chatboxes" color="#A3A3A3" size="12"/>
+      <wux-row v-if="item.bottom" class="pub_toolsarea">
+        <wux-col span="4" class="wux-text--center">
+          <wux-icon type="ios-chatboxes" color="#A3A3A3" size="14"/>
           &nbsp;评论({{item.bottom.comment}})
         </wux-col>
-        <wux-col span="4" class="wux-text--right">
-          <wux-icon type="md-thumbs-up" color="#A3A3A3" size="12"/>
+        <wux-col span="4" class="wux-text--center">
+          <wux-icon type="md-thumbs-up" color="#A3A3A3" size="14"/>
           &nbsp;点赞({{item.bottom.thumbs}})
         </wux-col>
-        <wux-col span="4" class="wux-text--right">
-          <wux-icon type="md-share" color="#A3A3A3" size="12"/>&nbsp;分享
+        <wux-col span="4" class="wux-text--center">
+          <wux-icon type="md-share" color="#A3A3A3" size="14"/>&nbsp;分享
         </wux-col>
       </wux-row>
     </wux-wing-blank>
@@ -148,5 +149,9 @@ export default {
   overflow: hidden;
   white-space: nowrap;
 }
-.ydhg_des{font-size: 13px;color:#000;}
+.ydhg_des{font-size: 14px;color:#000;}
+.pub_toolsarea{
+  border-top:dotted 1px #ebebeb;
+  display: block;
+}
 </style>

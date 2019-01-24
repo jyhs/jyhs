@@ -239,8 +239,9 @@ page {
   height: 158rpx;
   width: 144rpx;
   margin-right: 34rpx;
+  border:solid 1px red;
 }
-.catalog .bd .navigator-hover{background-color:white}
+.catalog .bd .navigator-hover{background-color: }
 
 .catalog .bd .item.last {
   margin-right: 0;
