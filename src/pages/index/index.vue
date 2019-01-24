@@ -175,15 +175,8 @@ export default {
           avatar: 'https://static.huanjiaohu.com/image/danfen.jpg',
           link: '../goods/goods?id=1135002',
           tags: ['热卖中'],
-          time: '2019-01-20',
           title: '武强水族蛋分',
-          name: '武强',
-          city: '上海',
-          price: '2130',
-          bottom: {
-            comment: '12',
-            thumbs: '22'
-          }
+          price: '2130'
         },
         {
           id: 1,
