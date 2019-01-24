@@ -71,10 +71,7 @@
     </swiper>
     <title text="最新商品"/>
     <view class="row">
-      <view v-for="good of goods" :key="good.id">
-          <cardItem :item='good'/>
-          <wux-white-space size="small" />
-      </view>
+            <goodsItem :goodsList="goods"/>
     </view>
     <wux-white-space size="small" />
     <swiper class="banner2" autoplay="true" interval="3000" duration="1000">
@@ -134,6 +131,7 @@
 // import api from '@/utils/api'
 import { $wuxSelect } from '../../../static/wux/index';
 import cardItem from '@/components/cardItem';
+import goodsItem from '@/components/goodsItem';
 import materilItem from '@/components/materilItem';
 import title from '@/components/title';
 
@@ -141,7 +139,8 @@ export default {
   components: {
     cardItem,
     materilItem,
-    title
+    title,
+    goodsItem
   },
   data () {
     return {
@@ -171,7 +170,7 @@ export default {
       ],
       goods: [
         {
-          id: 0,
+          id: 1135001,
           avatar: 'https://static.huanjiaohu.com/image/danfen.jpg',
           link: '../goods/goods?id=1135002',
           tags: ['热卖中'],
@@ -179,7 +178,37 @@ export default {
           price: '2130'
         },
         {
-          id: 1,
+          id: 1135002,
+          avatar: 'https://static.huanjiaohu.com/image/danfen.jpg',
+          link: '../goods/goods?id=1135002',
+          tags: ['热卖中'],
+          time: '2019-01-20',
+          title: '武强水族蛋分',
+          name: '武强',
+          city: '上海',
+          price: '2130',
+          bottom: {
+            comment: '12',
+            thumbs: '22'
+          }
+        },
+        {
+          id: 1135003,
+          avatar: 'https://static.huanjiaohu.com/image/danfen.jpg',
+          link: '../goods/goods?id=1135002',
+          tags: ['热卖中'],
+          time: '2019-01-20',
+          title: '武强水族蛋分',
+          name: '武强',
+          city: '上海',
+          price: '2130',
+          bottom: {
+            comment: '12',
+            thumbs: '22'
+          }
+        },
+        {
+          id: 1135004,
           avatar: 'https://static.huanjiaohu.com/image/danfen.jpg',
           link: '../goods/goods?id=1135002',
           tags: ['热卖中'],
@@ -205,11 +234,6 @@ export default {
           name: '武强',
           city: '上海',
           price: '2130',
-          urls: [
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=206',
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=207',
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=208'
-          ],
           bottom: {
             comment: '12',
             thumbs: '22'
@@ -225,11 +249,6 @@ export default {
           name: '武强',
           city: '上海',
           price: '2130',
-          urls: [
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=206',
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=207',
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=208'
-          ],
           bottom: {
             comment: '12',
             thumbs: '22'
