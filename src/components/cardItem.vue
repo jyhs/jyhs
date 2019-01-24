@@ -67,7 +67,6 @@
         </wux-col>
       </wux-row>
     </wux-wing-blank>
-     <wux-white-space/>
   </view>
 </template>
 
@@ -149,9 +148,11 @@ export default {
   overflow: hidden;
   white-space: nowrap;
 }
-.ydhg_des{font-size: 14px;color:#000;}
+.ydhg_des{font-size: 14px;color:#000;padding:0 0 4px 0;}
 .pub_toolsarea{
-  border-top:dotted 1px #ebebeb;
   display: block;
+  font-size: 12px;
+  color:#666;
+  padding:0 0 6px 0;
 }
 </style>
