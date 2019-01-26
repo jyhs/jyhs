@@ -8,7 +8,7 @@
             <wux-avatar
               :src="item.avatar"
               shape="cycle"
-              body-style="background-color: #ffffff;margin:6px 12px;"
+              body-style="background-color: #ffffff;margin:10px 12px;"
             />
           </wux-col>
           <wux-col span="10">
@@ -115,7 +115,7 @@ export default {
 
 <style scoped>
 .ngrouppre {
-  line-height: 22px;
+  line-height: 24px;
   color: #999;
   font-size: 11px;
 }

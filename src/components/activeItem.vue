@@ -7,12 +7,12 @@
           <wux-avatar
             :src="data.src"
             shape="square"
-            body-style="background-color: #ffffff;width:160rpx;height:160rpx;"
+            body-style="background-color: #ffffff;width:80px;height:80px;"
           />
         </wux-col>
         <wux-col span="9">
           <wux-row>
-            <wux-col span="12">{{data.title}}</wux-col>
+            <wux-col span="12" ><view class="titlecolor">{{data.title}}</view></wux-col>
           </wux-row>
                 <wux-white-space/>
 
@@ -78,4 +78,8 @@ export default {
       font-size: 12px;
           color: #888;
 }
+.titlecolor{
+  color:#000;
+  font-size: 14px;
+  }
 </style>

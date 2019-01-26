@@ -74,6 +74,15 @@ export default {
   padding:0px 4px;
   display: inline;
 }
+.tagblue_small{
+  font-size: 10px;
+  border:solid 1px #91d5ff;
+  color:#2a99ff;
+  background-color: #e6f7ff;
+  border-radius:4px;
+  padding:0px 4px;
+  display: inline;
+}
 .wux-whitespace--small{
   height:1px!important;
 }

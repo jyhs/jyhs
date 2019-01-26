@@ -21,7 +21,7 @@
           </wux-row>
           <wux-row>
             <wux-col span="12">
-                <wux-tag color="blue" prefixCls="tagvolcano_small">火焰木盒</wux-tag>
+                <wux-tag prefixCls="tagblue_small">火焰木盒</wux-tag>
             </wux-col>
           </wux-row>
           <wux-row>
