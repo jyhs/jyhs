@@ -236,7 +236,6 @@ page {
 .catalog .bd .item {
   display: block;
   float: left;
-  height: 158rpx;
   width: 144rpx;
   margin-right: 34rpx;
 }
@@ -253,7 +252,7 @@ page {
 .catalog .bd .item .txt {
   display: block;
   text-align: center;
-  font-size: 24rpx;
+  font-size:11px;
   color: #333;
   height: 32rpx;
   width: 144rpx;

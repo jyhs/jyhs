@@ -7,34 +7,57 @@
         </swiper-item>
     </swiper>
     <view class="service-policy">
-        <view class="item">30天无忧退货</view>
-        <view class="item">48小时快速退款</view>
-        <view class="item">满88元免邮费</view>
+        <view class="item"> &nbsp;&nbsp;海水鱼类 > 大型神仙</view>
     </view>
-    <view class="goods-info">
-        <view class="c">
-        <text class="name">{{goods.name}}</text>
-        <text class="desc">{{goods.goods_brief}}</text>
-        <text class="price">￥{{goods.retail_price}}</text>
-        <view class="brand" v-if="brand.name">
-            <navigator :url="'../brand/brandDetail?id=' + brand.id">
-            <text>{{brand.name}}</text>
-            </navigator>
+
+    <view class="material_all">
+        <view class="head">皮特克恩神仙鱼</view>
+        <view class="tag">
+          <view class="tagblue_small">火焰木盒</view>
+          <view class="tagblue_small">日本木盒</view>
+          <view class="tagblue_small">澳洲木盒</view>
         </view>
+
+        <view class="title">
+            <wux-row>
+            <wux-col span="2">
+                <view class="placeholder">学名:</view>
+            </wux-col>
+            <wux-col span="5">
+                <view>Genicanthus spinus</view>
+            </wux-col>
+            <wux-col span="2">
+                <view class="placeholder">饲养难度:</view>
+            </wux-col>
+             <wux-col span="3">
+                <view class="placeholder"><wux-rater :default-value="3" :font-size="12" disabled/></view>
+            </wux-col>
+        </wux-row>
+        <wux-row>
+            <wux-col span="2">
+                <view class="placeholder">英文名:</view>
+            </wux-col>
+            <wux-col span="5">
+                <view>Pitcaim Angelfish</view>
+            </wux-col>
+            <wux-col span="2">
+                <view class="placeholder">团参考价:</view>
+            </wux-col>
+             <wux-col span="3">
+                <view class="placeholder">1</view>
+            </wux-col>
+        </wux-row>
         </view>
-    </view>
-    <view class="section-nav section-attr" @click="switchAttrPop">
-        <view class="t">请选择规格数量</view>
-        <img class="i" src="/static/images/address_right.png" background-size="cover"/>
-    </view>
-    <view class="section-nav section-act">
-        <view class="t">
-            <view class="label">1个促销:</view>
-            <view class="tag">万圣趴</view>
-            <view class="text">全场满499，额外送糖果</view>
-        </view>
-        <img class="i" src="/static/images/address_right.png" background-size="cover"/>
-    </view>
+        <view class="descrition">
+          黑边公子小丑是一种在大洋洲、印度洋、大堡礁与海葵共生的鱼类，它们经常被发现或一个，通常是一对或一小群在海葵中，野生的个体很少超过11cm,在水族箱中很少超过8cm。</br>
+饲养要求： 水温:24~27 PH:8.1~8.4 比重:1.020~1.025</br>
+兼容性：安全</br>
+性情：一定攻击性</br>
+它们很容易与公子小丑搞混，除非你是行家否则很难将它们区别开来。黑边公子小丑颜色是亮桔色，而公子小丑的颜色暗淡一些。黑边公子小丑的身体白条纹间有一块很深的黑色。</br>
+这种小丑对新手来说不是一个很好的选择，如果你养海水鱼时间不长，经验不够丰富，你最好养公子小丑。黑边公子应该养于活石环境的水族箱，否则，它们不如公子小丑好养。一旦适应了新环境，又开口了，它们应该是最好养的。</br>
+如果已经配对了，大一点的是母的，像其它几种小丑一样，它是可以在水族箱产卵的，是一种海水鱼繁殖爱好者首选的海鱼。</br>
+在自然界，它是杂食的，在水族箱，它能接受大部分肉食及藻类。 </view>
+      </view>
     <view class="comments" v-if="comment.count > 0">
         <view class="h">
         <navigator :url="'../comment/comment?valueId=' + goods.id + '&typeId=0'">
@@ -61,40 +84,12 @@
         </view>
         </view>
     </view>
-    <view class="goods-attr">
-        <view class="t">商品参数</view>
-        <view class="l">
-        <view class="item" v-for="(item, index) of attribute" :key="item.name" :data-index="index">
-            <text class="left">{{item.name}}</text>
-            <text class="right">{{item.value}}</text>
-        </view>
-        </view>
-    </view>
-    <div>
-        <wxParse :content="goodDetailHTMLstr" />
-    </div>
-    <view class="common-problem">
-        <view class="h">
-        <view class="line"></view>
-        <text class="title">常见问题</text>
-        </view>
-        <view class="b">
-        <view class="item" v-for="(item, index) of issueList" :key="item.id" :data-index="index">
-            <view class="question-box">
-            <text class="spot"></text>
-            <text class="question">{{item.question}}</text>
-            </view>
-            <view class="answer">
-            {{item.answer}}
-            </view>
-        </view>
-        </view>
-    </view>
+    
 
     <view class="related-goods" v-if="relatedGoods.length">
         <view class="h">
         <view class="line"></view>
-        <text class="title">大家都在看</text>
+        <text class="title">同类推荐</text>
         </view>
         <view class="b">
         <view class="item" v-for="(item, index) of relatedGoods" :key="item.id" :data-index="index">
@@ -107,55 +102,11 @@
         </view>
     </view>
     </view>
-    <view class="attr-pop-box" :hidden="!openAttr">
-    <view class="attr-pop">
-        <view class="close" @click="closeAttr">
-        <img class="icon" src="/static/images/icon_close.png"/>
-        </view>
-        <view class="img-info">
-        <img class="img" :src="gallery[0].img_url"/>
-        <view class="info">
-            <view class="c">
-            <view class="p">价格：￥{{goods.retail_price}}</view>
-            <view class="a" v-if="productList.length">已选择：{{checkedSpecText}}</view>
-            </view>
-        </view>
-        </view>
-        <view class="spec-con">
-        <view class="spec-item" v-for="(item, index) of specificationList" :key="item.specification_id" :data-index="index">
-            <view class="name">{{item.name}}</view>
-            <view class="values">
-            <view :class="iitem.checked ? 'selected value' : 'value'" @click="clickSkuValue" v-for="(iitem, iindex) of item.valueList" :key="iitem.id" :data-value-id="iitem.id" :data-index="iindex" :data-name-id="iitem.specification_id">{{iitem.value}}</view>
-            </view>
-        </view>
-        <view class="number-item">
-            <view class="name">数量</view>
-            <view class="selnum">
-            <view class="cut" @click="cutNumber">-</view>
-            <input :value="number" class="number" disabled="true" type="number" />
-            <view class="add" @click="addNumber">+</view>
-            </view>
-        </view>
-        </view>
-    </view>
-    </view>
-    <view class="bottom-btn">
-    <view class="l l-collect" @click="addCannelCollect">
-        <img class="icon" :src="collectBackImage"/>
-    </view>
-    <view class="l l-cart">
-        <view class="box">
-        <text class="cart-count">{{cartGoodsCount}}</text>
-        <img @click="openCartPage" class="icon" src="/static/images/ic_menu_shoping_nor.png"/>
-        </view>
-    </view>
-    <view class="c">立即购买</view>
-    <view class="r" @click="addToCart">加入购物车</view>
-    </view>
 </div>
 </template>
 
 <script>
+
 import api from '@/utils/api'
 import wx from 'wx';
 import wxParse from 'mpvue-wxparse'
@@ -1179,4 +1130,24 @@ export default {
   line-height: 65rpx;
 }
 
+
+
+
+.material_all{
+  background-color:white;
+  font-size: 12px;
+  display: block;
+  width: 100%;
+  padding:12px;
+}
+.material_all > .head{
+  font-size: 20px;
+  color:#000;
+  margin-left:10px;
+}
+.material_all > .tag{padding:5px 10px;}
+.material_all > .tag > .tagblue_small{margin-right:5px;}
+.material_all > .title{line-height:24px;background-color:#F8F8F8;border: solid 1px #EAEAEA;margin:10px;padding:5px;font-size:11px;color:#000}
+.material_all > .title .placeholder{color:#9B9B9B;}
+.material_all > .descrition{color:#4A4A4A;line-height: 20px;padding:0 10px;}
 </style>
