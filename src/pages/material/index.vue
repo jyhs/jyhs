@@ -44,27 +44,11 @@
                 <view class="placeholder">团参考价:</view>
             </wux-col>
              <wux-col span="3">
-<<<<<<< HEAD
                 <view class="placeholder">¥ {{material.price}}</view>
             </wux-col>
         </wux-row>
         </view>
         <wxParse class="descrition" :content="material.description"></wxParse>
-=======
-                <view class="aboutprice">168 &nbsp;&nbsp;<wux-icon size="14" color="#1069a9" type="ios-help-circle-outline" /></view>
-            </wux-col>
-        </wux-row>
-        </view>
-        <view class="descrition">
-          黑边公子小丑是一种在大洋洲、印度洋、大堡礁与海葵共生的鱼类，它们经常被发现或一个，通常是一对或一小群在海葵中，野生的个体很少超过11cm,在水族箱中很少超过8cm。<br/>
-饲养要求： 水温:24~27 PH:8.1~8.4 比重:1.020~1.025<br/>
-兼容性：安全<br/>
-性情：一定攻击性<br/>
-它们很容易与公子小丑搞混，除非你是行家否则很难将它们区别开来。黑边公子小丑颜色是亮桔色，而公子小丑的颜色暗淡一些。黑边公子小丑的身体白条纹间有一块很深的黑色。<br/>
-这种小丑对新手来说不是一个很好的选择，如果你养海水鱼时间不长，经验不够丰富，你最好养公子小丑。黑边公子应该养于活石环境的水族箱，否则，它们不如公子小丑好养。一旦适应了新环境，又开口了，它们应该是最好养的。<br/>
-如果已经配对了，大一点的是母的，像其它几种小丑一样，它是可以在水族箱产卵的，是一种海水鱼繁殖爱好者首选的海鱼。<br/>
-在自然界，它是杂食的，在水族箱，它能接受大部分肉食及藻类。 </view>
->>>>>>> 88650eae6ee19487a68e282d5ed98d3187a4d37f
       </view>
     <view class="comments" v-if="comment.count > 0">
         <view class="h">
