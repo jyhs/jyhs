@@ -82,6 +82,7 @@ export default {
   border-radius:4px;
   padding:0px 4px;
   display: inline;
+  margin-right:6px;
 }
 .wux-whitespace--small{
   height:1px!important;

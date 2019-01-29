@@ -173,7 +173,8 @@ module.exports = [
       usingComponents: {
         'wux-row': '../../static/wux/row/index',
         'wux-col': '../../static/wux/col/index',
-        'wux-rater': '../../static/wux/rater/index'
+        "wux-icon": "../../static/wux/icon/index",
+        'wux-rater': '../../static/wux/rater/index',
       }
     }
   },

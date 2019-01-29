@@ -42,7 +42,7 @@
                 <view class="placeholder">团参考价:</view>
             </wux-col>
              <wux-col span="3">
-                <view class="placeholder">1</view>
+                <view class="aboutprice">168 &nbsp;&nbsp;<wux-icon size="14" color="#1069a9" type="ios-help-circle" /></view>
             </wux-col>
         </wux-row>
         </view>
@@ -1140,5 +1140,7 @@ export default {
 .material_all > .tag > .tagblue_small{margin-right:5px;}
 .material_all > .title{line-height:24px;background-color:#F8F8F8;border: solid 1px #EAEAEA;margin:10px;padding:5px;font-size:11px;color:#000}
 .material_all > .title .placeholder{color:#9B9B9B;}
-.material_all > .descrition{color:#4A4A4A;line-height: 20px;padding:0 10px;}
+.material_all > .title .aboutprice{color:#ef473a;font-weight: bold;}
+.material_all > .descrition{color:#4A4A4A;line-height: 20px;padding:0 15px;}
+
 </style>
