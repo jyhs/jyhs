@@ -5,7 +5,7 @@
       <wux-row>
         <wux-col span="3">
           <wux-avatar
-                src="https://api.huanjiaohu.com/material/getImageSmall?materialId=1812"
+                :src='url'
                 shape="square"
                 body-style="background-color: #ffffff;width:160rpx;height:120rpx;"
               />
@@ -13,20 +13,20 @@
         <wux-col span="9">
           <wux-row>
             <wux-col span="8">
-              <view class="home_swzltitle">火焰木盒</view>
+              <view class="home_swzltitle">{{item.name}}</view>
             </wux-col>
             <wux-col span="4">
-              指导价&nbsp;¥&nbsp;13
+              指导价&nbsp;¥&nbsp;{{item.price}}
             </wux-col>
           </wux-row>
           <wux-row>
             <wux-col span="12">
-                <wux-tag prefixCls="tagblue_small">火焰木盒</wux-tag>
+                <wux-tag v-for="tag of tags" :key="tag" prefixCls="tagblue_small">{{tag}}</wux-tag>
             </wux-col>
           </wux-row>
           <wux-row>
             <wux-col span="6">
-                            <wux-rater :default-value="3" :font-size="12" disabled/>
+                            <wux-rater :default-value="rater" :font-size="12" disabled/>
             </wux-col>
             <wux-col span="6">
             
@@ -46,6 +46,29 @@ export default {
       type: Object,
       default () {
         return {};
+      }
+    }
+  },
+  data () {
+    return {
+      url: 'https://api.huanjiaohu.com/material/getImageSmall?materialId=' + this.item.id
+    }
+  },
+  computed: {
+    tags () {
+      if (this.item.tag) {
+        return this.item.tag.split(',');
+      } else {
+        return [];
+      }
+    },
+    rater () {
+      if (this.item.level === 'yb') {
+        return 3;
+      } else if (this.item.level === 'ry') {
+        return 1;
+      } else {
+        return 5;
       }
     }
   }

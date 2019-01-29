@@ -7,7 +7,12 @@ const ApiCommonUrl = 'https://api2.huanjiaohu.com/api/'
 // const ApiCommonUrl = 'http://127.0.0.1:8360/api/'
 
 const api = {
-  // 获得服务列表
+  getMaterialRandomList: (paramObj) => request.post('material/randomList', paramObj, {
+    baseURL: ApiCommonUrl
+  }),
+  getMaterialList: (paramObj) => request.post('material/list', paramObj, {
+    baseURL: ApiCommonUrl
+  }),
   getMaterialCount: (paramObj) => request.post('material/count', paramObj, {
     baseURL: ApiCommonUrl
   }),

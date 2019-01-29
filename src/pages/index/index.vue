@@ -118,9 +118,11 @@
     </swiper>
     <title text="最新百科"/>
     <view class="row">
-      <materilItem/>
-      <wux-white-space size="small" />
-      <materilItem/>
+       <view v-for="item of materials" :key="item.id" :class="(index + 1) % 2 === 0 ? 'item-b item' : 'item'"
+                   @click="$router.push({ path: '/pages/material/index', query: { id: item.id } })" >
+                      <materialItem :item="item"/>
+                      <wux-white-space size="small" />
+       </view>
     </view>
     <wux-white-space size="small" />
     <wux-gallery id="wux-gallery"/>
@@ -132,18 +134,20 @@
 import { $wuxSelect } from '../../../static/wux/index';
 import cardItem from '@/components/cardItem';
 import goodsItem from '@/components/goodsItem';
-import materilItem from '@/components/materilItem';
+import materialItem from '@/components/materialItem';
 import title from '@/components/title';
+import api from '@/utils/api'
 
 export default {
   components: {
     cardItem,
-    materilItem,
+    materialItem,
     title,
     goodsItem
   },
   data () {
     return {
+      materials: [],
       groups: [
         {
           id: 0,
@@ -171,7 +175,7 @@ export default {
       goods: [
         {
           id: 1135001,
-          avatar: 'https://static.huanjiaohu.com/image/danfen.jpg',
+          avatar: 'http://static.huanjiaohu.com/mini/catalog/type_device_03.jpg',
           link: '../goods/goods?id=1135002',
           tags: ['热卖中'],
           title: '武强水族蛋分',
@@ -179,7 +183,7 @@ export default {
         },
         {
           id: 1135002,
-          avatar: 'https://static.huanjiaohu.com/image/danfen.jpg',
+          avatar: 'http://static.huanjiaohu.com/mini/catalog/type_device_03.jpg',
           link: '../goods/goods?id=1135002',
           tags: ['热卖中'],
           time: '2019-01-20',
@@ -194,7 +198,7 @@ export default {
         },
         {
           id: 1135003,
-          avatar: 'https://static.huanjiaohu.com/image/danfen.jpg',
+          avatar: 'http://static.huanjiaohu.com/mini/catalog/type_device_03.jpg',
           link: '../goods/goods?id=1135002',
           tags: ['热卖中'],
           time: '2019-01-20',
@@ -209,7 +213,7 @@ export default {
         },
         {
           id: 1135004,
-          avatar: 'https://static.huanjiaohu.com/image/danfen.jpg',
+          avatar: 'http://static.huanjiaohu.com/mini/catalog/type_device_03.jpg',
           link: '../goods/goods?id=1135002',
           tags: ['热卖中'],
           time: '2019-01-20',
@@ -411,7 +415,10 @@ export default {
       ]
     };
   },
-  async mounted () {},
+  async mounted () {
+    const res = await api.getMaterialRandomList({ page: 1, size: 10 });
+    this.materials = res.data;
+  },
 
   methods: {
     selectProvince () {

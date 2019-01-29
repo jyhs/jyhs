@@ -8,57 +8,54 @@
             </view>
         </scroll-view>
     </view>
-
-    <scroll-view scroll-y="true" scroll-top="scrollTop" :style="{'height': '100%'}">
-        <view class="cate-item">
-            <view class="h">
-                <text class="name">{{currentCategory.name}}</text>
-                <text class="desc">{{currentCategory.front_name}}</text>
-            </view>
-            <view class="b">
-                <view v-for="item of goodsList" :key="item.id" :class="(index + 1) % 2 === 0 ? 'item-b item' : 'item'"
+    <scroll-view scroll-y="true" scroll-top="scrollTop" style="height: 100%;margin-top:64rpx;">
+          <view v-for="item of goodsList" :key="item.id" :class="(index + 1) % 2 === 0 ? 'item-b item' : 'item'"
                    @click="$router.push({ path: '/pages/material/index', query: { id: item.id } })" >
-                    <img class="img" :src="item.list_pic_url" background-size="cover" />
-                    <text class="name">{{item.name}}</text>
-                    <text class="price">￥{{item.retail_price}}</text>
-                </view>
-            </view>
-        </view>
+                      <materialItem :item="item"/>
+                            <wux-white-space size="small" />
+          </view>
+          <loadMore :reflash="reflash"/>
     </scroll-view>
 </view>
 </template>
 
 <script>
 import api from '@/utils/api'
-import wx from 'wx'
-
+import loadMore from '@/components/loadMore';
+import materialItem from '@/components/materialItem';
 export default {
+  components: {
+    loadMore,
+    materialItem
+  },
   data () {
     return {
       navList: [],
       goodsList: [],
       id: 0,
       currentCategory: {},
+      paerntCategory: {},
       scrollLeft: 0,
       scrollTop: 0,
       scrollHeight: 0,
       page: 1,
+      reflash: false,
       size: 20 // 默认10000尽量大，查到所有符合的数据
     }
   },
+  async onReachBottom () {
+    this.reflash = true;
+    const parentCode = this.parentCategory.code;
+    const curentType = this.currentCategory.code;
+    this.page += 1;
+    const res = await api.getMaterialList({ category: parentCode, type: curentType, page: this.page, size: this.size });
+    this.goodsList = this.goodsList.concat(res.data)
+    this.reflash = false;
+  },
   async mounted () {
-    Object.assign(this.$data, this.$options.data())
     if (this.$route.query.id) {
       this.id = parseInt(this.$route.query.id);
     }
-    let that = this;
-    // 获得系统信息
-    wx.getSystemInfo({
-      success: function (res) {
-        // console.log('原生方法获得系统信息', res);
-        that.scrollHeight = res.windowHeight;
-      }
-    });
     await Promise.all([
       this.getCategoryInfo()
     ])
@@ -67,12 +64,9 @@ export default {
   methods: {
     // 获取类别信息
     async getCategoryInfo () {
-      const res = await api.getGoodsCategory({ id: this.id });
-      // console.log('类别信息', res);
-      if (res.errno === 0) {
-        this.navList = res.data.brotherCategory;
-        this.currentCategory = res.data.currentCategory;
-        // nav位置
+      const resData = await api.getGoodsCategory({ id: this.id });
+      if (resData.errno === 0) {
+        this.navList = resData.data.brotherCategory;
         let currentIndex = 0;
         let navListCount = this.navList.length;
         for (let i = 0; i < navListCount; i++) {
@@ -84,17 +78,13 @@ export default {
         if (currentIndex > navListCount / 2 && navListCount > 5) {
           this.scrollLeft = currentIndex * 60;
         }
-        // 获取商品列表信息
-        this.getGoodsList();
-      }
-    },
-
-    // 获取商品列表信息
-    async getGoodsList () {
-      const res = await api.getGoodsList({ categoryId: this.id, page: this.page, size: this.size });
-      // console.log('商品列表', res);
-      if (res.errno === 0) {
-        this.goodsList = res.data.goodsList;
+        this.page = 1;
+        this.currentCategory = resData.data.currentCategory;
+        this.parentCategory = resData.data.parentCategory;
+        const parentCode = this.parentCategory.code;
+        const curentType = this.currentCategory.code;
+        const res = await api.getMaterialList({ category: parentCode, type: curentType, page: this.page, size: this.size });
+        this.goodsList = res.data;
       }
     },
 

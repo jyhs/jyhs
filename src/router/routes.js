@@ -146,7 +146,16 @@ module.exports = [
     path: 'pages/category/category',
     name: 'category',
     config: {
-      navigationBarTitleText: '分类'
+      navigationBarTitleText: '分类',
+      usingComponents: {
+        'wux-row': '../../static/wux/row/index',
+        'wux-col': '../../static/wux/col/index',
+        'wux-wing-blank': '../../static/wux/wing-blank/index',
+        'wux-white-space': '../../static/wux/white-space/index',
+        'wux-divider': '../../static/wux/divider/index',
+        'wux-avatar': '../../static/wux/avatar/index',
+        'wux-rater': '../../static/wux/rater/index'
+      }
     }
   },
   {

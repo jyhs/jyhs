@@ -118,8 +118,7 @@ export default {
           },
           share: true
         }
-      ],
-      refreshing: false
+      ]
     };
   },
   onReachBottom () {
