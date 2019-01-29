@@ -7,15 +7,13 @@
         </swiper-item>
     </swiper>
     <view class="service-policy">
-        <view class="item"> &nbsp;&nbsp;海水鱼类 > 大型神仙</view>
+        <view class="item"> &nbsp;&nbsp;{{material.category_name}} > {{material.type_name}}</view>
     </view>
 
     <view class="material_all">
-        <view class="head">皮特克恩神仙鱼</view>
+        <view class="head">{{material.name}}</view>
         <view class="tag">
-          <view class="tagblue_small">火焰木盒</view>
-          <view class="tagblue_small">日本木盒</view>
-          <view class="tagblue_small">澳洲木盒</view>
+          <view v-for="tag of tags" :key="tag"  class="tagblue_small">{{tag}}</view>
         </view>
 
         <view class="title">
@@ -112,12 +110,31 @@ import wx from 'wx';
 import wxParse from 'mpvue-wxparse'
 
 export default {
+  props: {
+    material: {
+      type: Object,
+      default () {
+        return {};
+      }
+    }
+  },
   components: {
     wxParse
+  },
+  computed: {
+    tags () {
+      if (this.material.tag) {
+        return this.material.tag.split(',');
+      } else {
+        return [];
+      }
+    }
+
   },
   data () {
     return {
       id: 0,
+      material: {},
       goods: {},
       gallery: [{ img_url: '' }],
       attribute: [],
@@ -142,40 +159,14 @@ export default {
     if (this.$route.query.id) {
       this.id = parseInt(this.$route.query.id);
     }
-    await Promise.all([
-      this.getGoodsInfo()
-    ]);
-    const res = await api.getCartGoodsCount();
-    // console.log('购物车商品数量,请求结果', res);
-    if (res.errno === 0) {
-      this.cartGoodsCount = res.data.cartTotal.goodsCount;
-    }
+    this.getMaterialInfo();
   },
   methods: {
     // 获取商品详情
-    async getGoodsInfo () {
-      const res = await api.getGoodsDetail({ id: this.id });
-      // console.log('商品详情,请求结果', res);
-      if (res.errno === 0) {
-        this.goods = res.data.info;
-        this.gallery = res.data.gallery.length > 0 ? res.data.gallery : [{ img_url: '/static/images/icon_error.png' }];
-        this.attribute = res.data.attribute;
-        this.issueList = res.data.issue;
-        this.comment = res.data.comment;
-        this.brand = res.data.brand;
-        this.specificationList = res.data.specificationList;
-        this.productList = res.data.productList;
-        this.userHasCollect = res.data.userHasCollect;
-        if (res.data.userHasCollect === 1) {
-          this.collectBackImage = this.hasCollectImage;
-        } else {
-          this.collectBackImage = this.noCollectImage;
-        }
-        // wxParse的内容
-        this.goodDetailHTMLstr = res.data.info.goods_desc ? res.data.info.goods_desc : '暂无详情数据';
-        // 取“相关商品推荐”信息
-        this.getGoodsRelated();
-      }
+    async getMaterialInfo () {
+      const res = await api.getMaterialById({ materialId: this.id });
+      console.log(res)
+      this.material = res;
     },
     // 获得“相关商品推荐”信息
     async getGoodsRelated () {

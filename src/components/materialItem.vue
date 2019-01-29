@@ -21,7 +21,7 @@
           </wux-row>
           <wux-row>
             <wux-col span="12">
-                <wux-tag v-for="tag of tags" :key="tag" prefixCls="tagblue_small">{{tag}}</wux-tag>
+                <view v-for="tag of tags" :key="tag" class="tagblue_small">{{tag}}</view>
             </wux-col>
           </wux-row>
           <wux-row>
