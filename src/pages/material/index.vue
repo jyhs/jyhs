@@ -25,26 +25,26 @@
                 <view>{{sname}}</view>
             </wux-col>
             <wux-col span="2">
-                <view class="placeholder">英文名:</view>
+                <view class="placeholder">饲养难度:</view>
             </wux-col>
-            <wux-col span="5">
-                <view>{{ename}}</view>
+            <wux-col span="3">
+                <view><wux-rater :defaultValue="raterVal" :font-size="11" disabled/></view>
             </wux-col>
         </wux-row>
         <wux-row>
              <wux-col span="2">
-                <view class="placeholder">饲养难度:</view>
+                <view class="placeholder">英文名:</view>
             </wux-col>
-             <wux-col span="3">
-                <view class="placeholder">
-                  <wux-rater :defaultValue="raterVal" :font-size="11" disabled/>
+             <wux-col span="5">
+                <view>
+                  {{ename}}
                 </view>
             </wux-col>
             <wux-col span="2">
                 <view class="placeholder">团参考价:</view>
             </wux-col>
              <wux-col span="3">
-                <view class="placeholder">¥ {{price}}</view>
+                <view class="aboutprice">¥ {{price}}</view>
             </wux-col>
         </wux-row>
         </view>
