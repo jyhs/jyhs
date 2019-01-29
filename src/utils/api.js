@@ -7,6 +7,9 @@ const ApiCommonUrl = 'https://api2.huanjiaohu.com/api/'
 // const ApiCommonUrl = 'http://127.0.0.1:8360/api/'
 
 const api = {
+  getMaterialImageById: (paramObj) => request.post('material/getImage', paramObj, {
+    baseURL: ApiCommonUrl
+  }),
   getMaterialById: (paramObj) => request.post('material/get', paramObj, {
     baseURL: ApiCommonUrl
   }),

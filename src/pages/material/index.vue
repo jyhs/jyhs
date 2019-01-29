@@ -11,7 +11,7 @@
     </view>
 
     <view class="material_all">
-        <view class="head">{{material.name}}</view>
+        <view class="head">{{name}}</view>
         <view class="tag">
           <view v-for="tag of tags" :key="tag"  class="tagblue_small">{{tag}}</view>
         </view>
@@ -22,13 +22,13 @@
                 <view class="placeholder">学名:</view>
             </wux-col>
             <wux-col span="5">
-                <view>{{material.sname}}</view>
+                <view>{{sname}}</view>
             </wux-col>
             <wux-col span="2">
                 <view class="placeholder">英文名:</view>
             </wux-col>
             <wux-col span="5">
-                <view>{{material.ename}}</view>
+                <view>{{ename}}</view>
             </wux-col>
         </wux-row>
         <wux-row>
@@ -37,18 +37,18 @@
             </wux-col>
              <wux-col span="3">
                 <view class="placeholder">
-                  <wux-rater :default-value="rater" :font-size="12" disabled/>
+                  <wux-rater :defaultValue="raterVal" :font-size="11" disabled/>
                 </view>
             </wux-col>
             <wux-col span="2">
                 <view class="placeholder">团参考价:</view>
             </wux-col>
              <wux-col span="3">
-                <view class="placeholder">¥ {{material.price}}</view>
+                <view class="placeholder">¥ {{price}}</view>
             </wux-col>
         </wux-row>
         </view>
-        <wxParse class="descrition" :content="material.description"></wxParse>
+        <wxParse   :content="description"></wxParse>
       </view>
     <view class="comments" v-if="comment.count > 0">
         <view class="h">
@@ -78,17 +78,16 @@
     </view>
     
 
-    <view class="related-goods" v-if="relatedGoods.length">
+    <view class="related-goods" v-if="relatedMaterials.length">
         <view class="h">
         <view class="line"></view>
         <text class="title">同类推荐</text>
         </view>
         <view class="b">
-        <view class="item" v-for="(item, index) of relatedGoods" :key="item.id" :data-index="index">
-            <navigator :url="'/pages/goods/goods?id=' + item.id">
+        <view class="item" v-for="(item, index) of relatedMaterials" :key="item.id" :data-index="index">
+            <navigator :url="'/pages/material/index?id=' + item.id">
             <img class="img" :src="item.list_pic_url" background-size="cover"/>
             <text class="name">{{item.name}}</text>
-            <text class="price">￥{{item.retail_price}}</text>
             </navigator>
         </view>
         </view>
@@ -115,41 +114,28 @@ export default {
   components: {
     wxParse
   },
-  computed: {
-    tags () {
-      if (this.material.tag) {
-        return this.material.tag.split(',');
-      } else {
-        return [];
-      }
-    },
-    rater () {
-      if (this.material.level === 'yb') {
-        return 3;
-      } else if (this.material.level === 'ry') {
-        return 1;
-      } else {
-        return 5;
-      }
-    }
-
-  },
   data () {
     return {
       id: 0,
       material: {},
       goods: {},
-      gallery: [{ img_url: '' }],
+      gallery: [],
       attribute: [],
       issueList: [],
       comment: [],
       brand: {},
       specificationList: [],
       productList: [],
-      relatedGoods: [],
+      relatedMaterials: [],
       cartGoodsCount: 0,
       userHasCollect: 0,
       number: 1,
+      name: '',
+      sname: '',
+      ename: '',
+      price: '',
+      description: '',
+      raterVal: 5,
       checkedSpecText: '请选择规格数量',
       openAttr: false,
       noCollectImage: '/static/images/icon_collect.png',
@@ -158,18 +144,47 @@ export default {
       goodDetailHTMLstr: ''
     }
   },
-  async mounted () {
+  async onShow () {
     if (this.$route.query.id) {
       this.id = parseInt(this.$route.query.id);
     }
     this.getMaterialInfo();
   },
   methods: {
-    // 获取商品详情
+
     async getMaterialInfo () {
-      const res = await api.getMaterialById({ materialId: this.id });
-      console.log(res)
-      this.material = res;
+      const material = await api.getMaterialById({ materialId: this.id });
+      const resImage = await api.getMaterialImageById({ materialId: this.id });
+      const relatedMaterials = await api.getMaterialRandomList({ page: 1, size: 6, type: material.type, category: material.category });
+
+      const root = 'https://static.huanjiaohu.com/image/material';
+      const gallery = [];
+      for (let img of resImage.image) {
+        gallery.push({ img_url: root + img })
+      }
+      if (material.tag) {
+        this.tags = material.tag.split(',');
+      } else {
+        this.tags = [];
+      }
+      if (material.level === 'yb') {
+        this.raterVal = 3;
+      } else if (material.level === 'ry') {
+        this.raterVal = 1;
+      } else {
+        this.raterVal = 5;
+      }
+      material['gallery'] = gallery;
+      this.gallery = gallery;
+      this.name = material.name;
+      this.sname = material.sname;
+      this.ename = material.ename;
+      this.price = material.price;
+      this.description = material.description;
+      for (let relatedMaterial of relatedMaterials.data) {
+        relatedMaterial.list_pic_url = 'https://api.huanjiaohu.com/material/getImageSmall?materialId=' + relatedMaterial.id
+      }
+      this.relatedMaterials = relatedMaterials.data;
     },
     // 获得“相关商品推荐”信息
     async getGoodsRelated () {
