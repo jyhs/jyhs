@@ -169,7 +169,12 @@ module.exports = [
     path: 'pages/material/index',
     name: 'material',
     config: {
-      navigationBarTitleText: '详情'
+      navigationBarTitleText: '详情',
+      usingComponents: {
+        'wux-row': '../../static/wux/row/index',
+        'wux-col': '../../static/wux/col/index',
+        'wux-rater': '../../static/wux/rater/index'
+      }
     }
   },
   {
