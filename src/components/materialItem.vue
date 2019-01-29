@@ -15,8 +15,9 @@
             <wux-col span="8">
               <view class="home_swzltitle">{{item.name}}</view>
             </wux-col>
-            <wux-col span="4">
-              指导价&nbsp;¥&nbsp;{{item.price}}
+            <wux-col span="4" class="wux-text--right">
+              <view class="tzdja">团指导价:&nbsp;¥&nbsp;</view>
+              <view class="tzdjb">{{item.price}}</view>
             </wux-col>
           </wux-row>
           <wux-row>
@@ -26,7 +27,7 @@
           </wux-row>
           <wux-row>
             <wux-col span="6">
-                            <wux-rater :default-value="rater" :font-size="12" disabled/>
+                            <wux-rater :default-value="rater" :font-size="11" disabled/>
             </wux-col>
             <wux-col span="6">
             
@@ -76,10 +77,11 @@ export default {
 </script>
 
 <style scoped>
-.home_swzl{line-height:20px;color:#999;}
-.home_swzltitle{font-size:12px;color:#000;}
+.home_swzl{line-height:21px;color:#999;}
+.home_swzltitle{font-size:13px;color:#000;}
 .retail-item {
   background-color: #ffffff;
 }
-
+.tzdja{font-size: 11px;display: inline;}
+.tzdjb{font-size: 12px; font-weight: bold;display: inline;color:#ff8200}
 </style>

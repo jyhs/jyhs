@@ -171,6 +171,9 @@ module.exports = [
     config: {
       navigationBarTitleText: '详情',
       usingComponents: {
+        'wux-row': '../../static/wux/row/index',
+        'wux-col': '../../static/wux/col/index',
+        'wux-icon': '../../static/wux/icon/index',
         'wux-rater': '../../static/wux/rater/index'
       }
     }
