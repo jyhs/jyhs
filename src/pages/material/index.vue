@@ -44,7 +44,7 @@
                 <view class="placeholder">团参考价:</view>
             </wux-col>
              <wux-col span="3">
-                <view class="aboutprice">¥ {{price}}</view>
+                <view class="aboutprice">{{price}}</view>
             </wux-col>
         </wux-row>
         </view>

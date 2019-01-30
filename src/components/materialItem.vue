@@ -16,7 +16,7 @@
               <view class="home_swzltitle">{{item.name}}</view>
             </wux-col>
             <wux-col span="4" class="wux-text--right">
-              <view class="tzdja">团指导价 </view>
+              <view class="tzdja">团参考价 </view>
               <view class="tzdjb"> {{item.price}}</view>
             </wux-col>
           </wux-row>
