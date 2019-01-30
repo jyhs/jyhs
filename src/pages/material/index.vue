@@ -11,7 +11,20 @@
     </view>
 
     <view class="material_all">
-        <view class="head">{{name}}</view>
+
+            <wux-row>
+       <wux-col span="8">
+           <view class="head">{{name}}</view>
+      </wux-col>
+      <wux-col span="4">
+          <view>
+                <wux-icon type="ios-git-branch" size="12" />
+
+          </view>
+      </wux-col>
+            </wux-row>
+
+
         <view class="tag">
           <view v-for="tag of tags" :key="tag"  class="tagblue_small">{{tag}}</view>
         </view>
@@ -48,7 +61,9 @@
             </wux-col>
         </wux-row>
         </view>
+        <view class="descrition">
         <wxParse   :content="description"></wxParse>
+        </view>
       </view>
     <view class="comments" v-if="comment.count > 0">
         <view class="h">
@@ -835,7 +850,6 @@ export default {
 
 .related-goods .h {
   position: relative;
-  height: 145.5rpx;
   width: 750rpx;
   padding: 56.25rpx 0;
   background: #fff;
@@ -1139,6 +1153,11 @@ export default {
   line-height: 65rpx;
 }
 
+
+
+
+
+
 .material_all{
   background-color:white;
   font-size: 12px;
@@ -1146,7 +1165,7 @@ export default {
   width: 100%;
   padding:12px;
 }
-.material_all > .head{
+.material_all .head{
   font-size: 20px;
   color:#000;
   margin-left:10px;

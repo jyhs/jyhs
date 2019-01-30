@@ -174,7 +174,8 @@ module.exports = [
         'wux-row': '../../static/wux/row/index',
         'wux-col': '../../static/wux/col/index',
         'wux-icon': '../../static/wux/icon/index',
-        'wux-rater': '../../static/wux/rater/index'
+        'wux-rater': '../../static/wux/rater/index',
+        'wux-button': '../../static/wux/button/index'
       }
     }
   },
