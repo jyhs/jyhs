@@ -21,11 +21,8 @@
       <view class="imgs" v-if="item.pic_list.length">
         <image class="img" v-for="(iitem, iindex) of item.pic_list" :key="iitem.id" :src="iitem.pic_url" :data-index="iindex"/>
       </view>
-      <view class="spec">
-        <text class="item">白色 2件</text>
-      </view>
       <view class="customer-service" v-if="item.commentReplyVO">
-        <text class="u">卖家回复：</text>
+        <text class="u">回复：</text>
         <text class="c">{{item.commentReplyVO.replyContent}}</text>
       </view>
     </view>
@@ -88,13 +85,11 @@ export default {
       // console.log('评论详情', res);
       if (res.errno === 0) {
         if (this.showType === 0) {
-          this.allCommentList = this.allCommentList.concat(res.data.data);
-          this.allPage = res.data.currentPage;
           this.comments = this.allCommentList.concat(res.data.data);
+          this.allPage = res.data.currentPage;
         } else {
-          this.picCommentList = this.picCommentList.concat(res.data.data);
-          this.picPage = res.data.currentPage;
           this.comments = this.picCommentList.concat(res.data.data);
+          this.picPage = res.data.currentPage;
         }
       }
     },
@@ -189,12 +184,11 @@ export default {
     height: auto;
     width: 720rpx;
     overflow: hidden;
-    border-bottom: 1px solid #d9d9d9;
     padding-bottom: 10rpx;
 }
 
 .comments .info{
-    height: 127rpx;
+    height:67rpx;
     width: 100%;
     padding: 33rpx 0 27rpx 0;
 }

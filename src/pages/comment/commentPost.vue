@@ -17,7 +17,8 @@
 import api from '@/utils/api';
 import util from '@/utils/util';
 import wx from 'wx';
-import getCurrentPages from 'wxFunction';
+import { setTimeout } from 'timers';
+// import getCurrentPages from 'wxFunction';
 
 export default {
   data () {
@@ -56,23 +57,14 @@ export default {
         typeId: this.typeId,
         content: this.content
       });
-      // console.log('提交评论，返回结果', res);
       if (res.errno === 0) {
         wx.showToast({
           title: '评论成功',
-          complete: function () {
-            // that.$router.go(-1);
-            // 刷新专题详情页
-            wx.redirectTo({
-              url: '/pages/topic/topicDetail',
-              success: function (e) {
-                // console.log('getCurrentPages的页面栈', getCurrentPages());
-                var page = getCurrentPages().pop();
-                // console.log('当前page', page);
-                if (page === undefined || page === null) return;
-                page.onLoad();
-              }
-            });
+          duration: 2000,
+          complete: () => {
+            setTimeout(() => {
+              this.$router.go(-1);
+            }, 2000);
           }
         })
       }
@@ -129,8 +121,8 @@ page, .container {
 
 .post-comment .input-box .count {
   position: absolute;
-  bottom: 20rpx;
-  right: 20rpx;
+  bottom:10rpx;
+  right:-20rpx;
   display: block;
   height: 30rpx;
   width: 50rpx;

@@ -175,6 +175,7 @@ module.exports = [
         'wux-col': '../../static/wux/col/index',
         'wux-icon': '../../static/wux/icon/index',
         'wux-rater': '../../static/wux/rater/index',
+        'wux-white-space': '../../static/wux/white-space/index',
         'wux-button': '../../static/wux/button/index'
       }
     }
