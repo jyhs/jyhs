@@ -7,22 +7,19 @@
         </swiper-item>
     </swiper>
     <view class="service-policy">
-        <view class="item"> &nbsp;&nbsp;{{material.category_name}} > {{material.type_name}}</view>
+        <view class="item"> &nbsp;&nbsp;{{categoryName}} > {{typeName}}</view>
+        <view>
+           <wux-icon type="ios-git-branch" size="12" />
+           <button open-type='share' class='share'>分享</button>
+        </view>
     </view>
 
     <view class="material_all">
-
-            <wux-row>
-       <wux-col span="8">
-           <view class="head">{{name}}</view>
-      </wux-col>
-      <wux-col span="4">
-          <view>
-                <wux-icon type="ios-git-branch" size="12" />
-
-          </view>
-      </wux-col>
-            </wux-row>
+      <wux-row>
+          <wux-col span="12">
+              <view class="head">{{name}}</view>
+          </wux-col>
+      </wux-row>
 
 
         <view class="tag">
@@ -114,7 +111,6 @@
 <script>
 
 import api from '@/utils/api'
-import wx from 'wx';
 import wxParse from 'mpvue-wxparse'
 
 export default {
@@ -138,7 +134,7 @@ export default {
       attribute: [],
       issueList: [],
       comment: [],
-      brand: {},
+      tags: [],
       specificationList: [],
       productList: [],
       relatedMaterials: [],
@@ -146,6 +142,8 @@ export default {
       userHasCollect: 0,
       number: 1,
       name: '',
+      categoryName: '',
+      typeName: '',
       sname: '',
       ename: '',
       price: '',
@@ -192,6 +190,8 @@ export default {
       material['gallery'] = gallery;
       this.gallery = gallery;
       this.name = material.name;
+      this.categoryName = material.category_name;
+      this.typeName = material.type_name;
       this.sname = material.sname;
       this.ename = material.ename;
       this.price = material.price;
@@ -200,217 +200,12 @@ export default {
         relatedMaterial.list_pic_url = 'https://api.huanjiaohu.com/material/getImageSmall?materialId=' + relatedMaterial.id
       }
       this.relatedMaterials = relatedMaterials.data;
-    },
-    // 获得“相关商品推荐”信息
-    async getGoodsRelated () {
-      const res = await api.getGoodsRelated({ id: this.id });
-      // console.log('相关商品推荐', res);
-      if (res.errno === 0) {
-        this.relatedGoods = res.data.goodsList;
-      }
-    },
-    // 规格弹窗中，每个规则项的点击事件
-    clickSkuValue (event) {
-      let specNameId = event.currentTarget.dataset.nameId;
-      let specValueId = event.currentTarget.dataset.valueId;
-      // 判断是否可以点击
-      // TODO 性能优化，可在v-for中添加index，可以直接获取点击的属性名和属性值，不用循环
-      let _specificationList = this.specificationList;
-      for (let i = 0; i < _specificationList.length; i++) {
-        if (_specificationList[i].specification_id === specNameId) {
-          for (let j = 0; j < _specificationList[i].valueList.length; j++) {
-            if (_specificationList[i].valueList[j].id === specValueId) {
-              // 如果已经选中，则反选
-              if (_specificationList[i].valueList[j].checked) {
-                _specificationList[i].valueList[j].checked = false;
-              } else {
-                _specificationList[i].valueList[j].checked = true;
-              }
-            } else {
-              _specificationList[i].valueList[j].checked = false;
-            }
-          }
-        }
-      }
-      this.specificationList = _specificationList;
-      // 重新计算spec改变后的信息
-      this.changeSpecInfo();
-      // 重新计算哪些值不可以点击
-    },
-    // 获取选中的规格信息,存到数组中，其他方法有3处调用
-    getCheckedSpecValue () {
-      let checkedValues = [];
-      let _specificationList = this.specificationList;
-      for (let i = 0; i < _specificationList.length; i++) {
-        let _checkedObj = {
-          nameId: _specificationList[i].specification_id,
-          valueId: 0,
-          valueText: ''
-        };
-        for (let j = 0; j < _specificationList[i].valueList.length; j++) {
-          if (_specificationList[i].valueList[j].checked) {
-            _checkedObj.valueId = _specificationList[i].valueList[j].id;
-            _checkedObj.valueText = _specificationList[i].valueList[j].value;
-          }
-        }
-        checkedValues.push(_checkedObj);
-      }
-      return checkedValues;
-    },
-    // 根据已选的值，计算其它值的状态
-    setSpecValueStatus () {
-
-    },
-    // 判断规格是否选择完整(每一种至少选择一项)，加入购物车前进行判断
-    isCheckedAllSpec () {
-      return !this.getCheckedSpecValue().some(function (v) {
-        if (v.valueId === 0) {
-          return true;
-        }
-      });
-    },
-    // 拿到规格的key，库存判断时调用
-    getCheckedSpecKey () {
-      let checkedValue = this.getCheckedSpecValue().map(function (v) {
-        return v.valueId;
-      });
-      // console.log('getCheckedSpecKey', checkedValue.join('_'));
-      return checkedValue.join('_');
-    },
-    // 每次点击规格项，重新计算规格的信息
-    changeSpecInfo () {
-      let checkedNameValue = this.getCheckedSpecValue();
-      // 设置选择的信息
-      let checkedValue = checkedNameValue.filter(function (v) {
-        if (v.valueId !== 0) {
-          return true;
-        } else {
-          return false;
-        }
-      }).map(function (v) {
-        return v.valueText;
-      });
-      if (checkedValue.length > 0) {
-        this.checkedSpecText = checkedValue.join('　');
-      } else {
-        this.checkedSpecText = '请选择规格数量';
-      }
-    },
-    // 判断库存时调用，key是计算我们选择的规则，类似1_3_7
-    getCheckedProductItem (key) {
-      // console.log('this.data.productList', this.data.productList);
-      return this.productList.filter(function (v) {
-        if (v.goods_specification_ids === key) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-    },
-    // 打开商品规格选择弹窗
-    switchAttrPop () {
-      if (this.openAttr === false) {
-        this.openAttr = !this.openAttr;
-      }
-    },
-    // 关闭规格弹窗
-    closeAttr () {
-      this.openAttr = false;
-    },
-    // 购物车的五角星，添加或是取消收藏
-    async addCannelCollect () {
-      const res = await api.CollectAddOrDelete({ typeId: 0, valueId: this.id });
-      // console.log('添加或取消收藏', res);
-      if (res.errno === 0) {
-        if (res.data.type === 'add') {
-          this.collectBackImage = this.hasCollectImage;
-        } else {
-          this.collectBackImage = this.noCollectImage;
-        }
-      } else {
-        wx.showToast({
-          image: '/static/images/icon_error.png',
-          title: res.errmsg,
-          mask: true
-        });
-      }
-    },
-    // 跳转到购物车页面
-    openCartPage () {
-      wx.switchTab({
-        url: '/pages/cart/cart'
-      });
-    },
-    // 加入购物车，多种判断哦~
-    async addToCart () {
-      if (this.openAttr === false) {
-        // 打开规格选择弹窗
-        this.openAttr = !this.openAttr;
-      } else {
-        // 提示选择完整规格
-        if (!this.isCheckedAllSpec()) {
-          wx.showToast({
-            image: '/static/images/icon_error.png',
-            title: '规格选择不完整',
-            mask: true
-          });
-          return false;
-        }
-        // 根据选中的规格，判断是否有对应的sku信息
-        let checkedProduct = this.getCheckedProductItem(this.getCheckedSpecKey());
-        // console.log('checkedProduct', checkedProduct);
-        // 验证商品型号
-        if (!checkedProduct || checkedProduct.length <= 0) {
-          // 提示没有库存
-          wx.showToast({
-            image: '/static/images/icon_error.png',
-            title: '库存型号不足',
-            mask: true
-          });
-          return false;
-        }
-        // 验证商品数量
-        if (checkedProduct.goods_number < this.number) {
-          wx.showToast({
-            image: '/static/images/icon_error.png',
-            title: '库存数量不足',
-            mask: true
-          });
-          return false;
-        }
-        // 添加到购物车
-        const res = await api.CartAdd({ goodsId: this.goods.id, number: this.number, productId: checkedProduct[0].id });
-        // console.log('添加到购物车，请求结果', res);
-        if (res.errno === 0) {
-          wx.showToast({
-            title: '添加成功'
-          });
-          this.openAttr = !this.openAttr;
-          this.cartGoodsCount = res.data.cartTotal.goodsCount;
-        } else {
-          wx.showToast({
-            image: '/static/images/icon_error.png',
-            title: res.errmsg,
-            mask: true
-          });
-        }
-      }
-    },
-    // 减少数量
-    cutNumber () {
-      this.number = (this.number - 1 > 1) ? this.number - 1 : 1;
-    },
-    // 增加数量
-    addNumber () {
-      this.number = this.number + 1;
     }
   },
   // 原生的分享功能
   onShareAppMessage: function () {
     return {
-      title: 'xbyjShop',
-      desc: '仿网易严选小程序商城',
-      path: '/pages/goods/goods'
+      title: this.name
     }
   }
 }
@@ -418,7 +213,16 @@ export default {
 
 <style>
 @import "../../utils/wxParse/wxParse.wxss";
-
+.share{
+  font-size: 14px;
+  color:#666;
+  background-color: #f4f4f4;
+  padding-left: 0;
+  padding-right: 0;
+  line-height: 14px;
+  border-radius:0;
+  display:inline-block;
+}
 .container {
   margin-bottom: 100rpx;
 }
@@ -854,7 +658,6 @@ export default {
   padding: 56.25rpx 0;
   background: #fff;
   text-align: center;
-  border-bottom: 1px solid #f4f4f4;
 }
 
 .related-goods .h .line {
@@ -895,8 +698,6 @@ export default {
   overflow: hidden;
   text-align: center;
   padding: 15rpx 31.25rpx;
-  border-right: 1px solid #f4f4f4;
-  border-bottom: 1px solid #f4f4f4;
 }
 
 .related-goods .item .img {
