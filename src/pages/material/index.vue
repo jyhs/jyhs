@@ -62,6 +62,7 @@
           <wux-white-space size="small" />
     <view class="comments">
         <view class="h">
+            <wux-icon type="ios-list-box" size="14" color="#ff8200" class="commicon" />
             <text class="t">最新评价</text>
             <navigator :url="'../comment/comment?valueId=' + id + '&typeId=1'" v-if="comment.data.length > 0">
                 <text class="i" >查看全部</text>
@@ -121,7 +122,7 @@
             <img  class="icon" src="/static/images/comment.png"/>
             </view>
         </view>
-        <view class="r">
+        <view class="r fenxiang">
           <button open-type='share'>分享</button>
         </view>
      </view>
@@ -297,59 +298,14 @@ export default {
   background-color: #eee;
 }
 
-.service-policy {
-  width: 720rpx;
-  height: 73rpx;
-  background: #f4f4f4;
-  padding: 0 31.25rpx;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: space-between;
-}
 
-.no-comments{
-    height: 297rpx;
-}
-
-.no-comments .txt{
-    height: 43rpx;
-    line-height: 43rpx;
-    display: block;
-    width: 100%;
-    text-align: center;
-    font-size: 29rpx;
-    color: #7f7f7f;
-}
-
-.no-comments .icon{
-    margin: 48rpx auto 18rpx auto;
-    height: 130rpx;
-    display: block;
-    width: 115rpx;
-}
-
-.service-policy .item {
-  background-size: 10rpx;
-  margin-left:-10rpx;
-  display: flex;
-  align-items: center;
-  font-size: 25rpx;
-  color: #666;
-}
 .comments {
   width: 100%;
   height: auto;
-  padding-left: 30rpx;
+  padding:0 40rpx;
   background: #fff;
 }
 
-.comments .h {
-  height: 102.5rpx;
-  line-height: 100.5rpx;
-  width: 718.75rpx;
-  padding-right: 16rpx;
-}
 
 .comments .h .t {
   display: block;
@@ -383,7 +339,7 @@ export default {
 .comments .info {
   height: 67rpx;
   width: 100%;
-  padding: 33rpx 0 27rpx 0;
+  padding: 10px 0;
 }
 
 .comments .user {
@@ -424,10 +380,10 @@ export default {
 
 .comments .content {
   width: 720rpx;
-  padding-right: 30rpx;
+  padding:5px;
   line-height: 45.8rpx;
-  font-size: 29rpx;
-  margin-bottom: 24rpx;
+  font-size: 24rpx;
+  background-color:#f7f7f7;
 }
 
 .comments .imgs {
@@ -449,11 +405,6 @@ export default {
   font-size: 24rpx;
   color: #999;
   margin-bottom: 30rpx;
-}
-
-
-.wxParse view {
-    margin-bottom: -15rpx;
 }
 
 .related-goods {
@@ -636,11 +587,72 @@ button {
   font-size: 20px;
   color:#000;
   margin-left:10px;
+  text-align: center;
 }
-.material_all > .tag{padding:5px 10px;}
+.material_all > .tag{padding:10px 10px 0 10px;}
 .material_all > .tag > .tagblue_small{margin-right:5px;}
 .material_all > .title{line-height:24px;background-color:#F8F8F8;border: solid 1px #EAEAEA;margin:10px;padding:5px;font-size:11px;color:#000}
 .material_all > .title .placeholder{color:#9B9B9B;}
+.material_all > div{font-size: 11px!important}
 .material_all > .title .aboutprice{color:#ff8200;font-weight: bold;}
 .material_all > .descrition{color:#4A4A4A;line-height: 20px;padding:0 15px;}
+.bottom-btn .fenxiang{background-color:#87d74f;border:none;border-radius: 0;border:none}
+.fenxiang button {background-color:#87d74f;border: none;line-height:50px;}
+
+
+.no-comments{
+    height: 100px;
+    width:100%;
+    text-align:center;
+    background-color:white;
+    border-bottom:dashed 1px #f5f5f5;
+}
+.no-comments .txt{
+    text-align: center;
+    font-size: 12px;
+    color: #9b9b9b;
+}
+.commicon{float:left;margin-right:5px;margin-left:10px;}
+.no-comments .icon{
+    margin: 48rpx auto 18rpx auto;
+    height: 24px;
+    display: block;
+    width: 24px;
+}
+
+.comments .h .t {
+  display: block;
+  float: left;
+  width: 50%;
+  font-size: 14px;
+  color: #ff8200;
+}
+.comments .h {
+  line-height:42px;
+}
+
+
+.service-policy {
+  width: 720rpx;
+  height: 36px;
+  background: #f4f4f4;
+  padding: 0 15px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+
+
+.service-policy .item {
+  background-size: 10rpx;
+  margin-left:-10rpx;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: #999;
+}
 </style>
