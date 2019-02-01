@@ -617,11 +617,16 @@ button {
 }
 .material_all > .tag{padding:10px 10px 0 10px;}
 .material_all > .tag > .tagblue_small{margin-right:5px;}
-.material_all > .title{line-height:24px;background-color:#F8F8F8;border: solid 1px #EAEAEA;margin:10px;padding:5px;font-size:11px;color:#000}
+.material_all > .title{ font-family: arial; line-height:24px;background-color:#F8F8F8;border: solid 1px #EAEAEA;margin:10px;padding:5px;font-size:11px;color:#000}
 .material_all > .title .placeholder{color:#9B9B9B;}
 .material_all > div{font-size: 11px!important}
 .material_all > .title .aboutprice{color:#ff8200;font-weight: bold;}
-.material_all > .descrition{color:#4A4A4A;line-height: 20px;padding:0 15px;}
+.material_all > .descrition{
+  background: url(https://static.huanjiaohu.com/mini/index/baike_contents_bg.jpg) bottom no-repeat;
+  background-size: 100%;
+  border-radius: 6px;
+  color:#000;line-height: 20px;margin:0 10px;border: solid 2px #acdcfc;}
+.material_all > .descrition .wxParse{padding:8px;width: auto;color:#000;padding-bottom:110px}
 .bottom-btn .fenxiang{background-color:#87d74f;border:none;border-radius: 0;border:none}
 .fenxiang button {background-color:#87d74f;border: none;line-height:50px;}
 
