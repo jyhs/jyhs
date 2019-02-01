@@ -63,7 +63,7 @@
     <view class="comments">
         <view class="h">
             <wux-icon type="ios-list-box" size="14" color="#ff8200" class="commicon" />
-            <text class="t">最新评价</text>
+            <text class="t">最新评论</text>
             <navigator :url="'../comment/comment?valueId=' + id + '&typeId=1'" v-if="comment.data.length > 0">
                 <text class="i" >查看全部</text>
             </navigator>
@@ -345,11 +345,10 @@ export default {
 .comments .h .i {
   display: block;
   float: right;
-  width: 164rpx;
-  height: 100.5rpx;
-  line-height: 100.5rpx;
+  width: 136rpx;
+  line-height: 84rpx;
   background: url(https://static.huanjiaohu.com/icon/right_arrow.png) right center no-repeat;
-  background-size: 52rpx;
+  background-size: 42rpx;
 }
 
 .comments .b {
