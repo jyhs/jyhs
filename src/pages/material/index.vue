@@ -522,7 +522,7 @@ export default {
   height: 100rpx;
   display: flex;
   background: #fff;
-  box-shadow: 1px -2px 4px #e9e9e9;
+  box-shadow: 1px -2px 2px #e9e9e9;
 }
 
 .bottom-btn .l {
@@ -628,7 +628,7 @@ button {
   border-radius: 6px;
   box-shadow: 0 2px 8px #ebebeb;
   color:#000;line-height: 20px;margin:0 10px;border: solid 1px #acdcfc;}
-.material_all > .descrition .wxParse{padding:8px;width: auto;color:#000;padding-bottom:110px}
+.material_all > .descrition .wxParse{padding:8px;width: auto;color:#000;padding-bottom:105px}
 .bottom-btn .fenxiang{background-color:#87d74f;border:none;border-radius: 0;border:none}
 .fenxiang button {background-color:#87d74f;border: none;line-height:50px;}
 
