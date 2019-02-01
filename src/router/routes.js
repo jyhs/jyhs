@@ -175,8 +175,7 @@ module.exports = [
         'wux-col': '../../static/wux/col/index',
         'wux-icon': '../../static/wux/icon/index',
         'wux-rater': '../../static/wux/rater/index',
-        'wux-white-space': '../../static/wux/white-space/index',
-        'wux-button': '../../static/wux/button/index'
+        'wux-white-space': '../../static/wux/white-space/index'
       }
     }
   },
@@ -263,14 +262,7 @@ module.exports = [
     path: 'pages/goods/goods',
     name: 'goods',
     config: {
-      'navigationBarTitleText': '商品详情',
-      'usingComponents': {
-        'wux-row': '../../static/wux/row/index',
-        'wux-col': '../../static/wux/col/index',
-        'wux-cell-group': '../../static/wux/cell-group/index',
-        'wux-cell': '../../static/wux/cell/index',
-        'wux-rater': '../../static/wux/rater/index'
-      }
+      'navigationBarTitleText': '商品详情'
     }
   },
   {

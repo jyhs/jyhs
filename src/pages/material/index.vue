@@ -1,9 +1,9 @@
 <template >
 <div>
     <view class="container">
-    <swiper class="goodsimgs"  autoplay="true" interval="3000" duration="1000">
-        <swiper-item v-for="(item, index) of gallery" :key="item.id" :data-index="index">
-        <img :src="item.img_url" background-size="cover"/>
+    <swiper class="goodsimgs"  autoplay="true" interval="3000" duration="1000" :circular="true" @change='bindchange' :style="swiperStyle">
+        <swiper-item v-for="(item, index) of gallery" :key="item.id" >
+         <image :src="item.img_url"  class='image-view' :style="imgStyle" @load="imageLoad" :data-src='item' :data-index="index"/>
         </swiper-item>
     </swiper>
     <view class="service-policy">
@@ -151,6 +151,10 @@ export default {
   data () {
     return {
       id: 0,
+      imgheights: [],
+      current: 0,
+      swiperStyle: 'height:350rpx;',
+      imgStyle: 'height:100%;width:100%;',
       material: {},
       gallery: [],
       comment: {
@@ -174,6 +178,9 @@ export default {
       collectBackImage: '/static/images/icon_collect.png'
     }
   },
+  onLoad () {
+    this.gallery = [];
+  },
   async onShow () {
     if (this.$route.query.id) {
       this.id = parseInt(this.$route.query.id);
@@ -181,6 +188,23 @@ export default {
     this.getMaterialInfo();
   },
   methods: {
+    bindchange (e) {
+      this.current = e.mp.detail.current;
+      this.imgStyle = `height:${this.imgheights[this.current]}rpx;width:100%;`;
+      this.swiperStyle = `height:${this.imgheights[this.current]}rpx`;
+    },
+    imageLoad (e) {
+      const imgwidth = e.mp.detail.width;
+      let imgheight = e.mp.detail.height; ;
+      const ratio = imgwidth / imgheight;
+      const viewHeight = 750 / ratio;
+      imgheight = viewHeight;
+      const imgheights = this.imgheights;
+      imgheights[e.target.dataset['index']] = imgheight;
+      this.imgheights = imgheights;
+      this.imgStyle = `height:${imgheights[this.current]}rpx;width:100%;`;
+      this.swiperStyle = `height:${this.imgheights[this.current]}rpx`;
+    },
     goHome () {
       wx.reLaunch({
         url: '/pages/index/index'
@@ -272,6 +296,9 @@ export default {
 
 <style>
 @import "../../utils/wxParse/wxParse.wxss";
+.image-view{
+  background-size: cover;
+}
 .share{
    align-items: center;
   font-size: 25rpx;
