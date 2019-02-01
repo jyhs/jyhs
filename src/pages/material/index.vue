@@ -522,6 +522,7 @@ export default {
   height: 100rpx;
   display: flex;
   background: #fff;
+  box-shadow: 1px -2px 4px #e9e9e9;
 }
 
 .bottom-btn .l {
