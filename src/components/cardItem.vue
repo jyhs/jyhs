@@ -63,7 +63,8 @@
           &nbsp;点赞({{item.bottom.thumbs}})
         </wux-col>
         <wux-col span="4" class="wux-text--center">
-          <wux-icon type="md-share" color="#A3A3A3" size="14"/>&nbsp;分享
+          <wux-icon type="md-share" color="#A3A3A3" size="14"/>
+          &nbsp;分享
         </wux-col>
       </wux-row>
     </wux-wing-blank>

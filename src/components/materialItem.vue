@@ -16,8 +16,7 @@
               <view class="home_swzltitle">{{item.name}}</view>
             </wux-col>
             <wux-col span="4" class="wux-text--right">
-              <view class="tzdja">团参考价 </view>
-              <view class="tzdjb"> {{item.price}}</view>
+                            <wux-rater :default-value="rater" :font-size="11" disabled/>
             </wux-col>
           </wux-row>
           <wux-row>
@@ -26,12 +25,21 @@
             </wux-col>
           </wux-row>
           <wux-row>
-            <wux-col span="6">
-                            <wux-rater :default-value="rater" :font-size="11" disabled/>
+            <wux-col span="6"><view class="tzdja">团参考价:</view>
+              <view class="tzdjb"> {{item.price}}</view>
             </wux-col>
-            <wux-col span="6">
-            
-            </wux-col>
+            <wux-col span="2" class="wux-text--left">
+                <wux-icon type="md-share" color="#A3A3A3" size="12"/>
+                &nbsp;分享
+        </wux-col>
+              <wux-col span="2" class="wux-text--right">
+                <wux-icon type="md-thumbs-up" color="#A3A3A3" size="12"/>
+          &nbsp;56
+        </wux-col>
+        <wux-col span="2" class="wux-text--right">
+          <wux-icon type="ios-chatboxes" color="#A3A3A3" size="12"/>
+          &nbsp;21
+        </wux-col>
           </wux-row>
         </wux-col>
       </wux-row>
@@ -77,7 +85,7 @@ export default {
 </script>
 
 <style scoped>
-.home_swzl{line-height:21px;color:#999;}
+.home_swzl{line-height:21px;color:#999;font-size: 11px;}
 .home_swzltitle{font-size:13px;color:#000;}
 .retail-item {
   background-color: #ffffff;

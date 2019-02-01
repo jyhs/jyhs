@@ -154,7 +154,8 @@ module.exports = [
         'wux-white-space': '../../static/wux/white-space/index',
         'wux-divider': '../../static/wux/divider/index',
         'wux-avatar': '../../static/wux/avatar/index',
-        'wux-rater': '../../static/wux/rater/index'
+        'wux-rater': '../../static/wux/rater/index',
+        'wux-icon': '../../static/wux/icon/index'
       }
     }
   },

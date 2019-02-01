@@ -62,7 +62,7 @@
           <wux-white-space size="small" />
     <view class="comments">
         <view class="h">
-            <wux-icon type="ios-list-box" size="14" color="#ff8200" class="commicon" />
+            <wux-icon type="ios-today" size="14" color="#ff8200" class="commicon" />
             <text class="t">最新评论</text>
             <navigator :url="'../comment/comment?valueId=' + id + '&typeId=1'" v-if="comment.data.length > 0">
                 <text class="i" >查看全部</text>
