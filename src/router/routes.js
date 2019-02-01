@@ -249,7 +249,7 @@ module.exports = [
     path: 'pages/comment/comment',
     name: 'comment',
     config: {
-      navigationBarTitleText: '商品评论'
+      navigationBarTitleText: '评论'
     }
   },
   {
