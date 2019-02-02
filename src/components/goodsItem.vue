@@ -3,7 +3,7 @@
             <view class="b">
                 <view v-for="item of goodsList" :key="item.id" :class="(index + 1) % 2 === 0 ? 'item-b item' : 'item'"
                    @click="$router.push({ path: '/pages/material/index', query: { id: item.id } })" >
-                    <img class="img" :src="item.avatar" background-size="cover" />
+                    <img class="img" :src="item.headimgurl" background-size="cover" />
                     <text class="name">{{item.title}}</text>
                     <text class="price">￥{{item.price}}</text>
                 </view>

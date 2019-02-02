@@ -75,6 +75,8 @@ module.exports = [
         'wux-col': '../../static/wux/col/index',
         'wux-icon': '../../static/wux/icon/index',
         'wux-gallery': '../../static/wux/gallery/index',
+        'wux-tag': '../../static/wux/tag/index',
+        'wux-segmented-control': '../../static/wux/segmented-control/index',
         'wux-divider': '../../static/wux/divider/index'
       }
     }
@@ -257,6 +259,24 @@ module.exports = [
     name: 'commentPost',
     config: {
       navigationBarTitleText: '提交评论'
+    }
+  },
+  {
+    path: 'pages/circle/circlePost',
+    name: 'circlePost',
+    config: {
+      navigationBarTitleText: '发表鱼圈',
+      usingComponents: {
+        'wux-row': '../../static/wux/row/index',
+        'wux-col': '../../static/wux/col/index',
+        'wux-avatar': '../../static/wux/avatar/index',
+        'wux-tag': '../../static/wux/tag/index',
+        'wux-icon': '../../static/wux/icon/index',
+        'wux-cell-group': '../../static/wux/cell-group/index',
+        'wux-cell': '../../static/wux/cell/index',
+        'wux-button': '../../static/wux/button/index',
+        'wux-popup': '../../static/wux/popup/index'
+      }
     }
   },
   {

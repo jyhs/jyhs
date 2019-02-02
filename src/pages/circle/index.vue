@@ -4,8 +4,8 @@
       <wux-tabs class="tabAll" defaultCurrent="tab1" theme="positive">
         <wux-tab key="tab1" title="最新"></wux-tab>
         <wux-tab key="tab2" title="最热"></wux-tab>
-        <wux-tab key="tab3" title="按城市"></wux-tab>
-        <wux-tab key="tab4" title="按类型"></wux-tab>
+        <wux-tab key="tab3" title="省市"></wux-tab>
+        <wux-tab key="tab4" title="我的"></wux-tab>
       </wux-tabs>
     </view>
     <scroll-view scroll-y="true" style="height: 100%">
@@ -23,7 +23,7 @@
 <script>
 import cardItem from '@/components/cardItem';
 import loadMore from '@/components/loadMore';
-
+import wx from 'wx';
 export default {
   components: {
     cardItem,
@@ -37,13 +37,13 @@ export default {
       friends: [
         {
           id: 0,
-          avatar: 'https://api.huanjiaohu.com/user/getAvatar?userId=5482',
+          headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=5482',
           link: '../goods/goods?id=1135002',
-          tags: ['最新'],
+          tag: ['最新'],
           time: '2019-01-20',
           title: '我的鱼缸',
           name: 'York',
-          city: '上海',
+          city_name: '上海',
           price: '2130',
           descption: '我的鱼缸很牛逼啥都有，带鱼还有好几条',
           urls: [
@@ -58,13 +58,13 @@ export default {
         },
         {
           id: 1,
-          avatar: 'https://api.huanjiaohu.com/user/getAvatar?userId=5481',
+          headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=5481',
           link: '../goods/goods?id=1135002',
-          tags: ['最热'],
+          tag: ['最热'],
           time: '2019-01-20',
           title: '我的鱼缸',
           name: 'Tony',
-          city: '上海',
+          city_name: '上海',
           price: '2130',
           descption: '我的鱼缸很牛逼啥都有，带鱼还有好几条',
           urls: [
@@ -79,13 +79,13 @@ export default {
         },
         {
           id: 1,
-          avatar: 'https://api.huanjiaohu.com/user/getAvatar?userId=5481',
+          headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=5481',
           link: '../goods/goods?id=1135002',
-          tags: ['最热'],
+          tag: ['最热'],
           time: '2019-01-20',
           title: '我的鱼缸',
           name: 'Tony',
-          city: '上海',
+          city_name: '上海',
           price: '2130',
           descption: '我的鱼缸很牛逼啥都有，带鱼还有好几条',
           urls: [
@@ -103,7 +103,16 @@ export default {
   },
   methods: {
     add (e) {
-      console.log(e)
+      const user = wx.getStorageSync('userInfo', this.userInfo);
+      if (user) {
+        wx.navigateTo({
+          url: '/pages/circle/circlePost'
+        });
+      } else {
+        wx.reLaunch({
+          url: '/pages/ucenter/login'
+        });
+      }
     }
   },
   onReachBottom () {
@@ -111,13 +120,13 @@ export default {
     setTimeout(() => {
       this.friends.push({
         id: 1,
-        avatar: 'https://api.huanjiaohu.com/user/getAvatar?userId=5481',
+        headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=5481',
         link: '../goods/goods?id=1135002',
-        tags: ['最热'],
+        tag: ['最热'],
         time: '2019-01-20',
         title: '我的鱼缸',
         name: 'Tony',
-        city: '上海',
+        city_name: '上海',
         price: '2130',
         descption: '我的鱼缸很牛逼啥都有，带鱼还有好几条',
         urls: [
@@ -132,13 +141,13 @@ export default {
       });
       this.friends.push({
         id: 1,
-        avatar: 'https://api.huanjiaohu.com/user/getAvatar?userId=5481',
+        headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=5481',
         link: '../goods/goods?id=1135002',
-        tags: ['最热'],
+        tag: ['最热'],
         time: '2019-01-20',
         title: '我的鱼缸',
         name: 'Tony',
-        city: '上海',
+        city_name: '上海',
         price: '2130',
         descption: '我的鱼缸很牛逼啥都有，带鱼还有好几条',
         urls: [
@@ -161,7 +170,7 @@ export default {
 .add{
   width: 55px;
   height: 55px;
-  position: absolute;
+  position: fixed;
   bottom: 1%;
   right: 5%;
 }

@@ -151,45 +151,45 @@ export default {
       groups: [
         {
           id: 0,
-          avatar: 'https://api.huanjiaohu.com/user/getAvatar?userId=3152',
+          headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=3152',
           link: '../goods/goods?id=1135002',
-          tags: ['热团中'],
+          tag: ['热团中'],
           time: '2019-01-20',
           title: '月亮公主（周六）年前免运费团',
           name: '月亮姐姐',
-          city: '上海',
+          city_name: '上海',
           price: '2130'
         },
         {
           id: 0,
-          avatar: 'https://api.huanjiaohu.com/user/getAvatar?userId=3152',
+          headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=3152',
           link: '../goods/goods?id=1135002',
-          tags: ['热团中'],
+          tag: ['热团中'],
           time: '2019-01-20',
           title: '月亮公主（周六）年前免运费团',
           name: '月亮姐姐',
-          city: '上海',
+          city_name: '上海',
           price: '2130'
         }
       ],
       goods: [
         {
           id: 1135001,
-          avatar: 'http://static.huanjiaohu.com/mini/catalog/type_device_03.jpg',
+          headimgurl: 'http://static.huanjiaohu.com/mini/catalog/type_device_03.jpg',
           link: '../goods/goods?id=1135002',
-          tags: ['热卖中'],
+          tag: ['热卖中'],
           title: '武强水族蛋分',
           price: '2130'
         },
         {
           id: 1135002,
-          avatar: 'http://static.huanjiaohu.com/mini/catalog/type_device_03.jpg',
+          headimgurl: 'http://static.huanjiaohu.com/mini/catalog/type_device_03.jpg',
           link: '../goods/goods?id=1135002',
-          tags: ['热卖中'],
+          tag: ['热卖中'],
           time: '2019-01-20',
           title: '武强水族蛋分',
           name: '武强',
-          city: '上海',
+          city_name: '上海',
           price: '2130',
           bottom: {
             comment: '12',
@@ -198,13 +198,13 @@ export default {
         },
         {
           id: 1135003,
-          avatar: 'http://static.huanjiaohu.com/mini/catalog/type_device_03.jpg',
+          headimgurl: 'http://static.huanjiaohu.com/mini/catalog/type_device_03.jpg',
           link: '../goods/goods?id=1135002',
-          tags: ['热卖中'],
+          tag: ['热卖中'],
           time: '2019-01-20',
           title: '武强水族蛋分',
           name: '武强',
-          city: '上海',
+          city_name: '上海',
           price: '2130',
           bottom: {
             comment: '12',
@@ -213,13 +213,13 @@ export default {
         },
         {
           id: 1135004,
-          avatar: 'http://static.huanjiaohu.com/mini/catalog/type_device_03.jpg',
+          headimgurl: 'http://static.huanjiaohu.com/mini/catalog/type_device_03.jpg',
           link: '../goods/goods?id=1135002',
-          tags: ['热卖中'],
+          tag: ['热卖中'],
           time: '2019-01-20',
           title: '武强水族蛋分',
           name: '武强',
-          city: '上海',
+          city_name: '上海',
           price: '2130',
           bottom: {
             comment: '12',
@@ -230,13 +230,13 @@ export default {
       retails: [
         {
           id: 0,
-          avatar: 'https://api.huanjiaohu.com/user/getAvatar?userId=4581',
+          headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=4581',
           link: '../goods/goods?id=1135002',
-          tags: ['促销'],
+          tag: ['促销'],
           time: '2019-01-20',
           title: '全国满200元起发顺丰空运到家陈小文海水渔场20181017',
           name: '武强',
-          city: '上海',
+          city_name: '上海',
           price: '2130',
           bottom: {
             comment: '12',
@@ -245,13 +245,13 @@ export default {
         },
         {
           id: 1,
-          avatar: 'https://api.huanjiaohu.com/user/getAvatar?userId=4581',
+          headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=4581',
           link: '../goods/goods?id=1135002',
-          tags: ['促销'],
+          tag: ['促销'],
           time: '2019-01-20',
           title: '全国满200元起发顺丰空运到家陈小文海水渔场20181017',
           name: '武强',
-          city: '上海',
+          city_name: '上海',
           price: '2130',
           bottom: {
             comment: '12',
@@ -262,13 +262,13 @@ export default {
       friends: [
         {
           id: 0,
-          avatar: 'https://api.huanjiaohu.com/user/getAvatar?userId=5482',
+          headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=5482',
           link: '../goods/goods?id=1135002',
-          tags: ['最新'],
+          tag: ['最新'],
           time: '2019-01-20',
           title: '我的鱼缸',
           name: 'York',
-          city: '上海',
+          city_name: '上海',
           price: '2130',
           descption: '我的鱼缸很牛逼啥都有，带鱼还有好几条',
           urls: [
@@ -283,13 +283,13 @@ export default {
         },
         {
           id: 1,
-          avatar: 'https://api.huanjiaohu.com/user/getAvatar?userId=5481',
+          headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=5481',
           link: '../goods/goods?id=1135002',
-          tags: ['最热'],
+          tag: ['最热'],
           time: '2019-01-20',
           title: '我的鱼缸',
           name: 'Tony',
-          city: '上海',
+          city_name: '上海',
           price: '2130',
           descption: '我的鱼缸很牛逼啥都有，带鱼还有好几条',
           urls: [

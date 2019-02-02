@@ -6,7 +6,7 @@
         <wux-row>
           <wux-col span="2">
             <wux-avatar
-              :src="item.avatar"
+              :src="item.headimgurl"
               shape="cycle"
               body-style="background-color: #ffffff;margin:10px 12px;"
             />
@@ -14,12 +14,12 @@
           <wux-col span="10">
             <wux-row>
               <wux-col span="5">
-                <view v-for="tag of item.tags" :key="tag">
-                  <wux-tag prefixCls="taggreen_small">{{tag}}</wux-tag>
+                <view v-for="tag of item.tag" :key="tag">
+                  <wux-tag prefixCls="tagblue_small">{{tag}}</wux-tag>
                 </view>
               </wux-col>
               <wux-col span="7" class="wux-text--right">
-                <wux-icon type="md-time" color="#A3A3A3" size="12"/>
+                <wux-icon type="md-time" color="#A3A3A3" size="12" v-if="item.time"/>
                 &nbsp;&nbsp;{{item.time}}
               </wux-col>
             </wux-row>
@@ -33,9 +33,9 @@
                 <wux-icon type="md-person" color="#A3A3A3" size="12"/>
                 &nbsp;{{item.name}}&nbsp;&nbsp;&nbsp;&nbsp;
                 <wux-icon type="ios-pin" color="#A3A3A3" size="12"/>
-                &nbsp;{{item.city}}
+                &nbsp;{{item.city_name}}
               </wux-col>
-              <wux-col span="5" class="wux-assertive wux-text--right jine">¥&nbsp;{{item.price}}</wux-col>
+              <wux-col span="5" class="wux-assertive wux-text--right jine"><span v-if="item.price">¥</span>&nbsp;{{item.price}}</wux-col>
             </wux-row>
           </wux-col>
         </wux-row>

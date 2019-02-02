@@ -2,10 +2,10 @@
   <view>
     <view class="container">
       <view class="profile-info">
-        <view v-if="userInfo.avatarUrl">
+        <view v-if="userInfo.headimgurl">
           <wux-avatar
             size="large"
-            :src="userInfo.avatarUrl"
+            :src="userInfo.headimgurl"
             body-style="background-color: #ffffff;width:100rpx;height:100rpx;border-radius:50rpx;line-height:100rpx;"
           />
         </view>
@@ -13,14 +13,14 @@
           <navigator url="/pages/ucenter/login">
             <wux-avatar
               size="large"
-              :src="avatarUrl"
+              :src="headimgurl"
               body-style="background-color: #ffffff;width:100rpx;height:100rpx;border-radius:50rpx;line-height:100rpx;"
             />
           </navigator>
         </view>
-        <view class="sub-title">{{userInfo.nickName}}</view>
+        <view class="sub-title">{{userInfo.name}}</view>
       </view>
-      <view class="user-menu" v-if="userInfo.avatarUrl">
+      <view class="user-menu" v-if="userInfo.headimgurl">
         <view class="character-text">
           <view class="character-itemlist">
             <navigator url="/pages/ucenter/collect">
@@ -49,7 +49,7 @@
       </view>
       <wux-white-space/>
       <view class="character-info">
-        <view class="character-menu" v-if="userInfo.avatarUrl">
+        <view class="character-menu" v-if="userInfo.headimgurl">
           <wux-wing-blank>
             <wux-card title="商城订单" extra="商城">
               <view slot="body">
@@ -185,6 +185,7 @@
                   <wux-grid
                     thumb="https://static.huanjiaohu.com/mini/index/ic_exit.png"
                     label="退出登录"
+                    @click="logout"
                   />
                 </wux-grids>
               </view>
@@ -212,7 +213,7 @@ export default {
   data () {
     return {
       userInfo: {},
-      avatarUrl: 'https://api2.huanjiaohu.com/user/getAvatar?userId=0',
+      headimgurl: 'https://api2.huanjiaohu.com/user/getAvatar?userId=0',
       timeCounter: null,
       showtime: null,
       canIUse: wx.canIUse('button.open-type.getUserInfo')

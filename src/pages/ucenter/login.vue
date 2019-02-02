@@ -96,7 +96,7 @@ export default {
               phone: this.userInfo2.phone,
               code: res.code
             }).then((user) => {
-              wx.setStorageSync('userInfo', this.userInfo);
+              wx.setStorageSync('userInfo', user);
               wx.setStorageSync('token', user.token);
               wx.switchTab({
                 url: '/pages/ucenter/index'
