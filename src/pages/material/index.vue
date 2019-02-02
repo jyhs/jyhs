@@ -170,7 +170,7 @@ export default {
       sname: '',
       ename: '',
       price: '',
-      description: '',
+      description: ' ',
       raterVal: 5,
       commentNo: 0,
       noCollectBackImage: '/static/images/icon_collect.png',
@@ -179,7 +179,29 @@ export default {
     }
   },
   onLoad () {
+    this.id = 0;
+    this.imgheights = [];
+    this.current = 0;
+    this.swiperStyle = 'height=350rpx;';
+    this.imgStyle = 'height=100%;width=100%;';
+    this.material = {};
     this.gallery = [];
+    this.comment = {
+      data: {
+        pic_list: {}
+      }
+    };
+    this.relatedMaterials = [];
+    this.tags = [];
+    this.name = '';
+    this.categoryName = '';
+    this.typeName = '';
+    this.sname = '';
+    this.ename = '';
+    this.price = '';
+    this.description = ' ';
+    this.raterVal = 5;
+    this.commentNo = 0;
   },
   async onShow () {
     if (this.$route.query.id) {
@@ -316,7 +338,7 @@ export default {
 
 .goodsimgs {
   width: 750rpx;
-  height: 750rpx;
+  height: 350rpx;
 }
 
 .goodsimgs image {
@@ -409,7 +431,6 @@ export default {
   padding:5px;
   line-height: 45.8rpx;
   font-size: 24rpx;
-  background-color:#f7f7f7;
 }
 
 .comments .imgs {
