@@ -165,9 +165,9 @@ page {
 }
 
 .catalog .nav .item.active {
-  color: #ab2b2b;
+  color: #387ef5;
   font-size: 36rpx;
-  border-left: 6rpx solid #ab2b2b;
+  border-left: 6rpx solid #387ef5;
 }
 
 .catalog .cate {
