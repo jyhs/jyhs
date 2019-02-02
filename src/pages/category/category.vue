@@ -141,15 +141,16 @@ export default {
     height: 84rpx;
     min-width: 130rpx;
     padding: 0 15rpx;
+    text-align: center;
 }
 
 .cate-nav .item .name{
     display: block;
-    height: 84rpx;
+    height: 68rpx;
     padding: 0 20rpx;
-    line-height: 84rpx;
+    line-height: 80rpx;
     color: #333;
-    font-size: 30rpx;
+    font-size: 28rpx;
     width: auto;
 }
 
