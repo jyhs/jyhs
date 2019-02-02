@@ -574,7 +574,7 @@ export default {
   position: absolute;
   top: 0;
   right: 0;
-  background: #b4282d;
+  background: #387ef5;
   text-align: center;
   font-size: 18rpx;
   color: #fff;

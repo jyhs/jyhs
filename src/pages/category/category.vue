@@ -155,8 +155,8 @@ export default {
 }
 
 .cate-nav .item.active .name{
-    color: #ab2b2b;
-    border-bottom: 2px solid #ab2b2b;
+    color: #387ef5;
+    border-bottom: 2px solid #387ef5;
 }
 
 .cate-item{
