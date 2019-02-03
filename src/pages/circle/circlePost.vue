@@ -1,16 +1,14 @@
 <template >
 <view class="container">
-  <view class='row'>
-    <wux-row>
-            <wux-col span="11">
-                      <cardItem :item="user"/>
-            </wux-col>
-             <wux-col span="1">
-               <view class="setting">&nbsp;</view>
-            </wux-col>
-    </wux-row>
-  </view>
+  
   <view class="post-comment">
+    <wux-wing-blank>
+      <view class="row upload">
+                 <wux-upload listType="picture-card"  max="4" url="https://www.skyvow.cn/api/common/file" @success="onSuccess" @fail="onFail">
+                    <text>拍照</text>
+                </wux-upload>
+      </view>
+    </wux-wing-blank>
       <view class="input-box">
           <textarea class="content" focus="true" @input="bindInpuntValue" maxlength="140" placeholder="留言经过筛选后，对所有人可见" />
           <text class="count">{{140 - content.length}}</text>
@@ -20,16 +18,7 @@
           <view class="post" @click="onPost">发表</view>
       </view>
   </view>
-  <wux-popup position="bottom" :visible="true">
-    <wux-cell-group title="第一次使用需要开缸">
-        <wux-cell  title="鱼缸类型">
-                  <wux-segmented-control controlled  default-current="2" :values="value" />
-        </wux-cell>
-        <wux-cell hover-class="none">
-            <wux-button block type="balanced" bindtap="close2">Yes</wux-button>
-        </wux-cell>
-    </wux-cell-group>
-</wux-popup>
+
 </view>
 </template>
 
@@ -37,26 +26,18 @@
 import api from '@/utils/api';
 import util from '@/utils/util';
 import wx from 'wx';
-import { setTimeout } from 'timers';
-import cardItem from '@/components/cardItem';
 
 export default {
-  components: {
-    cardItem
-  },
+
   data () {
     return {
       typeId: 0,
       valueId: 0,
-      content: '',
-      user: {},
-      value: ['Segment1', 'Segment2', 'Segment3']
+      content: ''
+
     }
   },
   async mounted () {
-    const user = wx.getStorageSync('userInfo', this.userInfo);
-    user.title = '我的云端海缸';
-    this.user = user;
     if (this.$route.query.typeId && this.$route.query.valueId) {
       this.typeId = parseInt(this.$route.query.typeId);
       this.valueId = parseInt(this.$route.query.valueId);
@@ -64,9 +45,7 @@ export default {
   },
 
   methods: {
-    onClose2 () {
-      console.log(11)
-    },
+
     bindInpuntValue (event) {
       // console.log('监听输入事件', event);
       let value = event.target.value;
@@ -180,13 +159,10 @@ page, .container {
   text-align: right;
   padding: 0 30rpx;
 }
-.setting{
-  display: block;
-  line-height:145rpx;
-  background:url(https://static.huanjiaohu.com/icon/right_arrow.png) right center no-repeat;
-  background-size:42rpx;
-  background-color:#ffffff;
+
+.upload{
+  padding:30rpx 30rpx;
+background-color:#ffffff;
 
 }
-
 </style>

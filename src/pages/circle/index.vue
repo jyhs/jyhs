@@ -1,5 +1,17 @@
 <template >
   <view class="container">
+    <view class='row'>
+              <navigator @click='setting'>
+                  <wux-row>
+                          <wux-col span="11">
+                                    <cardItem :item="user"/>
+                          </wux-col>
+                          <wux-col span="1">
+                            <view class="setting">&nbsp;</view>
+                          </wux-col>
+                  </wux-row>
+              </navigator>
+  </view>
     <view class="row">
       <wux-tabs class="tabAll" defaultCurrent="tab1" theme="positive">
         <wux-tab key="tab1" title="最新"></wux-tab>
@@ -17,6 +29,25 @@
     </scroll-view>
     <wux-gallery id="wux-gallery"/>
     <cover-image class='add' src='/static/images/kefu.png' @click="add"></cover-image>
+      <wux-popup position="bottom" :visible="isPopup">
+    <wux-cell-group title="第一次使用需要开缸">
+        <wux-cell  title="鱼缸类型">
+                  <wux-segmented-control slot="footer" default-current="-1" @change="typeChange" theme="positive"	 :values="value1" />
+        </wux-cell>
+        <wux-cell  title="过滤方式">
+                  <wux-segmented-control slot="footer" default-current="-1" @change="filterChange" theme="positive"	 :values="value2" />
+        </wux-cell>
+        <wux-cell  title="过滤系统">
+                  <wux-segmented-control slot="footer" default-current="-1" @change="systemChange" theme="positive"	 :values="value3" />
+        </wux-cell>
+        <wux-cell  title="鱼缸尺寸">
+                  <wux-segmented-control slot="footer" default-current="-1" @change="sizeChange" theme="positive"	 :values="value4" />
+        </wux-cell>
+        <wux-cell hover-class="none">
+            <wux-button block type="positive" @tap="open">开缸</wux-button>
+        </wux-cell>
+    </wux-cell-group>
+</wux-popup>
   </view>
 </template>
 
@@ -24,6 +55,8 @@
 import cardItem from '@/components/cardItem';
 import loadMore from '@/components/loadMore';
 import wx from 'wx';
+import { setTimeout } from 'timers';
+
 export default {
   components: {
     cardItem,
@@ -32,8 +65,13 @@ export default {
   data () {
     return {
       title3: '',
-      value3: '',
       reflash: false,
+      user: {},
+      isPopup: false,
+      value1: ['SPS缸', 'LPS缸', 'FOT缸'],
+      value2: ['底滤', '背滤'],
+      value3: ['柏林系统', 'ZEO', 'ATS'],
+      value4: ['微缸', '小型', '中型', '大型'],
       friends: [
         {
           id: 0,
@@ -101,18 +139,49 @@ export default {
       ]
     };
   },
+  mounted () {
+    const user = wx.getStorageSync('userInfo', this.userInfo);
+    if (user) {
+      user.title = '我的云端海缸';
+      this.user = user;
+    } else {
+      wx.reLaunch({
+        url: '/pages/ucenter/login'
+      });
+    }
+  },
   methods: {
     add (e) {
-      const user = wx.getStorageSync('userInfo', this.userInfo);
-      if (user) {
-        wx.navigateTo({
-          url: '/pages/circle/circlePost'
-        });
-      } else {
-        wx.reLaunch({
-          url: '/pages/ucenter/login'
-        });
-      }
+      wx.navigateTo({
+        url: '/pages/circle/circlePost'
+      });
+    },
+    setting () {
+      this.isPopup = true;
+    },
+    open () {
+      wx.showToast({
+        title: '开缸成功',
+        duration: 2000,
+        complete: () => {
+          this.isPopup = false;
+          wx.navigateTo({
+            url: '/pages/circle/circle'
+          });
+        }
+      })
+    },
+    typeChange (e) {
+      console.log(e.mp.detail.key)
+    },
+    sizeChange (e) {
+      console.log(e.mp.detail.key)
+    },
+    systemChange (e) {
+      console.log(e.mp.detail.key)
+    },
+    filterChange (e) {
+      console.log(e.mp.detail.key)
     }
   },
   onReachBottom () {
@@ -174,5 +243,11 @@ export default {
   bottom: 1%;
   right: 5%;
 }
-
+.setting{
+  display: block;
+  line-height:185rpx;
+  background:url(https://static.huanjiaohu.com/icon/right_arrow.png) right center no-repeat;
+  background-size:42rpx;
+  background-color:#ffffff;
+}
 </style>

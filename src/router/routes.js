@@ -59,29 +59,6 @@ module.exports = [
     }
   },
   {
-    path: 'pages/circle/index',
-    name: 'circle',
-    config: {
-      enablePullDownRefresh: true,
-      navigationBarTitleText: '礁岩鱼圈',
-      usingComponents: {
-        'wux-tabs': '../../static/wux/tabs/index',
-        'wux-tab': '../../static/wux/tab/index',
-        'wux-avatar': '../../static/wux/avatar/index',
-        'wux-white-space': '../../static/wux/white-space/index',
-        'wux-wing-blank': '../../static/wux/wing-blank/index',
-        'wux-row': '../../static/wux/row/index',
-        'wux-button': '../../static/wux/button/index',
-        'wux-col': '../../static/wux/col/index',
-        'wux-icon': '../../static/wux/icon/index',
-        'wux-gallery': '../../static/wux/gallery/index',
-        'wux-tag': '../../static/wux/tag/index',
-        'wux-segmented-control': '../../static/wux/segmented-control/index',
-        'wux-divider': '../../static/wux/divider/index'
-      }
-    }
-  },
-  {
     path: 'pages/catalog/index',
     name: 'catalog',
     config: {
@@ -262,10 +239,47 @@ module.exports = [
     }
   },
   {
+    path: 'pages/circle/index',
+    name: 'circle',
+    config: {
+      enablePullDownRefresh: true,
+      navigationBarTitleText: '礁岩鱼圈',
+      usingComponents: {
+        'wux-tabs': '../../static/wux/tabs/index',
+        'wux-tab': '../../static/wux/tab/index',
+        'wux-avatar': '../../static/wux/avatar/index',
+        'wux-white-space': '../../static/wux/white-space/index',
+        'wux-wing-blank': '../../static/wux/wing-blank/index',
+        'wux-row': '../../static/wux/row/index',
+        'wux-button': '../../static/wux/button/index',
+        'wux-col': '../../static/wux/col/index',
+        'wux-icon': '../../static/wux/icon/index',
+        'wux-gallery': '../../static/wux/gallery/index',
+        'wux-tag': '../../static/wux/tag/index',
+        'wux-popup': '../../static/wux/popup/index',
+        'wux-cell-group': '../../static/wux/cell-group/index',
+        'wux-cell': '../../static/wux/cell/index',
+        'wux-segmented-control': '../../static/wux/segmented-control/index',
+        'wux-divider': '../../static/wux/divider/index'
+      }
+    }
+  },
+  {
     path: 'pages/circle/circlePost',
     name: 'circlePost',
     config: {
       navigationBarTitleText: '发表鱼圈',
+      usingComponents: {
+        'wux-upload': '../../static/wux/upload/index',
+        'wux-wing-blank': '../../static/wux/wing-blank/index'
+      }
+    }
+  },
+  {
+    path: 'pages/circle/circle',
+    name: 'circle',
+    config: {
+      navigationBarTitleText: '云端海缸',
       usingComponents: {
         'wux-row': '../../static/wux/row/index',
         'wux-col': '../../static/wux/col/index',
@@ -275,7 +289,12 @@ module.exports = [
         'wux-cell-group': '../../static/wux/cell-group/index',
         'wux-cell': '../../static/wux/cell/index',
         'wux-button': '../../static/wux/button/index',
-        'wux-popup': '../../static/wux/popup/index'
+        'wux-segmented-control': '../../static/wux/segmented-control/index',
+        'wux-upload': '../../static/wux/upload/index',
+        'wux-wing-blank': '../../static/wux/wing-blank/index',
+        'wux-tabs': '../../static/wux/tabs/index',
+        'wux-gallery': '../../static/wux/gallery/index',
+        'wux-tab': '../../static/wux/tab/index'
       }
     }
   },

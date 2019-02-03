@@ -51,7 +51,7 @@
       <view class="character-info">
         <view class="character-menu" v-if="userInfo.headimgurl">
           <wux-wing-blank>
-            <wux-card title="商城订单" extra="商城">
+            <wux-card title="商城订单">
               <view slot="body">
                 <wux-grids col="4" :bordered="false">
                   <wux-grid
@@ -84,7 +84,7 @@
           </wux-wing-blank>
           <wux-white-space/>
           <wux-wing-blank>
-            <wux-card title="我是鱼友" extra="零售/团购">
+            <wux-card title="我是鱼友" >
               <view slot="body">
                 <wux-grids col="4" :bordered="false">
                   <wux-grid
@@ -109,7 +109,7 @@
           </wux-wing-blank>
           <wux-white-space/>
           <wux-wing-blank>
-            <wux-card title="我是团长" extra="零售/团购">
+            <wux-card title="我是团长" >
               <view slot="body">
                 <wux-grids col="4" :bordered="false">
                   <wux-grid
@@ -130,7 +130,7 @@
           </wux-wing-blank>
           <wux-white-space/>
           <wux-wing-blank>
-            <wux-card title="我是渔场" extra="零售/团购">
+            <wux-card title="我是渔场" >
               <view slot="body">
                 <wux-grids col="4" :bordered="false">
                   <wux-grid
