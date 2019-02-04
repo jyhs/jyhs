@@ -56,11 +56,11 @@
       <wux-row v-if="item.bottom" class="pub_toolsarea">
         <wux-col span="4" class="wux-text--center">
           <wux-icon type="ios-chatboxes" color="#A3A3A3" size="14"/>
-          &nbsp;评论({{item.bottom.comment}})
+          &nbsp;评论 <span class="pointnum">{{item.bottom.comment}}</span>
         </wux-col>
         <wux-col span="4" class="wux-text--center">
           <wux-icon type="md-thumbs-up" color="#A3A3A3" size="14"/>
-          &nbsp;点赞({{item.bottom.thumbs}})
+          &nbsp;点赞 <span class="pointnum">{{item.bottom.thumbs}}</span>
         </wux-col>
         <wux-col span="4" class="wux-text--center">
           <wux-icon type="md-share" color="#A3A3A3" size="14"/>
@@ -153,7 +153,9 @@ export default {
 .pub_toolsarea{
   display: block;
   font-size: 12px;
-  color:#666;
+  color:#999;
   padding:0 0 6px 0;
 }
+
+.pub_toolsarea .pointnum{color:#02a2fd;}
 </style>

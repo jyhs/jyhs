@@ -28,17 +28,11 @@
       <loadMore :reflash="reflash"/>
     </scroll-view>
     <wux-gallery id="wux-gallery"/>
-    <cover-image class="add" src="/static/images/kefu.png" @click="add"></cover-image>
-    <wux-popup position="bottom" :visible="isPopup">
-      <wux-cell-group title="第一次使用需要开缸">
-        <wux-cell title="鱼缸类型">
-          <wux-segmented-control
-            slot="footer"
-            default-current="-1"
-            @change="typeChange"
-            theme="positive"
-            :values="value1"
-          />
+    <cover-image class='add' src='https://static.huanjiaohu.com/mini/index/ydhg_btn.png' @click="add"></cover-image>
+      <wux-popup position="bottom" :visible="isPopup">
+    <wux-cell-group class="pop_setaqua" title="第一次使用需要开缸">
+        <wux-cell  title="鱼缸类型">
+                  <wux-segmented-control slot="footer" default-current="-1" @change="typeChange" theme="positive"	 :values="value1" />
         </wux-cell>
         <wux-cell title="过滤方式">
           <wux-segmented-control
@@ -95,18 +89,15 @@ export default {
       value1: ['SPS缸', 'LPS缸', 'FOT缸'],
       value2: ['底滤', '背滤'],
       value3: ['柏林系统', 'ZEO', 'ATS'],
-      value4: ['微缸', '小型', '中型', '大型'],
+      value4: ['微缸<30cm', '小型<45cm', '中型<80cm', '大型>80cm'],
       friends: [
         {
           id: 0,
           headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=5482',
           link: '../goods/goods?id=1135002',
-          tag: ['最新'],
           time: '2019-01-20',
-          title: '我的鱼缸',
           name: 'York',
           city_name: '上海',
-          price: '2130',
           descption: '我的鱼缸很牛逼啥都有，带鱼还有好几条',
           urls: [
             'https://api.huanjiaohu.com/material/getImageSmall?materialId=206',
@@ -122,12 +113,9 @@ export default {
           id: 1,
           headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=5481',
           link: '../goods/goods?id=1135002',
-          tag: ['最热'],
           time: '2019-01-20',
-          title: '我的鱼缸',
           name: 'Tony',
           city_name: '上海',
-          price: '2130',
           descption: '我的鱼缸很牛逼啥都有，带鱼还有好几条',
           urls: [
             'https://api.huanjiaohu.com/material/getImageSmall?materialId=206',
@@ -143,12 +131,9 @@ export default {
           id: 1,
           headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=5481',
           link: '../goods/goods?id=1135002',
-          tag: ['最热'],
           time: '2019-01-20',
-          title: '我的鱼缸',
           name: 'Tony',
           city_name: '上海',
-          price: '2130',
           descption: '我的鱼缸很牛逼啥都有，带鱼还有好几条',
           urls: [
             'https://api.huanjiaohu.com/material/getImageSmall?materialId=206',
@@ -275,4 +260,5 @@ export default {
   background-size: 42rpx;
   background-color: #ffffff;
 }
+.pop_setaqua .wux-cell-group__hd {padding:0 30px;}
 </style>
