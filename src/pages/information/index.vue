@@ -1,145 +1,184 @@
 <template >
   <view class="container">
-    <view class='row'>
-       <wux-search-bar
-      clear=""
-      show-cancel
-      :value="value"
-      controlled
-      placeholder="搜索资讯"
-      @confirm="onConfirm"
-      @clear="onClear"
-    />
-  </view>
-    <scroll-view scroll-y="true" style="height: 100%">
-      <block v-for="item in data" :key="item.id">
-        <oneCard :data="item"/>
-        <moreCard :data="item" v-if="item.list"/>
-      </block>
-      <loadMore :reflash="reflash"/>
-    </scroll-view>
+    <view class="row">
+      <wux-search-bar
+        clear=""
+        show-cancel
+        :value="value"
+        controlled
+        placeholder="搜索美篇/美图/美拍"
+        @confirm="onConfirm"
+        @clear="onClear"
+      />
+    </view>
+    <view class="row">
+      <wux-tabs
+        class="tabAll"
+        controlled
+        :current="tabCurrent"
+        defaultCurrent="0"
+        theme="positive"
+        @change="change"
+      >
+        <wux-tab key="0" title="美篇"></wux-tab>
+        <wux-tab key="1" title="美图"></wux-tab>
+        <wux-tab key="2" title="美拍"></wux-tab>
+      </wux-tabs>
+    </view>
+    <swiper :style="winStyle" :current="current" @change="swiperChange">
+      <swiper-item>
+        <view class="row">
+          <scroll-view scroll-y="true" style="height: 100%">
+            <block v-for="item in informationList.item" :key="item.media_id">
+              <oneCard :data="item"/>
+            </block>
+            <loadMore :reflash="reflash"/>
+          </scroll-view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <scroll-view scroll-y="true" style="height: 100%">
+          <div class="img_all">
+            <block v-for="(it,index) of imageList" :key="index">
+              <view class="list_img" @tap="showGallery(index,$event)" :data-current="index">
+                <img :src="it">
+              </view>
+            </block>
+          </div>
+        </scroll-view>
+      </swiper-item>
+      <swiper-item>
+        <scroll-view scroll-y="true" style="height: 100%">
+          <view style="background:#ffffff">
+            <wux-cell
+              :title="it.name"
+              is-link
+              v-for="(it,index) of videoList.item"
+              :key="index"
+              @click="clickItem(it)"
+            />
+          </view>
+        </scroll-view>
+      </swiper-item>
+    </swiper>
+    <wux-gallery id="wux-gallery"/>
   </view>
 </template>
 
 <script>
 import loadMore from '@/components/loadMore';
 import oneCard from '@/components/oneCard';
-import moreCard from '@/components/moreCard';
-
-import { setTimeout } from 'timers';
+import api from '@/utils/api';
+import { $wuxGallery } from '../../../static/wux/index';
+import wx from 'wx';
 export default {
   components: {
     loadMore,
-    oneCard,
-    moreCard
+    oneCard
+  },
+  async onLoad () {
+    this.informationList = await api.getInformationList({
+      page: this.newPage,
+      size: 10,
+      type: 'news'
+    });
+    const imageList = await api.getInformationList({
+      page: this.imgPage,
+      size: 30,
+      type: 'image'
+    });
+    this.videoList = await api.getInformationList({
+      page: this.imgPage,
+      size: 30,
+      type: 'video'
+    });
+
+    const imgaes = [];
+    for (let img of imageList.item) {
+      imgaes.push(img.url);
+    }
+    this.imageList = imgaes;
+    this.winStyle =
+      'width:100%;height:' + this.informationList.item.length * 370 + 'px;';
   },
   data () {
     return {
       reflash: false,
       value: '',
-      data: [
-        {
-          id: 1,
-          width: '375px',
-          height: '180px',
-          src:
-            'https://static.huanjiaohu.com/image/ad/china/4.jpg?r=0.609779170857945',
-          title: '火焰木盒',
-          description:
-            '蓝木瓜为比较常见的箱鲀，饲养困难，很难开口，可以尝试冰冻丰年虾等天然饵料。蓝木瓜非常温顺，适合和其他鱼类混养。此类非常喜欢啃食管虫....'
-        },
-        {
-          id: 1,
-          width: '375px',
-          height: '180px',
-          src:
-            'https://static.huanjiaohu.com/image/ad/china/3.jpg?r=0.609779170857945',
-          description:
-            '蓝木瓜为比较常见的箱鲀，饲养困难，很难开口，可以尝试冰冻丰年虾等天然饵料。蓝木瓜非常温顺，适合和其他鱼类混养。此类非常喜欢啃食管虫....',
-          list: [
-            {
-              title: '火焰木盒',
-              src:
-                'https://static.huanjiaohu.com/image/material/hy/1524499703-HYMH.png'
-            }
-          ]
-        },
-        {
-          id: 1,
-          width: '375px',
-          height: '180px',
-          src:
-            'https://static.huanjiaohu.com/image/ad/china/1.jpg?r=0.609779170857945',
-          title: '火焰木盒',
-          description:
-            '蓝木瓜为比较常见的箱鲀，饲养困难，很难开口，可以尝试冰冻丰年虾等天然饵料。蓝木瓜非常温顺，适合和其他鱼类混养。此类非常喜欢啃食管虫....'
-        },
-        {
-          id: 1,
-          width: '375px',
-          height: '180px',
-          src:
-            'https://static.huanjiaohu.com/image/ad/china/4.jpg?r=0.609779170857945',
-          description:
-            '蓝木瓜为比较常见的箱鲀，饲养困难，很难开口，可以尝试冰冻丰年虾等天然饵料。蓝木瓜非常温顺，适合和其他鱼类混养。此类非常喜欢啃食管虫....',
-          list: [
-            {
-              title: '火焰木盒',
-              src:
-                'https://static.huanjiaohu.com/image/material/hy/1524499703-HYMH.png'
-            },
-            {
-              title: '火焰木盒',
-              src:
-                'https://static.huanjiaohu.com/image/material/hy/1524499703-HYMH.png'
-            }
-          ]
-        }
-      ],
-      refreshing: false
+      current: 0,
+      tabCurrent: 0,
+      informationList: {},
+      videoList: {},
+      imageList: [],
+      newPage: 1,
+      imgPage: 1,
+      winStyle: 'width:100%;height:100%'
     };
   },
-  onReachBottom () {
+  async onReachBottom () {
     this.reflash = true;
-    setTimeout(() => {
-      this.data.push({
-        id: 1,
-        width: '375px',
-        height: '180px',
-        src:
-          'https://static.huanjiaohu.com/image/ad/china/2.jpg?r=0.609779170857945',
-        title: '火焰木盒',
-        description:
-          '蓝木瓜为比较常见的箱鲀，饲养困难，很难开口，可以尝试冰冻丰年虾等天然饵料。蓝木瓜非常温顺，适合和其他鱼类混养。此类非常喜欢啃食管虫....'
-      });
-      this.data.push({
-        id: 1,
-        width: '375px',
-        height: '180px',
-        src:
-          'https://static.huanjiaohu.com/image/ad/china/4.jpg?r=0.609779170857945',
-        list: [
-          {
-            title: '火焰木盒',
-            src:
-              'https://static.huanjiaohu.com/image/material/hy/1524499703-HYMH.png'
-          },
-          {
-            title: '火焰木盒',
-            src:
-              'https://static.huanjiaohu.com/image/material/hy/1524499703-HYMH.png'
-          }
-        ]
-      });
-      this.reflash = false;
-    }, 3000);
+    this.newPage = this.newPage + 10;
+    const informationList = await api.getInformationList({
+      page: this.newPage,
+      size: 10,
+      type: 'news'
+    });
+    informationList.item = this.informationList.item.concat(
+      informationList.item
+    );
+    this.informationList = informationList;
+    this.winStyle =
+      'width:100%;height:' + this.informationList.item.length * 370 + 'px;';
+    this.reflash = false;
   },
   methods: {
+    async clickItem (e) {
+      const informationList = await api.getInformationById({
+        id: e.media_id
+      });
+      wx.setStorageSync(e.media_id, informationList.down_url);
+      wx.navigateTo({
+        url: '/pages/information/detail?media_id=' + e.media_id
+      })
+    },
+    swiperChange (e) {
+      this.tabCurrent = e.mp.detail.current;
+    },
+    change (e) {
+      this.current = e.mp.detail.key;
+    },
     onConfirm () {
       console.log('onConfirm');
     },
     onClear () {
       this.value = '';
+    },
+    showGallery (index, e) {
+      const { current } = e.currentTarget.dataset;
+      const urls = this.imageList;
+      this.$wuxGallery = $wuxGallery();
+      this.$wuxGallery.show({
+        showDelete: false,
+        current,
+        urls,
+        [`delete`]: (current, urls) => {
+          urls.splice(current, 1);
+          this.setData({
+            urls
+          });
+          return true;
+        },
+        cancel () {
+          console.log('Close gallery');
+        },
+        onTap (current, urls) {
+          console.log(current, urls);
+          return true;
+        },
+        onChange (e) {
+          console.log(e);
+        }
+      });
     }
   }
 };
@@ -156,5 +195,22 @@ export default {
 .item-style .description {
   font-size: 12px;
   color: #888;
+}
+
+.list_img {
+  width: 33%;
+  height: 90px;
+  display: inline-block;
+}
+.list_img:nth-child(2),
+.list_img:nth-child(3) {
+  margin-left: 0.5%;
+}
+.list_img > img {
+  width: 100%;
+  height: 100%;
+}
+video {
+  position: static;
 }
 </style>

@@ -170,10 +170,6 @@ export default {
     const user = wx.getStorageSync('userInfo', this.userInfo);
     user.title = '我的云端海缸';
     this.user = user;
-    if (this.$route.query.typeId && this.$route.query.valueId) {
-      this.typeId = parseInt(this.$route.query.typeId);
-      this.valueId = parseInt(this.$route.query.valueId);
-    }
   },
 
   methods: {

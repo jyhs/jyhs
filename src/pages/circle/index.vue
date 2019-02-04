@@ -1,17 +1,17 @@
 <template >
   <view class="container">
-    <view class='row'>
-              <navigator @click='setting'>
-                  <wux-row>
-                          <wux-col span="11">
-                                    <cardItem :item="user"/>
-                          </wux-col>
-                          <wux-col span="1">
-                            <view class="setting">&nbsp;</view>
-                          </wux-col>
-                  </wux-row>
-              </navigator>
-  </view>
+    <view class="row">
+      <navigator @click="setting">
+        <wux-row>
+          <wux-col span="11">
+            <cardItem :item="user"/>
+          </wux-col>
+          <wux-col span="1">
+            <view class="setting">&nbsp;</view>
+          </wux-col>
+        </wux-row>
+      </navigator>
+    </view>
     <view class="row">
       <wux-tabs class="tabAll" defaultCurrent="tab1" theme="positive">
         <wux-tab key="tab1" title="最新"></wux-tab>
@@ -28,26 +28,50 @@
       <loadMore :reflash="reflash"/>
     </scroll-view>
     <wux-gallery id="wux-gallery"/>
-    <cover-image class='add' src='/static/images/kefu.png' @click="add"></cover-image>
-      <wux-popup position="bottom" :visible="isPopup">
-    <wux-cell-group title="第一次使用需要开缸">
-        <wux-cell  title="鱼缸类型">
-                  <wux-segmented-control slot="footer" default-current="-1" @change="typeChange" theme="positive"	 :values="value1" />
+    <cover-image class="add" src="/static/images/kefu.png" @click="add"></cover-image>
+    <wux-popup position="bottom" :visible="isPopup">
+      <wux-cell-group title="第一次使用需要开缸">
+        <wux-cell title="鱼缸类型">
+          <wux-segmented-control
+            slot="footer"
+            default-current="-1"
+            @change="typeChange"
+            theme="positive"
+            :values="value1"
+          />
         </wux-cell>
-        <wux-cell  title="过滤方式">
-                  <wux-segmented-control slot="footer" default-current="-1" @change="filterChange" theme="positive"	 :values="value2" />
+        <wux-cell title="过滤方式">
+          <wux-segmented-control
+            slot="footer"
+            default-current="-1"
+            @change="filterChange"
+            theme="positive"
+            :values="value2"
+          />
         </wux-cell>
-        <wux-cell  title="过滤系统">
-                  <wux-segmented-control slot="footer" default-current="-1" @change="systemChange" theme="positive"	 :values="value3" />
+        <wux-cell title="过滤系统">
+          <wux-segmented-control
+            slot="footer"
+            default-current="-1"
+            @change="systemChange"
+            theme="positive"
+            :values="value3"
+          />
         </wux-cell>
-        <wux-cell  title="鱼缸尺寸">
-                  <wux-segmented-control slot="footer" default-current="-1" @change="sizeChange" theme="positive"	 :values="value4" />
+        <wux-cell title="鱼缸尺寸">
+          <wux-segmented-control
+            slot="footer"
+            default-current="-1"
+            @change="sizeChange"
+            theme="positive"
+            :values="value4"
+          />
         </wux-cell>
         <wux-cell hover-class="none">
-            <wux-button block type="positive" @tap="open">开缸</wux-button>
+          <wux-button block type="positive" @tap="open">开缸</wux-button>
         </wux-cell>
-    </wux-cell-group>
-</wux-popup>
+      </wux-cell-group>
+    </wux-popup>
   </view>
 </template>
 
@@ -169,19 +193,19 @@ export default {
             url: '/pages/circle/circle'
           });
         }
-      })
+      });
     },
     typeChange (e) {
-      console.log(e.mp.detail.key)
+      console.log(e.mp.detail.key);
     },
     sizeChange (e) {
-      console.log(e.mp.detail.key)
+      console.log(e.mp.detail.key);
     },
     systemChange (e) {
-      console.log(e.mp.detail.key)
+      console.log(e.mp.detail.key);
     },
     filterChange (e) {
-      console.log(e.mp.detail.key)
+      console.log(e.mp.detail.key);
     }
   },
   onReachBottom () {
@@ -236,18 +260,19 @@ export default {
 </script>
 
 <style scoped>
-.add{
+.add {
   width: 55px;
   height: 55px;
   position: fixed;
   bottom: 1%;
   right: 5%;
 }
-.setting{
+.setting {
   display: block;
-  line-height:185rpx;
-  background:url(https://static.huanjiaohu.com/icon/right_arrow.png) right center no-repeat;
-  background-size:42rpx;
-  background-color:#ffffff;
+  line-height: 185rpx;
+  background: url(https://static.huanjiaohu.com/icon/right_arrow.png) right
+    center no-repeat;
+  background-size: 42rpx;
+  background-color: #ffffff;
 }
 </style>

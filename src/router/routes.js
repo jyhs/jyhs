@@ -54,8 +54,23 @@ module.exports = [
         'wux-white-space': '../../static/wux/white-space/index',
         'wux-divider': '../../static/wux/divider/index',
         'wux-image': '../../static/wux/image/index',
+        'wux-tabs': '../../static/wux/tabs/index',
+        'wux-tab': '../../static/wux/tab/index',
+        'wux-timeago': '../../static/wux/timeago/index',
+        'wux-gallery': '../../static/wux/gallery/index',
+        'wux-cell': '../../static/wux/cell/index',
+        'wux-popup': '../../static/wux/popup/index',
+        'wux-cell-group': '../../static/wux/cell-group/index',
         'wux-search-bar': '../../static/wux/search-bar/index'
       }
+    }
+  },
+  {
+    path: 'pages/information/detail',
+    name: 'informationDetail',
+    config: {
+      enablePullDownRefresh: true,
+      navigationBarTitleText: '礁岩美篇'
     }
   },
   {
