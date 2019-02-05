@@ -30,7 +30,7 @@
         <view class="row">
           <scroll-view scroll-y="true" style="height: 100%">
             <block v-for="item in informationList.item" :key="item.media_id">
-              <oneCard :data="item"/>
+              <bigCard :data="item"/>
             </block>
             <loadMore :reflash="reflash"/>
           </scroll-view>
@@ -67,14 +67,14 @@
 
 <script>
 import loadMore from '@/components/loadMore';
-import oneCard from '@/components/oneCard';
+import bigCard from '@/components/bigCard';
 import api from '@/utils/api';
 import { $wuxGallery } from '../../../static/wux/index';
 import wx from 'wx';
 export default {
   components: {
     loadMore,
-    oneCard
+    bigCard
   },
   async onLoad () {
     this.informationList = await api.getInformationList({

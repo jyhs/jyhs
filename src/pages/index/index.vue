@@ -120,7 +120,7 @@
     <view class="row">
        <view v-for="item of materials" :key="item.id" :class="(index + 1) % 2 === 0 ? 'item-b item' : 'item'"
                    @click="$router.push({ path: '/pages/material/index', query: { id: item.id } })" >
-                      <materialItem :item="item"/>
+                      <smallCard :item="item"/>
                       <wux-white-space size="small" />
        </view>
     </view>
@@ -134,14 +134,14 @@
 import { $wuxSelect } from '../../../static/wux/index';
 import cardItem from '@/components/cardItem';
 import goodsItem from '@/components/goodsItem';
-import materialItem from '@/components/materialItem';
+import smallCard from '@/components/smallCard';
 import title from '@/components/title';
 import api from '@/utils/api'
 
 export default {
   components: {
     cardItem,
-    materialItem,
+    smallCard,
     title,
     goodsItem
   },

@@ -13,8 +13,7 @@
     </view>
     <scroll-view scroll-y="true" style="height: 100%">
       <block v-for="item in data" :key="item.id">
-        <oneCard :data="item" v-if="item.type!='small'"/>
-        <activeItem :data="item" v-if="item.type=='small'"/>
+        <smallCard :data="item" v-if="item.type=='small'"/>
       </block>
       <loadMore :reflash="reflash"/>
     </scroll-view>
@@ -23,15 +22,13 @@
 
 <script>
 import loadMore from '@/components/loadMore';
-import oneCard from '@/components/oneCard';
-import activeItem from '@/components/activeItem';
+import smallCard from '@/components/smallCard';
 
 import { setTimeout } from 'timers';
 export default {
   components: {
     loadMore,
-    oneCard,
-    activeItem
+    smallCard
   },
   data () {
     return {
