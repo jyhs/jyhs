@@ -1,164 +1,100 @@
 <template >
   <view class="container">
     <view class="row">
-      <wux-search-bar
-        clear=""
-        show-cancel
-        :value="value"
+      <wux-tabs
+        class="tabAll"
         controlled
-        placeholder="搜索活动"
-        @confirm="onConfirm"
-        @clear="onClear"
-      />
+        :current="tabCurrent"
+        defaultCurrent="0"
+        theme="positive"
+        @change="change"
+      >
+        <wux-tab key="0" title="进行中"></wux-tab>
+        <wux-tab key="1" title="已结束"></wux-tab>
+      </wux-tabs>
     </view>
-    <scroll-view scroll-y="true" style="height: 100%">
-      <block v-for="item in data" :key="item.id">
-        <smallCard :data="item" v-if="item.type=='small'"/>
-      </block>
-      <loadMore :reflash="reflash"/>
-    </scroll-view>
+    <swiper :style="winStyle" :current="current" @change="swiperChange">
+      <swiper-item>
+        <view class="row">
+          <scroll-view scroll-y="true" style="height: 100%">
+            <block v-for="item in activingList" :key="item.id">
+              <bigCard :data="item"/>
+            </block>
+          </scroll-view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+         <view class="row">
+          <scroll-view scroll-y="true" style="height: 100%">
+            <block v-for="item in noActivingList" :key="item.id">
+              <bigCard :data="item"/>
+            </block>
+            <loadMore :reflash="reflash"/>
+          </scroll-view>
+        </view>
+      </swiper-item>
+    </swiper>
   </view>
 </template>
 
 <script>
 import loadMore from '@/components/loadMore';
-import smallCard from '@/components/smallCard';
-
-import { setTimeout } from 'timers';
+import bigCard from '@/components/bigCard';
+import api from '@/utils/api';
+import wx from 'wx';
 export default {
   components: {
     loadMore,
-    smallCard
+    bigCard
+  },
+  async onLoad () {
+    // this.winStyle =
+    //   'width:100%;height:' + this.informationList.item.length * 370 + 'px;';
   },
   data () {
     return {
       reflash: false,
-      data: [
-        {
-          id: 1,
-          width: '375px',
-          height: '180px',
-          src:
-            'https://static.huanjiaohu.com/image/ad/china/3.jpg?r=0.609779170857945',
-          title: '淘宝开张了',
-          comment: {
-            goodNumber: 10,
-            commentNumber: 20
-          },
-          share: true
-        },
-        {
-          id: 1,
-          src:
-            'https://static.huanjiaohu.com/image/ad/china/2.jpg?r=0.609779170857945',
-          title: '淘宝开张了',
-          comment: {
-            goodNumber: 10,
-            commentNumber: 20
-          },
-          share: true,
-          time: '2019-01-20',
-          type: 'small',
-          price: '58元超低价格'
-        },
-        {
-          id: 1,
-          src:
-            'https://static.huanjiaohu.com/image/ad/china/2.jpg?r=0.609779170857945',
-          title: '淘宝开张了',
-          comment: {
-            goodNumber: 10,
-            commentNumber: 20
-          },
-          share: true,
-          time: '2019-01-20',
-          type: 'small',
-          price: '58元超低价格'
-        },
-        {
-          id: 1,
-          width: '375px',
-          height: '180px',
-          src:
-            'https://static.huanjiaohu.com/image/ad/china/1.jpg?r=0.609779170857945',
-          title: '淘宝开张了',
-          comment: {
-            goodNumber: 10,
-            commentNumber: 20
-          },
-          share: true
-        },
-        {
-          id: 1,
-          src:
-            'https://static.huanjiaohu.com/image/ad/china/2.jpg?r=0.609779170857945',
-          title: '淘宝开张了',
-          comment: {
-            goodNumber: 10,
-            commentNumber: 20
-          },
-          share: true,
-          time: '2019-01-20',
-          type: 'small',
-          price: '58元超低价格'
-        },
-        {
-          id: 1,
-          width: '375px',
-          height: '180px',
-          src:
-            'https://static.huanjiaohu.com/image/ad/china/3.jpg?r=0.609779170857945',
-          title: '淘宝开张了',
-          comment: {
-            goodNumber: 10,
-            commentNumber: 20
-          },
-          share: true
-        }
-      ]
+      value: '',
+      current: 0,
+      tabCurrent: 0,
+      activingList: [],
+      noActivingList: [],
+      winStyle: 'width:100%;height:100%'
     };
   },
-  onReachBottom () {
+  async onReachBottom () {
     this.reflash = true;
-    setTimeout(() => {
-      this.data.push({
-        id: 1,
-        src:
-            'https://static.huanjiaohu.com/image/ad/china/2.jpg?r=0.609779170857945',
-        title: '淘宝开张了',
-        comment: {
-          goodNumber: 10,
-          commentNumber: 20
-        },
-        share: true,
-        time: '2019-01-20',
-        type: 'small',
-        price: '58元超低价格'
-      });
-      this.data.push({
-        id: 1,
-        src:
-            'https://static.huanjiaohu.com/image/ad/china/2.jpg?r=0.609779170857945',
-        title: '淘宝开张了',
-        comment: {
-          goodNumber: 10,
-          commentNumber: 20
-        },
-        share: true,
-        time: '2019-01-20',
-        type: 'small',
-        price: '58元超低价格'
-      });
-      this.reflash = false;
-    }, 3000);
+    this.newPage = this.newPage + 10;
+    const informationList = await api.getInformationList({
+      page: this.newPage,
+      size: 10,
+      type: 'news'
+    });
+    informationList.item = this.informationList.item.concat(
+      informationList.item
+    );
+    this.informationList = informationList;
+    this.winStyle =
+      'width:100%;height:' + this.informationList.item.length * 370 + 'px;';
+    this.reflash = false;
   },
   methods: {
-    onConfirm () {
-      console.log('onConfirm');
+    async clickItem (e) {
+      const informationList = await api.getInformationById({
+        id: e.media_id
+      });
+      wx.setStorageSync(e.media_id, informationList.down_url);
+      wx.navigateTo({
+        url: '/pages/information/detail?media_id=' + e.media_id
+      })
     },
-    onClear () {
-      this.value = '';
+    swiperChange (e) {
+      this.tabCurrent = e.mp.detail.current;
+    },
+    change (e) {
+      this.current = e.mp.detail.key;
     }
+
   }
 };
 </script>
@@ -175,4 +111,5 @@ export default {
   font-size: 12px;
   color: #888;
 }
+
 </style>

@@ -29,15 +29,11 @@ module.exports = [
       enablePullDownRefresh: true,
       navigationBarTitleText: '礁岩活动',
       usingComponents: {
-        'wux-row': '../../static/wux/row/index',
-        'wux-col': '../../static/wux/col/index',
         'wux-wing-blank': '../../static/wux/wing-blank/index',
         'wux-white-space': '../../static/wux/white-space/index',
         'wux-divider': '../../static/wux/divider/index',
-        'wux-icon': '../../static/wux/icon/index',
-        'wux-image': '../../static/wux/image/index',
-        'wux-avatar': '../../static/wux/avatar/index',
-        'wux-search-bar': '../../static/wux/search-bar/index'
+        'wux-tabs': '../../static/wux/tabs/index',
+        'wux-tab': '../../static/wux/tab/index'
       }
     }
   },
@@ -48,8 +44,6 @@ module.exports = [
       enablePullDownRefresh: true,
       navigationBarTitleText: '礁岩资讯',
       usingComponents: {
-        'wux-row': '../../static/wux/row/index',
-        'wux-col': '../../static/wux/col/index',
         'wux-wing-blank': '../../static/wux/wing-blank/index',
         'wux-white-space': '../../static/wux/white-space/index',
         'wux-divider': '../../static/wux/divider/index',
@@ -59,7 +53,6 @@ module.exports = [
         'wux-timeago': '../../static/wux/timeago/index',
         'wux-gallery': '../../static/wux/gallery/index',
         'wux-cell': '../../static/wux/cell/index',
-        'wux-popup': '../../static/wux/popup/index',
         'wux-cell-group': '../../static/wux/cell-group/index',
         'wux-search-bar': '../../static/wux/search-bar/index'
       }
