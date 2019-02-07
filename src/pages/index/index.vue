@@ -14,7 +14,7 @@
         </wux-col>
         <wux-col span="3">
           <view class="location-select-btn" @click="selectProvince">
-            <wux-icon type="ios-pin" color="#A3A3A3" size="14"/>&nbsp;上海
+            <wux-icon type="ios-pin" color="#A3A3A3" size="14"/>&nbsp;{{provinceName}}
           </view>
           <wux-select id="province"/>
         </wux-col>
@@ -50,8 +50,8 @@
     </view>
     <title  text="最新团购"/>
     <view class="row">
-      <view v-if="groups">
-           <view v-for="group of groups" :key="group.id">
+      <view v-if="groupList.length>0">
+           <view v-for="group of groupList" :key="group.id">
                 <cardItem :item='group'/>
                 <wux-white-space size="small" />
             </view>
@@ -83,14 +83,14 @@
     </swiper>
     <title text="最新零售"/>
     <view class="row">
-      <view v-if="retails">
-         <view v-for="retail of retails" :key="retail.id">
+      <view v-if="retailList.length>0">
+         <view v-for="retail of retailList" :key="retail.id">
           <cardItem :item='retail'/>
           <wux-white-space size="small" />
          </view>
       </view>
        <view v-else class="wux-text--center">
-          亲，当前省份暂时还没有零售商家
+          亲，当前省暂时还没有零售商家
           <wux-white-space/>
       </view>
     </view>
@@ -130,13 +130,13 @@
 </template>
 
 <script>
-// import api from '@/utils/api'
 import { $wuxSelect } from '../../../static/wux/index';
 import cardItem from '@/components/cardItem';
 import goodsItem from '@/components/goodsItem';
 import smallCard from '@/components/smallCard';
 import title from '@/components/title';
-import api from '@/utils/api'
+import api from '@/utils/api';
+import wx from 'wx';
 
 export default {
   components: {
@@ -148,30 +148,7 @@ export default {
   data () {
     return {
       materials: [],
-      groups: [
-        {
-          id: 0,
-          headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=3152',
-          link: '../goods/goods?id=1135002',
-          tag: ['热团中'],
-          time: '2019-01-20',
-          title: '月亮公主（周六）年前免运费团',
-          name: '月亮姐姐',
-          city_name: '上海',
-          price: '2130'
-        },
-        {
-          id: 0,
-          headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=3152',
-          link: '../goods/goods?id=1135002',
-          tag: ['热团中'],
-          time: '2019-01-20',
-          title: '月亮公主（周六）年前免运费团',
-          name: '月亮姐姐',
-          city_name: '上海',
-          price: '2130'
-        }
-      ],
+      groupList: [],
       goods: [
         {
           id: 1135001,
@@ -227,38 +204,7 @@ export default {
           }
         }
       ],
-      retails: [
-        {
-          id: 0,
-          headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=4581',
-          link: '../goods/goods?id=1135002',
-          tag: ['促销'],
-          time: '2019-01-20',
-          title: '全国满200元起发顺丰空运到家陈小文海水渔场20181017',
-          name: '武强',
-          city_name: '上海',
-          price: '2130',
-          bottom: {
-            comment: '12',
-            thumbs: '22'
-          }
-        },
-        {
-          id: 1,
-          headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=4581',
-          link: '../goods/goods?id=1135002',
-          tag: ['促销'],
-          time: '2019-01-20',
-          title: '全国满200元起发顺丰空运到家陈小文海水渔场20181017',
-          name: '武强',
-          city_name: '上海',
-          price: '2130',
-          bottom: {
-            comment: '12',
-            thumbs: '22'
-          }
-        }
-      ],
+      retailList: [],
       friends: [
         {
           id: 0,
@@ -412,106 +358,75 @@ export default {
             'https://static.huanjiaohu.com/mini/index/information.png?r=123',
           sort_order: 5
         }
-      ]
+      ],
+      province: 'sh',
+      provinceName: '上海'
     };
   },
   async mounted () {
+    const provinceList = await api.getProvinces();
+    const provinces = [];
+    for (const item of provinceList) {
+      if (item.code !== 'china') {
+        provinces.push({
+          title: item.name,
+          value: item.code
+        });
+      }
+    }
+    this.provinces = provinces;
     const res = await api.getMaterialRandomList({ page: 1, size: 10 });
     this.materials = res.data;
   },
-
+  onLoad () {
+    const self = this;
+    wx.getLocation({
+      type: 'wgs84',
+      success: async function (res) {
+        const group = await api.getGroupListByLocation({ 'location': res.latitude + ',' + res.longitude });
+        self.setGroupCard(group.data);
+      }
+    });
+  },
   methods: {
-    selectProvince () {
-      $wuxSelect('#province').open({
-        value: this.value3,
-        options: [
-          {
-            title: '画画',
-            value: '1'
-          },
-          {
-            title: '打球',
-            value: '2'
-          },
-          {
-            title: '唱歌',
-            value: '3'
-          },
-          {
-            title: '游泳',
-            value: '4'
-          },
-          {
-            title: '健身',
-            value: '5'
-          },
-          {
-            title: '睡觉',
-            value: '6'
-          },
-          {
-            title: '健身',
-            value: '5'
-          },
-          {
-            title: '健身',
-            value: '5'
-          },
-          {
-            title: '健身',
-            value: '5'
-          },
-          {
-            title: '健身',
-            value: '5'
-          },
-          {
-            title: '健身',
-            value: '5'
-          },
-          {
-            title: '健身',
-            value: '5'
-          },
-          {
-            title: '健身',
-            value: '5'
-          },
-          {
-            title: '健身',
-            value: '5'
-          },
-          {
-            title: '健身',
-            value: '5'
-          },
-          {
-            title: '健身',
-            value: '5'
-          },
-          {
-            title: '健身',
-            value: '5'
-          },
-          {
-            title: '健身',
-            value: '5'
-          },
-          {
-            title: '健身',
-            value: '5'
-          },
-          {
-            title: '健身',
-            value: '5'
-          },
-          {
-            title: '健身',
-            value: '5'
+    setGroupCard (groups) {
+      const groupList = [];
+      const retailList = [];
+      for (const group of groups) {
+        group.headimgurl = 'https://api.huanjiaohu.com/user/getAvatar?userId=' + group.user_id;
+        group.navigator_url = '/pages/group/buy?id=' + group.id;
+        group.tag = group.activity_code ? [group.activity_code] : ['热团中']
+        group.time = group.end_date_format;
+        group.title = group.name;
+        group.name = group.contacts;
+        group.city_name = group.city_name;
+        group.price = group.sum;
+        if (group.status === 0) {
+          if (group.user_type.indexOf('lss') >= 0) {
+            retailList.push(group)
+          } else {
+            groupList.push(group)
           }
-        ],
-        onConfirm: (value, index, options) => {
-          console.log('onConfirm', value, index, options);
+        }
+      }
+
+      this.groupList = groupList;
+      this.retailList = retailList;
+    },
+    selectProvince () {
+      const self = this;
+      $wuxSelect('#province').open({
+        value: this.province,
+        toolbar: {
+          title: '请选择你所在的省',
+          confirmText: '确定'
+        },
+        options: this.provinces,
+        onConfirm: async function (value, index, options) {
+          this.province = value;
+          this.provinceName = options[index].title;
+          const group = await api.getGroupListByProvince({ 'province': value });
+          self.setGroupCard(group.data);
         }
       });
     }

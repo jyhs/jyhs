@@ -37,4 +37,5 @@ export default {
 </script>
 
 <style>
+@import "../../utils/wxParse/wxParse.wxss";
 </style>

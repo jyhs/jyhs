@@ -2,7 +2,7 @@
   <view class="row group-item ngrouppre">
     <wux-wing-blank>
       <wux-white-space/>
-      <navigator :url="item.link">
+      <navigator :url="item.navigator_url">
         <wux-row>
           <wux-col span="2">
             <wux-avatar

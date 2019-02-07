@@ -21,6 +21,11 @@ export default {
       'pages/nearby/index',
       'pages/ucenter/index'
     ],
+    permission: {
+      'scope.userLocation': {
+        'desc': '获取您所在的省将用于小程序给您提供更好的服务'
+      }
+    },
     window: {
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: '礁岩海水',

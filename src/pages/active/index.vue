@@ -22,6 +22,7 @@ export default {
     bigCard
   },
   async onLoad () {
+    this.page = 1;
     const activingList = await api.getActiveList({
       page: this.page,
       size: 10

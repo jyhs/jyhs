@@ -271,23 +271,6 @@ export default {
   background-color: rgba(0, 0, 0, 0.6);
 }
 
-@-webkit-keyframes twinkling {
-  0% {
-    opacity: 0.5;
-    filter: alpha(opacity=50);
-    -webkit-transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    filter: alpha(opacity=100);
-    -webkit-transform: scale(1.12);
-  }
-  100% {
-    opacity: 0.5;
-    filter: alpha(opacity=50);
-    -webkit-transform: scale(1);
-  }
-}
 .kefu {
   width: 55px;
   height: 55px;
