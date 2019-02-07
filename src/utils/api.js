@@ -7,6 +7,9 @@ const ApiCommonUrl = 'https://api2.huanjiaohu.com/api/'
 // const ApiCommonUrl = 'http://127.0.0.1:8360/api/'
 
 const api = {
+  getActiveList: (paramObj) => request.post('active/getActiveList', paramObj, {
+    baseURL: ApiCommonUrl
+  }),
   getInformationById: (paramObj) => request.post('information/getInformationById', paramObj, {
     baseURL: ApiCommonUrl
   }),

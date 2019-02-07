@@ -91,4 +91,5 @@ export default {
 {
   vertical-align:baseline!important;
 }
+
 </style>

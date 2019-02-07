@@ -1,5 +1,4 @@
 <template >
-<div>
     <view class="container">
     <swiper class="goodsimgs"  autoplay="true" interval="3000" duration="1000" :circular="true" @change='bindchange' :style="swiperStyle">
         <swiper-item v-for="(item, index) of gallery" :key="item.id" >
@@ -128,7 +127,6 @@
      </view>
 
     </view>
-</div>
 </template>
 
 <script>

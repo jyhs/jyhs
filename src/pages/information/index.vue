@@ -1,17 +1,6 @@
 <template >
   <view class="container">
     <view class="row">
-      <wux-search-bar
-        clear=""
-        show-cancel
-        :value="value"
-        controlled
-        placeholder="搜索美篇/美图/美拍"
-        @confirm="onConfirm"
-        @clear="onClear"
-      />
-    </view>
-    <view class="row">
       <wux-tabs
         class="tabAll"
         controlled
@@ -77,7 +66,7 @@ export default {
     bigCard
   },
   async onLoad () {
-    this.informationList = await api.getInformationList({
+    const informationList = await api.getInformationList({
       page: this.newPage,
       size: 10,
       type: 'news'
@@ -92,7 +81,14 @@ export default {
       size: 30,
       type: 'video'
     });
-
+    for (const item of informationList.item) {
+      for (const it of item.content.news_item) {
+        delete it['content'];
+        it['navigator_url'] = '/pages/webview/index?id=' + it.thumb_media_id;
+        it['id'] = it.thumb_media_id;
+      }
+    }
+    this.informationList = informationList;
     const imgaes = [];
     for (let img of imageList.item) {
       imgaes.push(img.url);
@@ -126,6 +122,13 @@ export default {
     informationList.item = this.informationList.item.concat(
       informationList.item
     );
+    for (const item of informationList.item) {
+      for (const it of item.content.news_item) {
+        delete it['content'];
+        it['navigator_url'] = '/pages/webview/index?id=' + it.thumb_media_id;
+        it['id'] = it.thumb_media_id;
+      }
+    }
     this.informationList = informationList;
     this.winStyle =
       'width:100%;height:' + this.informationList.item.length * 370 + 'px;';
@@ -136,9 +139,10 @@ export default {
       const informationList = await api.getInformationById({
         id: e.media_id
       });
-      wx.setStorageSync(e.media_id, informationList.down_url);
+      informationList.url = informationList.down_url;
+      wx.setStorageSync(e.media_id, informationList);
       wx.navigateTo({
-        url: '/pages/information/detail?media_id=' + e.media_id
+        url: '/pages/webview/index?id=' + e.media_id
       })
     },
     swiperChange (e) {

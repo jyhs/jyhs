@@ -33,6 +33,9 @@ module.exports = [
         'wux-white-space': '../../static/wux/white-space/index',
         'wux-divider': '../../static/wux/divider/index',
         'wux-tabs': '../../static/wux/tabs/index',
+        'wux-image': '../../static/wux/image/index',
+        'wux-row': '../../static/wux/row/index',
+        'wux-col': '../../static/wux/col/index',
         'wux-tab': '../../static/wux/tab/index'
       }
     }
@@ -50,20 +53,21 @@ module.exports = [
         'wux-image': '../../static/wux/image/index',
         'wux-tabs': '../../static/wux/tabs/index',
         'wux-tab': '../../static/wux/tab/index',
+        'wux-row': '../../static/wux/row/index',
+        'wux-col': '../../static/wux/col/index',
         'wux-timeago': '../../static/wux/timeago/index',
         'wux-gallery': '../../static/wux/gallery/index',
         'wux-cell': '../../static/wux/cell/index',
-        'wux-cell-group': '../../static/wux/cell-group/index',
-        'wux-search-bar': '../../static/wux/search-bar/index'
+        'wux-cell-group': '../../static/wux/cell-group/index'
       }
     }
   },
   {
-    path: 'pages/information/detail',
-    name: 'informationDetail',
+    path: 'pages/webview/index',
+    name: 'webview',
     config: {
       enablePullDownRefresh: true,
-      navigationBarTitleText: '礁岩美篇'
+      navigationBarTitleText: '详情'
     }
   },
   {

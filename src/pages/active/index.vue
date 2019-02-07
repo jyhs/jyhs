@@ -1,39 +1,13 @@
 <template >
   <view class="container">
     <view class="row">
-      <wux-tabs
-        class="tabAll"
-        controlled
-        :current="tabCurrent"
-        defaultCurrent="0"
-        theme="positive"
-        @change="change"
-      >
-        <wux-tab key="0" title="进行中"></wux-tab>
-        <wux-tab key="1" title="已结束"></wux-tab>
-      </wux-tabs>
+      <scroll-view scroll-y="true" :style="winStyle">
+        <block v-for="item in activingList" :key="item.id" v-if='item.content.news_item[0].status==1'>
+          <bigCard :data="item"/>
+        </block>
+        <loadMore :reflash="reflash"/>
+      </scroll-view>
     </view>
-    <swiper :style="winStyle" :current="current" @change="swiperChange">
-      <swiper-item>
-        <view class="row">
-          <scroll-view scroll-y="true" style="height: 100%">
-            <block v-for="item in activingList" :key="item.id">
-              <bigCard :data="item"/>
-            </block>
-          </scroll-view>
-        </view>
-      </swiper-item>
-      <swiper-item>
-         <view class="row">
-          <scroll-view scroll-y="true" style="height: 100%">
-            <block v-for="item in noActivingList" :key="item.id">
-              <bigCard :data="item"/>
-            </block>
-            <loadMore :reflash="reflash"/>
-          </scroll-view>
-        </view>
-      </swiper-item>
-    </swiper>
   </view>
 </template>
 
@@ -48,34 +22,41 @@ export default {
     bigCard
   },
   async onLoad () {
-    // this.winStyle =
-    //   'width:100%;height:' + this.informationList.item.length * 370 + 'px;';
+    const activingList = await api.getActiveList({
+      page: this.page,
+      size: 10
+    });
+    for (const active of activingList) {
+      for (const item of active.content.news_item) {
+        item['navigator_url'] = '/pages/webview/index?id=' + item.id;
+      }
+    }
+    this.activingList = activingList;
+    this.winStyle =
+      'width:100%;height:' + this.activingList.length * 370 + 'px;';
   },
   data () {
     return {
       reflash: false,
       value: '',
-      current: 0,
-      tabCurrent: 0,
+      page: 1,
       activingList: [],
-      noActivingList: [],
       winStyle: 'width:100%;height:100%'
     };
   },
   async onReachBottom () {
     this.reflash = true;
-    this.newPage = this.newPage + 10;
-    const informationList = await api.getInformationList({
-      page: this.newPage,
-      size: 10,
-      type: 'news'
+    this.page = this.page + 1;
+    const list = await api.getActiveList({
+      page: this.page,
+      size: 10
     });
-    informationList.item = this.informationList.item.concat(
-      informationList.item
+    const newList = this.activingList.concat(
+      list
     );
-    this.informationList = informationList;
+    this.activingList = newList;
     this.winStyle =
-      'width:100%;height:' + this.informationList.item.length * 370 + 'px;';
+      'width:100%;height:' + this.activingList.length * 370 + 'px;';
     this.reflash = false;
   },
   methods: {
@@ -86,15 +67,8 @@ export default {
       wx.setStorageSync(e.media_id, informationList.down_url);
       wx.navigateTo({
         url: '/pages/information/detail?media_id=' + e.media_id
-      })
-    },
-    swiperChange (e) {
-      this.tabCurrent = e.mp.detail.current;
-    },
-    change (e) {
-      this.current = e.mp.detail.key;
+      });
     }
-
   }
 };
 </script>
@@ -111,5 +85,4 @@ export default {
   font-size: 12px;
   color: #888;
 }
-
 </style>
