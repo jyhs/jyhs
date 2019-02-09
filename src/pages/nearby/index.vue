@@ -29,7 +29,7 @@
 
 <script>
 import wx from 'wx';
-import api from '@/utils/api';
+import api from '@/utils/nearbyApi';
 
 export default {
   data () {

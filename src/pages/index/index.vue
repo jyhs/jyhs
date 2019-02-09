@@ -135,7 +135,9 @@ import cardItem from '@/components/cardItem';
 import goodsItem from '@/components/goodsItem';
 import smallCard from '@/components/smallCard';
 import title from '@/components/title';
+import groupApi from '@/utils/groupApi';
 import api from '@/utils/api';
+
 import wx from 'wx';
 
 export default {
@@ -383,30 +385,46 @@ export default {
     wx.getLocation({
       type: 'wgs84',
       success: async function (res) {
-        const group = await api.getGroupListByLocation({ 'location': res.latitude + ',' + res.longitude });
-        self.setGroupCard(group.data);
+        const groups = await groupApi.getGroupListByLocation({ 'location': res.latitude + ',' + res.longitude, 'size': 5 });
+        wx.setStorage({
+          key: 'province',
+          data: self.getProvinceFromGroup(groups.data)
+        });
+        self.setGroupCard(groups.data);
       }
     });
   },
   methods: {
+    getProvinceFromGroup (groups) {
+      let province = 'sh';
+      for (const group of groups) {
+        if (group.user_type.indexOf('lss') < 0) {
+          province = group.province;
+          break;
+        }
+      }
+      return province;
+    },
     setGroupCard (groups) {
       const groupList = [];
       const retailList = [];
       for (const group of groups) {
         group.headimgurl = 'https://api.huanjiaohu.com/user/getAvatar?userId=' + group.user_id;
         group.navigator_url = '/pages/group/buy?id=' + group.id;
-        group.tag = group.activity_code ? [group.activity_code] : ['热团中']
+        if (group.status === 0) {
+          group.tag = ['已结束']
+        } else {
+          group.tag = group.activity_code ? [group.activity_code] : ['热团中']
+        }
         group.time = group.end_date_format;
         group.title = group.name;
         group.name = group.contacts;
         group.city_name = group.city_name;
         group.price = group.sum;
-        if (group.status === 0) {
-          if (group.user_type.indexOf('lss') >= 0) {
-            retailList.push(group)
-          } else {
-            groupList.push(group)
-          }
+        if (group.user_type.indexOf('lss') >= 0) {
+          retailList.push(group)
+        } else {
+          groupList.push(group)
         }
       }
 
@@ -425,7 +443,11 @@ export default {
         onConfirm: async function (value, index, options) {
           this.province = value;
           this.provinceName = options[index].title;
-          const group = await api.getGroupListByProvince({ 'province': value });
+          wx.setStorage({
+            key: 'province',
+            data: value
+          });
+          const group = await groupApi.getGroupListByProvince({ 'province': value });
           self.setGroupCard(group.data);
         }
       });

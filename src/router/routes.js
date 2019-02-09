@@ -7,12 +7,10 @@ module.exports = [
       usingComponents: {
         'wux-notice-bar': '../../static/wux/notice-bar/index',
         'wux-row': '../../static/wux/row/index',
-        'wux-button': '../../static/wux/button/index',
         'wux-col': '../../static/wux/col/index',
         'wux-wing-blank': '../../static/wux/wing-blank/index',
         'wux-white-space': '../../static/wux/white-space/index',
         'wux-select': '../../static/wux/select/index',
-        'wux-card': '../../static/wux/card/index',
         'wux-tag': '../../static/wux/tag/index',
         'wux-divider': '../../static/wux/divider/index',
         'wux-avatar': '../../static/wux/avatar/index',
@@ -116,7 +114,19 @@ module.exports = [
     path: 'pages/group/index',
     name: 'group',
     config: {
-      navigationBarTitleText: '礁岩团购'
+      navigationBarTitleText: '礁岩团购',
+      usingComponents: {
+        'wux-divider': '../../static/wux/divider/index',
+        'wux-tabs': '../../static/wux/tabs/index',
+        'wux-tab': '../../static/wux/tab/index',
+        'wux-row': '../../static/wux/row/index',
+        'wux-col': '../../static/wux/col/index',
+        'wux-wing-blank': '../../static/wux/wing-blank/index',
+        'wux-white-space': '../../static/wux/white-space/index',
+        'wux-tag': '../../static/wux/tag/index',
+        'wux-avatar': '../../static/wux/avatar/index',
+        'wux-icon': '../../static/wux/icon/index'
+      }
     }
   },
   {

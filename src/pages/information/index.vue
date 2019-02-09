@@ -95,7 +95,7 @@ export default {
     }
     this.imageList = imgaes;
     this.winStyle =
-      'width:100%;height:' + this.informationList.item.length * 370 + 'px;';
+      'width:100%;margin-top:44px;height:' + this.informationList.item.length * 370 + 'px;';
   },
   data () {
     return {
@@ -108,7 +108,7 @@ export default {
       imageList: [],
       newPage: 1,
       imgPage: 1,
-      winStyle: 'width:100%;height:100%'
+      winStyle: 'width:100%;margin-top:44px;height:100%'
     };
   },
   async onReachBottom () {
@@ -131,7 +131,7 @@ export default {
     }
     this.informationList = informationList;
     this.winStyle =
-      'width:100%;height:' + this.informationList.item.length * 370 + 'px;';
+      'width:100%;margin-top:44px;height:' + this.informationList.item.length * 370 + 'px;';
     this.reflash = false;
   },
   methods: {
@@ -189,6 +189,12 @@ export default {
 </script>
 
 <style scoped>
+.tabAll{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+}
 .item-style {
   background-color: white;
   border-radius: 5px;

@@ -2,7 +2,7 @@
   <wux-divider v-if="reflash">
     <view class="loadmore">
       <view class="loading"></view>
-      <text class="text">正在加载</text>
+      <text class="text">{{text}}</text>
     </view>
   </wux-divider>
 </template>
@@ -14,6 +14,12 @@ export default {
       type: Boolean,
       default () {
         return false;
+      }
+    },
+    text: {
+      type: String,
+      default () {
+        return '正在加载';
       }
     }
   }

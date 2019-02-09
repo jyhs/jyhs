@@ -16,8 +16,14 @@ request.interceptors.request.use((request) => {
 
 request.interceptors.response.use(
   (response, promise) => {
-    wx.hideNavigationBarLoading()
-    return promise.resolve(response.data)
+    wx.hideNavigationBarLoading();
+    if (response.data.errno === 401) {
+      wx.navigateTo({
+        url: '/pages/ucenter/login'
+      })
+    } else {
+      return promise.resolve(response.data)
+    }
   },
   (err, promise) => {
     wx.hideNavigationBarLoading()
