@@ -4,7 +4,7 @@
   <view class="post-comment">
     <wux-wing-blank>
       <view class="row upload">
-                 <wux-upload listType="picture-card"  max="4" url="https://www.skyvow.cn/api/common/file" @success="onSuccess" @fail="onFail">
+                 <wux-upload listType="picture-card" defaultFileType='video' name='img' :header="header" :formData="formData"  max="3" url="https://api2.huanjiaohu.com/circle/circle/upload" @success="onSuccess" @fail="onFail">
                     <text>拍照</text>
                 </wux-upload>
       </view>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import api from '@/utils/api';
+import api from '@/utils/circleApi';
 import util from '@/utils/util';
 import wx from 'wx';
 
@@ -33,15 +33,14 @@ export default {
     return {
       typeId: 0,
       valueId: 0,
-      content: ''
-
+      content: '',
+      formData: null,
+      header: null
     }
   },
-  async mounted () {
-    if (this.$route.query.typeId && this.$route.query.valueId) {
-      this.typeId = parseInt(this.$route.query.typeId);
-      this.valueId = parseInt(this.$route.query.valueId);
-    }
+  onShow () {
+    this.formData = {'circleId': this.$route.query.id};
+    this.header = {'Authorization': wx.getStorageSync('token')};
   },
 
   methods: {
@@ -61,26 +60,28 @@ export default {
         util.showErrorToast('请填写评论');
         return false;
       }
-      const res = await api.CommentPost({
-        valueId: this.valueId,
-        typeId: this.typeId,
-        content: this.content
+      const res = await api.addCircle({
+        'circleId': this.$route.query.id,
+        'description': this.content
       });
-      if (res.errno === 0) {
-        wx.showToast({
-          title: '评论成功',
-          duration: 2000,
-          complete: () => {
-            setTimeout(() => {
-              this.$router.go(-1);
-            }, 2000);
-          }
-        })
+      if (res > 0) {
+        this.$router.go(-1);
       }
     },
-    // 返回上一页
     onClose () {
       this.$router.go(-1);
+    },
+    onSuccess () {
+
+    },
+    onFail () {
+      wx.showToast({
+        title: '失败',
+        duration: 2000,
+        complete: () => {
+
+        }
+      })
     }
   },
   // 原生的分享功能

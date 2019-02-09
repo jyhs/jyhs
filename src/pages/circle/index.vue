@@ -1,17 +1,16 @@
 <template >
   <view class="container">
-    <view class="row">
-      <navigator @click="setting">
-        <wux-row>
-          <wux-col span="11">
-            <cardItem :item="user"/>
-          </wux-col>
-          <wux-col span="1">
-            <view class="setting">&nbsp;</view>
-          </wux-col>
-        </wux-row>
-      </navigator>
+    <view class="row" @tap="gotoMyCircle">
+      <wux-row>
+        <wux-col span="11">
+          <cardItem :item="user"/>
+        </wux-col>
+        <wux-col span="1">
+          <view class="setting">&nbsp;</view>
+        </wux-col>
+      </wux-row>
     </view>
+    <wux-white-space size="small"/>
     <view class="row">
       <wux-tabs class="tabAll" defaultCurrent="tab1" theme="positive">
         <wux-tab key="tab1" title="最新"></wux-tab>
@@ -21,21 +20,40 @@
       </wux-tabs>
     </view>
     <scroll-view scroll-y="true" style="height: 100%">
-      <view v-for="friend of friends" :key="friend.id">
+      <view v-for="friend of newList.data" :key="friend.id">
         <cardItem :item="friend"/>
         <wux-white-space size="small"/>
       </view>
       <loadMore :reflash="reflash"/>
     </scroll-view>
     <wux-gallery id="wux-gallery"/>
-    <cover-image class='add' src='https://static.huanjiaohu.com/mini/index/ydhg_btn.png' @click="add"></cover-image>
-      <wux-popup position="bottom" :visible="isPopup">
-    <wux-cell-group class="pop_setaqua" title="第一次使用需要开缸">
-        <wux-cell  title="鱼缸名字">
-                  <wux-input slot="footer" placeholder="设置一个很吊的名字吧" />
+    <cover-image
+      class="add"
+      src="https://static.huanjiaohu.com/mini/index/ydhg_btn.png"
+      @click="add"
+    ></cover-image>
+    <wux-popup position="bottom" :visible="isPopup">
+      <wux-cell-group class="pop_setaqua" title="第一次使用需要开缸">
+        <wux-cell title="鱼缸名字">
+          <wux-input slot="footer" placeholder="设置一个很吊的名字吧" @change="titleChange"/>
         </wux-cell>
-        <wux-cell  title="鱼缸类型">
-                  <wux-segmented-control slot="footer" default-current="-1" @change="typeChange" theme="positive"	 :values="value1" />
+        <wux-cell title="鱼缸类型">
+          <wux-segmented-control
+            slot="footer"
+            default-current="-1"
+            @change="typeChange"
+            theme="positive"
+            :values="value1"
+          />
+        </wux-cell>
+        <wux-cell title="鱼缸尺寸">
+          <wux-segmented-control
+            slot="footer"
+            default-current="-1"
+            @change="sizeChange"
+            theme="positive"
+            :values="value4"
+          />
         </wux-cell>
         <wux-cell title="过滤方式">
           <wux-segmented-control
@@ -55,15 +73,6 @@
             :values="value3"
           />
         </wux-cell>
-        <wux-cell title="鱼缸尺寸">
-          <wux-segmented-control
-            slot="footer"
-            default-current="-1"
-            @change="sizeChange"
-            theme="positive"
-            :values="value4"
-          />
-        </wux-cell>
         <wux-cell hover-class="none">
           <wux-button block type="positive" @tap="open">开缸</wux-button>
         </wux-cell>
@@ -77,6 +86,8 @@ import cardItem from '@/components/cardItem';
 import loadMore from '@/components/loadMore';
 import wx from 'wx';
 import { setTimeout } from 'timers';
+import api from '@/utils/circleApi';
+import util from '@/utils/util';
 
 export default {
   components: {
@@ -93,68 +104,23 @@ export default {
       value2: ['底滤', '背滤'],
       value3: ['柏林系统', 'ZEO', 'ATS'],
       value4: ['<30cm', '<45cm', '<80cm', '>80cm'],
-      friends: [
-        {
-          id: 0,
-          headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=5482',
-          link: '../goods/goods?id=1135002',
-          time: '2019-01-20',
-          name: 'York',
-          city_name: '上海',
-          descption: '我的鱼缸很牛逼啥都有，带鱼还有好几条',
-          urls: [
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=206',
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=207',
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=208'
-          ],
-          bottom: {
-            comment: '12',
-            thumbs: '22'
-          }
-        },
-        {
-          id: 1,
-          headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=5481',
-          link: '../goods/goods?id=1135002',
-          time: '2019-01-20',
-          name: 'Tony',
-          city_name: '上海',
-          descption: '我的鱼缸很牛逼啥都有，带鱼还有好几条',
-          urls: [
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=206',
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=207',
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=208'
-          ],
-          bottom: {
-            comment: '12',
-            thumbs: '22'
-          }
-        },
-        {
-          id: 1,
-          headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=5481',
-          link: '../goods/goods?id=1135002',
-          time: '2019-01-20',
-          name: 'Tony',
-          city_name: '上海',
-          descption: '我的鱼缸很牛逼啥都有，带鱼还有好几条',
-          urls: [
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=206',
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=207',
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=208'
-          ],
-          bottom: {
-            comment: '12',
-            thumbs: '22'
-          }
-        }
-      ]
+      newList: null,
+      setting: {
+        type: -1,
+        size: -1,
+        filter: -1,
+        bowlSystem: -1
+      }
     };
   },
-  onLoad () {
-    const user = wx.getStorageSync('userInfo', this.userInfo);
+  async onShow () {
+    this.newList = await api.listCircle();
+  },
+  async onLoad () {
+    const user = wx.getStorageSync('userInfo');
     if (user) {
       user.title = '我的云端海缸';
+      user.navigator_url = '/pages/circle/index';
       this.user = user;
     } else {
       this.user = {
@@ -164,42 +130,80 @@ export default {
         time: '2019-01-01',
         title: '请点击登录',
         name: '礁岩海水',
-        city_name: '上海'
+        city_name: '上海',
+        isLogin: false
       };
     }
   },
   methods: {
-    add (e) {
-      wx.navigateTo({
-        url: '/pages/circle/circlePost'
-      });
+    async add (e) {
+      const setting = await api.getCircleSetting();
+      if (setting.id) {
+        const id = await api.createCircle({ type: 1 });
+        wx.setStorageSync('add-circle-id', id);
+        wx.navigateTo({
+          url: '/pages/circle/circlePost?id=' + id
+        });
+      } else {
+        this.isPopup = true;
+      }
     },
-    setting () {
-      this.isPopup = true;
-    },
-    open () {
-      wx.showToast({
-        title: '开缸成功',
-        duration: 2000,
-        complete: () => {
-          this.isPopup = false;
-          wx.navigateTo({
-            url: '/pages/circle/circle'
-          });
+    async gotoMyCircle () {
+      const setting = await api.getCircleSetting();
+      if (setting.id) {
+        const list = await api.listByUserId({ type: 0 });
+        let id = null;
+        if (list.data.length === 0) {
+          id = await api.createCircle({ type: 0 });
+        } else {
+          id = list.data[0].id;
         }
-      });
+        wx.setStorageSync('my-circle-id', id);
+        console.log(id);
+        wx.navigateTo({
+          url: '/pages/circle/circle?id=' + id
+        });
+      } else {
+        this.isPopup = true;
+      }
+    },
+    async open () {
+      if (!this.setting.title) {
+        util.showErrorToast('请填写鱼缸名字');
+      } else if (this.setting.type < 0) {
+        util.showErrorToast('请选择鱼缸类型');
+      } else if (this.setting.size < 0) {
+        util.showErrorToast('请选择鱼缸尺寸');
+      } else if (this.setting.filter < 0) {
+        util.showErrorToast('请选择过滤方式');
+      } else if (this.setting.bowlSystem < 0) {
+        util.showErrorToast('请选择过滤系统');
+      } else {
+        const setting = await api.openCircleSetting(this.setting);
+        if (setting) {
+          wx.showToast({
+            title: '开缸成功',
+            duration: 2000
+          });
+        } else {
+          util.showErrorToast('开缸失败');
+        }
+      }
+    },
+    titleChange (e) {
+      this.setting.title = e.mp.detail.value;
     },
     typeChange (e) {
-      console.log(e.mp.detail.key);
+      this.setting.type = e.mp.detail.key + '';
     },
     sizeChange (e) {
-      console.log(e.mp.detail.key);
+      this.setting.size = e.mp.detail.key + '';
     },
     systemChange (e) {
-      console.log(e.mp.detail.key);
+      this.setting.bowlSystem = e.mp.detail.key + '';
     },
     filterChange (e) {
-      console.log(e.mp.detail.key);
+      this.setting.filter = e.mp.detail.key + '';
     }
   },
   onReachBottom () {
@@ -269,5 +273,7 @@ export default {
   background-size: 42rpx;
   background-color: #ffffff;
 }
-.pop_setaqua .wux-cell-group__hd {padding:0 30px;}
+.pop_setaqua .wux-cell-group__hd {
+  padding: 0 30px;
+}
 </style>

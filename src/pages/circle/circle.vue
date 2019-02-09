@@ -166,10 +166,28 @@ export default {
       ]
     };
   },
-  async mounted () {
+  async onLoad () {
     const user = wx.getStorageSync('userInfo', this.userInfo);
     user.title = '我的云端海缸';
     this.user = user;
+  },
+  async onShow () {
+    const setting = await api.getCircleSetting();
+    if (setting.id) {
+      const list = await api.listByUserId({type: 0});
+      let id = null;
+      if (list.data.length === 0) {
+        id = await api.createCircle({type: 0});
+      } else {
+        id = list.data[0].id;
+      }
+      wx.setStorageSync('my-circle-id', id);
+      wx.navigateTo({
+        url: '/pages/circle/circlePost?id=' + id
+      });
+    } else {
+      this.isPopup = true;
+    }
   },
 
   methods: {

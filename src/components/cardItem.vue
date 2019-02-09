@@ -41,12 +41,14 @@
         </wux-row>
       </navigator>
        <wux-white-space/>
-      <wux-row v-if="item.descption">
-        <wux-col span="12"><view class="ydhg_des">{{item.descption}}</view></wux-col>
+      <wux-row v-if="item.description">
+        <wux-col span="12">
+                  <wxParse   :content="item.description"></wxParse>
+        </wux-col>
       </wux-row>
-      <wux-row v-if="item.urls">
+      <wux-row v-if="item.thumImageList">
         <div class="img_all">
-          <block v-for="it of item.urls" :key="it.id">
+          <block v-for="it of item.thumImageList" :key="it.id">
             <view class="list_img" @tap="showGallery(it.id,$event)" :data-current="index">
               <img :src="it">
             </view>
@@ -73,7 +75,12 @@
 
 <script>
 import { $wuxGallery } from '../../static/wux/index';
+import wxParse from 'mpvue-wxparse'
+
 export default {
+  components: {
+    wxParse
+  },
   props: {
     item: {
       type: Object,
@@ -85,7 +92,7 @@ export default {
   methods: {
     showGallery (index, e) {
       const { current } = e.currentTarget.dataset;
-      const urls = this.item.urls;
+      const urls = this.item.bigImageList;
       this.$wuxGallery = $wuxGallery();
       this.$wuxGallery.show({
         showDelete: false,
@@ -115,6 +122,8 @@ export default {
 </script>
 
 <style scoped>
+@import "../utils/wxParse/wxParse.wxss";
+
 .ngrouppre {
   line-height: 24px;
   color: #999;

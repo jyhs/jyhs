@@ -23,7 +23,7 @@ export default {
     ],
     permission: {
       'scope.userLocation': {
-        'desc': '获取您所在的省将用于小程序给您提供更好的服务'
+        'desc': '将用于小程序为您提供更好的服务'
       }
     },
     window: {
