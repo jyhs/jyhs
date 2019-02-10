@@ -40,12 +40,12 @@
           </wux-col>
         </wux-row>
       </navigator>
-       <wux-white-space/>
       <wux-row v-if="item.description">
         <wux-col span="12">
                   <wxParse   :content="item.description"></wxParse>
         </wux-col>
       </wux-row>
+                   <wux-white-space/>
       <wux-row v-if="item.thumImageList">
         <div class="img_all">
           <block v-for="it of item.thumImageList" :key="it.id">

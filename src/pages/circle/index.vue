@@ -104,7 +104,7 @@ export default {
       value2: ['底滤', '背滤'],
       value3: ['柏林系统', 'ZEO', 'ATS'],
       value4: ['<30cm', '<45cm', '<80cm', '>80cm'],
-      newList: null,
+      newList: [],
       setting: {
         type: -1,
         size: -1,
@@ -267,7 +267,7 @@ export default {
 }
 .setting {
   display: block;
-  line-height: 185rpx;
+  line-height: 180rpx;
   background: url(https://static.huanjiaohu.com/icon/right_arrow.png) right
     center no-repeat;
   background-size: 42rpx;

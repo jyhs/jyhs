@@ -13,26 +13,122 @@
         </wux-col>
       </wux-row>
     </view>
-    <view class="row">
-      <scroll-view scroll-y="true" style="height: 100%">
-        <div class="img_all">
-          <block v-for="(it,index) of urls" :key="index">
-            <view class="list_img" @tap="showGallery(index,$event)" :data-current="index">
-              <img :src="it">
+    <swiper class="banner" :current="current">
+      <swiper-item>
+        <view class="content">
+          <view class="row upload">
+            <div class="img_all">
+              <block v-for="(it,index) of urls" :key="index">
+                <view class="list_img" @tap="showGallery(index,$event)" :data-current="index">
+                  <img :src="it">
+                </view>
+              </block>
+            </div>
+            <view class="upload-btn">
+              <wux-upload
+                url="https://api2.huanjiaohu.com/circle/circle/upload"
+                @success="onSuccess"
+                @fail="onFail"
+              >
+                <button type="default">拍照上传</button>
+              </wux-upload>
             </view>
-          </block>
-        </div>
-        <view class="upload-btn">
-          <wux-upload
-            url="https://api2.huanjiaohu.com/circle/circle/upload"
-            @success="onSuccess"
-            @fail="onFail"
-          >
-            <button type="default">拍照上传</button>
-          </wux-upload>
+          </view>
+          <scroll-view scroll-y="true" style="height: 100%">
+            <view v-for="friend of friends" :key="friend.id">
+              <cardItem :item="friend"/>
+              <wux-white-space size="small"/>
+            </view>
+            <loadMore :reflash="reflash"/>
+          </scroll-view>
         </view>
-      </scroll-view>
-    </view>
+      </swiper-item>
+      <swiper-item>
+        <scroll-view scroll-y="true" style="height: 100%">
+          <view class="content">
+            <wux-cell-group title="基本设置">
+              <wux-cell title="鱼缸类型">
+                <wux-segmented-control
+                  slot="footer"
+                  default-current="-1"
+                  @change="typeChange"
+                  theme="positive"
+                  :values="value1"
+                />
+              </wux-cell>
+              <wux-cell title="过滤方式">
+                <wux-segmented-control
+                  slot="footer"
+                  default-current="-1"
+                  @change="filterChange"
+                  theme="positive"
+                  :values="value2"
+                />
+              </wux-cell>
+              <wux-cell title="过滤系统">
+                <wux-segmented-control
+                  slot="footer"
+                  default-current="-1"
+                  @change="systemChange"
+                  theme="positive"
+                  :values="value3"
+                />
+              </wux-cell>
+              <wux-cell title="鱼缸尺寸">
+                <wux-segmented-control
+                  slot="footer"
+                  default-current="-1"
+                  @change="sizeChange"
+                  theme="positive"
+                  :values="value4"
+                />
+              </wux-cell>
+            </wux-cell-group>
+            <wux-cell-group title="高级设置">
+              <wux-cell title="鱼缸类型">
+                <wux-segmented-control
+                  slot="footer"
+                  default-current="-1"
+                  @change="typeChange"
+                  theme="positive"
+                  :values="value1"
+                />
+              </wux-cell>
+              <wux-cell title="过滤方式">
+                <wux-segmented-control
+                  slot="footer"
+                  default-current="-1"
+                  @change="filterChange"
+                  theme="positive"
+                  :values="value2"
+                />
+              </wux-cell>
+              <wux-cell title="过滤系统">
+                <wux-segmented-control
+                  slot="footer"
+                  default-current="-1"
+                  @change="systemChange"
+                  theme="positive"
+                  :values="value3"
+                />
+              </wux-cell>
+              <wux-cell title="鱼缸尺寸">
+                <wux-segmented-control
+                  slot="footer"
+                  default-current="-1"
+                  @change="sizeChange"
+                  theme="positive"
+                  :values="value4"
+                />
+              </wux-cell>
+              <wux-cell hover-class="none">
+                <wux-button block type="positive" @tap="open">开缸</wux-button>
+              </wux-cell>
+            </wux-cell-group>
+          </view>
+        </scroll-view>
+      </swiper-item>
+    </swiper>
     <wux-gallery id="wux-gallery"/>
   </view>
 </template>
@@ -74,10 +170,10 @@ export default {
   async onShow () {
     const setting = await api.getCircleSetting();
     if (setting.id) {
-      const list = await api.listByUserId({ type: 0 });
+      const list = await api.listByUserId({type: 0});
       let id = null;
       if (list.data.length === 0) {
-        id = await api.createCircle({ type: 0 });
+        id = await api.createCircle({type: 0});
       } else {
         id = list.data[0].id;
       }
