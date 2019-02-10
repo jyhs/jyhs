@@ -91,5 +91,9 @@ button[plain]{ border:0;font-size:12px;color:#A3A3A3; }
 {
   vertical-align:baseline!important;
 }
-
+.pop_setaqua .wux-cell {padding:4px 10px;font-size: 14px;line-height:48px;}
+.pop_setaqua .wux-segment{margin:0;min-height:32px;}
+.pop_setaqua .wux-cell__text{width:100%;}
+.pop_setaqua .wux-segment__item {font-size:12px;padding:6px;white-space: nowrap;}
+.pop_setaqua .wux-cell-group__hd{color:#000;font-size: 18px;}
 </style>
