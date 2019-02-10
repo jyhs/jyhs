@@ -95,14 +95,12 @@
       </wux-row>
     </wux-wing-blank>
      <wux-row v-if="showComment" class="comment">
-        <wux-col span="10" class="wux-text--left">
-          <wux-input placeholder="评论" :focus="true"/>
-        </wux-col>
-        <wux-col span="2" class="wux-text--center">
-           <button  :data-id="item.id" size="mini">
+       <wux-cell>
+          <wux-input  placeholder="设置一个很吊的名字吧" />
+          <button  slot="footer" :data-id="item.id" size="mini">
             发送
            </button>
-        </wux-col>
+        </wux-cell>
       </wux-row>
   </view>
 </template>
