@@ -21,13 +21,14 @@
     </view>
     <scroll-view scroll-y="true" style="height: 100%">
       <view v-for="friend of newList.data" :key="friend.id">
-        <cardItem :item="friend"/>
+        <cardItem :item="friend" :commentClick="onCommentClick"/>
         <wux-white-space size="small"/>
       </view>
       <loadMore :reflash="reflash"/>
     </scroll-view>
     <wux-gallery id="wux-gallery"/>
     <cover-image
+      v-if="showAdd"
       class="add"
       src="https://static.huanjiaohu.com/mini/index/ydhg_btn.png"
       @click="add"
@@ -100,6 +101,7 @@ export default {
       reflash: false,
       user: {},
       isPopup: false,
+      showAdd: true,
       value1: ['SPS缸', 'LPS缸', 'FOT缸'],
       value2: ['底滤', '背滤'],
       value3: ['柏林系统', 'ZEO', 'ATS'],
@@ -135,7 +137,11 @@ export default {
     return share;
   },
   async onShow () {
-    this.newList = await api.listCircle();
+    const newList = await api.listCircle();
+    for (const item of newList.data) {
+      item['praise'] = this.praise;
+    }
+    this.newList = newList;
   },
   async onLoad () {
     const user = wx.getStorageSync('userInfo');
@@ -157,6 +163,13 @@ export default {
     }
   },
   methods: {
+    onCommentClick (flag = false) {
+      this.showAdd = flag;
+    },
+    async praise (id) {
+      const list = await api.praise({'circleId': id});
+      return list;
+    },
     async add (e) {
       const setting = await api.getCircleSetting();
       if (setting.id) {

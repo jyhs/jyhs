@@ -63,22 +63,47 @@
           </block>
         </div>
       </wux-row>
-      <wux-row v-if="item.buttom" class="pub_toolsarea">
+      <wux-row v-if="item.interaction" class="pub_toolsarea">
         <wux-col span="4" class="wux-text--center">
-          <wux-icon type="ios-chatboxes" color="#A3A3A3" size="14"/>&nbsp;评论
-          <span class="pointnum">{{item.comment}}</span>
+          <button :plain="true" :data-id="item.id" @click="comment">
+            <wux-icon type="ios-chatboxes" color="#A3A3A3" size="14"/>&nbsp;评论
+          </button>
         </wux-col>
         <wux-col span="4" class="wux-text--center">
-          <wux-icon type="md-thumbs-up" color="#A3A3A3" size="14"/>&nbsp;点赞
-          <span class="pointnum">{{item.thumbs}}</span>
+          <button :plain="true" :data-id="item.id" @click="praise">
+            <wux-icon type="md-thumbs-up" color="#A3A3A3" size="14"/>&nbsp;点赞
+          </button>
         </wux-col>
         <wux-col span="4" class="wux-text--center">
           <button open-type="share" :plain="true" :data-id="item.id" :data-title="item.title">
-            <wux-icon type="md-share" color="#A3A3A3" size="12"/>&nbsp;分享
+            <wux-icon type="md-share" color="#A3A3A3" size="14"/>&nbsp;分享
           </button>
         </wux-col>
       </wux-row>
+      <wux-row v-if="item.interaction&&praiseList.length" class="pub_toolsarea">
+        <wux-col span="1" class="wux-text--center">
+          <wux-icon type="md-thumbs-up" color="#A3A3A3" size="14"/>
+        </wux-col>
+        <wux-col span="11" class="wux-text--left">
+          <image
+            v-for="it of praiseList"
+            :key="it.id"
+            style="width: 25px; height: 25px; background-color: #eeeeee;"
+            :src="'https://api2.huanjiaohu.com/user/getAvatar?userId='+it.user_id"
+          />
+        </wux-col>
+      </wux-row>
     </wux-wing-blank>
+     <wux-row v-if="showComment" class="comment">
+        <wux-col span="10" class="wux-text--left">
+          <wux-input placeholder="评论" :focus="true"/>
+        </wux-col>
+        <wux-col span="2" class="wux-text--center">
+           <button  :data-id="item.id" size="mini">
+            发送
+           </button>
+        </wux-col>
+      </wux-row>
   </view>
 </template>
 
@@ -95,9 +120,30 @@ export default {
       default () {
         return {};
       }
+    },
+    commentClick: {
+      type: Function
     }
   },
+  data () {
+    return {
+      praiseList: this.item.interaction ? this.item.interaction.praiseList : [],
+      commentList: this.item.interaction ? this.item.interaction.commentList : [],
+      showComment: false
+    };
+  },
   methods: {
+    async praise (e) {
+      const praiseList = await this.item.praise(e.mp.target.dataset.id);
+      this.praiseList = praiseList;
+    },
+    async comment (e) {
+      this.showComment = true;
+      console.log(this)
+      this.commentClick(false);
+      // const commentList = await this.item.comment(e.mp.target.dataset.id);
+      // this.commentList = commentList;
+    },
     showGallery (index, e) {
       const { current } = e.currentTarget.dataset;
       const urls = this.item.bigImageList;
@@ -173,7 +219,10 @@ export default {
   padding: 0 0 6px 0;
 }
 
-.pub_toolsarea .pointnum {
-  color: #02a2fd;
+.comment{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-color: #999;
 }
 </style>

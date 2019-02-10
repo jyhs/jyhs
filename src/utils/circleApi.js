@@ -17,6 +17,9 @@ const api = {
   getCircleSetting: (paramObj) => request.post('setting/getByUserId', paramObj, {
     baseURL: ApiCircleUrl
   }),
+  praise: (paramObj) => request.post('circle/praise', paramObj, {
+    baseURL: ApiCircleUrl
+  }),
   openCircleSetting: (paramObj) => request.post('setting/open', paramObj, {
     baseURL: ApiCircleUrl
   })
