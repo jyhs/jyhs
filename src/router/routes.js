@@ -283,6 +283,7 @@ module.exports = [
         'wux-cell': '../../static/wux/cell/index',
         'wux-segmented-control': '../../static/wux/segmented-control/index',
         'wux-input': '../../static/wux/input/index',
+        'wux-image': '../../static/wux/image/index',
         'wux-divider': '../../static/wux/divider/index'
       }
     }

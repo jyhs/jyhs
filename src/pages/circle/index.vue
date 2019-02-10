@@ -113,6 +113,27 @@ export default {
       }
     };
   },
+  onShareAppMessage (options) {
+    const share = {
+      title: '礁岩鱼圈',
+      path: '/pages/circle/index',
+      imageUrl: 'https://static.huanjiaohu.com/image/share/default/jpg',
+      success: (res) => {
+        console.log('转发成功', res);
+      },
+      fail: (res) => {
+        console.log('转发失败', res);
+      }
+    }
+
+    if (options.from === 'button') {
+      const eData = options.target.dataset;
+      share.path = '/pages/circle/circle?id=' + eData.id;
+      share.title = eData.title;
+    }
+
+    return share;
+  },
   async onShow () {
     this.newList = await api.listCircle();
   },

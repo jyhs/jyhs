@@ -17,6 +17,7 @@
           <view class="close" @click="onClose">取消</view>
           <view class="post" @click="onPost">发表</view>
       </view>
+      {{e}}
   </view>
 
 </view>
@@ -35,7 +36,8 @@ export default {
       valueId: 0,
       content: '',
       formData: null,
-      header: null
+      header: null,
+      e: null
     }
   },
   onShow () {
@@ -74,7 +76,8 @@ export default {
     onSuccess () {
 
     },
-    onFail () {
+    onFail (e) {
+      this.e = JSON.stringify(e);
       wx.showToast({
         title: '失败',
         duration: 2000,

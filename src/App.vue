@@ -22,7 +22,7 @@ export default {
 .row{
   width: 100%;
 }
-
+button[plain]{ border:0;font-size:12px;color:#A3A3A3; } 
 .jytt_module {
   font-size: 12px;
   background-image: url("https://static.huanjiaohu.com/mini/index/jytt_bg.png");
