@@ -273,7 +273,5 @@ export default {
   background-size: 42rpx;
   background-color: #ffffff;
 }
-.pop_setaqua .wux-cell-group__hd {
-  padding: 0 30px;
-}
+
 </style>
