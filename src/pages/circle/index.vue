@@ -19,7 +19,7 @@
         <wux-tab key="tab4" title="我的"></wux-tab>
       </wux-tabs>
     </view>
-    <scroll-view scroll-y="true" style="height: 100%">
+    <scroll-view scroll-y="true" :style="winStyle">
       <view v-for="friend of newList.data" :key="friend.id">
         <cardItem :item="friend" :commentClick="onCommentClick"/>
         <wux-white-space size="small"/>
@@ -86,7 +86,6 @@
 import cardItem from '@/components/cardItem';
 import loadMore from '@/components/loadMore';
 import wx from 'wx';
-import { setTimeout } from 'timers';
 import api from '@/utils/circleApi';
 import util from '@/utils/util';
 
@@ -107,19 +106,22 @@ export default {
       value3: ['柏林系统', 'ZEO', 'ATS'],
       value4: ['<30cm', '<45cm', '<80cm', '>80cm'],
       newList: [],
+      newPage: 1,
       setting: {
         type: -1,
         size: -1,
         filter: -1,
         bowlSystem: -1
-      }
+      },
+      winStyle: 'width:100%;height:100%'
+
     };
   },
   onShareAppMessage (options) {
     const share = {
       title: '礁岩鱼圈',
       path: '/pages/circle/index',
-      imageUrl: 'https://static.huanjiaohu.com/image/share/default/jpg',
+      imageUrl: 'https://static.huanjiaohu.com/image/share/default.jpg',
       success: (res) => {
         console.log('转发成功', res);
       },
@@ -137,17 +139,20 @@ export default {
     return share;
   },
   async onShow () {
-    const newList = await api.listCircle();
+    const newList = await api.listCircle({page: this.newPage});
     for (const item of newList.data) {
       item['praise'] = this.praise;
       item['comment'] = this.comment;
     }
     this.newList = newList;
+    this.newPage = 1;
+    this.winStyle = 'width:100%;height:' + this.newList.data.length * 120 + 'px;';
   },
   async onLoad () {
     const user = wx.getStorageSync('userInfo');
     if (user) {
-      user.title = '我的云端海缸';
+      const setting = await api.getCircleSetting();
+      user.title = setting ? setting.title : '我的云端海缸';
       user.navigator_url = '/pages/circle/index';
       this.user = user;
     } else {
@@ -249,53 +254,19 @@ export default {
       this.setting.filter = e.mp.detail.key + '';
     }
   },
-  onReachBottom () {
+  async onReachBottom () {
     this.reflash = true;
-    setTimeout(() => {
-      this.friends.push({
-        id: 1,
-        headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=5481',
-        link: '../goods/goods?id=1135002',
-        tag: ['最热'],
-        time: '2019-01-20',
-        title: '我的鱼缸',
-        name: 'Tony',
-        city_name: '上海',
-        price: '2130',
-        descption: '我的鱼缸很牛逼啥都有，带鱼还有好几条',
-        urls: [
-          'https://api.huanjiaohu.com/material/getImageSmall?materialId=206',
-          'https://api.huanjiaohu.com/material/getImageSmall?materialId=207',
-          'https://api.huanjiaohu.com/material/getImageSmall?materialId=208'
-        ],
-        bottom: {
-          comment: '12',
-          thumbs: '22'
-        }
-      });
-      this.friends.push({
-        id: 1,
-        headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=5481',
-        link: '../goods/goods?id=1135002',
-        tag: ['最热'],
-        time: '2019-01-20',
-        title: '我的鱼缸',
-        name: 'Tony',
-        city_name: '上海',
-        price: '2130',
-        descption: '我的鱼缸很牛逼啥都有，带鱼还有好几条',
-        urls: [
-          'https://api.huanjiaohu.com/material/getImageSmall?materialId=206',
-          'https://api.huanjiaohu.com/material/getImageSmall?materialId=207',
-          'https://api.huanjiaohu.com/material/getImageSmall?materialId=208'
-        ],
-        bottom: {
-          comment: '12',
-          thumbs: '22'
-        }
-      });
-      this.reflash = false;
-    }, 2000);
+    this.newPage = this.newPage + 1;
+    const newList = await api.listCircle({page: this.newPage});
+    for (const item of newList.data) {
+      item['praise'] = this.praise;
+      item['comment'] = this.comment;
+    }
+    newList.data = this.newList.data.concat(
+      newList.data
+    );
+    this.newList = newList;
+    this.winStyle = 'width:100%;height:' + this.newList.data.length * 120 + 'px;';
   }
 };
 </script>
@@ -310,7 +281,7 @@ export default {
 }
 .setting {
   display: block;
-  line-height: 180rpx;
+  line-height: 176rpx;
   background: url(https://static.huanjiaohu.com/icon/right_arrow.png) right
     center no-repeat;
   background-size: 42rpx;

@@ -104,7 +104,7 @@
     </swiper>
     <title text="最新鱼圈"/>
     <view class="row">
-       <view v-for="friend of friends" :key="friend.id">
+       <view v-for="friend of circleList.data" :key="friend.id">
           <cardItem :item='friend'/>
           <wux-white-space size="small" />
       </view>
@@ -137,6 +137,7 @@ import smallCard from '@/components/smallCard';
 import title from '@/components/title';
 import groupApi from '@/utils/groupApi';
 import api from '@/utils/api';
+import circleApi from '@/utils/circleApi';
 
 import wx from 'wx';
 
@@ -151,6 +152,7 @@ export default {
     return {
       materials: [],
       groupList: [],
+      circleList: {},
       goods: [
         {
           id: 1135001,
@@ -207,50 +209,6 @@ export default {
         }
       ],
       retailList: [],
-      friends: [
-        {
-          id: 0,
-          headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=5482',
-          link: '../goods/goods?id=1135002',
-          tag: ['最新'],
-          time: '2019-01-20',
-          title: '我的鱼缸',
-          name: 'York',
-          city_name: '上海',
-          price: '2130',
-          descption: '我的鱼缸很牛逼啥都有，带鱼还有好几条',
-          urls: [
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=206',
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=207',
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=208'
-          ],
-          bottom: {
-            comment: '12',
-            thumbs: '22'
-          }
-        },
-        {
-          id: 1,
-          headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=5481',
-          link: '../goods/goods?id=1135002',
-          tag: ['最热'],
-          time: '2019-01-20',
-          title: '我的鱼缸',
-          name: 'Tony',
-          city_name: '上海',
-          price: '2130',
-          descption: '我的鱼缸很牛逼啥都有，带鱼还有好几条',
-          urls: [
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=206',
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=207',
-            'https://api.huanjiaohu.com/material/getImageSmall?materialId=208'
-          ],
-          bottom: {
-            comment: '12',
-            thumbs: '22'
-          }
-        }
-      ],
       title3: '',
       value3: '',
       banner: [
@@ -365,7 +323,11 @@ export default {
       provinceName: '上海'
     };
   },
-  async mounted () {
+  async onShow () {
+
+  },
+  async onLoad () {
+    const self = this;
     const provinceList = await api.getProvinces();
     const provinces = [];
     for (const item of provinceList) {
@@ -379,9 +341,11 @@ export default {
     this.provinces = provinces;
     const res = await api.getMaterialRandomList({ page: 1, size: 10 });
     this.materials = res.data;
-  },
-  onLoad () {
-    const self = this;
+    const circleList = await circleApi.listCircle({page: 1, size: 5});
+    for (const item of circleList.data) {
+      delete item.interaction;
+    }
+    this.circleList = circleList;
     wx.getLocation({
       type: 'wgs84',
       success: async function (res) {
@@ -421,6 +385,7 @@ export default {
         group.name = group.contacts;
         group.city_name = group.city_name;
         group.price = group.sum;
+        delete group.description;
         if (group.user_type.indexOf('lss') >= 0) {
           retailList.push(group)
         } else {
@@ -447,7 +412,7 @@ export default {
             key: 'province',
             data: value
           });
-          const group = await groupApi.getGroupListByProvince({ 'province': value });
+          const group = await groupApi.getGroupListByProvince({ 'province': value, 'size': 5 });
           self.setGroupCard(group.data);
         }
       });

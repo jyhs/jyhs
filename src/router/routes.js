@@ -16,6 +16,7 @@ module.exports = [
         'wux-avatar': '../../static/wux/avatar/index',
         'wux-rater': '../../static/wux/rater/index',
         'wux-icon': '../../static/wux/icon/index',
+        'wux-image': '../../static/wux/image/index',
         'wux-gallery': '../../static/wux/gallery/index'
       }
     }

@@ -113,7 +113,7 @@ export default {
   },
   async onReachBottom () {
     this.reflash = true;
-    this.newPage = this.newPage + 10;
+    this.newPage = this.newPage + 1;
     const informationList = await api.getInformationList({
       page: this.newPage,
       size: 10,
