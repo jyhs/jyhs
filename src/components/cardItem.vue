@@ -88,16 +88,32 @@
           <image
             v-for="it of praiseList"
             :key="it.id"
-            style="width: 25px; height: 25px; background-color: #eeeeee;"
+            style="width: 25px; height: 25px; margin-right:5px;"
             :src="'https://api2.huanjiaohu.com/user/getAvatar?userId='+it.user_id"
           />
+        </wux-col>
+      </wux-row>
+       <wux-row v-if="item.interaction&&commentList.length" class="pub_toolsarea">
+        <wux-col span="1" class="wux-text--center">
+          <wux-icon type="ios-chatboxes" color="#A3A3A3" size="14"/>
+        </wux-col>
+        <wux-col span="11" class="wux-text--left">
+          <div class="comment-detail"  v-for="cit of commentList" :key="cit.id">
+              <div class="comment-detail-left">
+                <image
+                  style="width: 25px; height: 25px; margin-right:5px;"
+                  :src="cit.user_info.headimgurl"
+                />
+              </div>
+              <div class="comment-detail-right">2</div>
+          </div>
         </wux-col>
       </wux-row>
     </wux-wing-blank>
      <wux-row v-if="showComment" class="comment">
        <wux-cell>
-          <wux-input  placeholder="设置一个很吊的名字吧" />
-          <button  slot="footer" :data-id="item.id" size="mini">
+          <wux-input  placeholder="评论" wux-class="comment-input" :focus="true" @change="commentChange"/>
+          <button  slot="footer" :data-id="item.id" size="mini" @click="postComment">
             发送
            </button>
         </wux-cell>
@@ -126,8 +142,9 @@ export default {
   data () {
     return {
       praiseList: this.item.interaction ? this.item.interaction.praiseList : [],
-      commentList: this.item.interaction ? this.item.interaction.commentList : [],
-      showComment: false
+      commentList: this.item.commentList ? this.item.interaction.commentList : [],
+      showComment: false,
+      content: ''
     };
   },
   methods: {
@@ -137,10 +154,16 @@ export default {
     },
     async comment (e) {
       this.showComment = true;
-      console.log(this)
       this.commentClick(false);
-      // const commentList = await this.item.comment(e.mp.target.dataset.id);
-      // this.commentList = commentList;
+    },
+    async postComment (e) {
+      this.showComment = false;
+      this.commentClick(true);
+      const commentList = await this.item.comment(e.mp.target.dataset.id, this.content);
+      this.commentList = commentList;
+    },
+    commentChange (e) {
+      this.content = e.mp.detail.value;
     },
     showGallery (index, e) {
       const { current } = e.currentTarget.dataset;
@@ -168,7 +191,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 @import "../utils/wxParse/wxParse.wxss";
 
 .ngrouppre {
@@ -222,5 +245,13 @@ export default {
   position: fixed;
   bottom: 0;
   background-color: #999;
+  z-index: 100;
+}
+.comment-input{
+  background-color: #ffffff;
+  margin-right: 10px;
+}
+.comment-detail{
+  display: flex
 }
 </style>

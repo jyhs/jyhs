@@ -140,6 +140,7 @@ export default {
     const newList = await api.listCircle();
     for (const item of newList.data) {
       item['praise'] = this.praise;
+      item['comment'] = this.comment;
     }
     this.newList = newList;
   },
@@ -168,6 +169,10 @@ export default {
     },
     async praise (id) {
       const list = await api.praise({'circleId': id});
+      return list;
+    },
+    async comment (id, comment) {
+      const list = await api.commentPost({'valueId': id, 'typeId': 2, 'content': comment});
       return list;
     },
     async add (e) {

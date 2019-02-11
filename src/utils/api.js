@@ -59,7 +59,6 @@ const api = {
   getCatalogCurrent: (paramObj) => request.get('catalog/current', paramObj, {
     baseURL: ApiCommonUrl
   }),
-
   // 评论列表
   getCommentList: (paramObj) => request.get('comment/list', paramObj, {
     baseURL: ApiCommonUrl

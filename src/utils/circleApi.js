@@ -22,6 +22,9 @@ const api = {
   }),
   openCircleSetting: (paramObj) => request.post('setting/open', paramObj, {
     baseURL: ApiCircleUrl
+  }),
+  commentPost: (paramObj) => request.post('circle/commentPost', paramObj, {
+    baseURL: ApiCircleUrl
   })
 
 }
