@@ -1,24 +1,8 @@
 <template >
   <view class="container">
-    <view class="row" @tap="gotoMyCircle">
-      <wux-row>
-        <wux-col span="11">
-          <cardItem :item="user"/>
-        </wux-col>
-        <wux-col span="1">
-          <view class="setting">&nbsp;</view>
-        </wux-col>
-      </wux-row>
+    <view class="profile-info">
     </view>
     <wux-white-space size="small"/>
-    <view class="row">
-      <wux-tabs class="tabAll" defaultCurrent="tab1" theme="positive">
-        <wux-tab key="tab1" title="最新"></wux-tab>
-        <wux-tab key="tab2" title="最热"></wux-tab>
-        <wux-tab key="tab3" title="同省"></wux-tab>
-        <wux-tab key="tab4" title="我的"></wux-tab>
-      </wux-tabs>
-    </view>
     <scroll-view scroll-y="true" :style="winStyle">
       <view v-for="friend of newList.data" :key="friend.id">
         <cardItem :item="friend" :commentClick="onCommentClick"/>
@@ -279,13 +263,18 @@ export default {
   bottom: 1%;
   right: 5%;
 }
-.setting {
-  display: block;
-  line-height: 176rpx;
-  background: url(https://static.huanjiaohu.com/icon/right_arrow.png) right
-    center no-repeat;
-  background-size: 42rpx;
-  background-color: #ffffff;
+
+.profile-info {
+  width: 100%;
+  height: 370rpx;
+  display: flex;
+  background: url(https://static.huanjiaohu.com/image/login_banner.jpg);
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
 }
 
 </style>
