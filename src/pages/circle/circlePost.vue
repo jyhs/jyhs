@@ -17,7 +17,6 @@
           <view class="close" @click="onClose">取消</view>
           <view class="post" @click="onPost">发表</view>
       </view>
-      {{e}}
   </view>
 
 </view>
@@ -29,7 +28,6 @@ import util from '@/utils/util';
 import wx from 'wx';
 
 export default {
-
   data () {
     return {
       typeId: 0,
@@ -37,26 +35,32 @@ export default {
       content: '',
       formData: null,
       header: null,
-      e: null
+      isCancel: true
     }
   },
   onShow () {
     this.formData = {'circleId': this.$route.query.id};
+    this.isCancel = true;
+    this.content = '';
+  },
+  onLoad () {
     this.header = {'Authorization': wx.getStorageSync('token')};
   },
-
+  async onUnload () {
+    if (this.isCancel) {
+      await api.deleteCircle({
+        'circleId': this.$route.query.id
+      });
+    }
+  },
   methods: {
-
     bindInpuntValue (event) {
-      // console.log('监听输入事件', event);
       let value = event.target.value;
-      // 判断是否超过140个字符
       if (value && value.length > 140) {
         return false;
       }
       this.content = event.target.value;
     },
-    // 提交评论
     async onPost () {
       if (!this.content) {
         util.showErrorToast('请填写评论');
@@ -67,10 +71,14 @@ export default {
         'description': this.content
       });
       if (res > 0) {
+        this.isCancel = false;
         this.$router.go(-1);
       }
     },
-    onClose () {
+    async onClose () {
+      await api.deleteCircle({
+        'circleId': this.$route.query.id
+      });
       this.$router.go(-1);
     },
     onSuccess () {

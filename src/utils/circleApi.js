@@ -8,6 +8,9 @@ const api = {
   addCircle: (paramObj) => request.post('circle/add', paramObj, {
     baseURL: ApiCircleUrl
   }),
+  deleteCircle: (paramObj) => request.post('circle/delete', paramObj, {
+    baseURL: ApiCircleUrl
+  }),
   listCircle: (paramObj) => request.post('circle/list', paramObj, {
     baseURL: ApiCircleUrl
   }),

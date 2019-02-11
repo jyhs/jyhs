@@ -176,6 +176,9 @@ export default {
       return list;
     },
     async add (e) {
+      wx.showLoading({
+        title: '加载中'
+      });
       const setting = await api.getCircleSetting();
       if (setting.id) {
         const id = await api.createCircle({ type: 1 });
@@ -186,6 +189,7 @@ export default {
       } else {
         this.isPopup = true;
       }
+      wx.hideLoading();
     },
     async gotoMyCircle () {
       const setting = await api.getCircleSetting();

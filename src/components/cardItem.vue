@@ -101,11 +101,23 @@
           <div class="comment-detail"  v-for="cit of commentList" :key="cit.id">
               <div class="comment-detail-left">
                 <image
-                  style="width: 25px; height: 25px; margin-right:5px;"
+                  style="width: 45px; height: 45px; margin-right:5px;"
                   :src="cit.user_info.headimgurl"
                 />
               </div>
-              <div class="comment-detail-right">2</div>
+              <div class="comment-detail-right">
+                <div class="comment-detail-right-up">
+                  <div>
+                  {{cit.user_info.name}}
+                  </div>
+                  <div>
+                    {{cit.add_time}}
+                  </div>
+                </div>
+                <div class="comment-detail-right-down">
+                  {{cit.content}}
+                </div>
+              </div>
           </div>
         </wux-col>
       </wux-row>
@@ -141,8 +153,8 @@ export default {
   },
   data () {
     return {
-      praiseList: this.item.interaction ? this.item.interaction.praiseList : [],
-      commentList: this.item.commentList ? this.item.interaction.commentList : [],
+      praiseList: this.item.interaction && this.item.interaction.praiseList ? this.item.interaction.praiseList : [],
+      commentList: this.item.interaction && this.item.interaction.commentList ? this.item.interaction.commentList : [],
       showComment: false,
       content: ''
     };
@@ -253,5 +265,15 @@ export default {
 }
 .comment-detail{
   display: flex
+}
+.comment-detail-right{
+  display: flex;
+  flex-direction: column;
+  width:100%;
+}
+.comment-detail-right-up{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 </style>
