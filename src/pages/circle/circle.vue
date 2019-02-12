@@ -1,64 +1,153 @@
 <template >
   <view class="container">
-    <view class="row">
-      <wux-row>
-        <wux-col span="10">
-          <cardItem :item="user"/>
-        </wux-col>
-        <wux-col span="1">
-          <view class="setting">&nbsp;分享</view>
-        </wux-col>
-        <wux-col span="1">
-          <view class="setting">&nbsp;分享</view>
-        </wux-col>
-      </wux-row>
-    </view>
-    <view class="row">
       <scroll-view scroll-y="true" style="height: 100%">
-        <div class="img_all">
-          <block v-for="(it,index) of urls" :key="index">
-            <view class="list_img" @tap="showGallery(index,$event)" :data-current="index">
-              <img :src="it">
-            </view>
-          </block>
-        </div>
+         <view class="row">
+            <wux-row>
+              <wux-col span="12">
+                <cardItem :item="user"/>
+              </wux-col>
+            </wux-row>
+        </view>
+        <title text="我的鱼缸"/>
+         <wux-cell-group class="pop_setaqua">
+            <div class="img_all">
+              <block v-for="(it,index) of urls" :key="index">
+                <view class="list_img" @tap="showGallery(index,$event)" :data-current="index">
+                    <wux-image
+                      width="100%"
+                      height="97px"
+                      loading="图片加载中..." 
+                      :src="it"/>
+                </view>
+              </block>
+            </div>
+        </wux-cell-group>
+        <title text="基本设置"/>
+        <wux-cell-group class="pop_setaqua">
+        <wux-cell title="鱼缸名字">
+          <wux-input slot="footer" placeholder="设置一个很吊的名字吧" @change="titleChange"/>
+        </wux-cell>
+        <wux-cell title="鱼缸类型">
+          <wux-segmented-control
+            slot="footer"
+            default-current="-1"
+            @change="typeChange"
+            theme="positive"
+            :values="value1"
+          />
+        </wux-cell>
+        <wux-cell title="鱼缸尺寸">
+          <wux-segmented-control
+            slot="footer"
+            default-current="-1"
+            @change="sizeChange"
+            theme="positive"
+            :values="value4"
+          />
+        </wux-cell>
+        <wux-cell title="过滤方式">
+          <wux-segmented-control
+            slot="footer"
+            default-current="-1"
+            @change="filterChange"
+            theme="positive"
+            :values="value2"
+          />
+        </wux-cell>
+        <wux-cell title="过滤系统">
+          <wux-segmented-control
+            slot="footer"
+            default-current="-1"
+            @change="systemChange"
+            theme="positive"
+            :values="value3"
+          />
+        </wux-cell>
+      </wux-cell-group>
+        <title text="高级设置"/>
+        <wux-cell-group class="pop_setaqua">
+        <wux-cell title="鱼缸类型">
+          <wux-segmented-control
+            slot="footer"
+            default-current="-1"
+            @change="typeChange"
+            theme="positive"
+            :values="value1"
+          />
+        </wux-cell>
+        <wux-cell title="鱼缸尺寸">
+          <wux-segmented-control
+            slot="footer"
+            default-current="-1"
+            @change="sizeChange"
+            theme="positive"
+            :values="value4"
+          />
+        </wux-cell>
+        <wux-cell title="过滤方式">
+          <wux-segmented-control
+            slot="footer"
+            default-current="-1"
+            @change="filterChange"
+            theme="positive"
+            :values="value2"
+          />
+        </wux-cell>
+        <wux-cell title="过滤系统">
+          <wux-segmented-control
+            slot="footer"
+            default-current="-1"
+            @change="systemChange"
+            theme="positive"
+            :values="value3"
+          />
+        </wux-cell>
+      </wux-cell-group>
         <view class="upload-btn">
           <wux-upload
             url="https://api2.huanjiaohu.com/circle/circle/upload"
             @success="onSuccess"
             @fail="onFail"
           >
-            <button type="default">拍照上传</button>
+          <wux-button block type="positive" @click="upload">拍照/上传</wux-button>
+
           </wux-upload>
         </view>
       </scroll-view>
-    </view>
     <wux-gallery id="wux-gallery"/>
   </view>
 </template>
 
 <script>
-import api from '@/utils/api';
+import api from '@/utils/circleApi';
 import util from '@/utils/util';
 import wx from 'wx';
 import { setTimeout } from 'timers';
 import cardItem from '@/components/cardItem';
 import { $wuxGallery } from '../../../static/wux/index';
+import title from '@/components/title';
 
 export default {
   components: {
-    cardItem
+    cardItem,
+    title
   },
   data () {
     return {
       current: 0,
       user: {},
-      isPopup: true,
+      setting: null,
       value1: ['SPS缸', 'LPS缸', 'FOT缸'],
       value2: ['底滤', '背滤'],
       value3: ['柏林系统', 'ZEO', 'ATS'],
       value4: ['微缸', '小型', '中型', '大型'],
       urls: [
+        'https://api.huanjiaohu.com/material/getImageSmall?materialId=206',
+        'https://api.huanjiaohu.com/material/getImageSmall?materialId=207',
+        'https://api.huanjiaohu.com/material/getImageSmall?materialId=208',
+        'https://api.huanjiaohu.com/material/getImageSmall?materialId=206',
+        'https://api.huanjiaohu.com/material/getImageSmall?materialId=207',
+        'https://api.huanjiaohu.com/material/getImageSmall?materialId=208',
         'https://api.huanjiaohu.com/material/getImageSmall?materialId=206',
         'https://api.huanjiaohu.com/material/getImageSmall?materialId=207',
         'https://api.huanjiaohu.com/material/getImageSmall?materialId=208'
@@ -67,29 +156,22 @@ export default {
   },
   async onLoad () {
     const user = wx.getStorageSync('userInfo', this.userInfo);
-    user.title = '我的云端海缸';
-    user.navigate_url = '/pages/circle/circle';
     this.user = user;
   },
   async onShow () {
     const setting = await api.getCircleSetting();
-    if (setting.id) {
-      const list = await api.listByUserId({ type: 0 });
-      let id = null;
-      if (list.data.length === 0) {
-        id = await api.createCircle({ type: 0 });
-      } else {
-        id = list.data[0].id;
-      }
-      wx.setStorageSync('my-circle-id', id);
-      wx.navigateTo({
-        url: '/pages/circle/circlePost?id=' + id
-      });
+    const list = await api.listByUserId({ type: 0 });
+    let id = null;
+    if (list.data.length === 0) {
+      id = await api.createCircle({ type: 0 });
     } else {
-      this.isPopup = true;
+      id = list.data[0].id;
     }
+    const user = Object.assign({}, this.user)
+    user.title = setting.title;
+    user.navigator_url = '/pages/circle/circle?id=' + id;
+    this.user = user;
   },
-
   methods: {
     change (e) {
       this.current = e.mp.detail.key;

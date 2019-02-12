@@ -285,6 +285,7 @@ module.exports = [
         'wux-segmented-control': '../../static/wux/segmented-control/index',
         'wux-input': '../../static/wux/input/index',
         'wux-image': '../../static/wux/image/index',
+        'wux-upload': '../../static/wux/upload/index',
         'wux-divider': '../../static/wux/divider/index'
       }
     }
@@ -308,6 +309,7 @@ module.exports = [
       usingComponents: {
         'wux-row': '../../static/wux/row/index',
         'wux-col': '../../static/wux/col/index',
+        'wux-image': '../../static/wux/image/index',
         'wux-avatar': '../../static/wux/avatar/index',
         'wux-tag': '../../static/wux/tag/index',
         'wux-icon': '../../static/wux/icon/index',

@@ -3,12 +3,13 @@
     <wux-wing-blank>
       <wux-white-space/>
       <wux-row>
-        <wux-col span="2">
+        <wux-col span="2"  class="wux-text--left wux-ellipsis">
           <wux-avatar
             :src="item.headimgurl"
             shape="cycle"
-            body-style="background-color: #ffffff;margin:10px 12px;"
-          />
+            body-style="background-color: #ffffff;width: 35px; height: 35px;"
+          /><br/>
+                  {{item.name}}
         </wux-col>
         <wux-col span="10">
           <wux-row>
@@ -19,7 +20,9 @@
             </wux-col>
             <wux-col span="7" class="wux-text--right">
               <wux-icon type="md-time" color="#A3A3A3" size="12" v-if="item.time"/>
-              &nbsp;{{item.time}}
+              {{item.time}}&nbsp;
+              <wux-icon type="ios-pin" color="#A3A3A3" size="12"/>
+                 {{item.city_name}}
             </wux-col>
           </wux-row>
           <wux-row>
@@ -27,42 +30,36 @@
               <wux-col span="12">{{item.title}}</wux-col>
             </view>
           </wux-row>
-          <wux-row>
+          <wux-row >
             <wux-col span="2" class="wux-assertive wux-text--left jine">
               <span v-if="item.price>=0">¥</span>
               {{item.price}}
             </wux-col>
-          
-             <wux-col span="2" class="wux-text--center">
-              <button :plain="true" :data-id="item.id" @click="praise" v-if="item.interaction">
-                <wux-icon type="md-heart" color="#A3A3A3" size="12"/>
-                点赞
-              </button>
+              <wux-col span="2" class="wux-text--center">
+              
             </wux-col>
-             <wux-col span="2" class="wux-text--center">
+            <wux-col span="2" class="wux-text--center">
+              
+            </wux-col>
+             <wux-col span="2" class="wux-text--right">
               <button :plain="true" :data-id="item.id" @click="comment" v-if="item.interaction">
                 <wux-icon type="ios-chatboxes" color="#A3A3A3" size="12"/>
                 评论
               </button>
             </wux-col>
-             <wux-col span="2" class="wux-text--center">
+             <wux-col span="2" class="wux-text--right">
+              <button :plain="true" :data-id="item.id" @click="praise" v-if="item.interaction">
+                <wux-icon type="md-heart" color="#A3A3A3" size="12"/>
+                点赞
+              </button>
+            </wux-col>
+             <wux-col span="2" class="wux-text--right">
               <button open-type="share" :plain="true" :data-id="item.id" :data-title="item.title" v-if="item.interaction">
                 <wux-icon type="md-share" color="#A3A3A3" size="12"/>
                 分享
               </button>
             </wux-col>
-              <wux-col span="2" class="wux-text--center wux-ellipsis">
-               <button :plain="true" :data-id="item.id">
-                  <wux-icon type="md-person" color="#A3A3A3" size="12"/>
-                  {{item.name}}
-              </button>
-            </wux-col>
-            <wux-col span="2" class="wux-text--center wux-ellipsis">
-              <button :plain="true" :data-id="item.id">
-                <wux-icon type="ios-pin" color="#A3A3A3" size="12"/>
-                 {{item.city_name}}
-              </button>
-            </wux-col>
+          
           </wux-row>
            <wux-row v-if="item.description">
         <wux-col span="12">
@@ -107,7 +104,7 @@
           <div class="comment-detail"  v-for="cit of commentList" :key="cit.id">
               <div class="comment-detail-left">
                 <image
-                  style="width: 45px; height: 45px; margin-right:5px;"
+                  style="width: 35px; height: 35px; margin-right:5px;"
                   :src="cit.user_info.headimgurl"
                 />
               </div>

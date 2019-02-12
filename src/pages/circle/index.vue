@@ -1,9 +1,24 @@
 <template >
-  <view class="container">
-    <view class="profile-info">
-    </view>
-    <wux-white-space size="small"/>
+  <view class="container ">
     <scroll-view scroll-y="true" :style="winStyle">
+      <view class="profile-info" @click="showDialog">
+          <wux-image
+                width="100%"
+                src="https://static.huanjiaohu.com/image/login_banner.jpg"
+                loading="图片加载中..."
+                mode="aspectFill"
+           />
+      </view>
+      <view class="userinfo wux-margin-right--10">
+          <navigator url="/pages/circle/circle">
+            <wux-image
+                    width="50px"
+                    height="50px"
+                    :src="user.headimgurl"
+              />
+            </navigator>
+      </view>
+      <view class="wux-clearfix circle-info"></view>
       <view v-for="friend of newList.data" :key="friend.id">
         <cardItem :item="friend" :commentClick="onCommentClick"/>
         <wux-white-space size="small"/>
@@ -17,7 +32,7 @@
       src="https://static.huanjiaohu.com/mini/index/ydhg_btn.png"
       @click="add"
     ></cover-image>
-    <wux-popup position="bottom" :visible="isPopup">
+    <wux-popup position="bottom" :visible="isPopup" :maskClosable="false">
       <wux-cell-group class="pop_setaqua" title="第一次使用需要开缸">
         <wux-cell title="鱼缸名字">
           <wux-input slot="footer" placeholder="设置一个很吊的名字吧" @change="titleChange"/>
@@ -63,6 +78,16 @@
         </wux-cell>
       </wux-cell-group>
     </wux-popup>
+    <wux-popup closable :visible="showUpload" title="更换封面" content="给你的鱼圈选一个漂亮的封面吧" @close="onClose">
+          <wux-upload
+                      url="https://api2.huanjiaohu.com/circle/circle/upload"
+                      :header="header" :formData="formData"  max="1"
+                      @success="onSuccess"
+                      @fail="onFail"
+                    >
+                  <wux-button block type="positive" @click="upload">拍照/上传</wux-button>
+          </wux-upload>
+    </wux-popup>
   </view>
 </template>
 
@@ -85,6 +110,7 @@ export default {
       user: {},
       isPopup: false,
       showAdd: true,
+      showUpload: false,
       value1: ['SPS缸', 'LPS缸', 'FOT缸'],
       value2: ['底滤', '背滤'],
       value3: ['柏林系统', 'ZEO', 'ATS'],
@@ -98,7 +124,6 @@ export default {
         bowlSystem: -1
       },
       winStyle: 'width:100%;height:100%'
-
     };
   },
   onShareAppMessage (options) {
@@ -106,13 +131,13 @@ export default {
       title: '礁岩鱼圈',
       path: '/pages/circle/index',
       imageUrl: 'https://static.huanjiaohu.com/image/share/default.jpg',
-      success: (res) => {
+      success: res => {
         console.log('转发成功', res);
       },
-      fail: (res) => {
+      fail: res => {
         console.log('转发失败', res);
       }
-    }
+    };
 
     if (options.from === 'button') {
       const eData = options.target.dataset;
@@ -123,45 +148,58 @@ export default {
     return share;
   },
   async onShow () {
-    const newList = await api.listCircle({page: this.newPage});
-    for (const item of newList.data) {
-      item['praise'] = this.praise;
-      item['comment'] = this.comment;
-    }
-    this.newList = newList;
-    this.newPage = 1;
-    this.winStyle = 'width:100%;height:' + this.newList.data.length * 120 + 'px;';
+    this.loadingCircle();
   },
   async onLoad () {
     const user = wx.getStorageSync('userInfo');
+    const setting = await api.getCircleSetting();
     if (user) {
-      const setting = await api.getCircleSetting();
-      user.title = setting ? setting.title : '我的云端海缸';
-      user.navigator_url = '/pages/circle/index';
+      if (setting && setting.id) {
+        user.title = setting ? setting.title : '我的云端海缸';
+        user.navigator_url = '/pages/circle/index';
+      } else {
+        this.isPopup = true;
+      }
       this.user = user;
     } else {
-      this.user = {
-        navigator_url: '/pages/ucenter/login',
-        headimgurl: 'https://api.huanjiaohu.com/user/getAvatar?userId=0',
-        tag: ['未登录'],
-        time: '2019-01-01',
-        title: '请点击登录',
-        name: '礁岩海水',
-        city_name: '上海',
-        isLogin: false
-      };
+      wx.reLaunch({
+        url: '/pages/ucenter/login'
+      });
     }
   },
   methods: {
+    async loadingCircle () {
+      const newList = await api.listCircle({ page: 1 });
+      if (newList.data.length > 0) {
+        for (const item of newList.data) {
+          item['praise'] = this.praise;
+          item['comment'] = this.comment;
+        }
+        this.newList = newList;
+        this.newPage = 1;
+        this.winStyle =
+      'width:100%;height:' + this.newList.data.length * 120 + 'px;';
+      }
+    },
+    onClose () {
+      this.showUpload = false;
+    },
+    showDialog () {
+      this.showUpload = true;
+    },
     onCommentClick (flag = false) {
       this.showAdd = flag;
     },
     async praise (id) {
-      const list = await api.praise({'circleId': id});
+      const list = await api.praise({ circleId: id });
       return list;
     },
     async comment (id, comment) {
-      const list = await api.commentPost({'valueId': id, 'typeId': 2, 'content': comment});
+      const list = await api.commentPost({
+        valueId: id,
+        typeId: 2,
+        content: comment
+      });
       return list;
     },
     async add (e) {
@@ -191,7 +229,6 @@ export default {
           id = list.data[0].id;
         }
         wx.setStorageSync('my-circle-id', id);
-        console.log(id);
         wx.navigateTo({
           url: '/pages/circle/circle?id=' + id
         });
@@ -217,6 +254,8 @@ export default {
             title: '开缸成功',
             duration: 2000
           });
+          this.isPopup = false;
+          this.loadingCircle();
         } else {
           util.showErrorToast('开缸失败');
         }
@@ -241,21 +280,23 @@ export default {
   async onReachBottom () {
     this.reflash = true;
     this.newPage = this.newPage + 1;
-    const newList = await api.listCircle({page: this.newPage});
+    const newList = await api.listCircle({ page: this.newPage });
     for (const item of newList.data) {
       item['praise'] = this.praise;
       item['comment'] = this.comment;
     }
-    newList.data = this.newList.data.concat(
-      newList.data
-    );
+    newList.data = this.newList.data.concat(newList.data);
     this.newList = newList;
-    this.winStyle = 'width:100%;height:' + this.newList.data.length * 120 + 'px;';
+    this.winStyle =
+      'width:100%;height:' + this.newList.data.length * 120 + 'px;';
   }
 };
 </script>
 
 <style scoped>
+.background {
+  background-color: #ffffff
+}
 .add {
   width: 55px;
   height: 55px;
@@ -268,13 +309,24 @@ export default {
   width: 100%;
   height: 370rpx;
   display: flex;
-  background: url(https://static.huanjiaohu.com/image/login_banner.jpg);
   background-size: cover;
   -webkit-background-size: cover;
   -o-background-size: cover;
   justify-content: center;
   flex-direction: column;
   text-align: center;
+  position: absolute
 }
 
+.userinfo{
+  position: absolute;
+  right: 0;
+  top:360rpx;
+  z-index: 101;
+}
+
+.circle-info{
+  height:440rpx;
+  background-color: #ffffff;
+}
 </style>
