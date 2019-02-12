@@ -85,7 +85,6 @@ export default {
 
     },
     onFail (e) {
-      this.e = JSON.stringify(e);
       wx.showToast({
         title: '失败',
         duration: 2000,

@@ -1,10 +1,10 @@
 <template >
-  <view class="container ">
+  <view class="container background">
     <scroll-view scroll-y="true" :style="winStyle">
       <view class="profile-info" @click="showDialog">
           <wux-image
                 width="100%"
-                src="https://static.huanjiaohu.com/image/login_banner.jpg"
+                :src="cover_url"
                 loading="图片加载中..."
                 mode="aspectFill"
            />
@@ -80,12 +80,12 @@
     </wux-popup>
     <wux-popup closable :visible="showUpload" title="更换封面" content="给你的鱼圈选一个漂亮的封面吧" @close="onClose">
           <wux-upload
-                      url="https://api2.huanjiaohu.com/circle/circle/upload"
-                      :header="header" :formData="formData"  max="1"
+                      url="https://api2.huanjiaohu.com/circle/setting/upload"
+                      :header="header"
                       @success="onSuccess"
                       @fail="onFail"
                     >
-                  <wux-button block type="positive" @click="upload">拍照/上传</wux-button>
+                  <wux-button block type="positive">拍照/上传</wux-button>
           </wux-upload>
     </wux-popup>
   </view>
@@ -123,6 +123,8 @@ export default {
         filter: -1,
         bowlSystem: -1
       },
+      header: {},
+      cover_url: null,
       winStyle: 'width:100%;height:100%'
     };
   },
@@ -153,12 +155,19 @@ export default {
   async onLoad () {
     const user = wx.getStorageSync('userInfo');
     const setting = await api.getCircleSetting();
+    this.header = {'Authorization': wx.getStorageSync('token')};
     if (user) {
       if (setting && setting.id) {
         user.title = setting ? setting.title : '我的云端海缸';
         user.navigator_url = '/pages/circle/index';
+        if (setting.cover_url) {
+          this.cover_url = setting.cover_url;
+        } else {
+          this.cover_url = 'https://static.huanjiaohu.com/image/login_banner.jpg';
+        }
       } else {
         this.isPopup = true;
+        this.showAdd = false;
       }
       this.user = user;
     } else {
@@ -177,15 +186,29 @@ export default {
         }
         this.newList = newList;
         this.newPage = 1;
-        this.winStyle =
-      'width:100%;height:' + this.newList.data.length * 120 + 'px;';
+        this.winStyle = 'width:100%;height:' + this.newList.data.length * 120 + 'px;';
       }
     },
     onClose () {
       this.showUpload = false;
+      this.showAdd = true;
+    },
+    async onSuccess (e) {
+      this.cover_url = JSON.parse(e.mp.detail.file.res.data).cover_url;
+      this.showUpload = false;
+    },
+    onFail (e) {
+      wx.showToast({
+        title: '失败',
+        duration: 2000,
+        complete: () => {
+
+        }
+      })
     },
     showDialog () {
       this.showUpload = true;
+      this.showAdd = false;
     },
     onCommentClick (flag = false) {
       this.showAdd = flag;
@@ -206,16 +229,11 @@ export default {
       wx.showLoading({
         title: '加载中'
       });
-      const setting = await api.getCircleSetting();
-      if (setting.id) {
-        const id = await api.createCircle({ type: 1 });
-        wx.setStorageSync('add-circle-id', id);
-        wx.navigateTo({
-          url: '/pages/circle/circlePost?id=' + id
-        });
-      } else {
-        this.isPopup = true;
-      }
+      const id = await api.createCircle({ type: 1 });
+      wx.setStorageSync('add-circle-id', id);
+      wx.navigateTo({
+        url: '/pages/circle/circlePost?id=' + id
+      });
       wx.hideLoading();
     },
     async gotoMyCircle () {
@@ -255,6 +273,7 @@ export default {
             duration: 2000
           });
           this.isPopup = false;
+          this.showAdd = true;
           this.loadingCircle();
         } else {
           util.showErrorToast('开缸失败');
