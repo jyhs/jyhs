@@ -14,6 +14,9 @@ const api = {
   listCircle: (paramObj) => request.post('circle/list', paramObj, {
     baseURL: ApiCircleUrl
   }),
+  getCircleById: (paramObj) => request.post('circle/getCircleById', paramObj, {
+    baseURL: ApiCircleUrl
+  }),
   listByUserId: (paramObj) => request.post('circle/listByUserId', paramObj, {
     baseURL: ApiCircleUrl
   }),
@@ -27,6 +30,15 @@ const api = {
     baseURL: ApiCircleUrl
   }),
   commentPost: (paramObj) => request.post('circle/commentPost', paramObj, {
+    baseURL: ApiCircleUrl
+  }),
+  deleteImage: (paramObj) => request.post('circle/deleteImage', paramObj, {
+    baseURL: ApiCircleUrl
+  }),
+  getComments: (paramObj) => request.post('circle/getComments', paramObj, {
+    baseURL: ApiCircleUrl
+  }),
+  updateCircleSetting: (paramObj) => request.post('setting/update', paramObj, {
     baseURL: ApiCircleUrl
   })
 

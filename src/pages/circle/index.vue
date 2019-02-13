@@ -9,14 +9,12 @@
                 mode="aspectFill"
            />
       </view>
-      <view class="userinfo wux-margin-right--10">
-          <navigator url="/pages/circle/circle">
+      <view class="userinfo wux-margin-right--10" @click="gotoMyCircle">
             <wux-image
                     width="50px"
                     height="50px"
                     :src="user.headimgurl"
               />
-            </navigator>
       </view>
       <view class="wux-clearfix circle-info"></view>
       <view v-for="friend of newList.data" :key="friend.id">
@@ -237,22 +235,16 @@ export default {
       wx.hideLoading();
     },
     async gotoMyCircle () {
-      const setting = await api.getCircleSetting();
-      if (setting.id) {
-        const list = await api.listByUserId({ type: 0 });
-        let id = null;
-        if (list.data.length === 0) {
-          id = await api.createCircle({ type: 0 });
-        } else {
-          id = list.data[0].id;
-        }
-        wx.setStorageSync('my-circle-id', id);
-        wx.navigateTo({
-          url: '/pages/circle/circle?id=' + id
-        });
+      const list = await api.listByUserId({ type: 0 });
+      let id = null;
+      if (list.data.length === 0) {
+        id = await api.createCircle({ type: 0 });
       } else {
-        this.isPopup = true;
+        id = list.data[0].id;
       }
+      wx.navigateTo({
+        url: '/pages/circle/circle?id=' + id
+      });
     },
     async open () {
       if (!this.setting.title) {

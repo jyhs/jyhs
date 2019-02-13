@@ -122,7 +122,7 @@
             </view>
         </view>
         <view class="r fenxiang">
-          <button open-type='share'>分享</button>
+          <button :plain="true" open-type='share'>分享</button>
         </view>
      </view>
 
@@ -226,7 +226,7 @@ export default {
       this.swiperStyle = `height:${this.imgheights[this.current]}rpx`;
     },
     goHome () {
-      wx.reLaunch({
+      wx.switchTab({
         url: '/pages/index/index'
       });
     },

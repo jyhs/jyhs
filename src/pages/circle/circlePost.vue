@@ -4,7 +4,7 @@
   <view class="post-comment">
     <wux-wing-blank>
       <view class="row upload">
-                 <wux-upload listType="picture-card"  :header="header" :formData="formData"  max="3" url="https://api2.huanjiaohu.com/circle/circle/upload" @success="onSuccess" @fail="onFail">
+                 <wux-upload listType="picture-card" count="1"   :header="header" :formData="formData"  max="9" url="https://api2.huanjiaohu.com/circle/circle/upload" @success="onSuccess" @fail="onFail">
                     <text>拍照</text>
                 </wux-upload>
       </view>

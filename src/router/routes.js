@@ -320,7 +320,9 @@ module.exports = [
         'wux-upload': '../../static/wux/upload/index',
         'wux-wing-blank': '../../static/wux/wing-blank/index',
         'wux-tabs': '../../static/wux/tabs/index',
+        'wux-input': '../../static/wux/input/index',
         'wux-gallery': '../../static/wux/gallery/index',
+        'wux-select': '../../static/wux/select/index',
         'wux-tab': '../../static/wux/tab/index'
       }
     }
