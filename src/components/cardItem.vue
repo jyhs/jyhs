@@ -61,7 +61,7 @@
           <wux-row v-if="item.interaction">
             <wux-col span="6" class="wux-text--left">
               <wux-timeago :to="item.insert_date" v-if="item.insert_date"/>&nbsp;
-              <span @click="showDelete" :data-id="item.id" v-show="showDelete">
+              <span @click="showDelete" :data-id="item.id" v-if="showDeleteIcon">
                 <wux-icon type="ios-trash" color="#A3A3A3" size="12"/>&nbsp;删除
               </span>
             </wux-col>
@@ -144,7 +144,7 @@ export default {
     }
   },
   computed: {
-    showDelete () {
+    showDeleteIcon () {
       return this.item.user_id === this.user.id;
     }
   },
