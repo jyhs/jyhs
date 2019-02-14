@@ -24,7 +24,7 @@
               {{item.time}}
             </wux-col>
           </wux-row>
-          <wux-row>
+          <wux-row v-if="item.title || item.price">
             <view class="fontbd">
               <wux-col span="10">{{item.title}}</wux-col>
               <wux-col span="2" class="wux-assertive wux-text--left jine wux-text--right">
@@ -50,7 +50,7 @@
               </button>
             </wux-col>
              <wux-col span="2" class="wux-text--right">
-              <button open-type="share" :plain="true" :data-id="item.id" :data-title="item.title" v-if="item.interaction">
+              <button open-type="share" :plain="true" :data-id="item.id"  v-if="item.interaction">
                 <wux-icon type="md-share" color="#A3A3A3" size="12"/>
                 分享
               </button>

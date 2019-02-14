@@ -81,9 +81,6 @@
         </wux-cell-group>
         <title text="基本设置"/>
         <wux-cell-group class="pop_setaqua">
-        <wux-cell title="鱼缸名字">
-          <wux-input slot="footer" :controlled="true" :value="circle.title" placeholder="设置一个很吊的名字吧" @change="titleChange"/>
-        </wux-cell>
         <wux-cell title="鱼缸类型">
           <wux-segmented-control
             slot="footer"
@@ -353,7 +350,6 @@ export default {
   // 原生的分享功能
   onShareAppMessage: function () {
     return {
-      title: this.circle.title,
       path: '/pages/circle/circle?id=' + this.id
     };
   }
