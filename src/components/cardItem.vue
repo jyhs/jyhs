@@ -6,8 +6,8 @@
         <wux-col span="2" class="wux-text--left wux-ellipsis avatarstyle">
           <wux-avatar
             :src="item.headimgurl"
-            shape="cycle"
-            body-style="background-color: #ffffff;width: 32px; height:32px;"
+            shape="square"
+            body-style="background-color: #ffffff;width: 36px; height:36px;"
           />
         </wux-col>
         <wux-col span="10">
@@ -48,7 +48,7 @@
                 <view class="list_img" @tap="showGallery(it.id,$event)" :data-current="index">
                   <wux-image
                     width="100%"
-                    height="120px"
+                    height="96px"
                     :src="it"
                     loading="图片加载中..."
                     mode="aspectFill"
@@ -62,7 +62,7 @@
             <wux-col span="6" class="wux-text--left">
               <wux-timeago :to="item.insert_date" v-if="item.insert_date"/>&nbsp;
               <span @click="showDelete" :data-id="item.id" v-if="showDeleteIcon">
-                <wux-icon type="ios-trash" color="#A3A3A3" size="12"/>&nbsp;删除
+                &nbsp;删除
               </span>
             </wux-col>
             <wux-col span="2" class="wux-text--right">
@@ -97,10 +97,7 @@
               </wux-col>
             </wux-row>
             <wux-row v-if="commentList.length">
-              <wux-col span="1" class="wux-text--center">
-                <wux-icon type="md-list" color="#576b95" size="12"/>
-              </wux-col>
-              <wux-col span="11" class="wux-text--left">
+              <wux-col span="12" class="wux-text--left">
                 <div v-for="cit of commentList" :key="cit.id">
                   <span class="comm_name">{{cit.user_info.name}}:</span>
                   {{cit.content}}
