@@ -65,7 +65,7 @@
             </wux-col>
              <wux-col span="2" class="wux-text--right">
               <button :plain="true" :data-id="item.id" @click="comment" v-if="item.interaction">
-                <wux-icon type="ios-chatboxes" color="#A3A3A3" size="12"/>
+                <wux-icon type="ios-more" color="#A3A3A3" size="12"/>
                 评论
               </button>
             </wux-col>
@@ -98,7 +98,7 @@
       
        <wux-row v-if="item.interaction&&commentList.length" class="pub_toolsarea">
         <wux-col span="1" class="wux-text--center">
-          <wux-icon type="ios-chatboxes" color="#576b95" size="12"/>
+          <wux-icon type="ios-more" color="#576b95" size="12"/>
         </wux-col>
         <wux-col span="11" class="wux-text--left">
           <div v-for="cit of commentList" :key="cit.id">
