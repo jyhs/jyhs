@@ -12,7 +12,7 @@
            <wux-icon type="ios-pin" color="#cbcbcb" size="10"/>
            {{item.city_name}}       
         </wux-col>
-        <wux-col span="10">
+        <wux-col span="9">
           <wux-row>
             <wux-col span="7">
               <view v-for="tag of item.tag" :key="tag">
@@ -38,6 +38,9 @@
               <wux-icon type="ios-person" color="#cbcbcb" size="12"/> {{item.name}}
             </wux-col>
           </wux-row>
+        </wux-col>
+         <wux-col span="1"  class="wux-text--right">
+           <wux-icon type="ios-pin" color="#cbcbcb" size="12"/>
         </wux-col>
       </wux-row>
       <wux-row v-if="item.description">
