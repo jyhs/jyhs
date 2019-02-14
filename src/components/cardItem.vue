@@ -244,8 +244,8 @@ export default {
   display: block;
   font-size: 12px;
   color: #333;
-  padding:10px 10px 10px 0;
-  line-height:1.2;
+  padding:10px 10px 6px 0;
+  line-height:1.4;
   background-color:#efefef;
 }
 
@@ -261,7 +261,7 @@ export default {
   margin-right: 10px;
 }
 
-.comm_name{font-weight: bold;}
+.comm_name{font-weight: bold;color:#576b95}
 .avatarstyle .wux-col--span-2{
 overflow:hidden;
 border-right:solid 8px white;
