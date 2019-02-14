@@ -81,7 +81,8 @@
               </button>
             </wux-col>
           </wux-row>
-          <wux-row v-if="item.interaction" class="pub_toolsarea">
+          <wux-row v-if="item.interaction&&praiseList.length||commentList.length" class="pub_toolsarea">
+            <div class="arrowicon"></div>
             <wux-row v-if="praiseList.length">
               <wux-col span="1" class="wux-text--center">
                 <wux-icon type="ios-heart-empty" color="#576b95" size="12"/>
@@ -280,7 +281,16 @@ export default {
   font-size: 12px;
   color: #333;
   padding: 10px 10px 6px 0;
-  background-color: #efefef;
+  background-color: #f7f7f7;
+  margin-top:12px;
+}
+.arrowicon{
+  position: absolute;
+  margin-top:-16px;
+  margin-left: 8px;
+  background-image: url(https://static.huanjiaohu.com/mini/index/arrowbg.png);
+  width: 22px;
+  height: 10px;
 }
 
 .comment {
