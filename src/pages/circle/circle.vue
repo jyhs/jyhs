@@ -1,34 +1,59 @@
 <template >
   <view class="container">
-      <scroll-view scroll-y="true" style="height: 100%">
-         <view class="row">
-            <wux-row>
-              <wux-col span="12">
-                <cardItem :item="user"/>
-              </wux-col>
-            </wux-row>
-        </view>
- 
-        <title text="点赞和评论"/>
-      <wux-row v-if="circle.interaction&&praiseList.length" class="pub_toolsarea">
-        <wux-col span="1" class="wux-text--center">
-          <wux-icon type="md-heart" color="#A3A3A3" size="14"/>
-        </wux-col>
-        <wux-col span="11" class="wux-text--left">
-          <image
-            v-for="it of praiseList"
-            :key="it.id"
-            style="width: 25px; height: 25px; margin-right:5px;"
-            :src="'https://api2.huanjiaohu.com/user/getAvatar?userId='+it.user_id"
-          />
-        </wux-col>
-      </wux-row>
-       <wux-row v-if="circle.interaction&&commentList.length" class="pub_toolsarea">
-        <wux-col span="1" class="wux-text--center">
-          <wux-icon type="ios-chatboxes" color="#A3A3A3" size="14"/>
-        </wux-col>
-        <wux-col span="11" class="wux-text--left">
-          <div class="comment-detail"  v-for="cit of commentList" :key="cit.id">
+    <scroll-view scroll-y="true" style="height: 100%">
+      <view class="row">
+        <wux-row>
+          <wux-col span="12">
+            <cardItem :item="user"/>
+          </wux-col>
+        </wux-row>
+      </view>
+      <wux-cell-group class="pop_setaqua">
+        <div class="img_all">
+          <block v-for="(it,index) of thumImageList" :key="index">
+            <view class="list_img" @tap="showGallery(index,$event)" :data-current="index">
+              <wux-image width="100%" height="97px" loading="图片加载中..." :src="it"/>
+            </view>
+          </block>
+          <block>
+            <view class="list_img">
+              <wux-upload
+                :showUploadList="false"
+                listType="picture-card"
+                :max="max"
+                count="1"
+                :header="header"
+                :formData="formData"
+                url="https://api2.huanjiaohu.com/circle/circle/upload"
+                @success="onSuccess"
+                @fail="onFail"
+              >
+                <text>拍照</text>
+              </wux-upload>
+            </view>
+          </block>
+        </div>
+      </wux-cell-group>
+      <wux-cell-group>
+        <wux-row v-if="circle.interaction&&praiseList.length" class="pub_toolsarea">
+          <wux-col span="1" class="wux-text--center">
+            <wux-icon type="md-heart" color="#A3A3A3" size="14"/>
+          </wux-col>
+          <wux-col span="11" class="wux-text--left">
+            <image
+              v-for="it of praiseList"
+              :key="it.id"
+              style="width: 25px; height: 25px; margin-right:5px;"
+              :src="'https://api2.huanjiaohu.com/user/getAvatar?userId='+it.user_id"
+            />
+          </wux-col>
+        </wux-row>
+        <wux-row v-if="circle.interaction&&commentList.length" class="pub_toolsarea">
+          <wux-col span="1" class="wux-text--center">
+            <wux-icon type="ios-chatboxes" color="#A3A3A3" size="14"/>
+          </wux-col>
+          <wux-col span="11" class="wux-text--left">
+            <div class="comment-detail" v-for="cit of commentList" :key="cit.id">
               <div class="comment-detail-left">
                 <image
                   style="width: 35px; height: 35px; margin-right:5px;"
@@ -37,50 +62,23 @@
               </div>
               <div class="comment-detail-right">
                 <div class="comment-detail-right-up">
-                  <div>
-                  {{cit.user_info.name}}
-                  </div>
-                  <div>
-                    {{cit.add_time}}
-                  </div>
+                  <div>{{cit.user_info.name}}</div>
+                  <div>{{cit.add_time}}</div>
                 </div>
-                <div class="comment-detail-right-down">
-                  {{cit.content}}
-                </div>
+                <div class="comment-detail-right-down">{{cit.content}}</div>
               </div>
-          </div>
-        </wux-col>
-      </wux-row>
-        <view class="no-comments" v-else>
-              <view class="b" @click="postComment">
-                  <img class="icon" src="https://static.huanjiaohu.com/icon/noComment.png"/>
-                  <text class="txt">点击下方留言按钮,期待您的精彩留言</text>
-              </view>
-        </view>
-        <title text="我的鱼缸"/>
-         <wux-cell-group class="pop_setaqua">
-            <div class="img_all">
-              <block v-for="(it,index) of thumImageList" :key="index">
-                <view class="list_img" @tap="showGallery(index,$event)" :data-current="index">
-                    <wux-image
-                      width="100%"
-                      height="97px"
-                      loading="图片加载中..." 
-                      :src="it"/>
-                </view>
-              </block>
-              <block>
-                <view class="list_img">
-                     <wux-upload :showUploadList="false" listType="picture-card" :max="max" count="1" :header="header" :formData="formData"  url="https://api2.huanjiaohu.com/circle/circle/upload" @success="onSuccess" @fail="onFail">
-                    <text>拍照</text>
-                </wux-upload>
-                </view>
-              </block>
-                
             </div>
-        </wux-cell-group>
-        <title text="基本设置"/>
-        <wux-cell-group class="pop_setaqua">
+          </wux-col>
+        </wux-row>
+        <view class="no-comments" v-else>
+          <view class="b" @click="postComment">
+            <img class="icon" src="https://static.huanjiaohu.com/icon/noComment.png">
+            <text class="txt">点击下方留言按钮,期待您的精彩留言</text>
+          </view>
+        </view>
+      </wux-cell-group>
+      <title text="基本设置"/>
+      <wux-cell-group class="pop_setaqua">
         <wux-cell title="鱼缸类型">
           <wux-segmented-control
             slot="footer"
@@ -118,42 +116,37 @@
           />
         </wux-cell>
       </wux-cell-group>
-        <title text="高级设置"/>
-        <wux-cell-group class="pop_setaqua">
+      <title text="高级设置"/>
+      <wux-cell-group class="pop_setaqua">
         <wux-cell title="鱼缸品牌" :extra="circle.bowlBrand" @click="onClickBrand" :isLink="true"/>
-        <wux-cell title="灯具品牌">
-        </wux-cell>
-        <wux-cell title="蛋分型号">
-        </wux-cell>
-        <wux-cell title="造流型号">
-        </wux-cell>
-         <wux-cell>
-           &nbsp;
-        </wux-cell>
+        <wux-cell title="灯具品牌"></wux-cell>
+        <wux-cell title="蛋分型号"></wux-cell>
+        <wux-cell title="造流型号"></wux-cell>
+        <wux-cell>&nbsp;</wux-cell>
       </wux-cell-group>
-      </scroll-view>
+    </scroll-view>
     <wux-gallery id="wux-gallery"/>
-    <wux-select id="wux-select1" />
-    <wux-select id="wux-select2" />
-    <wux-select id="wux-select3" />
-    <wux-select id="wux-select4" />
-     <view class="bottom-btn">
-        <view class="l l-collect" @click="goHome">
-            <img class="icon" src="/static/images/ic_menu_choice_nor.png"/>
+    <wux-select id="wux-select1"/>
+    <wux-select id="wux-select2"/>
+    <wux-select id="wux-select3"/>
+    <wux-select id="wux-select4"/>
+    <view class="bottom-btn">
+      <view class="l l-collect" @click="goHome">
+        <img class="icon" src="/static/images/ic_menu_choice_nor.png">
+      </view>
+      <view class="l l-collect" @click="praise">
+        <img class="icon" :src="collectBackImage">
+      </view>
+      <view class="l l-cart" @click="addComment">
+        <view class="box">
+          <text class="cart-count">{{commentNo}}</text>
+          <img class="icon" src="/static/images/comment.png">
         </view>
-        <view class="l l-collect" @click="praise">
-            <img class="icon" :src="collectBackImage"/>
-        </view>
-        <view class="l l-cart" @click="addComment">
-            <view class="box">
-            <text class="cart-count">{{commentNo}}</text>
-            <img  class="icon" src="/static/images/comment.png"/>
-            </view>
-        </view>
-        <view class="r fenxiang">
-          <button :plain="true" open-type='share'>分享</button>
-        </view>
-     </view>
+      </view>
+      <view class="r fenxiang">
+        <button :plain="true" open-type="share">分享</button>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -195,25 +188,27 @@ export default {
   async onLoad () {
     this.id = this.$route.query.id;
     const token = wx.getStorageSync('token');
-    this.circle = await api.getCircleById({'circleId': this.id});
-    console.log(this.circle)
+    this.circle = await api.getCircleById({ circleId: this.id });
+    console.log(this.circle);
     if (token) {
-      this.header = {'Authorization': token};
+      this.header = { Authorization: token };
     } else {
-
     }
-    const circle = Object.assign({}, this.circle)
+    const circle = Object.assign({}, this.circle);
     delete circle.interaction;
     delete circle.thumImageList;
     this.user = circle;
-    this.formData = {'circleId': this.id};
+    this.formData = { circleId: this.id };
     this.thumImageList = this.circle.thumImageList;
     if (this.thumImageList.length < 9) {
       this.max = 9 - this.thumImageList.length;
     } else {
       this.max = 0;
     }
-    this.praiseList = this.circle.interaction && this.circle.interaction.praiseList ? this.circle.interaction.praiseList : []
+    this.praiseList =
+      this.circle.interaction && this.circle.interaction.praiseList
+        ? this.circle.interaction.praiseList
+        : [];
     const user = wx.getStorageSync('userInfo');
     let flag = false;
     for (const praise of this.praiseList) {
@@ -228,28 +223,21 @@ export default {
     }
   },
   async onShow () {
-    this.commentList = await api.getComments({'circleId': this.id});
+    this.commentList = await api.getComments({ circleId: this.id });
     this.commentNo = this.commentList.length;
   },
   methods: {
     onClickBrand () {
       $wuxSelect('#wux-select1').open({
         value: this.circle.bowl_brand,
-        options: [
-          '法官',
-          '医生',
-          '猎人',
-          '学生',
-          '记者',
-          '其他'
-        ],
+        options: ['法官', '医生', '猎人', '学生', '记者', '其他'],
         onConfirm: (value, index, options) => {
           if (index !== -1) {
             this.$set(this.circle, 'bowlBrand', options[index]);
             api.updateCircleSetting(this.circle);
           }
         }
-      })
+      });
     },
     goHome () {
       wx.switchTab({
@@ -298,7 +286,7 @@ export default {
         [`delete`]: (current, urls) => {
           urls.splice(current, 1);
           const imgObj = this.circle.imageList[current];
-          api.deleteImage({'circleImgId': imgObj.id}).then((res) => {
+          api.deleteImage({ circleImgId: imgObj.id }).then(res => {
             this.thumImageList = urls;
             if (this.thumImageList.length < 9) {
               this.max = 9 - this.thumImageList.length;
@@ -320,7 +308,7 @@ export default {
       });
     },
     async onSuccess () {
-      this.circle = await api.getCircleById({'circleId': this.id});
+      this.circle = await api.getCircleById({ circleId: this.id });
       this.thumImageList = this.circle.thumImageList;
     },
     typeChange (e) {
@@ -472,35 +460,39 @@ page,
   text-align: center;
   color: #fff;
 }
-.no-comments{
-    height: 100px;
-    width:100%;
-    text-align:center;
-    background-color:white;
-    border-bottom:dashed 1px #f5f5f5;
-    padding-top:20rpx;
+.no-comments {
+  height: 100px;
+  width: 100%;
+  text-align: center;
+  background-color: white;
+  border-bottom: dashed 1px #f5f5f5;
+  padding-top: 20rpx;
 }
-.no-comments .txt{
-    text-align: center;
-    font-size: 12px;
-    color: #9b9b9b;
+.no-comments .txt {
+  text-align: center;
+  font-size: 12px;
+  color: #9b9b9b;
 }
-.commicon{float:left;margin-right:5px;margin-left:10px;}
-.no-comments .icon{
-    margin: 48rpx auto 18rpx auto;
-    height: 24px;
-    display: block;
-    width: 24px;
+.commicon {
+  float: left;
+  margin-right: 5px;
+  margin-left: 10px;
 }
-.comment-detail{
-  display: flex
+.no-comments .icon {
+  margin: 48rpx auto 18rpx auto;
+  height: 24px;
+  display: block;
+  width: 24px;
 }
-.comment-detail-right{
+.comment-detail {
+  display: flex;
+}
+.comment-detail-right {
   display: flex;
   flex-direction: column;
-  width:100%;
+  width: 100%;
 }
-.comment-detail-right-up{
+.comment-detail-right-up {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
