@@ -57,7 +57,9 @@
             </wux-col>
           
           </wux-row>
-           <wux-row v-if="item.description">
+        </wux-col>
+      </wux-row>
+      <wux-row v-if="item.description">
         <wux-col span="12">
           <wxParse :content="item.description"></wxParse>
         </wux-col>
@@ -79,6 +81,7 @@
           </block>
         </div>
       </wux-row>
+      
       <wux-row v-if="item.interaction&&praiseList.length" class="pub_toolsarea">
         <wux-col span="1" class="wux-text--center">
           <wux-icon type="md-heart" color="#A3A3A3" size="14"/>
@@ -92,6 +95,7 @@
           />
         </wux-col>
       </wux-row>
+      
        <wux-row v-if="item.interaction&&commentList.length" class="pub_toolsarea">
         <wux-col span="1" class="wux-text--center">
           <wux-icon type="ios-chatboxes" color="#A3A3A3" size="14"/>
@@ -118,8 +122,6 @@
                 </div>
               </div>
           </div>
-        </wux-col>
-      </wux-row>
         </wux-col>
       </wux-row>
     </wux-wing-blank>
