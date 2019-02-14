@@ -9,7 +9,7 @@
             shape="cycle"
             body-style="background-color: #ffffff;width: 35px; height: 35px;"
           /><br/>
-           <wux-icon type="ios-pin" color="#A3A3A3" size="12"/>
+           <wux-icon type="ios-pin" color="#cbcbcb" size="10"/>
                  {{item.city_name}}       
         </wux-col>
         <wux-col span="10">
@@ -27,7 +27,7 @@
           <wux-row>
             <view class="fontbd">
               <wux-col span="10">{{item.title}}</wux-col>
-              <wux-col span="2" class="wux-assertive wux-text--left jine">
+              <wux-col span="2" class="wux-assertive wux-text--left jine wux-text--right">
                  <span v-if="item.price>=0">¥</span>
                   {{item.price}}
               </wux-col>
@@ -35,7 +35,7 @@
           </wux-row>
           <wux-row >
             <wux-col span="6" class="wux-text--left">
-              {{item.name}}
+              <wux-icon type="ios-person" color="#cbcbcb" size="12"/> {{item.name}}
             </wux-col>
              <wux-col span="2" class="wux-text--right">
               <button :plain="true" :data-id="item.id" @click="comment" v-if="item.interaction">
@@ -284,5 +284,6 @@ border-right:solid 8px white;
 white-space:nowrap;
 text-overflow:ellipsis;
 padding:4px;
+font-size:10px;
 }
 </style>
