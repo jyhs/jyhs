@@ -300,14 +300,14 @@ export default {
   width: 100%;
   position: fixed;
   bottom: 0;
-  background-color: #999;
+  background-color: #f7f7f7;
   z-index: 100;
 }
 .comment-input {
   background-color: #ffffff;
   margin-right: 10px;
 }
-
+.comment button{overflow: visible;}
 .comm_name {
   font-weight: bold;
   color: #576b95;
@@ -320,5 +320,10 @@ export default {
   text-overflow: ellipsis;
   padding: 8px;
   font-size: 10px;
+}
+.wux-input__item {
+  height: 2.5em!important;
+  padding-left: 5px;
+  font-size: 14px!important;
 }
 </style>
