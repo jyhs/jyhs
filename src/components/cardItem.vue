@@ -9,7 +9,8 @@
             shape="cycle"
             body-style="background-color: #ffffff;width: 35px; height: 35px;"
           /><br/>
-                  {{item.name}}
+           <wux-icon type="ios-pin" color="#A3A3A3" size="12"/>
+                 {{item.city_name}}       
         </wux-col>
         <wux-col span="10">
           <wux-row>
@@ -20,26 +21,21 @@
             </wux-col>
             <wux-col span="7" class="wux-text--right">
               <wux-icon type="md-time" color="#A3A3A3" size="12" v-if="item.time"/>
-              {{item.time}}&nbsp;
-              <wux-icon type="ios-pin" color="#A3A3A3" size="12"/>
-                 {{item.city_name}}
+              {{item.time}}
             </wux-col>
           </wux-row>
           <wux-row>
             <view class="fontbd">
-              <wux-col span="12">{{item.title}}</wux-col>
+              <wux-col span="10">{{item.title}}</wux-col>
+              <wux-col span="2" class="wux-assertive wux-text--left jine">
+                 <span v-if="item.price>=0">¥</span>
+                  {{item.price}}
+              </wux-col>
             </view>
           </wux-row>
           <wux-row >
-            <wux-col span="2" class="wux-assertive wux-text--left jine">
-              <span v-if="item.price>=0">¥</span>
-              {{item.price}}
-            </wux-col>
-              <wux-col span="2" class="wux-text--center">
-              
-            </wux-col>
-            <wux-col span="2" class="wux-text--center">
-              
+            <wux-col span="6" class="wux-text--left">
+              {{item.name}}
             </wux-col>
              <wux-col span="2" class="wux-text--right">
               <button :plain="true" :data-id="item.id" @click="comment" v-if="item.interaction">
