@@ -2,8 +2,8 @@
   <view class="container">
     <view class="row">
       <scroll-view scroll-y="true" :style="winStyle">
-        <block v-for="item in activingList" :key="item.id" v-if='item.content.news_item[0].status==1'>
-          <bigCard :data="item"/>
+        <block v-for="item in activingList" :key="item.id" >
+          <bigCard :data="item" v-if='item.content.news_item[0].status==0'/>
         </block>
         <loadMore :reflash="reflash"/>
       </scroll-view>
