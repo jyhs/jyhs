@@ -58,49 +58,54 @@
               </block>
             </div>
           </wux-row>
-          <wux-row>
+          <wux-row v-if="item.interaction">
             <wux-col span="6" class="wux-text--left">
-              <wux-timeago :to="item.insert_date" v-if="item.insert_date"/>
+              <wux-timeago :to="item.insert_date" v-if="item.insert_date"/>&nbsp;
+              <span @click="showDelete" :data-id="item.id" v-show="showDelete">
+                <wux-icon type="ios-trash" color="#A3A3A3" size="12"/>&nbsp;删除
+              </span>
             </wux-col>
             <wux-col span="2" class="wux-text--right">
-              <button :plain="true" :data-id="item.id" @click="comment" v-if="item.interaction">
+              <button :plain="true" :data-id="item.id" @click="comment">
                 <wux-icon type="md-list" color="#A3A3A3" size="12"/>&nbsp;评论
               </button>
             </wux-col>
             <wux-col span="2" class="wux-text--right">
-              <button :plain="true" :data-id="item.id" @click="praise" v-if="item.interaction">
+              <button :plain="true" :data-id="item.id" @click="praise">
                 <wux-icon type="ios-heart-empty" color="#A3A3A3" size="12"/>&nbsp;点赞
               </button>
             </wux-col>
             <wux-col span="2" class="wux-text--right">
-              <button open-type="share" :plain="true" :data-id="item.id" v-if="item.interaction">
+              <button open-type="share" :plain="true" :data-id="item.id">
                 <wux-icon type="md-share" color="#A3A3A3" size="12"/>&nbsp;分享
               </button>
             </wux-col>
           </wux-row>
-          <wux-row v-if="item.interaction&&praiseList.length" class="pub_toolsarea">
-            <wux-col span="1" class="wux-text--center">
-              <wux-icon type="ios-heart-empty" color="#576b95" size="12"/>
-            </wux-col>
-            <wux-col span="11" class="wux-text--left">
-              <image
-                v-for="it of praiseList"
-                :key="it.id"
-                style="width: 24px; height: 24px; margin-right:6px;"
-                :src="'https://api2.huanjiaohu.com/user/getAvatar?userId='+it.user_id"
-              />
-            </wux-col>
-          </wux-row>
-          <wux-row v-if="item.interaction&&commentList.length" class="pub_toolsarea">
-            <wux-col span="1" class="wux-text--center">
-              <wux-icon type="md-list" color="#576b95" size="12"/>
-            </wux-col>
-            <wux-col span="11" class="wux-text--left">
-              <div v-for="cit of commentList" :key="cit.id">
-                <span class="comm_name">{{cit.user_info.name}}:</span>
-                {{cit.content}}
-              </div>
-            </wux-col>
+          <wux-row v-if="item.interaction" class="pub_toolsarea">
+            <wux-row v-if="praiseList.length">
+              <wux-col span="1" class="wux-text--center">
+                <wux-icon type="ios-heart-empty" color="#576b95" size="12"/>
+              </wux-col>
+              <wux-col span="11" class="wux-text--left">
+                <image
+                  v-for="it of praiseList"
+                  :key="it.id"
+                  style="width: 24px; height: 24px; margin-right:6px;"
+                  :src="'https://api2.huanjiaohu.com/user/getAvatar?userId='+it.user_id"
+                />
+              </wux-col>
+            </wux-row>
+            <wux-row v-if="commentList.length">
+              <wux-col span="1" class="wux-text--center">
+                <wux-icon type="md-list" color="#576b95" size="12"/>
+              </wux-col>
+              <wux-col span="11" class="wux-text--left">
+                <div v-for="cit of commentList" :key="cit.id">
+                  <span class="comm_name">{{cit.user_info.name}}:</span>
+                  {{cit.content}}
+                </div>
+              </wux-col>
+            </wux-row>
           </wux-row>
         </wux-col>
       </wux-row>
@@ -122,6 +127,7 @@
 <script>
 import { $wuxGallery } from '../../static/wux/index';
 import wxParse from 'mpvue-wxparse';
+import wx from 'wx';
 export default {
   components: {
     wxParse
@@ -137,6 +143,14 @@ export default {
       type: Function
     }
   },
+  computed: {
+    showDelete () {
+      return this.item.user_id === this.user.id;
+    }
+  },
+  onLoad () {
+    this.user = wx.getStorageSync('userInfo');
+  },
   data () {
     return {
       praiseList:
@@ -148,10 +162,21 @@ export default {
           ? this.item.interaction.commentList
           : [],
       showComment: false,
-      content: ''
+      content: '',
+      user: {}
     };
   },
   methods: {
+    showDelete (e) {
+      wx.showModal({
+        content: '确定删除?',
+        success: async res => {
+          if (res.confirm) {
+            await this.item.delete(e.mp.target.dataset.id);
+          }
+        }
+      });
+    },
     async praise (e) {
       const praiseList = await this.item.praise(e.mp.target.dataset.id);
       this.praiseList = praiseList;

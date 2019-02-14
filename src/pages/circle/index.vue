@@ -176,6 +176,7 @@ export default {
         for (const item of newList.data) {
           item['praise'] = this.praise;
           item['comment'] = this.comment;
+          item['delete'] = this.delete;
         }
         this.newList = newList;
         this.newPage = 1;
@@ -205,6 +206,12 @@ export default {
     },
     onCommentClick (flag = false) {
       this.showAdd = flag;
+    },
+    async delete (id) {
+      await api.deleteCircle({
+        'circleId': id
+      });
+      this.loadingCircle();
     },
     async praise (id) {
       const list = await api.praise({ circleId: id });
