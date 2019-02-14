@@ -45,7 +45,7 @@
             </wux-col>
              <wux-col span="2" class="wux-text--right">
               <button :plain="true" :data-id="item.id" @click="praise" v-if="item.interaction">
-                <wux-icon type="md-heart" color="#A3A3A3" size="12"/>
+                <wux-icon type="ios-heart-empty" color="#A3A3A3" size="12"/>
                 点赞
               </button>
             </wux-col>
@@ -81,7 +81,7 @@
       </wux-row>
       <wux-row v-if="item.interaction&&praiseList.length" class="pub_toolsarea">
         <wux-col span="1" class="wux-text--center">
-          <wux-icon type="md-heart" color="#A3A3A3" size="14"/>
+          <wux-icon type="ios-heart-empty" color="#A3A3A3" size="14"/>
         </wux-col>
         <wux-col span="11" class="wux-text--left">
           <image
@@ -252,7 +252,7 @@ export default {
   display: block;
   font-size: 12px;
   color: #999;
-  padding: 0 0 6px 0;
+  line-height:1.2;
   background-color:#efefef;
 }
 
