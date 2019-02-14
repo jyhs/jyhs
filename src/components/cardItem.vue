@@ -7,7 +7,7 @@
           <wux-avatar
             :src="item.headimgurl"
             shape="cycle"
-            body-style="background-color: #ffffff;width: 35px; height: 35px;"
+            body-style="background-color: #ffffff;width: 24px; height:24px;"
           /><br/>
            <wux-icon type="ios-pin" color="#cbcbcb" size="10"/>
                  {{item.city_name}}       
@@ -45,7 +45,7 @@
             </wux-col>
              <wux-col span="2" class="wux-text--right">
               <button :plain="true" :data-id="item.id" @click="praise" v-if="item.interaction">
-                <wux-icon type="md-heart" color="#A3A3A3" size="12"/>
+                <wux-icon type="ios-heart-empty" color="#A3A3A3" size="12"/>
                 点赞
               </button>
             </wux-col>
@@ -84,13 +84,13 @@
       
       <wux-row v-if="item.interaction&&praiseList.length" class="pub_toolsarea">
         <wux-col span="1" class="wux-text--center">
-          <wux-icon type="md-heart" color="#A3A3A3" size="14"/>
+          <wux-icon type="ios-heart-empty" color="#1171ca" size="12"/>
         </wux-col>
         <wux-col span="11" class="wux-text--left">
           <image
             v-for="it of praiseList"
             :key="it.id"
-            style="width: 25px; height: 25px; margin-right:5px;"
+            style="width: 24px; height: 24px; margin-right:6px;"
             :src="'https://api2.huanjiaohu.com/user/getAvatar?userId='+it.user_id"
           />
         </wux-col>
@@ -98,29 +98,11 @@
       
        <wux-row v-if="item.interaction&&commentList.length" class="pub_toolsarea">
         <wux-col span="1" class="wux-text--center">
-          <wux-icon type="ios-chatboxes" color="#A3A3A3" size="14"/>
+          <wux-icon type="ios-chatboxes" color="#1171ca" size="12"/>
         </wux-col>
         <wux-col span="11" class="wux-text--left">
-          <div class="comment-detail"  v-for="cit of commentList" :key="cit.id">
-              <div class="comment-detail-left">
-                <image
-                  style="width: 35px; height: 35px; margin-right:5px;"
-                  :src="cit.user_info.headimgurl"
-                />
-              </div>
-              <div class="comment-detail-right">
-                <div class="comment-detail-right-up">
-                  <div>
-                  {{cit.user_info.name}}
-                  </div>
-                  <div>
-                    <wux-timeago :to="cit.add_time*1000"/>
-                  </div>
-                </div>
-                <div class="comment-detail-right-down">
-                  {{cit.content}}
-                </div>
-              </div>
+          <div v-for="cit of commentList" :key="cit.id">
+                  {{cit.user_info.name}}: {{cit.content}}
           </div>
         </wux-col>
       </wux-row>
@@ -216,7 +198,10 @@ export default {
   line-height: 24px;
   color: #999;
   font-size: 11px;
+  border-bottom:solid 1px #f5f5f5;
+  padding-bottom:8px;
 }
+.ngrouppre button{line-height: 2;text-align: right}
 .fontbd {
   color: #000;
   font-size: 12px;
@@ -253,8 +238,9 @@ export default {
 .pub_toolsarea {
   display: block;
   font-size: 12px;
-  color: #999;
-  padding: 0 0 6px 0;
+  color: #333;
+  padding:10px 10px 10px 0;
+  line-height:1.2;
   background-color:#efefef;
 }
 
@@ -269,25 +255,12 @@ export default {
   background-color: #ffffff;
   margin-right: 10px;
 }
-.comment-detail{
-  display: flex
-}
-.comment-detail-right{
-  display: flex;
-  flex-direction: column;
-  width:100%;
-}
-.comment-detail-right-up{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
 .avatarstyle .wux-col--span-2{
 overflow:hidden;
 border-right:solid 8px white;
 white-space:nowrap;
 text-overflow:ellipsis;
-padding:4px;
+padding:0 4px;
 font-size:10px;
 }
 
