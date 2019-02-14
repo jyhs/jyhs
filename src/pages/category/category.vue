@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import mallApi from '@/utils/mallApi';
 import api from '@/utils/api';
 import loadMore from '@/components/loadMore';
 import smallCard from '@/components/smallCard';
@@ -72,17 +73,17 @@ export default {
     this.goodsList = this.goodsList.concat(res.data);
     this.reflash = false;
   },
-  async mounted () {
+  async onLoad () {
     if (this.$route.query.id) {
       this.id = parseInt(this.$route.query.id);
     }
-    await Promise.all([this.getCategoryInfo()]);
+    await this.getCategoryInfo();
   },
 
   methods: {
     // 获取类别信息
     async getCategoryInfo () {
-      const resData = await api.getGoodsCategory({ id: this.id });
+      const resData = await mallApi.getGoodsCategory({ id: this.id });
       if (resData.errno === 0) {
         this.navList = resData.data.brotherCategory;
         let currentIndex = 0;
