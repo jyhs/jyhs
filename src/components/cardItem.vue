@@ -29,11 +29,8 @@
             </view>
           </wux-row>
           <wux-row >
-            <wux-col span="2" class="wux-text--left">
-                <wux-icon type="ios-pin" color="#cbcbcb" size="12"/> {{item.city_name}}   
-            </wux-col>
-             <wux-col span="6" class="wux-text--left">
-                <wux-icon type="ios-person" color="#cbcbcb" size="12"/> {{item.name}}
+             <wux-col span="8" class="wux-text--left">
+                <wux-icon type="ios-person" color="#cbcbcb" size="12"/> {{item.name}} - {{item.city_name}}  
             </wux-col>
             <wux-col span="4" class="wux-text--right">
                 <wux-icon type="md-time" color="#A3A3A3" size="12" v-if="item.time"/> {{item.time}}
