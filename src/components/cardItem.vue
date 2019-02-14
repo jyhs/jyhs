@@ -14,8 +14,8 @@
           <wux-row>
             <wux-col span="7">
               <view v-for="tag of item.tag" :key="tag">
-                <wux-tag prefixCls="tagblue_small" v-if="item.status">{{tag}}</wux-tag>
-                <wux-tag prefixCls="taggreen_small" v-else>{{tag}}</wux-tag>
+                <wux-tag prefixCls="taggray_small" v-if="item.status==0">{{tag}}</wux-tag>
+                <wux-tag prefixCls="tagblue_small" v-else>{{tag}}</wux-tag>
               </view>
             </wux-col>
             <wux-col span="5" class="wux-assertive jine wux-text--right">
