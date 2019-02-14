@@ -84,7 +84,7 @@
       
       <wux-row v-if="item.interaction&&praiseList.length" class="pub_toolsarea">
         <wux-col span="1" class="wux-text--center">
-          <wux-icon type="ios-heart-empty" color="#1171ca" size="12"/>
+          <wux-icon type="ios-heart-empty" color="#576b95" size="12"/>
         </wux-col>
         <wux-col span="11" class="wux-text--left">
           <image
@@ -98,11 +98,11 @@
       
        <wux-row v-if="item.interaction&&commentList.length" class="pub_toolsarea">
         <wux-col span="1" class="wux-text--center">
-          <wux-icon type="ios-chatboxes" color="#1171ca" size="12"/>
+          <wux-icon type="ios-chatboxes" color="#576b95" size="12"/>
         </wux-col>
         <wux-col span="11" class="wux-text--left">
           <div v-for="cit of commentList" :key="cit.id">
-                  {{cit.user_info.name}}: {{cit.content}}
+                  <span class="comm_name">{{cit.user_info.name}}:</span> {{cit.content}}
           </div>
         </wux-col>
       </wux-row>
@@ -255,6 +255,8 @@ export default {
   background-color: #ffffff;
   margin-right: 10px;
 }
+
+.comm_name{font-weight: bold;}
 .avatarstyle .wux-col--span-2{
 overflow:hidden;
 border-right:solid 8px white;
