@@ -32,9 +32,6 @@
     ></cover-image>
     <wux-popup position="bottom" :visible="isPopup" :maskClosable="false">
       <wux-cell-group class="pop_setaqua" title="第一次使用需要开缸">
-        <wux-cell title="鱼缸名字">
-          <wux-input slot="footer" placeholder="设置一个很吊的名字吧" @change="titleChange"/>
-        </wux-cell>
         <wux-cell title="鱼缸类型">
           <wux-segmented-control
             slot="footer"
@@ -142,7 +139,6 @@ export default {
     if (options.from === 'button') {
       const eData = options.target.dataset;
       share.path = '/pages/circle/circle?id=' + eData.id;
-      share.title = eData.title;
     }
 
     return share;
@@ -156,7 +152,6 @@ export default {
     this.header = {'Authorization': wx.getStorageSync('token')};
     if (user) {
       if (setting && setting.id) {
-        user.title = setting ? setting.title : '我的云端海缸';
         user.navigator_url = '/pages/circle/index';
         if (setting.cover_url) {
           this.cover_url = setting.cover_url;
@@ -247,9 +242,7 @@ export default {
       });
     },
     async open () {
-      if (!this.setting.title) {
-        util.showErrorToast('请填写鱼缸名字');
-      } else if (this.setting.type < 0) {
+      if (this.setting.type < 0) {
         util.showErrorToast('请选择鱼缸类型');
       } else if (this.setting.size < 0) {
         util.showErrorToast('请选择鱼缸尺寸');
@@ -271,9 +264,6 @@ export default {
           util.showErrorToast('开缸失败');
         }
       }
-    },
-    titleChange (e) {
-      this.setting.title = e.mp.detail.value;
     },
     typeChange (e) {
       this.setting.type = e.mp.detail.key + '';
