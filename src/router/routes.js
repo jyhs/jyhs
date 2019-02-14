@@ -282,6 +282,7 @@ module.exports = [
         'wux-popup': '../../static/wux/popup/index',
         'wux-cell-group': '../../static/wux/cell-group/index',
         'wux-cell': '../../static/wux/cell/index',
+        'wux-timeago': '../../static/wux/timeago/index',
         'wux-segmented-control': '../../static/wux/segmented-control/index',
         'wux-input': '../../static/wux/input/index',
         'wux-image': '../../static/wux/image/index',
