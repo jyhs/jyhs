@@ -41,7 +41,7 @@
 <script>
 import loadMore from '@/components/loadMore';
 import cardItem from '@/components/cardItem';
-import api from '@/utils/api';
+import api from '@/utils/groupApi';
 import wx from 'wx';
 export default {
   components: {
@@ -142,6 +142,7 @@ export default {
         group.name = group.contacts;
         group.city_name = group.city_name;
         group.price = group.sum;
+        delete group.description;
         if (group.province === province) {
           list.push(group);
         }
