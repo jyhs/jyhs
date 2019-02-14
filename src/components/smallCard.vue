@@ -60,7 +60,7 @@ export default {
   },
   data () {
     return {
-      url: 'https://api.huanjiaohu.com/material/getImageSmall?materialId=' + this.item.id
+      url: 'https://api2.huanjiaohu.com/material/getImageSmall?materialId=' + this.item.id
     }
   },
   computed: {

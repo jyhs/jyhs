@@ -140,6 +140,14 @@ export default {
     },
     commentClick: {
       type: Function
+    },
+    praiseList: {
+      type: Array,
+      default () {
+        return this.item.interaction && this.item.interaction.praiseList
+          ? this.item.interaction.praiseList
+          : [];
+      }
     }
   },
   computed: {
@@ -152,10 +160,6 @@ export default {
   },
   data () {
     return {
-      praiseList:
-        this.item.interaction && this.item.interaction.praiseList
-          ? this.item.interaction.praiseList
-          : [],
       commentList:
         this.item.interaction && this.item.interaction.commentList
           ? this.item.interaction.commentList

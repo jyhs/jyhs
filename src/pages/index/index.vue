@@ -373,7 +373,7 @@ export default {
       const groupList = [];
       const retailList = [];
       for (const group of groups) {
-        group.headimgurl = 'https://api.huanjiaohu.com/user/getAvatar?userId=' + group.user_id;
+        group.headimgurl = 'https://api2.huanjiaohu.com/user/getAvatar?userId=' + group.user_id;
         group.navigator_url = '/pages/group/buy?id=' + group.id;
         if (group.status === 0) {
           group.tag = ['已结束']

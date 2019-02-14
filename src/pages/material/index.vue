@@ -300,7 +300,7 @@ export default {
       this.comment = commentList.data;
       this.commentNo = commentCount.data.allCount;
       for (let relatedMaterial of relatedMaterials.data) {
-        relatedMaterial.list_pic_url = 'https://api.huanjiaohu.com/material/getImageSmall?materialId=' + relatedMaterial.id
+        relatedMaterial.list_pic_url = 'https://api2.huanjiaohu.com/material/getImageSmall?materialId=' + relatedMaterial.id
       }
       this.relatedMaterials = relatedMaterials.data;
     }

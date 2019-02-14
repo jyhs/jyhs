@@ -160,6 +160,10 @@ function showErrorToast (msg) {
   })
 }
 
+function getUrl (url) {
+  return 'https://api2.huanjiaohu.com' + url;
+}
+
 const util = {
   formatTime,
   request,
@@ -167,7 +171,8 @@ const util = {
   showErrorToast,
   checkSession,
   login,
-  getUserInfo
+  getUserInfo,
+  getUrl
 }
 
 export default util

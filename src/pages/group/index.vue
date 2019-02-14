@@ -59,7 +59,7 @@ export default {
     const groupList = [];
     this.setGroupCard(group.data, groupList, province);
     this.groupList = groupList;
-    this.winStyle = 'width:100%;margin-top:44px;height:' + groupList.length * 82 + 'px;';
+    this.winStyle = this.computedHeight(this.groupList);
   },
   data () {
     return {
@@ -87,7 +87,7 @@ export default {
         const retailList = [];
         this.setGroupCard(group.data, retailList, 'china');
         this.retailList = this.retailList.concat(retailList);
-        this.winStyle = 'width:100%;margin-top:44px;height:' + this.retailList.length * 82 + 'px;';
+        this.winStyle = this.computedHeight(this.retailList);
       }
     } else {
       this.groupPage = this.groupPage + 1;
@@ -102,7 +102,7 @@ export default {
         const groupList = [];
         this.setGroupCard(group.data, groupList, province);
         this.groupList = this.groupList.concat(groupList);
-        this.winStyle = 'width:100%;margin-top:44px;height:' + this.groupList.length * 82 + 'px;';
+        this.winStyle = this.computedHeight(this.groupList);
       }
     }
   },
@@ -118,11 +118,14 @@ export default {
           this.setGroupCard(group.data, retailList, 'china');
           this.retailList = retailList;
         }
-        this.winStyle = 'width:100%;margin-top:44px;height:' + this.retailList.length * 82 + 'px;';
+        this.winStyle = this.computedHeight(this.retailList);
       } else {
-        this.winStyle = 'width:100%;margin-top:44px;height:' + this.groupList.length * 82 + 'px;';
+        this.winStyle = this.computedHeight(this.groupList);
       }
       this.tabCurrent = e.mp.detail.current;
+    },
+    computedHeight (list) {
+      return 'width:100%;margin-top:44px;height:' + list.length * 92 + 'px;'
     },
     change (e) {
       this.current = e.mp.detail.key;
@@ -130,7 +133,7 @@ export default {
     setGroupCard (groups, list, province) {
       for (const group of groups) {
         group.headimgurl =
-          'https://api.huanjiaohu.com/user/getAvatar?userId=' + group.user_id;
+          'https://api2.huanjiaohu.com/user/getAvatar?userId=' + group.user_id;
         group.navigator_url = '/pages/group/buy?id=' + group.id;
         if (group.status === 0) {
           group.tag = ['已结束'];
