@@ -34,6 +34,7 @@ export default {
       valueId: 0,
       content: '',
       formData: null,
+      countImg: 0,
       header: null,
       isCancel: true
     }
@@ -65,14 +66,18 @@ export default {
       if (!this.content) {
         util.showErrorToast('请填写评论');
         return false;
-      }
-      const res = await api.addCircle({
-        'circleId': this.$route.query.id,
-        'description': this.content
-      });
-      if (res > 0) {
-        this.isCancel = false;
-        this.$router.go(-1);
+      } else if (this.countImg <= 0) {
+        util.showErrorToast('请添加一张图片');
+        return false;
+      } else {
+        const res = await api.addCircle({
+          'circleId': this.$route.query.id,
+          'description': this.content
+        });
+        if (res > 0) {
+          this.isCancel = false;
+          this.$router.go(-1);
+        }
       }
     },
     async onClose () {
@@ -82,7 +87,7 @@ export default {
       this.$router.go(-1);
     },
     onSuccess () {
-
+      this.countImg += 1;
     },
     onFail (e) {
       wx.showToast({
@@ -92,6 +97,9 @@ export default {
 
         }
       })
+    },
+    onRemove (e) {
+      this.countImg -= 1;
     }
   },
   // 原生的分享功能
