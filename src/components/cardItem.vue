@@ -281,6 +281,7 @@ export default {
   padding: 10px 10px 6px 0;
   background-color: #f7f7f7;
   margin-top:12px;
+  line-height: 20px;
 }
 .arrowicon{
   position: absolute;
@@ -306,6 +307,7 @@ export default {
 .comm_name {
   font-weight: bold;
   color: #576b95;
+  padding-left:7px;
 }
 .avatarstyle .wux-col--span-2 {
   overflow: hidden;
