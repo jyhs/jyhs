@@ -3,13 +3,12 @@
     <wux-wing-blank>
       <wux-white-space/>
       <wux-row>
-        <wux-col span="2"  class="wux-text--left wux-ellipsis avatarstyle">
+        <wux-col span="2" class="wux-text--left wux-ellipsis avatarstyle">
           <wux-avatar
             :src="item.headimgurl"
             shape="cycle"
             body-style="background-color: #ffffff;width: 32px; height:32px;"
           />
-               
         </wux-col>
         <wux-col span="10">
           <wux-row>
@@ -18,103 +17,105 @@
                 <wux-tag prefixCls="tagblue_small">{{tag}}</wux-tag>
               </view>
             </wux-col>
-           <wux-col span="5" class="wux-assertive jine wux-text--right">
-                 <span v-if="item.price>=0">¥</span>
-                  {{item.price}}
-           </wux-col>
+            <wux-col span="5" class="wux-assertive jine wux-text--right">
+              <span v-if="item.price>=0">¥</span>
+              {{item.price}}
+            </wux-col>
           </wux-row>
           <wux-row v-if="item.title">
             <view class="fontbd">
               <wux-col span="12">{{item.title}}</wux-col>
             </view>
           </wux-row>
-          <wux-row >
-             <wux-col span="8" class="wux-text--left">
-                <wux-icon type="ios-person" color="#cbcbcb" size="12"/> {{item.name}} - {{item.city_name}}  
+          <wux-row>
+            <wux-col span="8" class="wux-text--left">
+              <wux-icon type="ios-person" color="#cbcbcb" size="12"/>
+              {{item.name}} - {{item.city_name}}
             </wux-col>
             <wux-col span="4" class="wux-text--right">
-                <wux-icon type="md-time" color="#A3A3A3" size="12" v-if="item.time"/> {{item.time}}
+              <wux-icon type="md-time" color="#A3A3A3" size="12" v-if="item.time"/>
+              {{item.time}}
             </wux-col>
           </wux-row>
-        </wux-col>
-      </wux-row>
-      <wux-row v-if="item.description">
-        <wux-col span="12">
-          <wxParse :content="item.description"></wxParse>
-        </wux-col>
-      </wux-row>
-      <wux-row v-if="item.thumImageList">
-        <div class="img_all">
-          <block v-for="it of item.thumImageList" :key="it.id">
-            <view class="list_img" @tap="showGallery(it.id,$event)" :data-current="index">
-              <wux-image
-                width="100%"
-                height="120px"
-                :src="it"
-                loading="图片加载中..."
-                mode="aspectFill"
-                shape="rounded"
-              />
-            </view>
-          </block>
-        </div>
-      </wux-row>
-      <wux-row >
+          <wux-row v-if="item.description">
+            <wux-col span="12">
+              <wxParse :content="item.description"></wxParse>
+            </wux-col>
+          </wux-row>
+          <wux-row v-if="item.thumImageList">
+            <div class="img_all">
+              <block v-for="it of item.thumImageList" :key="it.id">
+                <view class="list_img" @tap="showGallery(it.id,$event)" :data-current="index">
+                  <wux-image
+                    width="100%"
+                    height="120px"
+                    :src="it"
+                    loading="图片加载中..."
+                    mode="aspectFill"
+                    shape="rounded"
+                  />
+                </view>
+              </block>
+            </div>
+          </wux-row>
+          <wux-row>
             <wux-col span="6" class="wux-text--left">
-                <wux-timeago :to="item.insert_date" v-if="item.insert_date"/>
+              <wux-timeago :to="item.insert_date" v-if="item.insert_date"/>
             </wux-col>
-             <wux-col span="2" class="wux-text--right">
+            <wux-col span="2" class="wux-text--right">
               <button :plain="true" :data-id="item.id" @click="comment" v-if="item.interaction">
-                <wux-icon type="ios-more" color="#A3A3A3" size="12"/>
-                评论
+                <wux-icon type="ios-more" color="#A3A3A3" size="12"/>评论
               </button>
             </wux-col>
-             <wux-col span="2" class="wux-text--right">
+            <wux-col span="2" class="wux-text--right">
               <button :plain="true" :data-id="item.id" @click="praise" v-if="item.interaction">
-                <wux-icon type="ios-heart-empty" color="#A3A3A3" size="12"/>
-                点赞
+                <wux-icon type="ios-heart-empty" color="#A3A3A3" size="12"/>点赞
               </button>
             </wux-col>
-             <wux-col span="2" class="wux-text--right">
-              <button open-type="share" :plain="true" :data-id="item.id"  v-if="item.interaction">
-                <wux-icon type="md-share" color="#A3A3A3" size="12"/>
-                分享
+            <wux-col span="2" class="wux-text--right">
+              <button open-type="share" :plain="true" :data-id="item.id" v-if="item.interaction">
+                <wux-icon type="md-share" color="#A3A3A3" size="12"/>分享
               </button>
             </wux-col>
           </wux-row>
-      <wux-row v-if="item.interaction&&praiseList.length" class="pub_toolsarea">
-        <wux-col span="1" class="wux-text--center">
-          <wux-icon type="ios-heart-empty" color="#576b95" size="12"/>
-        </wux-col>
-        <wux-col span="11" class="wux-text--left">
-          <image
-            v-for="it of praiseList"
-            :key="it.id"
-            style="width: 24px; height: 24px; margin-right:6px;"
-            :src="'https://api2.huanjiaohu.com/user/getAvatar?userId='+it.user_id"
-          />
-        </wux-col>
-      </wux-row>
-      
-       <wux-row v-if="item.interaction&&commentList.length" class="pub_toolsarea">
-        <wux-col span="1" class="wux-text--center">
-          <wux-icon type="ios-more" color="#576b95" size="12"/>
-        </wux-col>
-        <wux-col span="11" class="wux-text--left">
-          <div v-for="cit of commentList" :key="cit.id">
-                  <span class="comm_name">{{cit.user_info.name}}:</span> {{cit.content}}
-          </div>
+          <wux-row v-if="item.interaction&&praiseList.length" class="pub_toolsarea">
+            <wux-col span="1" class="wux-text--center">
+              <wux-icon type="ios-heart-empty" color="#576b95" size="12"/>
+            </wux-col>
+            <wux-col span="11" class="wux-text--left">
+              <image
+                v-for="it of praiseList"
+                :key="it.id"
+                style="width: 24px; height: 24px; margin-right:6px;"
+                :src="'https://api2.huanjiaohu.com/user/getAvatar?userId='+it.user_id"
+              />
+            </wux-col>
+          </wux-row>
+          <wux-row v-if="item.interaction&&commentList.length" class="pub_toolsarea">
+            <wux-col span="1" class="wux-text--center">
+              <wux-icon type="ios-more" color="#576b95" size="12"/>
+            </wux-col>
+            <wux-col span="11" class="wux-text--left">
+              <div v-for="cit of commentList" :key="cit.id">
+                <span class="comm_name">{{cit.user_info.name}}:</span>
+                {{cit.content}}
+              </div>
+            </wux-col>
+          </wux-row>
         </wux-col>
       </wux-row>
     </wux-wing-blank>
-     <wux-row v-if="showComment" class="comment">
-       <wux-cell>
-          <wux-input  placeholder="评论" wux-class="comment-input" :focus="true" @change="commentChange"/>
-          <button  slot="footer" :data-id="item.id" size="mini" @click="postComment">
-            发送
-           </button>
-        </wux-cell>
-      </wux-row>
+    <wux-row v-if="showComment" class="comment">
+      <wux-cell>
+        <wux-input
+          placeholder="评论"
+          wux-class="comment-input"
+          :focus="true"
+          @change="commentChange"
+        />
+        <button slot="footer" :data-id="item.id" size="mini" @click="postComment">发送</button>
+      </wux-cell>
+    </wux-row>
   </view>
 </template>
 
@@ -138,8 +139,14 @@ export default {
   },
   data () {
     return {
-      praiseList: this.item.interaction && this.item.interaction.praiseList ? this.item.interaction.praiseList : [],
-      commentList: this.item.interaction && this.item.interaction.commentList ? this.item.interaction.commentList : [],
+      praiseList:
+        this.item.interaction && this.item.interaction.praiseList
+          ? this.item.interaction.praiseList
+          : [],
+      commentList:
+        this.item.interaction && this.item.interaction.commentList
+          ? this.item.interaction.commentList
+          : [],
       showComment: false,
       content: ''
     };
@@ -156,7 +163,10 @@ export default {
     async postComment (e) {
       this.showComment = false;
       this.commentClick(true);
-      const commentList = await this.item.comment(e.mp.target.dataset.id, this.content);
+      const commentList = await this.item.comment(
+        e.mp.target.dataset.id,
+        this.content
+      );
       this.commentList = commentList;
     },
     commentChange (e) {
@@ -193,17 +203,20 @@ export default {
 .wxParse {
   margin: 0;
   line-height: 1.4;
-  color:#000;
-  padding:4px 0;
+  color: #000;
+  padding: 4px 0;
 }
 .ngrouppre {
   line-height: 24px;
   color: #999;
   font-size: 11px;
-  border-bottom:solid 1px #f5f5f5;
-  padding-bottom:8px;
+  border-bottom: solid 1px #f5f5f5;
+  padding-bottom: 8px;
 }
-.ngrouppre button{line-height: 2;text-align: right}
+.ngrouppre button {
+  line-height: 2;
+  text-align: right;
+}
 .fontbd {
   color: #000;
   font-size: 12px;
@@ -241,30 +254,32 @@ export default {
   display: block;
   font-size: 12px;
   color: #333;
-  padding:10px 10px 6px 0;
-  background-color:#efefef;
+  padding: 10px 10px 6px 0;
+  background-color: #efefef;
 }
 
-.comment{
+.comment {
   width: 100%;
   position: fixed;
   bottom: 0;
   background-color: #999;
   z-index: 100;
 }
-.comment-input{
+.comment-input {
   background-color: #ffffff;
   margin-right: 10px;
 }
 
-.comm_name{font-weight: bold;color:#576b95}
-.avatarstyle .wux-col--span-2{
-overflow:hidden;
-border-right:solid 8px white;
-white-space:nowrap;
-text-overflow:ellipsis;
-padding:8px;
-font-size:10px;
+.comm_name {
+  font-weight: bold;
+  color: #576b95;
 }
-
+.avatarstyle .wux-col--span-2 {
+  overflow: hidden;
+  border-right: solid 8px white;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 8px;
+  font-size: 10px;
+}
 </style>
