@@ -44,7 +44,6 @@
           <wxParse :content="item.description"></wxParse>
         </wux-col>
       </wux-row>
-      <wux-white-space v-if="item.description"/>
       <wux-row v-if="item.thumImageList">
         <div class="img_all">
           <block v-for="it of item.thumImageList" :key="it.id">
