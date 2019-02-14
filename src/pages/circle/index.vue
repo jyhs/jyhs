@@ -180,7 +180,7 @@ export default {
         }
         this.newList = newList;
         this.newPage = 1;
-        this.winStyle = 'width:100%;height:' + this.newList.data.length * 120 + 'px;';
+        this.winStyle = 'width:100%;height:' + this.newList.data.length * 200 + 'px;';
       }
     },
     onClose () {
@@ -296,7 +296,7 @@ export default {
     newList.data = this.newList.data.concat(newList.data);
     this.newList = newList;
     this.winStyle =
-      'width:100%;height:' + this.newList.data.length * 120 + 'px;';
+      'width:100%;height:' + this.newList.data.length * 200 + 'px;';
   }
 };
 </script>
