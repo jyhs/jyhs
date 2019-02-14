@@ -62,7 +62,7 @@
       </wux-row>
       <wux-row >
             <wux-col span="6" class="wux-text--left">
-                              <wux-icon type="md-time" color="#A3A3A3" size="12" v-if="item.insert_time"/>  <wux-timeago :to="item.insert_time*1000"/>
+                              <wux-icon type="md-time" color="#A3A3A3" size="12" v-if="item.insert_date"/>  <wux-timeago :to="item.insert_date*1000"/>
             </wux-col>
              <wux-col span="2" class="wux-text--right">
               <button :plain="true" :data-id="item.id" @click="comment" v-if="item.interaction">
