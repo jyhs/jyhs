@@ -255,6 +255,7 @@ export default {
   font-size: 12px;
   color: #999;
   padding: 0 0 6px 0;
+  background-color:#efefef;
 }
 
 .comment{
