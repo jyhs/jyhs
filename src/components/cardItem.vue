@@ -110,7 +110,7 @@
                   {{cit.user_info.name}}
                   </div>
                   <div>
-                    {{cit.add_time}}
+                    <wux-timeago :to="cit.add_time*1000"/>
                   </div>
                 </div>
                 <div class="comment-detail-right-down">
