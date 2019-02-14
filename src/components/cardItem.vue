@@ -7,10 +7,9 @@
           <wux-avatar
             :src="item.headimgurl"
             shape="cycle"
-            body-style="background-color: #ffffff;width: 24px; height:24px;"
-          /><br/>
-           <wux-icon type="ios-pin" color="#cbcbcb" size="10"/>
-           {{item.city_name}}       
+            body-style="background-color: #ffffff;width: 32px; height:32px;"
+          />
+               
         </wux-col>
         <wux-col span="10">
           <wux-row>
@@ -30,7 +29,10 @@
             </view>
           </wux-row>
           <wux-row >
-             <wux-col span="8" class="wux-text--left">
+            <wux-col span="2" class="wux-text--left">
+                <wux-icon type="ios-pin" color="#cbcbcb" size="12"/> {{item.city_name}}   
+            </wux-col>
+             <wux-col span="6" class="wux-text--left">
                 <wux-icon type="ios-person" color="#cbcbcb" size="12"/> {{item.name}}
             </wux-col>
             <wux-col span="4" class="wux-text--right">
