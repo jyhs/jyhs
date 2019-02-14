@@ -208,6 +208,7 @@ export default {
 @import "../utils/wxParse/wxParse.wxss";
 .wxParse {
   margin: 0;
+  line-height: 1.4;
 }
 .ngrouppre {
   line-height: 24px;
@@ -286,4 +287,5 @@ text-overflow:ellipsis;
 padding:4px;
 font-size:10px;
 }
+
 </style>
