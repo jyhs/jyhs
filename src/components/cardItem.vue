@@ -3,7 +3,7 @@
     <wux-wing-blank>
       <wux-white-space/>
       <wux-row>
-        <wux-col span="2"  class="wux-text--left wux-ellipsis">
+        <wux-col span="2"  class="wux-text--left wux-ellipsis avatarstyle">
           <wux-avatar
             :src="item.headimgurl"
             shape="cycle"
@@ -281,5 +281,12 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+.avatarstyle .wux-col--span-2{
+overflow:hidden;
+border-right:solid 8px white;
+white-space:nowrap;
+text-overflow:ellipsis;
+padding:4px;
 }
 </style>
