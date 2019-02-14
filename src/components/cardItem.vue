@@ -10,53 +10,37 @@
             body-style="background-color: #ffffff;width: 24px; height:24px;"
           /><br/>
            <wux-icon type="ios-pin" color="#cbcbcb" size="10"/>
-                 {{item.city_name}}       
+           {{item.city_name}}       
         </wux-col>
-        <wux-col span="10">
+        <wux-col span="9">
           <wux-row>
-            <wux-col span="5">
+            <wux-col span="7">
               <view v-for="tag of item.tag" :key="tag">
                 <wux-tag prefixCls="tagblue_small">{{tag}}</wux-tag>
               </view>
             </wux-col>
-            <wux-col span="7" class="wux-text--right">
-              <wux-icon type="md-time" color="#A3A3A3" size="12" v-if="item.time"/>
-              {{item.time}}
-            </wux-col>
-          </wux-row>
-          <wux-row v-if="item.title || item.price">
-            <view class="fontbd">
-              <wux-col span="10">{{item.title}}</wux-col>
-              <wux-col span="2" class="wux-assertive wux-text--left jine wux-text--right">
+           <wux-col span="5" class="wux-assertive jine wux-text--right">
                  <span v-if="item.price>=0">¥</span>
                   {{item.price}}
-              </wux-col>
+           </wux-col>
+          </wux-row>
+          <wux-row v-if="item.title">
+            <view class="fontbd">
+              <wux-col span="12">{{item.title}}</wux-col>
             </view>
           </wux-row>
           <wux-row >
-            <wux-col span="6" class="wux-text--left">
+             <wux-col span="4" class="wux-text--left">
+                <wux-icon type="md-time" color="#A3A3A3" size="12" v-if="item.time"/>
+                {{item.time}}
+            </wux-col>
+             <wux-col span="8" class="wux-text--left">
               <wux-icon type="ios-person" color="#cbcbcb" size="12"/> {{item.name}}
             </wux-col>
-             <wux-col span="2" class="wux-text--right">
-              <button :plain="true" :data-id="item.id" @click="comment" v-if="item.interaction">
-                <wux-icon type="ios-chatboxes" color="#A3A3A3" size="12"/>
-                评论
-              </button>
-            </wux-col>
-             <wux-col span="2" class="wux-text--right">
-              <button :plain="true" :data-id="item.id" @click="praise" v-if="item.interaction">
-                <wux-icon type="ios-heart-empty" color="#A3A3A3" size="12"/>
-                点赞
-              </button>
-            </wux-col>
-             <wux-col span="2" class="wux-text--right">
-              <button open-type="share" :plain="true" :data-id="item.id"  v-if="item.interaction">
-                <wux-icon type="md-share" color="#A3A3A3" size="12"/>
-                分享
-              </button>
-            </wux-col>
-          
           </wux-row>
+        </wux-col>
+         <wux-col span="1"  class="wux-text--right">
+           <wux-icon type="ios-pin" color="#cbcbcb" size="12"/>
         </wux-col>
       </wux-row>
       <wux-row v-if="item.description">
@@ -81,7 +65,28 @@
           </block>
         </div>
       </wux-row>
-      
+      <wux-row >
+            <wux-col span="6" class="wux-text--left">
+            </wux-col>
+             <wux-col span="2" class="wux-text--right">
+              <button :plain="true" :data-id="item.id" @click="comment" v-if="item.interaction">
+                <wux-icon type="ios-chatboxes" color="#A3A3A3" size="12"/>
+                评论
+              </button>
+            </wux-col>
+             <wux-col span="2" class="wux-text--right">
+              <button :plain="true" :data-id="item.id" @click="praise" v-if="item.interaction">
+                <wux-icon type="ios-heart-empty" color="#A3A3A3" size="12"/>
+                点赞
+              </button>
+            </wux-col>
+             <wux-col span="2" class="wux-text--right">
+              <button open-type="share" :plain="true" :data-id="item.id"  v-if="item.interaction">
+                <wux-icon type="md-share" color="#A3A3A3" size="12"/>
+                分享
+              </button>
+            </wux-col>
+          </wux-row>
       <wux-row v-if="item.interaction&&praiseList.length" class="pub_toolsarea">
         <wux-col span="1" class="wux-text--center">
           <wux-icon type="ios-heart-empty" color="#576b95" size="12"/>
