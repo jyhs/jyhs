@@ -52,7 +52,7 @@
             <view class="list_img" @tap="showGallery(it.id,$event)" :data-current="index">
               <wux-image
                 width="100%"
-                height="97px"
+                height="120px"
                 :src="it"
                 loading="图片加载中..."
                 mode="aspectFill"
@@ -196,6 +196,8 @@ export default {
 .wxParse {
   margin: 0;
   line-height: 1.4;
+  color:#000;
+  padding:4px 0;
 }
 .ngrouppre {
   line-height: 24px;
@@ -243,7 +245,6 @@ export default {
   font-size: 12px;
   color: #333;
   padding:10px 10px 6px 0;
-  line-height:1.4;
   background-color:#efefef;
 }
 
@@ -265,7 +266,7 @@ overflow:hidden;
 border-right:solid 8px white;
 white-space:nowrap;
 text-overflow:ellipsis;
-padding:0 4px;
+padding:8px;
 font-size:10px;
 }
 
