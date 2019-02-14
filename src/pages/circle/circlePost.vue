@@ -63,6 +63,7 @@ export default {
       this.content = event.target.value;
     },
     async onPost () {
+      console.log(this.countImg)
       if (!this.content) {
         util.showErrorToast('请填写评论');
         return false;
@@ -87,7 +88,8 @@ export default {
       this.$router.go(-1);
     },
     onSuccess () {
-      this.countImg += 1;
+      this.countImg = this.countImg + 1;
+      console.log(this.countImg)
     },
     onFail (e) {
       wx.showToast({
@@ -99,7 +101,8 @@ export default {
       })
     },
     onRemove (e) {
-      this.countImg -= 1;
+      this.countImg = this.countImg - 1;
+      console.log(this.countImg)
     }
   },
   // 原生的分享功能
