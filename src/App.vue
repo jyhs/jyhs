@@ -74,6 +74,15 @@ button[plain]{ border:0;font-size:12px;color:#A3A3A3;padding:0 }
   padding:0px 4px;
   display: inline;
 }
+.taggray_small{
+  font-size: 10px;
+  border:solid 1px #e5e4e9;
+  color:#a9a9a9;
+  background-color: #fffcff;
+  border-radius:4px;
+  padding:0px 4px;
+  display: inline;
+}
 .tagblue_small{
   font-size: 10px;
   border:solid 1px #91d5ff;
