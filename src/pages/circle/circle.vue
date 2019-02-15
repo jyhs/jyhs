@@ -4,7 +4,7 @@
       <view class="row">
         <wux-row>
           <wux-col span="12">
-            <cardItem :item="circle" :praiseList="praiseList"/>
+            <cardItem :item="circle" :praiseList="praiseList" :commentList="commentList"/>
           </wux-col>
         </wux-row>
       </view>
@@ -29,33 +29,19 @@ export default {
     return {
       id: null,
       circle: {},
-      praiseList: []
+      praiseList: [],
+      commentList: []
     };
-  },
-  async onLoad () {
-    // console.log(this.circle);
-    // const user = wx.getStorageSync('userInfo');
-    // let flag = false;
-    // for (const praise of this.praiseList) {
-    //   if (praise.user_id === user.id) {
-    //     flag = true;
-    //   }
-    // }
-    // if (flag) {
-    //   this.collectBackImage = this.hasCollectImage;
-    // } else {
-    //   this.collectBackImage = this.noCollectBackImage;
-    // }
   },
   async onShow () {
     this.id = this.$route.query.id;
-    const circle = await api.getCircleById({ circleId: this.id });
-    this.circle = Object.assign({}, circle);
+    this.circle = await api.getCircleById({ circleId: this.id });
     this.praiseList = this.circle.interaction && this.circle.interaction.praiseList
       ? this.circle.interaction.praiseList
       : [];
-    // this.commentList = await api.getComments({ circleId: this.id });
-    // this.commentNo = this.commentList.length;
+    this.commentList = this.circle.interaction && this.circle.interaction.commentList
+      ? this.circle.interaction.commentList
+      : [];
   },
   methods: {
     async praise (e) {

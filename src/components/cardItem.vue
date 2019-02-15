@@ -148,6 +148,14 @@ export default {
           ? this.item.interaction.praiseList
           : [];
       }
+    },
+    commentList: {
+      type: Array,
+      default () {
+        return this.item.interaction && this.item.interaction.commentList
+          ? this.item.interaction.commentList
+          : [];
+      }
     }
   },
   computed: {
@@ -160,10 +168,6 @@ export default {
   },
   data () {
     return {
-      commentList:
-        this.item.interaction && this.item.interaction.commentList
-          ? this.item.interaction.commentList
-          : [],
       showComment: false,
       content: '',
       user: {}

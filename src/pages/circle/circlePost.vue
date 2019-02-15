@@ -63,7 +63,6 @@ export default {
       this.content = event.target.value;
     },
     async onPost () {
-      console.log(this.countImg)
       if (!this.content) {
         util.showErrorToast('请填写评论');
         return false;

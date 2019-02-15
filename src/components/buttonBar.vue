@@ -8,7 +8,7 @@
       </view>
       <view class="l l-cart" :data-id="item.id" @click="addComment">
         <view class="box">
-          <text class="cart-count">{{commentNo}}</text>
+          <!-- <text class="cart-count">{{commentNo}}</text> -->
           <img class="icon" src="/static/images/comment.png">
         </view>
       </view>
@@ -35,6 +35,23 @@ export default {
       noCollectBackImage: '/static/images/icon_collect.png',
       hasCollectImage: '/static/images/icon_collect_checked.png',
       collectBackImage: '/static/images/icon_collect.png'
+    }
+  },
+  onShow () {
+    const user = wx.getStorageSync('userInfo');
+    let flag = false;
+    if (this.item.interaction && this.item.interaction.praiseList) {
+      for (const praise of this.item.interaction.praiseList) {
+        if (praise.user_id === user.id) {
+          flag = true;
+        }
+      }
+    }
+
+    if (flag) {
+      this.collectBackImage = this.hasCollectImage;
+    } else {
+      this.collectBackImage = this.noCollectBackImage;
     }
   },
   methods: {
