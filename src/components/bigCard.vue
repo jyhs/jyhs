@@ -1,7 +1,7 @@
 <template >
     <block>
         <wux-divider v-if="data.update_time">
-            <wux-timeago :to="data.update_time*1000"/>
+            <wux-timeago :to="data.content.create_time*1000"/>
         </wux-divider>
         <view class="space" v-else/>
         <wux-wing-blank>

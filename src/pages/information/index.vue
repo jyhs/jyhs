@@ -18,21 +18,8 @@ export default {
     loadMore,
     bigCard
   },
-  async onLoad () {
-    const informationList = await api.getInformationList({
-      page: this.newPage,
-      size: 10,
-      type: 'news'
-    });
-    for (const item of informationList.item) {
-      for (const it of item.content.news_item) {
-        delete it['content'];
-        it['navigator_url'] = '/pages/webview/index?id=' + it.thumb_media_id;
-        it['id'] = it.thumb_media_id;
-      }
-    }
-    this.informationList = informationList;
-    this.winStyle = 'width:100%;margin-top:44px;height:' + this.informationList.item.length * 370 + 'px;';
+  async onShow () {
+    this.loadInformation();
   },
   data () {
     return {
@@ -47,7 +34,7 @@ export default {
   },
   async onReachBottom () {
     this.reflash = true;
-    this.newPage = this.newPage + 1;
+    this.newPage = this.newPage + 10;
     const informationList = await api.getInformationList({
       page: this.newPage,
       size: 10,
@@ -68,6 +55,22 @@ export default {
     this.reflash = false;
   },
   methods: {
+    async loadInformation () {
+      const informationList = await api.getInformationList({
+        page: 1,
+        size: 10,
+        type: 'news'
+      });
+      for (const item of informationList.item) {
+        for (const it of item.content.news_item) {
+          delete it['content'];
+          it['navigator_url'] = '/pages/webview/index?id=' + it.thumb_media_id;
+          it['id'] = it.thumb_media_id;
+        }
+      }
+      this.informationList = informationList;
+      this.winStyle = 'width:100%;margin-top:44px;height:' + this.informationList.item.length * 370 + 'px;';
+    }
   }
 };
 </script>
