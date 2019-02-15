@@ -4,7 +4,7 @@
       <view class="row">
         <wux-row>
           <wux-col span="12">
-            <cardItem :item="circle" :praiseList="praiseList" :commentList="commentList"/>
+            <cardItem :item="circle" :praiseList="praiseList" :commentList="commentList" :isInteraction="false"/>
           </wux-col>
         </wux-row>
       </view>
@@ -67,5 +67,7 @@ export default {
 </script>
 
 <style scoped>
-
+.container{
+  background-color: #ffffff;
+}
 </style>

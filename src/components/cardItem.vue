@@ -59,7 +59,7 @@
               </block>
             </div>
           </wux-row>
-          <wux-row v-if="item.interaction">
+          <wux-row v-if="item.interaction&&isInteraction">
             <wux-col span="6" class="wux-text--left">
               <wux-timeago :to="item.insert_date" v-if="item.insert_date"/>&nbsp;
               <span @click="showDelete" :data-id="item.id" v-if="showDeleteIcon">
@@ -136,6 +136,12 @@ export default {
       type: Object,
       default () {
         return {};
+      }
+    },
+    isInteraction: {
+      type: Boolean,
+      default () {
+        return true;
       }
     },
     commentClick: {
