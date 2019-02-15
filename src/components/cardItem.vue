@@ -5,9 +5,11 @@
       <wux-row>
         <wux-col span="2" class="wux-text--left wux-ellipsis avatarstyle">
           <wux-avatar
+            :data-id="item.user_id"
             :src="item.headimgurl"
             shape="square"
             body-style="background-color: #ffffff;width: 36px; height:36px;"
+            @click="gotoCircle"
           />
         </wux-col>
         <wux-col span="10">
@@ -92,6 +94,8 @@
                 <image
                   v-for="it of praiseList"
                   :key="it.id"
+                  :data-id="it.user_id"
+                  @click="gotoCircle"
                   style="width: 24px; height: 24px; margin-right:6px;"
                   :src="'https://api2.huanjiaohu.com/user/getAvatar?userId='+it.user_id"
                 />
@@ -100,7 +104,7 @@
             <wux-row v-if="commentList.length">
               <wux-col span="12" class="wux-text--left">
                 <div v-for="cit of commentList" :key="cit.id">
-                  <span class="comm_name">{{cit.user_info.name}}:</span>
+                  <span class="comm_name"  :data-id="cit.user_info.id" @click="gotoCircle">{{cit.user_info.name}}:</span>
                   {{cit.content}}
                 </div>
               </wux-col>
@@ -126,6 +130,7 @@
 <script>
 import { $wuxGallery } from '../../static/wux/index';
 import wxParse from 'mpvue-wxparse';
+import api from '@/utils/circleApi';
 import wx from 'wx';
 export default {
   components: {
@@ -180,6 +185,18 @@ export default {
     };
   },
   methods: {
+    async gotoCircle (e) {
+      const circle = await api.getByUserId({ userId: e.mp.target.dataset.id, type: 0 });
+      let id = null;
+      if (circle && circle.id) {
+        id = circle.id;
+      } else {
+        id = await api.createCircle({ userId: e.mp.target.dataset.id, type: 0 });
+      }
+      wx.navigateTo({
+        url: '/pages/circle/personal?id=' + id
+      });
+    },
     showDelete (e) {
       wx.showModal({
         content: '确定删除?',
@@ -215,14 +232,12 @@ export default {
       const urls = this.item.bigImageList;
       this.$wuxGallery = $wuxGallery();
       this.$wuxGallery.show({
-        showDelete: false,
+        showDelete: !!this.item.deleteImg,
         current,
         urls,
         [`delete`]: (current, urls) => {
           urls.splice(current, 1);
-          this.setData({
-            urls
-          });
+          this.item.deleteImg(current);
           return true;
         },
         cancel () {},

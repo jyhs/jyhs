@@ -152,13 +152,13 @@ export default {
     this.header = {'Authorization': wx.getStorageSync('token')};
     if (user) {
       if (setting && setting.id) {
-        user.navigator_url = '/pages/circle/index';
         if (setting.cover_url) {
           this.cover_url = setting.cover_url;
         } else {
           this.cover_url = 'https://static.huanjiaohu.com/image/login_banner.jpg';
         }
       } else {
+        this.cover_url = 'https://static.huanjiaohu.com/image/login_banner.jpg';
         this.isPopup = true;
         this.showAdd = false;
       }
@@ -237,15 +237,15 @@ export default {
       wx.hideLoading();
     },
     async gotoMyCircle () {
-      const list = await api.listByUserId({ type: 0 });
+      const circle = await api.getByUserId({ type: 0 });
       let id = null;
-      if (list.data.length === 0) {
-        id = await api.createCircle({ type: 0 });
+      if (circle && circle.id) {
+        id = circle.id;
       } else {
-        id = list.data[0].id;
+        id = await api.createCircle({ type: 0 });
       }
       wx.navigateTo({
-        url: '/pages/circle/circle?id=' + id
+        url: '/pages/circle/personal?id=' + id
       });
     },
     async open () {

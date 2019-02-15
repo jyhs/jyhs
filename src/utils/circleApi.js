@@ -17,7 +17,7 @@ const api = {
   getCircleById: (paramObj) => request.post('circle/getCircleById', paramObj, {
     baseURL: ApiCircleUrl
   }),
-  listByUserId: (paramObj) => request.post('circle/listByUserId', paramObj, {
+  getByUserId: (paramObj) => request.post('circle/getByUserId', paramObj, {
     baseURL: ApiCircleUrl
   }),
   getCircleSetting: (paramObj) => request.post('setting/getByUserId', paramObj, {

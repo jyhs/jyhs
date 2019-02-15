@@ -301,6 +301,24 @@ module.exports = [
     path: 'pages/circle/circle',
     name: 'circle',
     config: {
+      navigationBarTitleText: '礁岩鱼圈',
+      usingComponents: {
+        'wux-row': '../../static/wux/row/index',
+        'wux-col': '../../static/wux/col/index',
+        'wux-image': '../../static/wux/image/index',
+        'wux-avatar': '../../static/wux/avatar/index',
+        'wux-tag': '../../static/wux/tag/index',
+        'wux-icon': '../../static/wux/icon/index',
+        'wux-button': '../../static/wux/button/index',
+        'wux-timeago': '../../static/wux/timeago/index',
+        'wux-gallery': '../../static/wux/gallery/index'
+      }
+    }
+  },
+  {
+    path: 'pages/circle/personal',
+    name: 'personal',
+    config: {
       navigationBarTitleText: '云端海缸',
       usingComponents: {
         'wux-row': '../../static/wux/row/index',
@@ -314,12 +332,10 @@ module.exports = [
         'wux-button': '../../static/wux/button/index',
         'wux-segmented-control': '../../static/wux/segmented-control/index',
         'wux-upload': '../../static/wux/upload/index',
+        'wux-timeago': '../../static/wux/timeago/index',
         'wux-wing-blank': '../../static/wux/wing-blank/index',
-        'wux-tabs': '../../static/wux/tabs/index',
-        'wux-input': '../../static/wux/input/index',
         'wux-gallery': '../../static/wux/gallery/index',
-        'wux-select': '../../static/wux/select/index',
-        'wux-tab': '../../static/wux/tab/index'
+        'wux-select': '../../static/wux/select/index'
       }
     }
   },
