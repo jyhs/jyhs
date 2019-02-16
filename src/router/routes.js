@@ -334,6 +334,7 @@ module.exports = [
         'wux-upload': '../../static/wux/upload/index',
         'wux-timeago': '../../static/wux/timeago/index',
         'wux-wing-blank': '../../static/wux/wing-blank/index',
+        'wux-input': '../../static/wux/input/index',
         'wux-gallery': '../../static/wux/gallery/index',
         'wux-select': '../../static/wux/select/index'
       }

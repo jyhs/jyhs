@@ -4,7 +4,7 @@
       <view class="row">
         <wux-row>
           <wux-col span="12">
-            <cardItem :item="circle"/>
+            <cardItem :item="circle" :commentClick="onCommentClick"/>
           </wux-col>
         </wux-row>
       </view>
@@ -14,8 +14,8 @@
           <wux-segmented-control
             slot="footer"
             :disabled="!isOwer"
-            :default-current="circle.type"
-            :current="circle.type?circle.type:-1" 
+            :default-current="circle.bowlType"
+            :current="circle.bowlType?circle.bowlType:-1" 
             controlled
             @change="typeChange"
             theme="positive"
@@ -26,8 +26,8 @@
           <wux-segmented-control
             slot="footer"
             :disabled="!isOwer"
-            :default-current="circle.size"
-            :current="circle.size?circle.size:-1" 
+            :default-current="circle.bowlSize"
+            :current="circle.bowlSize?circle.bowlSize:-1" 
             controlled
             @change="sizeChange"
             theme="positive"
@@ -38,8 +38,8 @@
           <wux-segmented-control
             slot="footer"
             :disabled="!isOwer"
-            :default-current="circle.filter"
-            :current="circle.filter?circle.filter:-1" 
+            :default-current="circle.bowlFilter"
+            :current="circle.bowlFilter?circle.bowlFilter:-1" 
             controlled
             @change="filterChange"
             theme="positive"
@@ -96,7 +96,6 @@ export default {
   },
   data () {
     return {
-      setting: null,
       formData: null,
       header: null,
       id: null,
@@ -136,7 +135,7 @@ export default {
     },
     onClickBrand () {
       $wuxSelect('#wux-select1').open({
-        value: this.circle.bowl_brand,
+        value: this.circle.bowlBrand,
         options: ['法官', '医生', '猎人', '学生', '记者', '其他'],
         onConfirm: (value, index, options) => {
           if (index !== -1) {
@@ -161,6 +160,9 @@ export default {
       const list = await api.praise({ circleId: id });
       return list;
     },
+    onCommentClick (flag = false) {
+      this.isOwer = flag;
+    },
     async comment (id, comment) {
       const list = await api.commentPost({
         valueId: id,
@@ -173,12 +175,12 @@ export default {
       this.loadingCircle();
     },
     async typeChange (e) {
-      this.circle.type = e.mp.detail.key + '';
+      this.circle.bowlType = e.mp.detail.key + '';
       await api.updateCircleSetting(this.circle);
       this.loadingCircle();
     },
     sizeChange (e) {
-      this.circle.size = e.mp.detail.key + '';
+      this.circle.bowlSize = e.mp.detail.key + '';
       api.updateCircleSetting(this.circle);
     },
     systemChange (e) {
@@ -186,7 +188,7 @@ export default {
       api.updateCircleSetting(this.circle);
     },
     filterChange (e) {
-      this.circle.filter = e.mp.detail.key + '';
+      this.circle.bowlFilter = e.mp.detail.key + '';
       api.updateCircleSetting(this.circle);
     }
   },
@@ -204,7 +206,6 @@ export default {
   position: fixed;
   left: 0;
   bottom: 0;
-  z-index: 10;
   width: 100%;
   box-shadow: 1px -2px 2px #e9e9e9;
 }

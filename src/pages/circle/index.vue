@@ -113,9 +113,9 @@ export default {
       newList: [],
       newPage: 1,
       setting: {
-        type: -1,
-        size: -1,
-        filter: -1,
+        bowlType: -1,
+        bowlSize: -1,
+        bowlFilter: -1,
         bowlSystem: -1
       },
       header: {},
@@ -249,11 +249,11 @@ export default {
       });
     },
     async open () {
-      if (this.setting.type < 0) {
+      if (this.setting.bowlType < 0) {
         util.showErrorToast('请选择鱼缸类型');
-      } else if (this.setting.size < 0) {
+      } else if (this.setting.bowlSize < 0) {
         util.showErrorToast('请选择鱼缸尺寸');
-      } else if (this.setting.filter < 0) {
+      } else if (this.setting.bowlFilter < 0) {
         util.showErrorToast('请选择过滤方式');
       } else if (this.setting.bowlSystem < 0) {
         util.showErrorToast('请选择过滤系统');
@@ -273,16 +273,16 @@ export default {
       }
     },
     typeChange (e) {
-      this.setting.type = e.mp.detail.key + '';
+      this.setting.bowlType = e.mp.detail.key + '';
     },
     sizeChange (e) {
-      this.setting.size = e.mp.detail.key + '';
+      this.setting.bowlSize = e.mp.detail.key + '';
     },
     systemChange (e) {
       this.setting.bowlSystem = e.mp.detail.key + '';
     },
     filterChange (e) {
-      this.setting.filter = e.mp.detail.key + '';
+      this.setting.bowlFilter = e.mp.detail.key + '';
     }
   },
   async onReachBottom () {
