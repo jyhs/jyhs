@@ -361,8 +361,8 @@ export default {
           sort_order: 5
         }
       ],
-      province: 'sh',
-      provinceName: '上海'
+      province: wx.getStorageSync('province') || 'sh',
+      provinceName: wx.getStorageSync('provinceName') || '上海'
     };
   },
   async onPullDownRefresh () {
@@ -426,9 +426,14 @@ export default {
           type: 'wgs84',
           success: async (res) => {
             const groups = await groupApi.getGroupListByLocation({ 'location': res.latitude + ',' + res.longitude, 'size': 5 });
+            const provinceObj = this.getProvinceFromGroup(groups.data);
             wx.setStorage({
               key: 'province',
-              data: this.getProvinceFromGroup(groups.data)
+              data: provinceObj.key
+            });
+            wx.setStorage({
+              key: 'provinceName',
+              data: provinceObj.value
             });
             this.groupList = this.handlGroups(groups.data);
           }
@@ -436,10 +441,14 @@ export default {
       }
     },
     getProvinceFromGroup (groups) {
-      let province = 'sh';
+      let province = {
+        key: 'sh',
+        value: '上海'
+      };
       for (const group of groups) {
         if (group.user_type.indexOf('lss') < 0) {
-          province = group.province;
+          province.key = group.province;
+          province.value = group.province_name;
           break;
         }
       }
@@ -478,12 +487,14 @@ export default {
           this.provinceName = options[index].title;
           wx.setStorage({
             key: 'province',
-            data: value
+            data: this.province
           });
-          console.log(this)
+          wx.setStorage({
+            key: 'provinceName',
+            data: this.provinceName
+          });
           this.groupList = [];
           this.groupList = await this.getGroupByProvinceList(value);
-          console.log(this.groupList)
         }
       });
     }

@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     countDownText (s) {
-      this.showtime = `${s}s后重新获取`;
+      this.showtime = `${s}s`;
     },
     // 倒计时 60秒 不需要很精准
     countDown (times) {
@@ -66,7 +66,11 @@ export default {
           return false;
         }
         count++;
-        self.countDownText(times - count + 1);
+        let text = times - count + 1;
+        self.countDownText(text);
+        if (text === 59) {
+          wx.hideLoading();
+        }
         if (count > times) {
           clearTimeout(self.timeCounter);
           self.showtime = null;
@@ -138,7 +142,6 @@ export default {
               'content-type': 'application/json'
             },
             success: function (res) {
-              console.log('333', res);
               if (res.status === 1) {
                 wx.setStorageSync('phone', res.phone);
               }
@@ -184,6 +187,9 @@ export default {
           mask: true
         });
       } else {
+        wx.showLoading({
+          title: '加载中'
+        });
         this.countDown(59);
         const res = await api.getVerification({
           phone: this.userInfo2.phone

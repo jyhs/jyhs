@@ -87,7 +87,6 @@ module.exports = [
       usingComponents: {
         'wux-button': '../../static/wux/button/index',
         'wux-avatar': '../../static/wux/avatar/index',
-        'wux-prompt': '../../static/wux/prompt/index',
         'wux-cell-group': '../../static/wux/cell-group/index',
         'wux-cell': '../../static/wux/cell/index',
         'wux-white-space': '../../static/wux/white-space/index',

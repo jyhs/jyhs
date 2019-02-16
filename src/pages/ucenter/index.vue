@@ -2,25 +2,16 @@
   <view>
     <view class="container">
       <view class="profile-info">
-        <view v-if="userInfo.headimgurl">
+        <view>
           <wux-avatar
             size="large"
             :src="userInfo.headimgurl"
             body-style="background-color: #ffffff;width:100rpx;height:100rpx;border-radius:50rpx;line-height:100rpx;"
           />
         </view>
-        <view v-else>
-          <navigator url="/pages/ucenter/login">
-            <wux-avatar
-              size="large"
-              :src="headimgurl"
-              body-style="background-color: #ffffff;width:100rpx;height:100rpx;border-radius:50rpx;line-height:100rpx;"
-            />
-          </navigator>
-        </view>
         <view class="sub-title">{{userInfo.name}}</view>
       </view>
-      <view class="user-menu" v-if="userInfo.headimgurl">
+      <view class="user-menu">
         <view class="character-text">
           <view class="character-itemlist">
             <navigator url="/pages/ucenter/collect">
@@ -49,7 +40,7 @@
       </view>
       <wux-white-space/>
       <view class="character-info">
-        <view class="character-menu" v-if="userInfo.headimgurl">
+        <view class="character-menu">
           <wux-wing-blank>
             <wux-card title="商城订单">
               <view slot="body">
@@ -193,15 +184,6 @@
           </wux-wing-blank>
           <wux-white-space/>
         </view>
-        <view v-else>
-          <wux-white-space body-style="height: 120rpx"/>
-          <wux-prompt
-            :visible="true"
-            icon="https://static.huanjiaohu.com/mini/index/ic_notlogin.png"
-            title="您还没有登录"
-          />
-          <wux-button block type="light" size="small" @click="logout">登录</wux-button>
-        </view>
       </view>
     </view>
   </view>
@@ -219,8 +201,15 @@ export default {
       canIUse: wx.canIUse('button.open-type.getUserInfo')
     };
   },
-  onShow () {
-    this.userInfo = wx.getStorageSync('userInfo');
+  onLoad () {
+    const userInfo = wx.getStorageSync('userInfo');
+    if (userInfo) {
+      this.userInfo = userInfo;
+    } else {
+      wx.reLaunch({
+        url: '/pages/ucenter/login'
+      });
+    }
   },
   methods: {
     logout () {
