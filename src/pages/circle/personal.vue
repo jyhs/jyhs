@@ -69,7 +69,7 @@
       </wux-cell-group>
     </scroll-view>
      <view class="bottom-btn" v-if="isOwer">
-        <wux-upload count="1"   :header="header" :formData="formData"  max="9" url="https://api2.huanjiaohu.com/circle/circle/upload" @success="onSuccess" @fail="onFail">
+        <wux-upload count="9"   :header="header" :formData="formData"  max="9" url="https://api2.huanjiaohu.com/circle/circle/upload" @success="onSuccess" @fail="onFail">
                     <wux-button block type="positive">拍照</wux-button>
         </wux-upload>
      </view>
@@ -171,8 +171,14 @@ export default {
       });
       return list;
     },
-    async onSuccess () {
-      this.loadingCircle();
+    throttle (method, context) {
+      clearTimeout(method.tId);
+      method.tId = setTimeout(function () {
+        method.call(context)
+      }, 1000)
+    },
+    async onSuccess (e) {
+      this.throttle(this.loadingCircle)
     },
     async typeChange (e) {
       this.circle.bowlType = e.mp.detail.key + '';

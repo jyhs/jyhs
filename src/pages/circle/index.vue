@@ -79,6 +79,8 @@
                       :header="header"
                       @success="onSuccess"
                       @fail="onFail"
+                      count="1"
+                      max="1"
                     >
                   <wux-button block type="positive">拍照/上传</wux-button>
           </wux-upload>

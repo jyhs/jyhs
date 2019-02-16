@@ -4,7 +4,7 @@
   <view class="post-comment">
     <wux-wing-blank>
       <view class="row upload">
-                 <wux-upload listType="picture-card" count="1"   :header="header" :formData="formData"  max="9" url="https://api2.huanjiaohu.com/circle/circle/upload" @success="onSuccess" @fail="onFail">
+                 <wux-upload listType="picture-card" count="9"   :header="header" :formData="formData"  max="9" url="https://api2.huanjiaohu.com/circle/circle/upload" @success="onSuccess" @fail="onFail" @remove="onRemove">
                     <text>拍照</text>
                 </wux-upload>
       </view>
@@ -61,21 +61,21 @@ export default {
         return false;
       }
       this.content = event.target.value;
+      wx.setStorageSync('circle_conent' + this.$route.query.id, this.content)
     },
     async onPost () {
-      if (!this.content) {
-        util.showErrorToast('请填写评论');
-        return false;
-      } else if (this.countImg <= 0) {
+      if (this.countImg <= 0) {
         util.showErrorToast('请添加一张图片');
         return false;
       } else {
+        const id = this.$route.query.id;
         const res = await api.addCircle({
-          'circleId': this.$route.query.id,
-          'description': this.content
+          'circleId': id,
+          'description': wx.getStorageSync('circle_conent' + id)
         });
         if (res > 0) {
           this.isCancel = false;
+          wx.removeStorageSync('circle_conent' + id);
           this.$router.go(-1);
         }
       }
@@ -86,9 +86,8 @@ export default {
       });
       this.$router.go(-1);
     },
-    onSuccess () {
-      this.countImg = this.countImg + 1;
-      console.log(this.countImg)
+    onSuccess (e) {
+      this.countImg = e.mp.detail.fileList.length;
     },
     onFail (e) {
       wx.showToast({
@@ -99,9 +98,9 @@ export default {
         }
       })
     },
-    onRemove (e) {
-      this.countImg = this.countImg - 1;
-      console.log(this.countImg)
+    async onRemove (e) {
+      await api.deleteImage({ circleImgId: e.mp.detail.file.res.data });
+      this.countImg = e.mp.detail.fileList.length;
     }
   },
   // 原生的分享功能
