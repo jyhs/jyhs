@@ -21,7 +21,13 @@
       </wux-row>
     </view>
     <view class="m-menu">
-      <navigator class="item" :url="item.url" v-for="item of channel" :key="item.id">
+      <navigator class="item" :url="item.url" v-for="item of channel1" :key="item.id">
+        <img :src="item.icon_url" background-size="cover">
+        <text>{{item.name}}</text>
+      </navigator>
+    </view>
+    <view class="m-menu">
+      <navigator class="item" :url="item.url" v-for="item of channel2" :key="item.id">
         <img :src="item.icon_url" background-size="cover">
         <text>{{item.name}}</text>
       </navigator>
@@ -281,7 +287,7 @@ export default {
           enabled: 1
         }
       ],
-      channel: [
+      channel1: [
         {
           id: 1,
           name: '商城',
@@ -313,6 +319,44 @@ export default {
         {
           id: 5,
           name: '资讯',
+          url: '/pages/information/index',
+          icon_url:
+            'https://static.huanjiaohu.com/mini/index/information.png?r=123',
+          sort_order: 5
+        }
+      ],
+      channel2: [
+        {
+          id: 6,
+          name: '品牌',
+          url: '/pages/mall/index',
+          icon_url: 'https://static.huanjiaohu.com/mini/index/mall.png?r=123',
+          sort_order: 1
+        },
+        {
+          id: 7,
+          name: '出单',
+          url: '/pages/group/index',
+          icon_url: 'https://static.huanjiaohu.com/mini/index/group.png?r=123',
+          sort_order: 2
+        },
+        {
+          id: 8,
+          name: '爆款',
+          url: '/pages/active/index',
+          icon_url: 'https://static.huanjiaohu.com/mini/index/active.png?r=123',
+          sort_order: 3
+        },
+        {
+          id: 9,
+          name: '帮助',
+          url: '/pages/game/index',
+          icon_url: 'https://static.huanjiaohu.com/mini/index/game.png?r=123',
+          sort_order: 4
+        },
+        {
+          id: 10,
+          name: '签到',
           url: '/pages/information/index',
           icon_url:
             'https://static.huanjiaohu.com/mini/index/information.png?r=123',
