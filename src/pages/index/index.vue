@@ -327,7 +327,7 @@ export default {
         {
           id: 6,
           name: '品牌',
-          url: '/pages/mall/index',
+          url: '/pages/brand/brand',
           icon_url: 'https://static.huanjiaohu.com/mini/index/brand.png?r=124',
           sort_order: 1
         },
@@ -341,7 +341,7 @@ export default {
         {
           id: 8,
           name: '爆款',
-          url: '/pages/active/index',
+          url: '/pages/hotGoods/hotGoods',
           icon_url: 'https://static.huanjiaohu.com/mini/index/fire.png?r=124',
           sort_order: 3
         },

@@ -1,5 +1,6 @@
 <template >
     <view class="container">
+      <headerImg :bannerInfo="bannerInfo"/>
         <view class="row">
             <wux-tabs
                 class="tabAll"
@@ -40,13 +41,15 @@
 
 <script>
 import loadMore from '@/components/loadMore';
+import headerImg from '@/components/headerImg';
 import cardItem from '@/components/cardItem';
 import api from '@/utils/groupApi';
 import wx from 'wx';
 export default {
   components: {
     loadMore,
-    cardItem
+    cardItem,
+    headerImg
   },
   async onLoad () {
     const province = wx.getStorageSync('province');
@@ -67,11 +70,15 @@ export default {
       value: '',
       current: 0,
       tabCurrent: 0,
+      bannerInfo: {
+        'img_url': 'https://static.huanjiaohu.com/mini/index/banner2.jpg',
+        'name': '礁岩海水水族新零售'
+      },
       groupList: [],
       retailList: [],
       groupPage: 1,
       retailPage: 1,
-      winStyle: 'width:100%;margin-top:44px;height:100%'
+      winStyle: 'width:100%;height:100%'
     };
   },
   async onReachBottom () {
@@ -125,7 +132,7 @@ export default {
       this.tabCurrent = e.mp.detail.current;
     },
     computedHeight (list) {
-      return 'width:100%;margin-top:44px;height:' + list.length * 92 + 'px;'
+      return 'width:100%;height:' + list.length * 92 + 'px;'
     },
     change (e) {
       this.current = e.mp.detail.key;
@@ -156,12 +163,6 @@ export default {
 </script>
 
 <style scoped>
-.tabAll{
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-}
 .item-style {
   background-color: white;
   border-radius: 5px;
