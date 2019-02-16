@@ -328,28 +328,28 @@ export default {
           id: 6,
           name: '品牌',
           url: '/pages/mall/index',
-          icon_url: 'https://static.huanjiaohu.com/mini/index/brand.png?r=123',
+          icon_url: 'https://static.huanjiaohu.com/mini/index/brand.png?r=124',
           sort_order: 1
         },
         {
           id: 7,
           name: '出单',
           url: '/pages/group/index',
-          icon_url: 'https://static.huanjiaohu.com/mini/index/grouplist.png?r=123',
+          icon_url: 'https://static.huanjiaohu.com/mini/index/grouplist.png?r=124',
           sort_order: 2
         },
         {
           id: 8,
           name: '爆款',
           url: '/pages/active/index',
-          icon_url: 'https://static.huanjiaohu.com/mini/index/fire.png?r=123',
+          icon_url: 'https://static.huanjiaohu.com/mini/index/fire.png?r=124',
           sort_order: 3
         },
         {
           id: 9,
           name: '帮助',
           url: '/pages/game/index',
-          icon_url: 'https://static.huanjiaohu.com/mini/index/help.png?r=123',
+          icon_url: 'https://static.huanjiaohu.com/mini/index/help.png?r=125',
           sort_order: 4
         },
         {
@@ -357,7 +357,7 @@ export default {
           name: '签到',
           url: '/pages/information/index',
           icon_url:
-            'https://static.huanjiaohu.com/mini/index/signed.png?r=123',
+            'https://static.huanjiaohu.com/mini/index/signed.png?r=124',
           sort_order: 5
         }
       ],
