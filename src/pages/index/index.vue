@@ -366,33 +366,34 @@ export default {
     };
   },
   async onPullDownRefresh () {
-    this.getGroupByLocation();
-    this.getRetailList();
-    this.getCircleList();
-    this.getMaterialList();
+    this.groupList = await this.getGroupByProvinceList(wx.getStorageSync('province'));
+    this.retailList = await this.getGroupByProvinceList('china');
+    this.circleList = await this.getCircleList();
+    this.materialList = await this.getMaterialList();
+    wx.stopPullDownRefresh();
   },
   async onLoad () {
     this.getProvinceList();
     this.getGroupByLocation();
-    this.getRetailList();
-    this.getCircleList();
-    this.getMaterialList();
+    this.retailList = await this.getGroupByProvinceList('china');
+    this.circleList = await this.getCircleList();
+    this.materialList = await this.getMaterialList();
   },
   methods: {
-    async getRetailList () {
-      const groups = await groupApi.getGroupListByProvince({ 'province': 'china', 'size': 5 });
-      this.retailList = this.handlGroups(groups.data);
+    async getGroupByProvinceList (province) {
+      const groups = await groupApi.getGroupListByProvince({ 'province': province, 'size': 5 });
+      return this.handlGroups(groups.data);
     },
     async getMaterialList () {
       const res = await api.getMaterialRandomList({ page: 1, size: 10 });
-      this.materialList = res.data;
+      return res.data;
     },
     async getCircleList () {
       const circleList = await circleApi.listCircle({page: 1, size: 5});
       for (const item of circleList.data) {
         delete item.interaction;
       }
-      this.circleList = circleList.data;
+      return circleList.data;
     },
     async getProvinceList () {
       const provinceList = wx.getStorageSync('provinceList');
@@ -417,17 +418,22 @@ export default {
       }
     },
     async getGroupByLocation () {
-      wx.getLocation({
-        type: 'wgs84',
-        success: async (res) => {
-          const groups = await groupApi.getGroupListByLocation({ 'location': res.latitude + ',' + res.longitude, 'size': 5 });
-          wx.setStorage({
-            key: 'province',
-            data: this.getProvinceFromGroup(groups.data)
-          });
-          this.groupList = this.handlGroups(groups.data);
-        }
-      });
+      const province = wx.getStorageSync('province');
+      if (province) {
+        this.groupList = await this.getGroupByProvinceList(province);
+      } else {
+        wx.getLocation({
+          type: 'wgs84',
+          success: async (res) => {
+            const groups = await groupApi.getGroupListByLocation({ 'location': res.latitude + ',' + res.longitude, 'size': 5 });
+            wx.setStorage({
+              key: 'province',
+              data: this.getProvinceFromGroup(groups.data)
+            });
+            this.groupList = this.handlGroups(groups.data);
+          }
+        });
+      }
     },
     getProvinceFromGroup (groups) {
       let province = 'sh';
