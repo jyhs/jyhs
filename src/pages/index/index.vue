@@ -110,7 +110,7 @@
     </swiper>
     <title text="最新鱼圈"/>
     <view class="row">
-       <view v-for="friend of circleList.data" :key="friend.id">
+       <view v-for="friend of circleList" :key="friend.id">
           <cardItem :item='friend'/>
           <wux-white-space size="small" />
       </view>
@@ -124,7 +124,7 @@
     </swiper>
     <title text="最新百科"/>
     <view class="row">
-       <view v-for="item of materials" :key="item.id" :class="(index + 1) % 2 === 0 ? 'item-b item' : 'item'"
+       <view v-for="item of materialList" :key="item.id" :class="(index + 1) % 2 === 0 ? 'item-b item' : 'item'"
                    @click="$router.push({ path: '/pages/material/index', query: { id: item.id } })" >
                       <smallCard :item="item"/>
                       <wux-white-space size="small" />
@@ -156,9 +156,10 @@ export default {
   },
   data () {
     return {
-      materials: [],
+      materialList: [],
       groupList: [],
-      circleList: {},
+      circleList: [],
+      retailList: [],
       goods: [
         {
           id: 1135001,
@@ -214,9 +215,6 @@ export default {
           }
         }
       ],
-      retailList: [],
-      title3: '',
-      value3: '',
       banner: [
         {
           id: 1,
@@ -367,42 +365,70 @@ export default {
       provinceName: '上海'
     };
   },
-  async onShow () {
-
+  async onPullDownRefresh () {
+    this.getGroupByLocation();
+    this.getRetailList();
+    this.getCircleList();
+    this.getMaterialList();
   },
   async onLoad () {
-    const self = this;
-    const provinceList = await api.getProvinces();
-    const provinces = [];
-    for (const item of provinceList) {
-      if (item.code !== 'china') {
-        provinces.push({
-          title: item.name,
-          value: item.code
-        });
-      }
-    }
-    this.provinces = provinces;
-    wx.getLocation({
-      type: 'wgs84',
-      success: async function (res) {
-        const groups = await groupApi.getGroupListByLocation({ 'location': res.latitude + ',' + res.longitude, 'size': 5 });
-        wx.setStorage({
-          key: 'province',
-          data: self.getProvinceFromGroup(groups.data)
-        });
-        self.setGroupCard(groups.data);
-      }
-    });
-    const circleList = await circleApi.listCircle({page: 1, size: 5});
-    for (const item of circleList.data) {
-      delete item.interaction;
-    }
-    this.circleList = circleList;
-    const res = await api.getMaterialRandomList({ page: 1, size: 10 });
-    this.materials = res.data;
+    this.getProvinceList();
+    this.getGroupByLocation();
+    this.getRetailList();
+    this.getCircleList();
+    this.getMaterialList();
   },
   methods: {
+    async getRetailList () {
+      const groups = await groupApi.getGroupListByProvince({ 'province': 'china', 'size': 5 });
+      this.retailList = this.handlGroups(groups.data);
+    },
+    async getMaterialList () {
+      const res = await api.getMaterialRandomList({ page: 1, size: 10 });
+      this.materialList = res.data;
+    },
+    async getCircleList () {
+      const circleList = await circleApi.listCircle({page: 1, size: 5});
+      for (const item of circleList.data) {
+        delete item.interaction;
+      }
+      this.circleList = circleList.data;
+    },
+    async getProvinceList () {
+      const provinceList = wx.getStorageSync('provinceList');
+      if (!provinceList) {
+        const list = await api.getProvinces();
+        const provinces = [];
+        for (const item of list) {
+          if (item.code !== 'china') {
+            provinces.push({
+              title: item.name,
+              value: item.code
+            });
+          }
+        }
+        wx.setStorage({
+          key: 'provinceList',
+          data: provinces
+        });
+        this.provinces = provinces;
+      } else {
+        this.provinces = provinceList;
+      }
+    },
+    async getGroupByLocation () {
+      wx.getLocation({
+        type: 'wgs84',
+        success: async (res) => {
+          const groups = await groupApi.getGroupListByLocation({ 'location': res.latitude + ',' + res.longitude, 'size': 5 });
+          wx.setStorage({
+            key: 'province',
+            data: this.getProvinceFromGroup(groups.data)
+          });
+          this.groupList = this.handlGroups(groups.data);
+        }
+      });
+    },
     getProvinceFromGroup (groups) {
       let province = 'sh';
       for (const group of groups) {
@@ -413,9 +439,8 @@ export default {
       }
       return province;
     },
-    setGroupCard (groups) {
+    handlGroups (groups) {
       const groupList = [];
-      const retailList = [];
       for (const group of groups) {
         group.headimgurl = 'https://api2.huanjiaohu.com/user/getAvatar?userId=' + group.user_id;
         group.navigator_url = '/pages/group/buy?id=' + group.id;
@@ -430,18 +455,11 @@ export default {
         group.city_name = group.city_name;
         group.price = group.sum;
         delete group.description;
-        if (group.user_type.indexOf('lss') >= 0) {
-          retailList.push(group)
-        } else {
-          groupList.push(group)
-        }
+        groupList.push(group)
       }
-
-      this.groupList = groupList;
-      this.retailList = retailList;
+      return groupList;
     },
     selectProvince () {
-      const self = this;
       $wuxSelect('#province').open({
         value: this.province,
         toolbar: {
@@ -449,15 +467,15 @@ export default {
           confirmText: '确定'
         },
         options: this.provinces,
-        onConfirm: async function (value, index, options) {
+        onConfirm: async (value, index, options) => {
           this.province = value;
           this.provinceName = options[index].title;
           wx.setStorage({
             key: 'province',
             data: value
           });
-          const group = await groupApi.getGroupListByProvince({ 'province': value, 'size': 5 });
-          self.setGroupCard(group.data);
+          const groups = await groupApi.getGroupListByProvince({ 'province': value, 'size': 5 });
+          this.groupList = this.handlGroups(groups.data);
         }
       });
     }
