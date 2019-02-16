@@ -31,11 +31,10 @@ module.exports = [
         'wux-wing-blank': '../../static/wux/wing-blank/index',
         'wux-white-space': '../../static/wux/white-space/index',
         'wux-divider': '../../static/wux/divider/index',
-        'wux-tabs': '../../static/wux/tabs/index',
         'wux-image': '../../static/wux/image/index',
         'wux-row': '../../static/wux/row/index',
         'wux-col': '../../static/wux/col/index',
-        'wux-tab': '../../static/wux/tab/index'
+        'wux-timeago': '../../static/wux/timeago/index'
       }
     }
   },

@@ -383,13 +383,6 @@ export default {
       }
     }
     this.provinces = provinces;
-    const res = await api.getMaterialRandomList({ page: 1, size: 10 });
-    this.materials = res.data;
-    const circleList = await circleApi.listCircle({page: 1, size: 5});
-    for (const item of circleList.data) {
-      delete item.interaction;
-    }
-    this.circleList = circleList;
     wx.getLocation({
       type: 'wgs84',
       success: async function (res) {
@@ -401,6 +394,13 @@ export default {
         self.setGroupCard(groups.data);
       }
     });
+    const circleList = await circleApi.listCircle({page: 1, size: 5});
+    for (const item of circleList.data) {
+      delete item.interaction;
+    }
+    this.circleList = circleList;
+    const res = await api.getMaterialRandomList({ page: 1, size: 10 });
+    this.materials = res.data;
   },
   methods: {
     getProvinceFromGroup (groups) {
