@@ -480,8 +480,10 @@ export default {
             key: 'province',
             data: value
           });
-          const groups = await groupApi.getGroupListByProvince({ 'province': value, 'size': 5 });
-          this.groupList = this.handlGroups(groups.data);
+          console.log(this)
+          this.groupList = [];
+          this.groupList = await this.getGroupByProvinceList(value);
+          console.log(this.groupList)
         }
       });
     }
