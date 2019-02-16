@@ -105,7 +105,7 @@
               <wux-col span="12" class="wux-text--left">
                 <div v-for="cit of commentList" :key="cit.id">
                   <span class="comm_name"  :data-id="cit.user_info.id" @click="gotoCircle">{{cit.user_info.name}}:</span>
-                  {{cit.content}}
+                  {{cit.content}} 
                 </div>
               </wux-col>
             </wux-row>
@@ -120,6 +120,7 @@
           wux-class="comment-input"
           :focus="true"
           @change="commentChange"
+          @blur="commentBlur"
         />
         <button slot="footer" :data-id="item.id" size="mini" @click="postComment">发送</button>
       </wux-cell>
@@ -214,6 +215,10 @@ export default {
     async comment (e) {
       this.showComment = true;
       this.commentClick(false);
+    },
+    commentBlur (e) {
+      this.showComment = false;
+      this.commentClick(true);
     },
     async postComment (e) {
       this.showComment = false;
