@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import api from '@/utils/api';
+import api from '@/utils/mallApi';
 
 export default {
   data () {

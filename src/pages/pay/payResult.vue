@@ -25,7 +25,7 @@
 </template>
 
 <script>
-// import api from '@/utils/api'
+// import api from '@/utils/mallApi'
 import wx from 'wx'
 import pay from '@/services/pay'
 import util from '@/utils/util'

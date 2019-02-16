@@ -2,7 +2,7 @@
  * 用户相关服务
  */
 import wx from 'wx';
-import api from '@/utils/api';
+import api from '@/utils/mallApi';
 import util from '@/utils/util';
 /**
  * 调用微信登录

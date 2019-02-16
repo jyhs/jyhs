@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import api from '@/utils/api'
+import api from '@/utils/mallApi'
 import sortGoods from '@/components/sortGoods'
 
 export default {

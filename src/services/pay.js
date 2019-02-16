@@ -2,7 +2,7 @@
  * 支付相关服务
  */
 import wx from 'wx';
-import api from '@/utils/api';
+import api from '@/utils/mallApi';
 import util from '@/utils/util';
 /**
  * 判断用户是否登录
