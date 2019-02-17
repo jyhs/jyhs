@@ -9,10 +9,10 @@
     </swiper>
     <view class="row notice-bar-location">
       <wux-row>
-        <wux-col span="9">
+        <wux-col span="10">
           <wux-notice-bar size="12" content="喜大普奔！礁岩海水小程序上线了！礁岩海水小程序上线了" loop speed="50"/>
         </wux-col>
-        <wux-col span="3">
+        <wux-col span="2">
           <view class="location-select-btn" @click="selectProvince">
             <wux-icon type="ios-pin" color="#A3A3A3" size="14"/>&nbsp;{{provinceName}}
           </view>
@@ -652,8 +652,8 @@ export default {
   line-height: 36px;
   border: none;
   border-radius: 0;
-  padding-right: 15px;
-  margin-right: 10px;
+  padding-right: 10px;
+  margin-right: 4px;
   font-size: 12px;
   text-align: right;
 }
