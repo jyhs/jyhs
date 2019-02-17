@@ -229,11 +229,13 @@ export default {
       const list = await api.commentDelete({ commentId, typeId, valueId });
       return list;
     },
-    async commentPost (id, comment) {
+    async commentPost (id, content, comment) {
+      console.log(comment)
       const list = await api.commentPost({
         valueId: id,
         typeId: 2,
-        content: comment
+        content: content,
+        parentComment: comment
       });
       return list;
     },
