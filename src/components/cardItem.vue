@@ -69,12 +69,12 @@
               </span>
             </wux-col>
             <wux-col span="2" class="wux-text--right">
-              <button :plain="true" :data-id="item.id" @click="comment">
+              <button :plain="true" :data-id="item.id" @click="commentClick">
                 <wux-icon type="md-list" color="#A3A3A3" size="12"/>&nbsp;评论
               </button>
             </wux-col>
             <wux-col span="2" class="wux-text--right">
-              <button :plain="true" :data-id="item.id" @click="praise">
+              <button :plain="true" :data-id="item.id" @click="praiseClick">
                 <wux-icon type="ios-heart-empty" color="#A3A3A3" size="12"/>&nbsp;点赞
               </button>
             </wux-col>
@@ -126,8 +126,8 @@
     </wux-row>
     <wux-popup position="bottom" :visible="showPopupComment"  @close="onCommentContentClose">
       <wux-cell-group class="pop_setaqua" title="评论操作">
-        <wux-cell :title="comment.user_info.reply"/>
-        <wux-cell :title="comment.user_info.delete" @click="deleteComment" :data-comment="comment"/>
+        <wux-cell :title="commentInfo.user_info.reply"/>
+        <wux-cell :title="commentInfo.user_info.delete" @click="deleteComment" :data-comment="commentInfo"/>
       </wux-cell-group>
     </wux-popup>
   </view>
@@ -185,7 +185,7 @@ export default {
     return {
       showComment: false,
       showPopupComment: false,
-      comment: {
+      commentInfo: {
         user_info: {}
       },
       content: '',
@@ -215,24 +215,21 @@ export default {
         }
       });
     },
-    async praise (e) {
+    async praiseClick (e) {
       const praiseList = await this.item.praise(e.mp.target.dataset.id);
       this.praiseList = praiseList;
     },
-    async comment (e) {
+    async commentClick (e) {
       this.showComment = true;
       this.item.commentBtnClick(false);
     },
     async commentContentClick (e) {
-      const comment = Object.assign({}, e.mp.target.dataset.comment);
-      comment.user_info.reply = '回复: ' + comment.user_info.name;
-      comment.user_info.delete = '删除: ' + comment.content;
-      this.comment = comment;
+      const commentInfo = Object.assign({}, e.mp.target.dataset.comment);
+      commentInfo.user_info.reply = '回复: ' + commentInfo.user_info.name;
+      commentInfo.user_info.delete = '删除: ' + commentInfo.content;
+      this.commentInfo = commentInfo;
       this.showPopupComment = true;
-
       this.item.commentBtnClick(false);
-
-      // this.item.commentContentClick(e);
     },
     async onCommentContentClose (e) {
       this.showPopupComment = false;

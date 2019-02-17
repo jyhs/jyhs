@@ -309,7 +309,10 @@ module.exports = [
         'wux-icon': '../../static/wux/icon/index',
         'wux-button': '../../static/wux/button/index',
         'wux-timeago': '../../static/wux/timeago/index',
-        'wux-gallery': '../../static/wux/gallery/index'
+        'wux-gallery': '../../static/wux/gallery/index',
+        'wux-popup': '../../static/wux/popup/index',
+        'wux-cell-group': '../../static/wux/cell-group/index',
+        'wux-cell': '../../static/wux/cell/index'
       }
     }
   },
@@ -334,7 +337,8 @@ module.exports = [
         'wux-wing-blank': '../../static/wux/wing-blank/index',
         'wux-input': '../../static/wux/input/index',
         'wux-gallery': '../../static/wux/gallery/index',
-        'wux-select': '../../static/wux/select/index'
+        'wux-select': '../../static/wux/select/index',
+        'wux-popup': '../../static/wux/popup/index'
       }
     }
   },

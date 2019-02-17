@@ -131,8 +131,16 @@ export default {
       this.circle['praise'] = this.praise;
       this.circle['commentPost'] = this.commentPost;
       this.circle['commentBtnClick'] = this.onCommentClick;
+      this.circle['deleteComment'] = this.deleteComment;
       this.circle['delete'] = this.delete;
       this.circle['deleteImg'] = this.deleteImg;
+    },
+    async deleteComment (e) {
+      const commentId = e.mp.target.dataset.comment.id;
+      const typeId = e.mp.target.dataset.comment.type_id;
+      const valueId = e.mp.target.dataset.comment.value_id;
+      const list = await api.commentDelete({ commentId, typeId, valueId });
+      return list;
     },
     onClickBrand () {
       $wuxSelect('#wux-select1').open({
