@@ -1,14 +1,13 @@
 <template >
 <view class="container">
-  
+          <wux-wing-blank size="default">
+
   <view class="post-comment">
-    <wux-wing-blank>
       <view class="row upload">
                  <wux-upload listType="picture-card" count="9"   :header="header" :formData="formData"  max="9" url="https://api2.huanjiaohu.com/circle/circle/upload" @success="onSuccess" @fail="onFail" @remove="onRemove">
                     <text>拍照</text>
                 </wux-upload>
       </view>
-    </wux-wing-blank>
       <view class="input-box">
           <textarea class="content" focus="true" @input="bindInpuntValue" maxlength="140" placeholder="留言经过筛选后，对所有人可见" />
           <text class="count">{{140 - content.length}}</text>
@@ -18,6 +17,7 @@
           <view class="post" @click="onPost">发表</view>
       </view>
   </view>
+          </wux-wing-blank>
 
 </view>
 </template>
@@ -124,49 +124,45 @@ page, .container {
   width: 750rpx;
   height: auto;
   overflow: hidden;
-  padding: 30rpx;
+  box-sizing: border-box;
 }
 
 .post-comment .input-box {
-  height: 337.5rpx;
-  width: 690rpx;
   position: relative;
   /* background: #fff; */
 }
 
 .post-comment .input-box .content {
-  position: absolute;
-  top: 0;
-  left: 0;
+  padding-top:10px;
   display: block;
   background: #fff;
-  font-size: 29rpx;
-  color: #333;
+  font-size: 14px;
+  color: #000;
   height: 300rpx;
-  width: 650rpx;
-  padding: 20rpx;
-  margin-left: 30rpx;
-}
+  width:100%;
+  box-sizing: border-box;
+  padding:10px;
+  }
 
 .post-comment .input-box .count {
   position: absolute;
-  bottom:10rpx;
-  right:-20rpx;
+  bottom:12px;
+  right:4px;
   display: block;
   height: 30rpx;
   width: 50rpx;
-  font-size: 29rpx;
+  font-size: 28rpx;
   color: #999;
 }
 
 .post-comment .btns {
-  height: 108rpx;
+  font-size: 14px;
 }
 
 .post-comment .close {
   float: left;
-  height: 108rpx;
-  line-height: 108rpx;
+  height: 96rpx;
+  line-height: 96rpx;
   text-align: left;
   color: #666;
   padding: 0 30rpx;
@@ -174,15 +170,17 @@ page, .container {
 
 .post-comment .post {
   float: right;
-  height: 108rpx;
-  line-height: 108rpx;
+  height: 96rpx;
+  line-height: 96rpx;
   text-align: right;
   padding: 0 30rpx;
 }
 
 .upload{
-  padding:30rpx 30rpx;
 background-color:#ffffff;
-
+margin-top:10px;
+padding:10px;
+box-sizing: border-box;
+padding:10px;
 }
 </style>

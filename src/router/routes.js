@@ -291,7 +291,8 @@ module.exports = [
       navigationBarTitleText: '发表鱼圈',
       usingComponents: {
         'wux-upload': '../../static/wux/upload/index',
-        'wux-wing-blank': '../../static/wux/wing-blank/index'
+        'wux-wing-blank': '../../static/wux/wing-blank/index',
+        'wux-white-space': '../../static/wux/white-space/index'
       }
     }
   },
