@@ -387,7 +387,7 @@ export default {
   border-right: solid 8px white;
   white-space: nowrap;
   text-overflow: ellipsis;
-  padding: 8px;
+  padding: 6px 8px;
   font-size: 10px;
 }
 .wux-input__item {
