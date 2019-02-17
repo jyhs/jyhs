@@ -4,7 +4,7 @@
       <view class="row">
         <wux-row>
           <wux-col span="12">
-            <cardItem :item="circle"/>
+            <cardItem :item="circle" :praiseList="praiseList" :commentList="commentList" />
           </wux-col>
         </wux-row>
       </view>
@@ -103,7 +103,9 @@ export default {
       value2: ['底滤', '背滤'],
       value3: ['柏林系统', 'ZEO', 'ATS'],
       value4: ['微缸', '小型', '中型', '大型'],
-      circle: {}
+      circle: {},
+      praiseList: [],
+      commentList: []
     };
   },
   computed: {
@@ -134,6 +136,12 @@ export default {
       this.circle['deleteComment'] = this.deleteComment;
       this.circle['delete'] = this.delete;
       this.circle['deleteImg'] = this.deleteImg;
+      this.praiseList = this.circle.interaction && this.circle.interaction.praiseList
+        ? this.circle.interaction.praiseList
+        : [];
+      this.commentList = this.circle.interaction && this.circle.interaction.commentList
+        ? this.circle.interaction.commentList
+        : [];
     },
     async deleteComment (e) {
       const commentId = e.mp.target.dataset.comment.id;
