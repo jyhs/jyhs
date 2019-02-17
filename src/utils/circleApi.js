@@ -32,6 +32,9 @@ const api = {
   commentPost: (paramObj) => request.post('circle/commentPost', paramObj, {
     baseURL: ApiCircleUrl
   }),
+  commentDelete: (paramObj) => request.post('circle/commentDelete', paramObj, {
+    baseURL: ApiCircleUrl
+  }),
   deleteImage: (paramObj) => request.post('circle/deleteImage', paramObj, {
     baseURL: ApiCircleUrl
   }),

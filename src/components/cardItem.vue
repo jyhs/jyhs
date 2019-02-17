@@ -103,10 +103,9 @@
             </wux-row>
             <wux-row v-if="commentList.length">
               <wux-col span="12" class="wux-text--left">
-                <div v-for="cit of commentList" :key="cit.id">
-                  <span class="comm_name"  :data-id="cit.user_info.id" @click="gotoCircle">{{cit.user_info.name}}:</span>
-                  {{cit.content}} 
-                </div>
+                <view v-for="cit of commentList" :key="cit.id" :data-comment="cit" @click="commentContentClick">
+                  <span class="comm_name"  :data-id="cit.user_info.id" @click="gotoCircle">{{cit.user_info.name}}:</span>{{cit.content}} 
+                </view>
               </wux-col>
             </wux-row>
           </wux-row>
@@ -125,6 +124,12 @@
         <button slot="footer" :data-id="item.id" size="mini" @click="postComment">发送</button>
       </wux-cell>
     </wux-row>
+    <wux-popup position="bottom" :visible="showPopupComment"  @close="onCommentContentClose">
+      <wux-cell-group class="pop_setaqua" title="评论操作">
+        <wux-cell :title="comment.user_info.reply"/>
+        <wux-cell :title="comment.user_info.delete" @click="deleteComment" :data-comment="comment"/>
+      </wux-cell-group>
+    </wux-popup>
   </view>
 </template>
 
@@ -133,6 +138,7 @@ import { $wuxGallery } from '../../static/wux/index';
 import wxParse from 'mpvue-wxparse';
 import api from '@/utils/circleApi';
 import wx from 'wx';
+import { setTimeout } from 'timers';
 export default {
   components: {
     wxParse
@@ -149,9 +155,6 @@ export default {
       default () {
         return true;
       }
-    },
-    commentClick: {
-      type: Function
     },
     praiseList: {
       type: Array,
@@ -181,6 +184,10 @@ export default {
   data () {
     return {
       showComment: false,
+      showPopupComment: false,
+      comment: {
+        user_info: {}
+      },
       content: '',
       user: {}
     };
@@ -214,16 +221,39 @@ export default {
     },
     async comment (e) {
       this.showComment = true;
-      this.commentClick(false);
+      this.item.commentBtnClick(false);
+    },
+    async commentContentClick (e) {
+      const comment = Object.assign({}, e.mp.target.dataset.comment);
+      comment.user_info.reply = '回复: ' + comment.user_info.name;
+      comment.user_info.delete = '删除: ' + comment.content;
+      this.comment = comment;
+      this.showPopupComment = true;
+
+      this.item.commentBtnClick(false);
+
+      // this.item.commentContentClick(e);
+    },
+    async onCommentContentClose (e) {
+      this.showPopupComment = false;
+      this.item.commentBtnClick(true);
+    },
+    async deleteComment (e) {
+      this.showPopupComment = false;
+      this.item.commentBtnClick(true);
+      const commentList = await this.item.deleteComment(e);
+      this.commentList = commentList;
     },
     commentBlur (e) {
-      this.showComment = false;
-      this.commentClick(true);
+      setTimeout(() => {
+        this.showComment = false;
+        this.item.commentBtnClick(true);
+      }, 500);
     },
     async postComment (e) {
       this.showComment = false;
-      this.commentClick(true);
-      const commentList = await this.item.comment(
+      this.item.commentBtnClick(true);
+      const commentList = await this.item.commentPost(
         e.mp.target.dataset.id,
         this.content
       );

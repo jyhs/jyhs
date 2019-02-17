@@ -30,7 +30,7 @@
       src="https://static.huanjiaohu.com/mini/index/ydhg_btn.png"
       @click="add"
     ></cover-image>
-    <wux-popup position="bottom" :visible="isPopup" :maskClosable="false">
+    <wux-popup position="bottom" :visible="showOpenPopup" :maskClosable="false">
       <wux-cell-group class="pop_setaqua" title="第一次使用需要开缸">
         <wux-cell title="鱼缸类型">
           <wux-segmented-control
@@ -73,7 +73,7 @@
         </wux-cell>
       </wux-cell-group>
     </wux-popup>
-    <wux-popup closable :visible="showUpload" title="更换封面" content="给你的鱼圈选一个漂亮的封面吧" @close="onClose">
+    <wux-popup  :visible="showUpload" title="更换封面" content="给你的鱼圈选一个漂亮的封面吧" @close="onClose">
           <wux-upload
                       url="https://api2.huanjiaohu.com/circle/setting/upload"
                       :header="header"
@@ -85,6 +85,7 @@
                   <wux-button block type="positive">拍照/上传</wux-button>
           </wux-upload>
     </wux-popup>
+  
   </view>
 </template>
 
@@ -105,7 +106,7 @@ export default {
       title3: '',
       reflash: false,
       user: {},
-      isPopup: false,
+      showOpenPopup: false,
       showAdd: true,
       showUpload: false,
       value1: ['SPS缸', 'LPS缸', 'FOT缸'],
@@ -161,7 +162,7 @@ export default {
         }
       } else {
         this.cover_url = 'https://static.huanjiaohu.com/image/login_banner.jpg';
-        this.isPopup = true;
+        this.showOpenPopup = true;
         this.showAdd = false;
       }
       this.user = user;
@@ -177,7 +178,9 @@ export default {
       if (newList.data.length > 0) {
         for (const item of newList.data) {
           item['praise'] = this.praise;
-          item['comment'] = this.comment;
+          item['commentPost'] = this.commentPost;
+          item['commentBtnClick'] = this.onCommentBtnClick;
+          item['deleteComment'] = this.deleteComment;
           item['delete'] = this.delete;
         }
         this.newList = newList;
@@ -206,7 +209,7 @@ export default {
       this.showUpload = true;
       this.showAdd = false;
     },
-    onCommentClick (flag = false) {
+    onCommentBtnClick (flag = false) {
       this.showAdd = flag;
     },
     async delete (id) {
@@ -219,7 +222,14 @@ export default {
       const list = await api.praise({ circleId: id });
       return list;
     },
-    async comment (id, comment) {
+    async deleteComment (e) {
+      const commentId = e.mp.target.dataset.comment.id;
+      const typeId = e.mp.target.dataset.comment.type_id;
+      const valueId = e.mp.target.dataset.comment.value_id;
+      const list = await api.commentDelete({ commentId, typeId, valueId });
+      return list;
+    },
+    async commentPost (id, comment) {
       const list = await api.commentPost({
         valueId: id,
         typeId: 2,
@@ -266,7 +276,7 @@ export default {
             title: '开缸成功',
             duration: 2000
           });
-          this.isPopup = false;
+          this.showOpenPopup = false;
           this.showAdd = true;
           this.loadingCircle();
         } else {

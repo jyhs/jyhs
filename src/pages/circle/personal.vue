@@ -4,7 +4,7 @@
       <view class="row">
         <wux-row>
           <wux-col span="12">
-            <cardItem :item="circle" :commentClick="onCommentClick"/>
+            <cardItem :item="circle"/>
           </wux-col>
         </wux-row>
       </view>
@@ -129,7 +129,8 @@ export default {
     async loadingCircle () {
       this.circle = await api.getCircleById({ circleId: this.id });
       this.circle['praise'] = this.praise;
-      this.circle['comment'] = this.comment;
+      this.circle['commentPost'] = this.commentPost;
+      this.circle['commentBtnClick'] = this.onCommentClick;
       this.circle['delete'] = this.delete;
       this.circle['deleteImg'] = this.deleteImg;
     },
@@ -163,7 +164,7 @@ export default {
     onCommentClick (flag = false) {
       this.isOwer = flag;
     },
-    async comment (id, comment) {
+    async commentPost (id, comment) {
       const list = await api.commentPost({
         valueId: id,
         typeId: 2,
