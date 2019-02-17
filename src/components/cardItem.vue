@@ -104,7 +104,10 @@
             <wux-row v-if="commentList.length">
               <wux-col span="12" class="wux-text--left">
                 <view v-for="cit of commentList" :key="cit.id" :data-comment="cit" @click="commentContentClick">
-                  <span class="comm_name"  :data-id="cit.user_info.id" @click="gotoCircle">{{cit.user_info.name}}:</span>{{cit.content}} 
+                  <span class="comm_name"  :data-id="cit.user_info.id" @click="gotoCircle">{{cit.user_info.name}}</span>
+                  <span v-if="cit.parent_comment" >&nbsp;回复</span>
+                  <span class="comm_name" v-if="cit.parent_comment"  :data-id="cit.parent_comment.user_info.id" @click="gotoCircle">{{cit.parent_comment.user_info.name}}</span>
+                  :&nbsp;{{cit.content}} 
                 </view>
               </wux-col>
             </wux-row>
@@ -121,13 +124,13 @@
           @change="commentChange"
           @blur="commentBlur"
         />
-        <button slot="footer" :data-id="item.id" size="mini" @click="postComment">发送</button>
+        <button slot="footer" :data-id="item.id" size="mini" @click="postComment" :data-comment="commentInfo">发送</button>
       </wux-cell>
     </wux-row>
     <wux-popup position="bottom" :visible="showPopupComment"  @close="onCommentContentClose">
       <wux-cell-group class="pop_setaqua" title="评论操作">
-        <wux-cell :title="commentInfo.user_info.reply"/>
-        <wux-cell :title="commentInfo.user_info.delete" @click="deleteComment" :data-comment="commentInfo"/>
+        <wux-cell v-if="user.id !== commentInfo.user_info.id" :title="commentInfo.user_info.reply" @click="replyComment" :data-comment="commentInfo"/>
+        <wux-cell v-if="user.id === commentInfo.user_info.id" :title="commentInfo.user_info.delete" @click="deleteComment" :data-comment="commentInfo"/>
       </wux-cell-group>
     </wux-popup>
   </view>
@@ -241,6 +244,10 @@ export default {
       const commentList = await this.item.deleteComment(e);
       this.commentList = commentList;
     },
+    async replyComment (e) {
+      this.showPopupComment = false;
+      this.showComment = true;
+    },
     commentBlur (e) {
       setTimeout(() => {
         this.showComment = false;
@@ -252,7 +259,8 @@ export default {
       this.item.commentBtnClick(true);
       const commentList = await this.item.commentPost(
         e.mp.target.dataset.id,
-        this.content
+        this.content,
+        e.mp.target.dataset.comment
       );
       this.commentList = commentList;
     },
