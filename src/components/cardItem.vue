@@ -124,7 +124,7 @@
           @change="commentChange"
           @blur="commentBlur"
         />
-        <button slot="footer" :data-id="item.id" size="mini" @click="postComment" :data-comment="commentInfo">发送</button>
+        <button slot="footer" :data-id="item.id" size="mini" @click="postComment" :data-comment="commentInfo"  class="Itembtn" hover-class="btnhover">发送</button>
       </wux-cell>
     </wux-row>
     <wux-popup position="bottom" :visible="showPopupComment"  @close="onCommentContentClose">
@@ -272,6 +272,8 @@ export default {
       this.content = e.mp.detail.value;
     },
     showGallery (index, e) {
+      const self = this;
+      this.item.commentBtnClick(false);
       const { current } = e.currentTarget.dataset;
       const urls = this.item.bigImageList;
       this.$wuxGallery = $wuxGallery();
@@ -284,8 +286,10 @@ export default {
           this.item.deleteImg(current);
           return true;
         },
-        cancel () {},
+        cancel () {
+        },
         onTap (current, urls) {
+          self.item.commentBtnClick(true);
           return true;
         },
         onChange (e) {}
@@ -394,5 +398,13 @@ export default {
   height: 2.5em!important;
   padding-left: 5px;
   font-size: 14px!important;
+}
+.Itembtn {
+color: #fff;
+background-color: #52c41a;
+}
+.btnhover {
+background-color: #52c41a;
+border-radius: 10rpx;
 }
 </style>
