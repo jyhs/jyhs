@@ -64,7 +64,7 @@ export default {
           complete: () => {
             setTimeout(() => {
               this.$router.go(-1);
-            }, 2000);
+            }, 1000);
           }
         })
       }
