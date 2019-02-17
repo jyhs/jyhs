@@ -59,25 +59,25 @@
           />
         </wux-cell>
       </wux-cell-group>
-      <title text="高级设置"/>
+      <!-- <title text="高级设置"/>
       <wux-cell-group class="pop_setaqua">
         <wux-cell title="鱼缸品牌" :extra="circle.bowlBrand" @click="onClickBrand" :isLink="true"/>
         <wux-cell title="灯具品牌"></wux-cell>
         <wux-cell title="蛋分型号"></wux-cell>
         <wux-cell title="造流型号"></wux-cell>
         <wux-cell>&nbsp;</wux-cell>
-      </wux-cell-group>
+      </wux-cell-group> -->
     </scroll-view>
      <view class="bottom-btn" v-if="isOwer">
         <wux-upload count="9"   :header="header" :formData="formData"  max="9" url="https://api2.huanjiaohu.com/circle/circle/upload" @success="onSuccess" @fail="onFail">
                     <wux-button block type="positive">拍照</wux-button>
         </wux-upload>
      </view>
-    <wux-gallery id="wux-gallery"/>
+    <!-- <wux-gallery id="wux-gallery"/>
     <wux-select id="wux-select1"/>
     <wux-select id="wux-select2"/>
     <wux-select id="wux-select3"/>
-    <wux-select id="wux-select4"/>
+    <wux-select id="wux-select4"/> -->
     
   </view>
 </template>
@@ -149,7 +149,7 @@ export default {
         onConfirm: (value, index, options) => {
           if (index !== -1) {
             this.$set(this.circle, 'bowlBrand', options[index]);
-            api.updateCircleSetting(this.circle);
+            // api.updateCircleSetting(this.circle);
           }
         }
       });
@@ -172,11 +172,12 @@ export default {
     onCommentClick (flag = false) {
       this.isOwer = flag;
     },
-    async commentPost (id, comment) {
+    async commentPost (id, content, comment) {
       const list = await api.commentPost({
         valueId: id,
         typeId: 2,
-        content: comment
+        content: content,
+        parentComment: comment
       });
       return list;
     },

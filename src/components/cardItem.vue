@@ -105,8 +105,8 @@
               <wux-col span="12" class="wux-text--left">
                 <view v-for="cit of commentList" :key="cit.id" :data-comment="cit" @click="commentContentClick">
                   <span class="comm_name"  :data-id="cit.user_info.id" @click="gotoCircle">{{cit.user_info.name}}</span>
-                  <span v-if="cit.parent_comment" >&nbsp;回复</span>
-                  <span class="comm_name" v-if="cit.parent_comment"  :data-id="cit.parent_comment.user_info.id" @click="gotoCircle">{{cit.parent_comment.user_info.name}}</span>
+                  <span v-if="cit.parent_comment&&cit.parent_comment.user_info" >&nbsp;回复</span>
+                  <span class="comm_name" v-if="cit.parent_comment&&cit.parent_comment.user_info"  :data-id="cit.parent_comment.user_info.id" @click="gotoCircle">{{cit.parent_comment.user_info.name}}</span>
                   :&nbsp;{{cit.content}} 
                 </view>
               </wux-col>
@@ -118,7 +118,7 @@
     <wux-row v-if="showComment" class="comment">
       <wux-cell>
         <wux-input
-          placeholder="评论"
+          :placeholder="placeholder"
           wux-class="comment-input"
           :focus="true"
           @change="commentChange"
@@ -128,9 +128,8 @@
       </wux-cell>
     </wux-row>
     <wux-popup position="bottom" :visible="showPopupComment"  @close="onCommentContentClose">
-      <wux-cell-group class="pop_setaqua" title="评论操作">
-        <wux-cell v-if="user.id !== commentInfo.user_info.id" :title="commentInfo.user_info.reply" @click="replyComment" :data-comment="commentInfo"/>
-        <wux-cell v-if="user.id === commentInfo.user_info.id" :title="commentInfo.user_info.delete" @click="deleteComment" :data-comment="commentInfo"/>
+      <wux-cell-group class="pop_setaqua" title="你确定要删除么？">
+        <wux-cell :title="placeholder" @click="deleteComment" :data-comment="commentInfo"/>
       </wux-cell-group>
     </wux-popup>
   </view>
@@ -188,10 +187,9 @@ export default {
     return {
       showComment: false,
       showPopupComment: false,
-      commentInfo: {
-        user_info: {}
-      },
+      commentInfo: {},
       content: '',
+      placeholder: '评论',
       user: {}
     };
   },
@@ -223,15 +221,21 @@ export default {
       this.praiseList = praiseList;
     },
     async commentClick (e) {
+      this.placeholder = '评论';
       this.showComment = true;
+      this.commentInfo = {};
       this.item.commentBtnClick(false);
     },
     async commentContentClick (e) {
       const commentInfo = Object.assign({}, e.mp.target.dataset.comment);
-      commentInfo.user_info.reply = '回复: ' + commentInfo.user_info.name;
-      commentInfo.user_info.delete = '删除: ' + commentInfo.content;
       this.commentInfo = commentInfo;
-      this.showPopupComment = true;
+      if (commentInfo.user_info.id === this.user.id) {
+        this.placeholder = '确定删除: ' + commentInfo.content;
+        this.showPopupComment = true;
+      } else {
+        this.placeholder = '回复: ' + commentInfo.user_info.name;
+        this.showComment = true;
+      }
       this.item.commentBtnClick(false);
     },
     async onCommentContentClose (e) {

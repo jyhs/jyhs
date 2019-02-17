@@ -313,6 +313,7 @@ module.exports = [
         'wux-gallery': '../../static/wux/gallery/index',
         'wux-popup': '../../static/wux/popup/index',
         'wux-cell-group': '../../static/wux/cell-group/index',
+        'wux-input': '../../static/wux/input/index',
         'wux-cell': '../../static/wux/cell/index'
       }
     }
