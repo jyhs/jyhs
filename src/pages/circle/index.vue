@@ -230,7 +230,6 @@ export default {
       return list;
     },
     async commentPost (id, content, comment) {
-      console.log(comment)
       const list = await api.commentPost({
         valueId: id,
         typeId: 2,

@@ -38,6 +38,7 @@ export default {
     this.circle = await api.getCircleById({ circleId: this.id });
     this.circle['commentBtnClick'] = () => {};
     this.circle['deleteComment'] = this.deleteComment;
+    this.circle['commentPost'] = this.commentPost;
     this.praiseList = this.circle.interaction && this.circle.interaction.praiseList
       ? this.circle.interaction.praiseList
       : [];
@@ -64,6 +65,15 @@ export default {
       const valueId = e.mp.target.dataset.comment.value_id;
       const commentList = await api.commentDelete({ commentId, typeId, valueId });
       return commentList;
+    },
+    async commentPost (id, content, comment) {
+      const list = await api.commentPost({
+        valueId: id,
+        typeId: 2,
+        content: content,
+        parentComment: comment
+      });
+      return list;
     }
   },
   // 原生的分享功能
