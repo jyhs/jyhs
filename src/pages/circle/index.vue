@@ -324,6 +324,7 @@ export default {
   position: fixed;
   bottom: 1%;
   right: 5%;
+  z-index: 999;
 }
 
 .profile-info {
