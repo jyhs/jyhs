@@ -31,6 +31,14 @@
         <img :src="item.icon_url" background-size="cover">
         <text>{{item.name}}</text>
       </navigator>
+      <view class="item" @click="help">
+        <img src="https://static.huanjiaohu.com/mini/index/help.png?r=126" background-size="cover">
+        <text>帮助</text>
+      </view>
+      <view class="item" @click="signe">
+        <img src="https://static.huanjiaohu.com/mini/index/signed.png?r=124" background-size="cover">
+        <text>签到</text>
+      </view>
     </view>
     <view class="row jytt_module">
       <wux-wing-blank>
@@ -334,7 +342,7 @@ export default {
         {
           id: 7,
           name: '出单',
-          url: '/pages/group/index',
+          url: '/pages/bill/index',
           icon_url: 'https://static.huanjiaohu.com/mini/index/grouplist.png?r=124',
           sort_order: 2
         },
@@ -344,21 +352,6 @@ export default {
           url: '/pages/hotGoods/hotGoods',
           icon_url: 'https://static.huanjiaohu.com/mini/index/fire.png?r=124',
           sort_order: 3
-        },
-        {
-          id: 9,
-          name: '帮助',
-          url: '/pages/game/index',
-          icon_url: 'https://static.huanjiaohu.com/mini/index/help.png?r=125',
-          sort_order: 4
-        },
-        {
-          id: 10,
-          name: '签到',
-          url: '/pages/information/index',
-          icon_url:
-            'https://static.huanjiaohu.com/mini/index/signed.png?r=124',
-          sort_order: 5
         }
       ],
       province: wx.getStorageSync('province') || 'sh',
@@ -380,6 +373,20 @@ export default {
     this.materialList = await this.getMaterialList();
   },
   methods: {
+    async help () {
+      const id = 'Y8p29PXnoQcJomxr8Cyca5rtpambgYuCRUckp2iJhds';
+      const help = await api.getInformationById({id})
+      wx.setStorageSync(id, {'url': help.news_item[0].url});
+      wx.navigateTo({
+        url: '/pages/webview/index?id=' + id
+      });
+    },
+    async signe () {
+      wx.showToast({
+        title: '签到成功',
+        image: '/static/images/icon_success.png'
+      })
+    },
     async getGroupByProvinceList (province) {
       const groups = await groupApi.getGroupListByProvince({ 'province': province, 'size': 5 });
       return this.handlGroups(groups.data);
