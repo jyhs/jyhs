@@ -124,6 +124,23 @@ module.exports = [
     }
   },
   {
+    path: 'pages/bill/index',
+    name: 'bill',
+    config: {
+      navigationBarTitleText: '礁岩出单',
+      usingComponents: {
+        'wux-divider': '../../static/wux/divider/index',
+        'wux-row': '../../static/wux/row/index',
+        'wux-col': '../../static/wux/col/index',
+        'wux-wing-blank': '../../static/wux/wing-blank/index',
+        'wux-white-space': '../../static/wux/white-space/index',
+        'wux-tag': '../../static/wux/tag/index',
+        'wux-avatar': '../../static/wux/avatar/index',
+        'wux-icon': '../../static/wux/icon/index'
+      }
+    }
+  },
+  {
     path: 'pages/game/index',
     name: 'game',
     config: {

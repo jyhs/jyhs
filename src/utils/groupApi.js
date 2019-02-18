@@ -7,6 +7,9 @@ const api = {
   }),
   getGroupListByProvince: (paramObj) => request.post('group/list', paramObj, {
     baseURL: ApiGroupUrl
+  }),
+  getBillList: (paramObj) => request.post('bill/list', paramObj, {
+    baseURL: ApiGroupUrl
   })
 }
 
