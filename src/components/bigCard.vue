@@ -83,7 +83,7 @@
                             <wux-icon type="ios-chatboxes" color="#A3A3A3" size="16"/>&nbsp;13
                             &nbsp;
                             &nbsp;
-                            <wux-icon type="ios-thumbs-up" color="#A3A3A3" size="16"/>&nbsp;20
+                            <wux-icon type="ios-heart-empty" color="#A3A3A3" size="16"/>&nbsp;20
                         </wux-col>
                         <wux-col span="2" class="description wux-text--right" v-if="data.share">
                             <wux-icon type="md-share" color="#A3A3A3" size="16"/>&nbsp;分享

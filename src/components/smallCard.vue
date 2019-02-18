@@ -33,7 +33,7 @@
                 &nbsp;分享
         </wux-col>
               <wux-col span="2" class="wux-text--right">
-                <wux-icon type="md-thumbs-up" color="#A3A3A3" size="12"/>
+                <wux-icon type="ios-heart-empty" color="#A3A3A3" size="12"/>
           &nbsp;56
         </wux-col>
         <wux-col span="2" class="wux-text--right">

@@ -103,7 +103,7 @@
             </wux-row>
             <wux-row v-if="commentList.length">
               <wux-col span="12" class="wux-text--left">
-                <view v-for="cit of commentList" :key="cit.id" :data-comment="cit" @click="commentContentClick">
+                <view class="comm_all" v-for="cit of commentList" :key="cit.id" :data-comment="cit" @click="commentContentClick">
                   <span class="comm_name"  :data-id="cit.user_info.id" @click="gotoCircle">{{cit.user_info.name}}</span>
                   <span v-if="cit.parent_comment&&cit.parent_comment.user_info" >&nbsp;回复</span>
                   <span class="comm_name" v-if="cit.parent_comment&&cit.parent_comment.user_info"  :data-id="cit.parent_comment.user_info.id" @click="gotoCircle">{{cit.parent_comment.user_info.name}}</span>
@@ -384,8 +384,8 @@ export default {
 .comm_name {
   font-weight: bold;
   color: #576b95;
-  padding-left:7px;
 }
+.comm_all{padding-left: 8px;}
 .avatarstyle .wux-col--span-2 {
   overflow: hidden;
   border-right: solid 8px white;

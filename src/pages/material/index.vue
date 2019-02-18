@@ -110,7 +110,7 @@
 
       <view class="bottom-btn">
         <view class="l l-collect" @click="goHome">
-            <img class="icon" src="/static/images/ic_menu_choice_nor.png"/>
+            <img class="icon" src="https://static.huanjiaohu.com/mini/index/ic_menu_choice_nor.png"/>
         </view>
         <view class="l l-collect" @click="addCannelCollect">
             <img class="icon" :src="collectBackImage"/>
@@ -118,11 +118,11 @@
         <view class="l l-cart" @click="addComment">
             <view class="box">
             <text class="cart-count">{{commentNo}}</text>
-            <img  class="icon" src="/static/images/comment.png"/>
+            <img  class="icon" src="https://static.huanjiaohu.com/mini/index/comment.png"/>
             </view>
         </view>
         <view class="r fenxiang">
-          <button :plain="true" open-type='share'>分享</button>
+          <button :plain="true" open-type='share'><wux-icon type="md-share" size="16" /> 分享</button>
         </view>
      </view>
 
@@ -171,9 +171,9 @@ export default {
       description: ' ',
       raterVal: 5,
       commentNo: 0,
-      noCollectBackImage: '/static/images/icon_collect.png',
-      hasCollectImage: '/static/images/icon_collect_checked.png',
-      collectBackImage: '/static/images/icon_collect.png'
+      noCollectBackImage: 'https://static.huanjiaohu.com/mini/index/ic_myfavior.png',
+      hasCollectImage: 'https://static.huanjiaohu.com/mini/index/ic_myfavior_checked.png',
+      collectBackImage: 'https://static.huanjiaohu.com/mini/index/ic_myfavior.png'
     }
   },
   onLoad () {
@@ -429,6 +429,7 @@ export default {
   padding:5px;
   line-height: 45.8rpx;
   font-size: 24rpx;
+  background-color:#f5f5f5;
 }
 
 .comments .imgs {
@@ -461,7 +462,7 @@ export default {
 .related-goods .h {
   position: relative;
   width: 750rpx;
-  padding: 56.25rpx 0;
+  padding: 40rpx 0;
   background: #fff;
   text-align: center;
 }
@@ -481,7 +482,7 @@ export default {
 .related-goods .h .title {
   display: inline-block;
   position: absolute;
-  top: 56.125rpx;
+  top: 0;
   left: 0;
   z-index: 3;
   height: 33rpx;
@@ -621,7 +622,6 @@ button {
 }
 
 
-
 .material_all{
   background-color:white;
   font-size: 12px;
@@ -648,8 +648,8 @@ button {
   box-shadow: 0 2px 8px #ebebeb;
   color:#000;line-height: 20px;margin:0 10px;border: solid 1px #acdcfc;}
 .material_all > .descrition .wxParse{padding:8px;width: auto;color:#000;padding-bottom:120px}
-.bottom-btn .fenxiang{background-color:#87d74f;border:none;border-radius: 0;border:none}
-.fenxiang button {background-color:#87d74f;border: none;line-height:50px;}
+.bottom-btn .fenxiang{background-color:#fff;border:none}
+.fenxiang button {line-height:50px;background-color:#fff;font-size:16px;color:#ff8200}
 
 
 .no-comments{
